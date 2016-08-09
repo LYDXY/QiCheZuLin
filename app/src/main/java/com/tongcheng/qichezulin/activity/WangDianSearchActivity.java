@@ -26,6 +26,7 @@ import com.tongcheng.qichezulin.model.CityQuModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.QuModel;
 import com.tongcheng.qichezulin.utils.UtilsJson;
+import com.tongcheng.qichezulin.utils.UtilsMath;
 import com.tongcheng.qichezulin.view.ExpandableListViewForScrollView;
 
 import org.xutils.common.Callback;
@@ -256,7 +257,8 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                         .setText(R.id.tv_shop_name, item.FShopName)
                                         .setText(R.id.tv_shop_address, item.FAddress);
                                 LatLng p2 = new LatLng(Double.parseDouble(item.FLatitude), Double.parseDouble(item.FLongitude));
-                                helper.setText(R.id.tv_hao_far, DistanceUtil.getDistance(p1, p2) + "");
+                                int mishu = (int) DistanceUtil.getDistance(p1, p2);
+                                helper.setText(R.id.tv_hao_far, UtilsMath.getjuli(mishu));//设置距离
                                 helper.getView(R.id.rrl_shop).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
