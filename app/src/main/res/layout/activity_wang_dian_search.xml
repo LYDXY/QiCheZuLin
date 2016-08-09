@@ -67,6 +67,7 @@
             app:layout_widthPercent="30%w">
 
             <TextView
+                android:id="@+id/tv_near_shop"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:gravity="center"
@@ -102,6 +103,7 @@
             app:layout_widthPercent="70%w">
 
             <TextView
+                android:id="@+id/tv_qu_name"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:gravity="center_vertical"
