@@ -34,14 +34,14 @@ public class AppConfig {
     //二级目录
     public static final String GET_CITY_QU = "api/car/get_citycounty.ashx";
 
-    //网点列表
+    //网点列表 根据地区id
     public static final String GET_WANG_DIAN_LIST = "api/shop/get_shoplist.ashx";
 
 
-    //获取附近网点
+    //获取默认网点(离我最近)
     public static final String GET_DEFAULTSHOP = "api/shop/get_defaultshop.ashx";
 
-    //获取默认网点(离我最近)
-    public static final String GET_NEAR_DEFAULTSHOP = "api/car/get_defaultshop.ashx";
+    //获取附近网点
+    public static final String GET_NEAR_DEFAULTSHOP2 = "api/shop/get_defaultshop.ashx";
 
 }

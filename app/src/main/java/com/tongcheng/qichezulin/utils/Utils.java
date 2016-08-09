@@ -75,4 +75,16 @@ public class Utils {
         }
         toast.show();
     }
+
+
+    //简单的弹出提示
+    public static void ShowText2(Context activity, String showText) {
+        if (toast == null) {
+            toast = Toast.makeText(activity, showText, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(showText);
+            toast.setDuration(Toast.LENGTH_SHORT);
+        }
+        toast.show();
+    }
 }

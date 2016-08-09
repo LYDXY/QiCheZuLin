@@ -14,5 +14,6 @@ import java.util.List;
 
 public class CityQuModel implements Serializable {
     public String CityName;//城市名
+    public String CityId;//城市id
     public ArrayList<QuModel> quModels;//多个区县
 }
