@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayF0F0F0"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/common_head_background"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w">
+
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/retern"
+            app:layout_heightPercent="4%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="4%w" />
+
+        <EditText
+            android:id="@+id/tv_first"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/search"
+            android:ellipsize="none"
+            android:hint="@string/et_text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray_6d6d6d"
+            app:layout_heightPercent="8%w"
+            app:layout_paddingLeftPercent="8%w"
+            app:layout_textSizePercent="4%w"
+            app:layout_widthPercent="70%w" />
+
+
+        <TextView
+            android:id="@+id/tv_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/di_ti"
+            android:textColor="@color/white"
+            app:layout_marginRightPercent="3%w"
+            app:layout_textSizePercent="5%w" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:background="@color/grayF0F0F0"
+            android:orientation="vertical"
+            app:layout_widthPercent="30%w">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/fu_jin_men_dian"
+                android:textColor="@color/gray9999999"
+                app:layout_heightPercent="35%w"
+                app:layout_textSizePercent="18%w"
+                app:layout_widthPercent="100%w" />
+
+            <ExpandableListView
+                android:id="@+id/elv_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:childDivider="@color/gray9999999"
+                android:divider="@color/gray9999999"
+                android:dividerHeight="1dp"
+                android:footerDividersEnabled="true"
+                android:headerDividersEnabled="true"
+
+                >
+
+            </ExpandableListView>
+
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            app:layout_widthPercent="70%w">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:text="@string/fu_jin_men_dian"
+                android:textColor="@color/gray9999999"
+                app:layout_heightPercent="15%w"
+                app:layout_textSizePercent="6%w" />
+
+            <ListView
+                android:id="@+id/lv_fu_jin_men_dian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/green_36b57e"
+                android:divider="@color/gray9999999"
+                android:dividerHeight="1dp"></ListView>
+        </com.zhy.android.percent.support.PercentLinearLayout>
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+</com.zhy.android.percent.support.PercentLinearLayout>

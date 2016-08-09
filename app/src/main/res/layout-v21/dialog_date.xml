@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_heightPercent="100%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_heightPercent="25%w"
+            app:layout_widthPercent="100%w">
+
+            <TextView
+                android:id="@+id/tv_get_car_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/get_car_time"
+                android:textColor="@color/gray_6d6d6d"
+                app:layout_marginLeftPercent="20%w"
+                app:layout_marginTopPercent="3%w"
+                app:layout_textSizePercent="6%w" />
+
+
+            <TextView
+                android:id="@+id/tv_show_get_car_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/tv_get_car_time"
+                android:text="@string/show_time"
+                android:textColor="@color/gray_6d6d6d"
+                app:layout_marginLeftPercent="18%w"
+                app:layout_marginTopPercent="1%w"
+                app:layout_textSizePercent="5%w"
+
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true"
+                android:background="@color/green_36b57e"
+                app:layout_heightPercent="15%w"
+                app:layout_widthPercent="0.5%w"></View>
+
+
+            <TextView
+                android:id="@+id/tv_back_car_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/back_car"
+                android:textColor="@color/gray_6d6d6d"
+                app:layout_marginRightPercent="20%w"
+                app:layout_marginTopPercent="3%w"
+                app:layout_textSizePercent="6%w" />
+
+            <TextView
+                android:id="@+id/tv_show_back_car_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/tv_back_car_time"
+                android:text="@string/show_time"
+                android:textColor="@color/gray_6d6d6d"
+                app:layout_marginRightPercent="18%w"
+                app:layout_marginTopPercent="1%w"
+                app:layout_textSizePercent="5%w" />
+
+
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/gray"
+            android:orientation="horizontal"
+            app:layout_heightPercent="55%w"
+            app:layout_widthPercent="100%w">
+
+            <!--<DatePicker
+                style="@android:style/Widget.DatePicker"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:headerBackground="@null"
+                app:layout_widthPercent="60%w"></DatePicker>
+
+            <TimePicker
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="40%w"></TimePicker>-->
+
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            app:layout_heightPercent="20%w"
+            app:layout_widthPercent="100%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/qu_xiao"
+                android:textColor="@color/gray_6d6d6d"
+                app:layout_marginLeftPercent="25%w"
+                app:layout_textSizePercent="6%w" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/que_ding"
+                android:textColor="@color/gray_6d6d6d"
+                app:layout_marginRightPercent="25%w"
+                app:layout_textSizePercent="6%w" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+</com.zhy.android.percent.support.PercentLinearLayout>

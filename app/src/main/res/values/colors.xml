@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--整个项目的主题-->
+    <color name="colorTheme">#0D3D6E</color>
+    <color name="colorPrimary">#0D3D6E</color>
+    <color name="colorPrimaryDark">#0D3D6E</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="dark_gray">#F4F4F4</color>
+    <!-- 中间灰色背景色 -->
+    <color name="gray_bg">#F4F4F4</color>
+    <color name="gray_bg1">#f9f9f9</color>
+    <color name="gray_bg_popupwindow">#E8E8F0</color>
+    <color name="gray0">#cccccc</color>
+    <color name="choose_eara_item_press_color">#f4f4f4</color>
+    <color name="no_color">#00000000</color>
+    <color name="black272727">#272727</color>
+    <color name="light_gray2">#B8B8B8</color>
+    <color name="light_gray_tittle">#F0F0F0</color>
+    <color name="white">#ffffff</color>
+    <color name="backcolor">#fbfaf4</color>
+    <color name="light_grey">#f9f9f9</color>
+    <color name="gray_line">#d2d2cb</color>
+    <color name="gray_line3">#cecece</color>
+    <color name="gray_bg_head">#F5F5F5</color>
+    <color name="bg0">#F0F0F0</color>
+    <color name="gray_bg2">#eeefef</color>
+    <color name="Focus_gray_bg">#EEEFEF</color>
+    <color name="wd_common">#ECEAEA</color>
+    <color name="province_line_border">#C7C7C7</color>
+    <color name="Ex_line">#dcdcdc</color>
+    <color name="text_chesk3">#FFF5EE</color>
+    <color name="tzm_text_sys_default_light">#c9caca</color>
+
+
+    <color name="theme_blue">#7dcdf3</color>
+    <color name="light_blue">#00BCFD</color>
+    <color name="dark_blue">#3971d1</color>
+    <color name="blue">#4FA8E0</color>
+    <color name="home_list_item_title">#0088dd</color>
+    <color name="light_blue_dialog">#3971d1</color>
+    <color name="common_head_background">#0D3D6E</color>
+
+
+    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay1">#aa000000</color>
+    <color name="black">#292724</color>
+    <color name="gray10">#666464</color>
+    <color name="tzm_black">#595757</color>
+    <color name="tzm_text_gray">#727171</color>
+    <color name="gray">#8b8b8b</color>
+    <color name="gray1">#999999</color>
+    <color name="translucent_gray">#908b8b8b</color>
+    <color name="tzm_text_sys_default">#9fa0a0</color>
+    <color name="black2">#3e3a39</color>
+    <color name="text_chesk1">#5e5a59</color>
+    <color name="text_chesk2">#928676</color>
+    <color name="text_chesk4">#ababab</color>
+    <color name="text_chesk5">#666666</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent_white">#A0FFFFFF</color>
+    <color name="content_text">#444444</color>
+    <color name="text_gtay_blue">#586068</color>
+    <color name="gray_line2">#a2a2a2</color>
+    <color name="gray_content_text">#808080</color>
+    <color name="line0">#999999</color>
+    <color name="semitransparent_gray">#A5787878</color>
+    <color name="semitransparent_black">#A5000000</color>
+    <color name="semitransparent_black2">#A5787878</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="popup_main_background">#b0000000</color>
+
+    <color name="gray9999999">#999999</color>
+    <color name="grayFFFFFFF">#ffffff</color>
+    <color name="gray_6d6d6d">#6d6d6d</color>
+    <color name="grayF0F0F0">#F0F0F0</color>
+
+    <color name="green_36b57e">#36b57e</color>
+    <color name="orange_f79c03">#f79c03</color>
+    <color name="orange_fd6203">#fd6203</color>
+    <color name="gray_eeeeee">#eeeeee</color>
+
+    <color name="orange_ff7220">#ff7220</color>
+
+    <color name="orange_34ae7d">#34ae7d</color>
+    <color name="gray939393">#939393</color>
+</resources>

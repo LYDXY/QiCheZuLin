@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">QiCheZuLin</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="Qing_shu_ru_shou_ji_hao">请输入手机号</string>
+    <string name="Qing_shu_ru_mi_ma">请输入密码</string>
+    <string name="Qing_shu_ru_yan_zheng_ma">请输入验证码</string>
+    <string name="huo_qu_yan_zheng_ma">获取验证码</string>
+    <string name="tong_yi">我同意</string>
+    <string name="tong_cheng_yong_hu_xie_yi">《同城用户协议》</string>
+
+
+    <string name="head">这里是HeadView</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
+    <string name="yi_jian_zu_che">一键租车</string>
+    <string name="wang_dian_cha_xun">网点查询</string>
+    <string name="che_xing_cha_xun">车型查询</string>
+    <string name="xing_cheng">行程</string>
+    <string name="RuiChi">瑞驰EK 35</string>
+    <string name="xing_che_number">00:35:23</string>
+
+    <string name="car_name">本田飞度</string>
+    <string name="car_remark">两箱/1.3自动/乘坐5人</string>
+    <string name="car_price">¥99/</string>
+    <string name="car_everyday">日均</string>
+    <string name="get_car_time">取车时间</string>
+    <string name="back_car">还车时间</string>
+    <string name="show_time">07/22/20:00</string>
+
+    <string name="qu_xiao">取消</string>
+    <string name="que_ding">确定</string>
+    <string name="yu_yue_zu_che">预约租车</string>
+    <string name="date1">07-22</string>
+    <string name="time1">周二 11:00</string>
+    <string name="qu_che_men_dian">取车门店</string>
+    <string name="car_type">车辆类型</string>
+    <string name="no_limit">不限</string>
+    <string name="zu_che_type">租车类型:</string>
+    <string name="hour_zu">小时租</string>
+    <string name="day_zu">日租</string>
+    <string name="month_zu">月租</string>
+    <string name="hour_money">时租金</string>
+    <string name="day_money">日租金</string>
+    <string name="month_money">月租金</string>
+    <string name="help_me_to_chose_car">帮我选车</string>
+    <string name="i_want_to_chose_car">我要选车</string>
+    <string name="person_center">个人中心</string>
+    <string name="zhang_hao_info">账号信息</string>
+    <string name="counnt_number">136****3675</string>
+    <string name="zu_che_record">租车记录</string>
+    <string name="use_car_record">用车记录</string>
+    <string name="tui_che_deng_lu">退出登录</string>
+    <string name="wo_de_ji_fen">我的积分</string>
+    <string name="zan_di_yong">赞积分,享抵用</string>
+    <string name="wo_de_qian_bao">我的钱包</string>
+    <string name="yu_e_chong_zhi">余额充值</string>
+    <string name="bao_zheng_jin">保证金</string>
+    <string name="zu_che_ya_jin">租车押金</string>
+    <string name="wo_de_fa_piao">我的发票</string>
+    <string name="fa_piao_tai_tou_di_zhi">发票抬头,地址</string>
+    <string name="wo_de_tou_su">我的投诉</string>
+    <string name="tou_su_fan_kui">每单投诉都反馈</string>
+    <string name="click_change_photo">点击跟换你的头像</string>
+    <string name="ni_cheng">昵称</string>
+    <string name="bang_ding_shou_ji_hao_ma">绑定手机号码</string>
+    <string name="bang_ding_yin_han_ka">绑定银行卡</string>
+    <string name="mi_ma_she_zhi">密码设置</string>
+    <string name="di_ti">地图</string>
+    <string name="et_text">输入地址寻找周边门店</string>
+    <string name="fu_jin_men_dian">附近门店</string>
+    <string name="shan_tou_shi">汕头市</string>
+    <string name="long_hu_qu">龙湖区</string>
+    <string name="jin_yun_tao_yuan_dian">金园桃园店</string>
+    <string name="shop_address">汕头市金凤路桃园51栋102号</string>
+    <string name="ju_li">1.88km</string>
+    <string name="qing_bang_ding_ni_de_yin_hang_ka">请绑定持卡人本人的银行卡</string>
+    <string name="chi_ka_ren">持卡人</string>
+    <string name="chi_ka_ren_name">张三</string>
+    <string name="ka_hao">卡号</string>
+    <string name="qing_shu_ru_yin_hang_ka">请输入银行卡</string>
+</resources>

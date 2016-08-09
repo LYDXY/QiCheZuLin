@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/rrl_shop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grayF0F0F0"
+        app:layout_heightPercent="30%w"
+        app:layout_widthPercent="100%w">
+
+
+        <TextView
+            android:id="@+id/tv_shop_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jin_yun_tao_yuan_dian"
+            android:textColor="@color/black"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_marginTopPercent="5%w"
+            app:layout_textSizePercent="7%w" />
+
+        <TextView
+            android:id="@+id/tv_shop_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_shop_name"
+            android:text="@string/shop_address"
+            android:textColor="@color/gray9999999"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_marginTopPercent="3%w"
+            app:layout_textSizePercent="5%w" />
+
+        <TextView
+            android:id="@+id/tv_hao_far"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/ju_li"
+            android:textColor="@color/gray9999999"
+            app:layout_marginRightPercent="3%w"
+            app:layout_marginTopPercent="5%w"
+            app:layout_textSizePercent="5%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</com.zhy.android.percent.support.PercentRelativeLayout>

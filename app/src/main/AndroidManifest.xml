@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.tongcheng.qichezulin">
+
+
+    <!--使用 xutils 需要的权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--使用 xutils 需要的权限-->
+    <application
+        android:name=".config.RootApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".activity.StartActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!--使用百度地图需要配置的服务 和权限  beging//////////////////////////////////////////////////////////////////// -->
+        <!-- meta-data需要写在application中 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="TNLvOAGDt4YLtsmCZb1y0Fz3v8ro2ExA" />
+        <!--在application标签中声明service组件,每个app拥有自己单独的定位service-->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
+        <!-- 这个权限用于进行网络定位-->
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+        <!-- 这个权限用于访问GPS定位-->
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+        <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+        <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+        <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+        <!-- 用于读取手机当前的状态-->
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+        <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+        <!-- 访问网络，网络定位需要上网-->
+        <uses-permission android:name="android.permission.INTERNET" />
+        <!-- SD卡读取权限，用户写入离线定位数据-->
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+
+
+        <!--使用百度地图需要配置的服务 和权限  end ////////////////////////////////////////////////////////////////////-->
+
+
+        <!--登录界面-->
+        <activity
+            android:name=".activity.loginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <!--注册界面-->
+        <activity
+            android:name=".activity.RegistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <!--主界面-->
+        <activity
+            android:name=".activity.MainActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!--租车界面-->
+        <activity
+            android:name=".activity.ZuCheActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!--账号信息界面-->
+        <activity
+            android:name=".activity.AccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!--网点查询-->
+        <activity
+            android:name=".activity.WangDianSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <!--添加银行卡界面-->
+        <activity
+            android:name=".activity.AddBankCardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+    </application>
+
+</manifest>

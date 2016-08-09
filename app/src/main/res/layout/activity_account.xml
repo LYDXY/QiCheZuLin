@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayF0F0F0"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <include
+        layout="@layout/common_header"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w" />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        app:layout_heightPercent="10%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ni_cheng"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_textSizePercent="4%w" />
+
+        <TextView
+            android:id="@+id/tv_user_ccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/counnt_number"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginRightPercent="12%w"
+            app:layout_textSizePercent="4%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/jiantou"
+            app:layout_heightPercent="4%w"
+            app:layout_marginRightPercent="4%w"
+            app:layout_widthPercent="4%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        app:layout_heightPercent="10%w"
+        app:layout_marginTopPercent="0.5%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bang_ding_shou_ji_hao_ma"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_textSizePercent="4%w" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/counnt_number"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginRightPercent="12%w"
+            app:layout_textSizePercent="4%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/jiantou"
+            app:layout_heightPercent="4%w"
+            app:layout_marginRightPercent="4%w"
+            app:layout_widthPercent="4%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        app:layout_heightPercent="10%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bang_ding_yin_han_ka"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_textSizePercent="4%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/jiantou"
+            app:layout_heightPercent="4%w"
+            app:layout_marginRightPercent="4%w"
+            app:layout_widthPercent="4%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        app:layout_heightPercent="10%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mi_ma_she_zhi"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_textSizePercent="4%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/jiantou"
+            app:layout_heightPercent="4%w"
+            app:layout_marginRightPercent="4%w"
+            app:layout_widthPercent="4%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

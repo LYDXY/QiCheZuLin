@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- api 21 或者 21 以上的 跟 安卓 19的 沉浸式不同-->
+    <!--带 action bar-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--不带action bar-->
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/white</item>
+
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <!--界面的ActionBar-->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+
+    </style>
+
+
+    <!--字体的大小-->
+    <style name="MyTabLayoutTextAppearance">
+        <item name="android:textSize">12dip</item>
+    </style>
+
+
+</resources>

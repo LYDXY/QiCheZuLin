@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape0"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_heightPercent="16%w"
+        app:layout_marginTopPercent="6%w"
+        app:layout_widthPercent="90%w">
+
+        <ImageView
+            android:id="@+id/iv_ren"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ren"
+            app:layout_heightPercent="6%w"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_widthPercent="6%w" />
+
+        <EditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_ren"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/Qing_shu_ru_shou_ji_hao"
+            android:singleLine="true"
+            android:textColor="@color/gray1"
+            android:textColorHint="@color/line0"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_textSizePercent="5%w"
+            app:layout_widthPercent="60%w" />
+
+        <ImageView
+            android:id="@+id/iv_qu_xiao"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/quxiao"
+            app:layout_heightPercent="6%w"
+            app:layout_marginRightPercent="6%w"
+            app:layout_widthPercent="6%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape1"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_heightPercent="16%w"
+        app:layout_widthPercent="90%w">
+
+        <ImageView
+            android:id="@+id/iv_shuo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/suo"
+            app:layout_heightPercent="6%w"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_widthPercent="6%w" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_shuo"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/Qing_shu_ru_yan_zheng_ma"
+            android:singleLine="true"
+            android:textColor="@color/gray1"
+            android:textColorHint="@color/line0"
+            app:layout_marginLeftPercent="6%w"
+            app:layout_textSizePercent="5%w"
+            app:layout_widthPercent="60%w" />
+
+        <TextView
+            android:id="@+id/tv_get_yan_zheng_ma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/huo_qu_yan_zheng_ma"
+            android:textColor="@color/colorPrimary"
+            app:layout_marginRightPercent="6%w"
+            app:layout_textSizePercent="5%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape2"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/white"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="7%w"
+        app:layout_textSizePercent="5%w"
+        app:layout_widthPercent="70%w" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

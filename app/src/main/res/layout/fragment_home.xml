@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_eeeeee"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.tongcheng.qichezulin.pulltorefresh.PullableScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--广告轮播控件-->
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    android:id="@+id/convenientBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/blue"
+                    app:canLoop="true"
+                    app:layout_heightPercent="35%w" />
+
+
+                <!--一键租车 ,网点查询,车型查询-->
+                <com.zhy.android.percent.support.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    app:layout_heightPercent="28%w">
+
+                    <ImageView
+                        android:id="@+id/iv_first"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentLeft="true"
+                        android:background="@mipmap/yi_jian_zu_che"
+                        app:layout_heightPercent="18%w"
+                        app:layout_marginLeftPercent="8%w"
+                        app:layout_marginTopPercent="3%w"
+                        app:layout_widthPercent="18%w" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_second"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@mipmap/wang_dian_cha_xun"
+                        app:layout_heightPercent="18%w"
+                        app:layout_marginTopPercent="3%w"
+                        app:layout_widthPercent="18%w" />
+
+                    <ImageView
+                        android:id="@+id/iv_third"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@mipmap/che_xing_cha_xun"
+                        app:layout_heightPercent="18%w"
+                        app:layout_marginRightPercent="8%w"
+                        app:layout_marginTopPercent="3%w"
+                        app:layout_widthPercent="18%w" />
+
+                    <TextView
+                        android:id="@+id/yijianzuche"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_first"
+                        android:text="@string/yi_jian_zu_che"
+                        android:textColor="@color/gray9999999"
+                        app:layout_marginLeftPercent="9%w"
+                        app:layout_marginTopPercent="2%w"
+                        app:layout_textSizePercent="3.5%w" />
+
+
+                    <TextView
+                        android:id="@+id/wangdianchaxun"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_second"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/wang_dian_cha_xun"
+                        android:textColor="@color/gray9999999"
+                        app:layout_marginTopPercent="2%w"
+                        app:layout_textSizePercent="3.5%w" />
+
+
+                    <TextView
+                        android:id="@+id/chexingchaxun"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/iv_third"
+                        android:text="@string/che_xing_cha_xun"
+                        android:textColor="@color/gray9999999"
+                        app:layout_marginRightPercent="9%w"
+                        app:layout_marginTopPercent="2%w"
+                        app:layout_textSizePercent="3.5%w" />
+
+
+                </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+                <!--是否显示行程 由用户的本身的信息决定 否则隐藏掉-->
+                <com.zhy.android.percent.support.PercentRelativeLayout
+                    android:id="@+id/prl_xingcheng"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    app:layout_heightPercent="9%w"
+                    app:layout_marginLeftPercent="4%w"
+                    app:layout_marginRightPercent="4%w"
+                    app:layout_marginTopPercent="2%w">
+
+                    <TextView
+                        android:id="@+id/tv_Xing_Cheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/xingcheng"
+                        android:gravity="center"
+                        android:text="@string/xing_cheng"
+                        android:textColor="@color/white"
+                        app:layout_marginLeftPercent="4%w"
+                        app:layout_paddingPercent="0.5%w"
+                        app:layout_textSizePercent="3%w" />
+
+                    <TextView
+                        android:id="@+id/tv_che_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_Xing_Cheng"
+                        android:gravity="center"
+                        android:text="@string/RuiChi"
+                        android:textColor="@color/gray0"
+                        app:layout_marginLeftPercent="20%w"
+                        app:layout_textSizePercent="4%w" />
+
+                    <TextView
+                        android:id="@+id/tv_che_xing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_che_name"
+                        android:gravity="center"
+                        android:text="@string/xing_che_number"
+                        android:textColor="@color/green_36b57e"
+                        app:layout_marginLeftPercent="5%w"
+                        app:layout_textSizePercent="4%w" />
+
+                    <ImageView
+                        android:id="@+id/iv_go"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@mipmap/go"
+                        android:scaleType="fitXY"
+                        app:layout_heightPercent="5%w"
+                        app:layout_marginRightPercent="4%w"
+                        app:layout_widthPercent="5%w" />
+
+                </com.zhy.android.percent.support.PercentRelativeLayout>
+
+                <com.tongcheng.qichezulin.view.ListViewForScrollView2
+                    android:id="@+id/lv_fs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:divider="@color/gray_eeeeee"
+                    android:dividerHeight="0.5dp"
+                    app:layout_marginLeftPercent="4%w"
+                    app:layout_marginRightPercent="4%w"
+                    app:layout_marginTopPercent="2%w">
+
+
+                </com.tongcheng.qichezulin.view.ListViewForScrollView2>
+
+
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+        </com.tongcheng.qichezulin.pulltorefresh.PullableScrollView>
+
+
+    </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
+
+
+</com.zhy.android.percent.support.PercentLinearLayout>
