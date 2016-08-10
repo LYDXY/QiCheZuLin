@@ -40,6 +40,8 @@
     <string name="get_car_time">取车时间</string>
     <string name="back_car">还车时间</string>
     <string name="show_time">07/22/20:00</string>
+    <string name="car_yue_price">¥2470/</string>
+    <string name="yue_zu_jia">月租价</string>
 
     <string name="qu_xiao">取消</string>
     <string name="que_ding">确定</string>

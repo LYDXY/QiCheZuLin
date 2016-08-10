@@ -12,4 +12,47 @@
         android:layout_height="0dp"
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w"></include>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/prl_prl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <com.tongcheng.qichezulin.pulltorefresh.PullableListView
+                android:id="@+id/plv_car_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/whiteFFFFFF"
+                app:layout_widthPercent="96%w">
+
+
+            </com.tongcheng.qichezulin.pulltorefresh.PullableListView>
+        </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/bgdigao"
+            app:layout_heightPercent="13%w"
+            app:layout_marginLeftPercent="2%w"
+            app:layout_widthPercent="65%w" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/bg_shai_xuan"
+            app:layout_heightPercent="13%w"
+            app:layout_marginRightPercent="2%w"
+            app:layout_widthPercent="30%w" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
 </com.zhy.android.percent.support.PercentLinearLayout>
