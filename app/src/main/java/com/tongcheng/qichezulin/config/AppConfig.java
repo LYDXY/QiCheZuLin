@@ -6,7 +6,7 @@ package com.tongcheng.qichezulin.config;
 public class AppConfig {
 
     //域名 或者ip 地址
-    public static final String HOST = "http://192.168.0.123:8090";
+    public static final String HOST = "http://120.24.236.80:8090";
 
     //广告轮播地址
     public static final String GET_BANNER = "api/advert/get_advert.ashx";
@@ -41,7 +41,7 @@ public class AppConfig {
     //获取默认网点(离我最近)
     public static final String GET_DEFAULTSHOP = "api/shop/get_defaultshop.ashx";
 
-    //获取附近网点
-    public static final String GET_NEAR_DEFAULTSHOP2 = "api/shop/get_defaultshop.ashx";
+    //获取网点列表 根据城市id
+    public static final String GET_WANG_DIAN_LIST_BY_CITYID = "api/car/get_countyshop.ashx";
 
 }

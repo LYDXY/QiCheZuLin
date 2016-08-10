@@ -22,11 +22,13 @@ import com.pacific.adapter.ExpandableAdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamCityQu;
 import com.tongcheng.qichezulin.Param.ParamGetWangDianList;
 import com.tongcheng.qichezulin.Param.ParamNearWangDian;
+import com.tongcheng.qichezulin.Param.ParamNearWangDian2;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.BannerShop;
 import com.tongcheng.qichezulin.model.CityQuModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.QuModel;
+import com.tongcheng.qichezulin.model.QuShopsModel;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsMath;
@@ -54,7 +56,6 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
     ListView lv_fu_jin_men_dian;
     Adapter<BannerShop> shopAdapter;
     List<CityQuModel> cityQuModels;
-    List<BannerShop> shops;
     @ViewInject(R.id.elv_city)
     ExpandableListView elv_city;
     ExpandableAdapter<CityQuModel, QuModel> quModelExpandableAdapter;
@@ -66,9 +67,12 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
             TextView tv_qu_name;
     @ViewInject(R.id.tv_near_shop)//附近门店
             TextView tv_near_shop;
+    @ViewInject(R.id.elv_shop)
+    ExpandableListView elv_shop;
+    ExpandableAdapter<QuShopsModel, QuShopsModel.ShopModel> shopsModelShopModelExpandableAdapter;
+    List<QuShopsModel> quShopsModels;
     private String latitude; //纬度
     private String lontitude;//经度
-    private String defaultQuid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +101,9 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
             case R.id.tv_near_shop:
                 get_near_Wang_dian_List(lontitude, latitude, "1");
                 tv_qu_name.setText("附近门店");
+                tv_qu_name.setVisibility(View.VISIBLE);
+                lv_fu_jin_men_dian.setVisibility(View.VISIBLE);
+                elv_shop.setVisibility(View.GONE);
                 break;
         }
     }
@@ -142,8 +149,6 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                 JLog.i(cityQuModels.size() + "=============");
                 if (base.data.size() > 0) {
                     cityQuModels = base.data;
-                    defaultQuid = base.data.get(0).quModels.get(0).PID;
-                    // get_Wang_dian_List(defaultQuid, "", "");//获取默认的网店列表
                     quModelExpandableAdapter = new ExpandableAdapter<CityQuModel, QuModel>(getApplicationContext(), R.layout.e_listview_item_father, R.layout.e_listview_item_child) {
                         @Override
                         protected List<QuModel> getChildren(int groupPosition) {
@@ -159,10 +164,12 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                     JLog.i(item.CityName);
                                     if (isExpanded) {
                                         elv_city.collapseGroup(helper.getGroupPosition());
+                                        JLog.i(item.CityId);
+                                        get_Wang_dian_List_by_cityID(item.CityId);
                                     } else {
                                         elv_city.expandGroup(helper.getGroupPosition(), true);
                                         JLog.i(item.CityId);
-                                        get_Wang_dian_List_by_cityID(item.CityId, "", "");
+                                        get_Wang_dian_List_by_cityID(item.CityId);
 
                                     }
                                 }
@@ -216,26 +223,68 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
 
 
     // 获取网点 ----根据城市id
-    public void get_Wang_dian_List_by_cityID(String county_id, String keyword, String type_id) {
-        ParamGetWangDianList paramGetWangDianList = new ParamGetWangDianList();
-        paramGetWangDianList.county_id = county_id;
-        paramGetWangDianList.keyword = keyword;
-        paramGetWangDianList.type_id = type_id;
+    public void get_Wang_dian_List_by_cityID(String city_id) {
+        ParamNearWangDian2 paramNearWangDian2 = new ParamNearWangDian2();
+        paramNearWangDian2.city_id = city_id;
         Callback.Cancelable cancelable
-                = x.http().post(paramGetWangDianList, new Callback.CommonCallback<String>() {
+                = x.http().post(paramNearWangDian2, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 UtilsJson.printJsonData(result);
-
                 try {
-
-
-                 /*   Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase<ArrayList<BannerShop>>>() {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<ArrayList<QuShopsModel>>>() {
                     }.getType();
-                    JsonBase<ArrayList<BannerShop>> base = gson
+                    JsonBase<ArrayList<QuShopsModel>> base = gson
                             .fromJson(result, type);
-                    */
+                    if (base.data.size() > 0) {
+                        elv_shop.setVisibility(View.VISIBLE);
+                        tv_qu_name.setVisibility(View.GONE);
+                        lv_fu_jin_men_dian.setVisibility(View.GONE);
+                        quShopsModels = base.data;
+                        shopsModelShopModelExpandableAdapter = new ExpandableAdapter<QuShopsModel, QuShopsModel.ShopModel>(getApplicationContext(), R.layout.e_listview_item_father2, R.layout.listview_item0) {
+                            @Override
+                            protected List<QuShopsModel.ShopModel> getChildren(int groupPosition) {
+                                return get(groupPosition).ShopModels;
+                            }
+
+                            @Override
+                            protected void convertGroupView(final boolean isExpanded, final ExpandableAdapterHelper helper, final QuShopsModel item) {
+                                if (quShopsModels.get(helper.getGroupPosition()).ShopModels.size() == 0) {
+                                    helper.setVisible(R.id.tv_city, View.GONE);
+                                } else {
+                                    helper.setVisible(R.id.tv_city, View.VISIBLE);
+                                    helper.setText(R.id.tv_city, item.CountyName).getView(R.id.rrl_father);
+                                }
+
+                            }
+
+                            @Override
+                            protected void convertChildView(final boolean isLastChild, final ExpandableAdapterHelper helper, final QuShopsModel.ShopModel item) {
+                                helper
+                                        .setText(R.id.tv_shop_name, item.FShopName)
+                                        .setText(R.id.tv_shop_address, item.FAddress);
+                                LatLng p2 = new LatLng(Double.parseDouble(item.FLatitude), Double.parseDouble(item.FLongitude));
+                                int mishu = (int) DistanceUtil.getDistance(p1, p2);
+                                helper.setText(R.id.tv_hao_far, UtilsMath.getjuli(mishu));//设置距离
+                                helper.getView(R.id.rrl_shop).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        JLog.i("点击了" + item.FShopName);
+
+                                    }
+                                });
+                            }
+                        };
+
+                        shopsModelShopModelExpandableAdapter.addAll(quShopsModels);
+                        elv_shop.setAdapter(shopsModelShopModelExpandableAdapter);
+                        for (int i = 0; i < quShopsModels.size(); i++) {
+                            elv_shop.expandGroup(i);
+                        }
+
+                    }
+
 
                 } catch (Exception E) {
                     E.printStackTrace();
@@ -284,11 +333,15 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                         shopAdapter.clear();
                         shopAdapter.addAll(base.data);
                         shopAdapter.notifyDataSetChanged();
+                        tv_qu_name.setVisibility(View.VISIBLE);
+                        lv_fu_jin_men_dian.setVisibility(View.VISIBLE);
+                        elv_shop.setVisibility(View.GONE);
                     } else {
+                        tv_qu_name.setVisibility(View.VISIBLE);
                         tv_qu_name.setText(QUNAME);
                         shopAdapter.clear();
                         shopAdapter.notifyDataSetChanged();
-                        Utils.ShowText2(getApplication(), "该地区没有网点");
+                        Utils.ShowText2(getApplication(), QUNAME + "没有网点");
                     }
                 } else {
                     JLog.i(base.info);

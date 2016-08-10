@@ -10,9 +10,8 @@ import org.xutils.http.annotation.HttpRequest;
  */
 @HttpRequest(
         host = AppConfig.HOST,
-        path = AppConfig.GET_NEAR_DEFAULTSHOP2
+        path = AppConfig.GET_WANG_DIAN_LIST_BY_CITYID
 )
 public class ParamNearWangDian2 extends RequestParams {
-    public String lng;//经度
-    public String lat;//纬度
+    public String city_id;//城市id
 }

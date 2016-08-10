@@ -4,17 +4,19 @@
     android:id="@+id/rrl_father"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteFFFFFF"
+    android:background="@color/gray_eeeeee"
+
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_city"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:text="@string/shan_tou_shi"
-        android:textColor="@color/black"
-        app:layout_heightPercent="50%w"
-        app:layout_textSizePercent="18%w"
-        app:layout_widthPercent="100%w" />
+        android:textColor="@color/gray9999999"
+        app:layout_heightPercent="10%w"
+        app:layout_marginLeftPercent="3%w"
+        app:layout_textSizePercent="6%w" />
 </com.zhy.android.percent.support.PercentLinearLayout>
