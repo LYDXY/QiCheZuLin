@@ -207,6 +207,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         ViewGroup extView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.alertview00, null);
         mAlertViewExt.addExtView(extView);
         mAlertViewExt.show();
+        // mAlertViewExt.dismiss();
     }
 
     @Override
