@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_line"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:id="@+id/rrl_item"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_heightPercent="30%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:id="@+id/tv_re_men_or_you_hui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/remen"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_marginLeftPercent="4%w"
+            app:layout_marginTopPercent="2%w"
+            app:layout_paddingPercent="0.5%w"
+            app:layout_textSizePercent="3%w" />
+
+        <ImageView
+            android:id="@+id/iv_car_picture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/tv_re_men_or_you_hui"
+            app:layout_heightPercent="15%w"
+            app:layout_marginLeftPercent="4%w"
+            app:layout_marginTopPercent="2%w"
+            app:layout_widthPercent="23%w" />
+
+        <TextView
+            android:id="@+id/tv_car_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_re_men_or_you_hui"
+            android:layout_toRightOf="@+id/iv_car_picture"
+            android:text="@string/car_name"
+            android:textColor="@color/black272727"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginTopPercent="2%w"
+            app:layout_textSizePercent="5%w" />
+
+        <TextView
+            android:id="@+id/tv_car_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_car_name"
+            android:layout_toRightOf="@+id/iv_car_picture"
+            android:text="@string/car_remark"
+            android:textColor="@color/orange_f79c03"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginTopPercent="2%w"
+            app:layout_textSizePercent="4%w" />
+
+        <TextView
+            android:id="@+id/tv_car_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_car_name"
+            android:layout_toLeftOf="@+id/tv_ri_jun"
+            android:text="@string/car_price"
+            android:textColor="@color/orange_fd6203"
+            app:layout_marginRightPercent="1%w"
+            app:layout_marginTopPercent="1%w"
+            app:layout_textSizePercent="5%w" />
+
+        <TextView
+            android:id="@+id/tv_ri_jun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_car_name"
+            android:text="@string/car_everyday"
+            android:textColor="@color/gray_6d6d6d"
+            app:layout_marginRightPercent="5%w"
+            app:layout_marginTopPercent="2.5%w"
+            app:layout_textSizePercent="3.5%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+</com.zhy.android.percent.support.PercentLinearLayout>

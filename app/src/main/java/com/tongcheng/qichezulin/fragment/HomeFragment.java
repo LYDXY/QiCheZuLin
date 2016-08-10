@@ -16,6 +16,7 @@ import com.joanzapata.android.QuickAdapter;
 import com.tongcheng.qichezulin.Param.ParamBanner;
 import com.tongcheng.qichezulin.Param.ParamHotCar;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.activity.FindCarTypeActivity;
 import com.tongcheng.qichezulin.activity.WangDianSearchActivity;
 import com.tongcheng.qichezulin.activity.ZuCheActivity;
 import com.tongcheng.qichezulin.holder.NetworkImageHolderView;
@@ -160,6 +161,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
             case R.id.iv_third:
                 JLog.i("车型查询");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), FindCarTypeActivity.class);
                 break;
 
             case R.id.prl_xingcheng:
