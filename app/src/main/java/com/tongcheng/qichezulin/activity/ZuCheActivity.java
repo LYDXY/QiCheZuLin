@@ -20,8 +20,11 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.code19.library.DateUtils;
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsDate;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
+import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -36,6 +39,13 @@ import java.util.Date;
 
 @ContentView(R.layout.activity_zu_che)
 public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
+
+
+    AlertView mAlertViewExt;//窗口拓展例子
+    @ViewInject(R.id.rrl_third)
+    PercentRelativeLayout rrl_third;
+    @ViewInject(R.id.rrl_second)
+    PercentRelativeLayout rrl_second;
 
 
     TimePickerView pvTime; //时间选择控件
@@ -90,6 +100,22 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 break;
             case R.id.iv_return:
                 onBackPressed();
+                break;
+            case R.id.rrl_second:
+                if (MyLocationListener.latitude != null && MyLocationListener.lontitude != null) {
+                    JLog.i("经度" + MyLocationListener.latitude);
+                    JLog.i("纬度" + MyLocationListener.lontitude);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("latitude", MyLocationListener.latitude);
+                    bundle.putString("lontitude", MyLocationListener.lontitude);
+                    UtilsTiaoZhuang.ToAnotherActivity(this, WangDianSearchActivity.class, bundle);
+                } else {
+                    JLog.i("定位失败");
+                }
+
+                break;
+            case R.id.rrl_third:
+                showAlertView();
                 break;
 
         }
@@ -171,6 +197,27 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         tv_Right_date.setOnClickListener(this);
         tv_Right_time.setOnClickListener(this);
         iv_return.setOnClickListener(this);
+        rrl_third.setOnClickListener(this);
+        rrl_second.setOnClickListener(this);
     }
 
+
+    public void showAlertView() {
+        mAlertViewExt = new AlertView(null, null, null, null, null, this, AlertView.Style.Alert, this);
+        ViewGroup extView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.alertview00, null);
+        mAlertViewExt.addExtView(extView);
+        mAlertViewExt.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JLog.i("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JLog.i("onPause");
+    }
 }

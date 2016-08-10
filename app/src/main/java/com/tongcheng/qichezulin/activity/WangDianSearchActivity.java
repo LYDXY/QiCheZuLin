@@ -445,5 +445,18 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        JLog.i("onDestroy");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JLog.i("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JLog.i("onPause");
     }
 }
