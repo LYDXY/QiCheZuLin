@@ -110,6 +110,12 @@
             android:name=".activity.FindCarTypeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!--我的银行卡界面-->
+        <activity
+            android:name=".activity.MyBankCardsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

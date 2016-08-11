@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grayF0F0F0"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <include
@@ -41,12 +43,14 @@
             app:layout_textSizePercent="5%w" />
 
         <EditText
+            android:id="@+id/et_chi_ka_ren"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/et_chi_ka_ren"
+            android:layout_toRightOf="@+id/tv_chi_ka_ren"
             android:background="@null"
             android:hint="@string/chi_ka_ren_name"
+            android:textColor="@color/gray9999999"
             app:layout_marginLeftPercent="5%w"
             app:layout_textSizePercent="5%w"
             app:layout_widthPercent="50%w" />
@@ -78,12 +82,14 @@
             android:layout_toRightOf="@+id/tv_ka_hao"
             android:background="@null"
             android:hint="@string/qing_shu_ru_yin_hang_ka"
+            android:textColor="@color/gray9999999"
             app:layout_marginLeftPercent="10%w"
             app:layout_textSizePercent="5%w"
             app:layout_widthPercent="50%w" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <ImageButton
+        android:id="@+id/ib_next_step"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
