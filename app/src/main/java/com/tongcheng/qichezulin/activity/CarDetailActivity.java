@@ -3,6 +3,7 @@ package com.tongcheng.qichezulin.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
@@ -19,6 +20,9 @@ import org.xutils.view.annotation.ViewInject;
 public class CarDetailActivity extends PuTongActivity {
 
 
+    @ViewInject(R.id.tv_user_this_car)
+    TextView tv_user_this_car;
+
     @Override
     void initData() {
 
@@ -26,6 +30,7 @@ public class CarDetailActivity extends PuTongActivity {
 
     @Override
     void initView() {
+        tv_user_this_car.setOnClickListener(this);
         tv_first.setVisibility(View.VISIBLE);
         tv_second.setVisibility(View.VISIBLE);
         tv_first.setText("车辆详情");
@@ -42,6 +47,9 @@ public class CarDetailActivity extends PuTongActivity {
             case R.id.tv_second:
                 JLog.i("租车界面");
                 UtilsTiaoZhuang.ToAnotherActivity(CarDetailActivity.this, ZuCheActivity.class);
+                break;
+            case R.id.tv_user_this_car:
+                JLog.i("租用这辆车");
                 break;
         }
 

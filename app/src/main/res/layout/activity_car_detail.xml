@@ -14,4 +14,229 @@
         android:layout_height="0dp"
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w" />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteFFFFFF"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_this_car"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/gray939393"
+                app:layout_heightPercent="50%w"
+                app:layout_widthPercent="100%w" />
+
+            <TextView
+                android:id="@+id/tv_this_car_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_this_car"
+                android:layout_centerHorizontal="true"
+                android:text="@string/carname"
+                android:textColor="@color/black272727"
+                app:layout_marginTopPercent="5%w"
+                app:layout_textSizePercent="6%w" />
+
+
+            <com.zhy.android.percent.support.PercentRelativeLayout
+                android:id="@+id/prl_pei_zhi"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/tv_this_car_name"
+                android:layout_centerHorizontal="true"
+                app:layout_heightPercent="10%w"
+                app:layout_marginTopPercent="5%w"
+                app:layout_widthPercent="75%w">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/gray939393"
+                    app:layout_heightPercent="0.3%w"
+                    app:layout_widthPercent="30%w" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/ji_chu_pei_zhi"
+                    android:textColor="@color/gray9999999"
+                    app:layout_textSizePercent="6%w" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/gray939393"
+                    app:layout_heightPercent="0.3%w"
+                    app:layout_widthPercent="30%w" />
+            </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+            <com.zhy.android.percent.support.PercentRelativeLayout
+                android:id="@+id/prl_shuo_ming"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/prl_pei_zhi"
+                android:layout_centerHorizontal="true"
+                android:background="@color/gray0"
+                app:layout_heightPercent="40%w"
+                app:layout_marginBottomPercent="5%w"
+                app:layout_marginLeftPercent="10%w"
+                app:layout_marginTopPercent="3%w"
+                app:layout_paddingLeftPercent="8%w"
+                app:layout_paddingRightPercent="4%w"
+                app:layout_paddingTopPercent="4%w"
+                app:layout_widthPercent="70%w">
+
+                <ImageView
+                    android:id="@+id/iv_power"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentLeft="true"
+                    android:background="@mipmap/power2x"
+                    app:layout_heightPercent="9%w"
+                    app:layout_widthPercent="9%w" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/iv_power"
+                    android:gravity="center"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/black"
+                    app:layout_marginLeftPercent="3%w"
+                    app:layout_marginTopPercent="1%w"
+                    app:layout_textSizePercent="7%w" />
+
+                <ImageView
+                    android:id="@+id/iv_dian_dong"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/iv_power"
+                    android:background="@mipmap/power2x"
+                    app:layout_heightPercent="9%w"
+                    app:layout_marginTopPercent="4%w"
+                    app:layout_widthPercent="9%w" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_power"
+                    android:layout_toRightOf="@+id/iv_dian_dong"
+                    android:gravity="center"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/black"
+                    app:layout_marginLeftPercent="3%w"
+                    app:layout_marginTopPercent="5%w"
+                    app:layout_textSizePercent="7%w" />
+
+                <ImageView
+                    android:id="@+id/iv_che_zai_dao_hang"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/iv_dian_dong"
+                    android:background="@mipmap/power2x"
+                    app:layout_heightPercent="9%w"
+                    app:layout_marginTopPercent="4%w"
+                    app:layout_widthPercent="9%w" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_dian_dong"
+                    android:layout_toRightOf="@+id/iv_che_zai_dao_hang"
+                    android:gravity="center"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/black"
+                    app:layout_marginLeftPercent="3%w"
+                    app:layout_marginTopPercent="5%w"
+                    app:layout_textSizePercent="7%w" />
+
+
+                <TextView
+                    android:id="@+id/tv_zi_dong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/black"
+                    app:layout_marginTopPercent="1%w"
+                    app:layout_textSizePercent="7%w" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_toLeftOf="@+id/tv_zi_dong"
+                    android:background="@mipmap/power2x"
+                    app:layout_heightPercent="9%w"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_widthPercent="9%w" />
+
+
+                <TextView
+                    android:id="@+id/tv_zuo_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv_zi_dong"
+                    android:gravity="center"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/black"
+                    app:layout_marginTopPercent="5%w"
+                    app:layout_textSizePercent="7%w" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/tv_zi_dong"
+                    android:layout_toLeftOf="@+id/tv_zuo_number"
+                    android:background="@mipmap/power2x"
+                    app:layout_heightPercent="9%w"
+                    app:layout_marginRightPercent="3%w"
+                    app:layout_marginTopPercent="4%w"
+                    app:layout_widthPercent="9%w" />
+
+            </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/bg_price_show"
+            app:layout_heightPercent="13%w"
+            app:layout_widthPercent="68%w" />
+
+        <TextView
+            android:id="@+id/tv_user_this_car"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/use_this_car"
+            app:layout_heightPercent="13%w"
+            app:layout_widthPercent="30%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
 </com.zhy.android.percent.support.PercentLinearLayout>
