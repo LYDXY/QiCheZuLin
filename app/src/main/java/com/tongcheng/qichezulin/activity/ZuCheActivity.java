@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,20 +19,32 @@ import com.bigkoo.alertview.OnDismissListener;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.bigkoo.pickerview.TimePickerView;
 import com.code19.library.DateUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.pacific.adapter.Adapter;
+import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Param.ParamGetCarType;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
+import com.tongcheng.qichezulin.model.CarTypeModel;
+import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsDate;
+import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
+import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 林尧 on 2016/7/22.
@@ -41,12 +54,14 @@ import java.util.Date;
 public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
 
 
+    @ViewInject(R.id.tv_car_type_show)
+    TextView tv_car_type_show;
     AlertView mAlertViewExt;//窗口拓展例子
     @ViewInject(R.id.rrl_third)
     PercentRelativeLayout rrl_third;
     @ViewInject(R.id.rrl_second)
     PercentRelativeLayout rrl_second;
-
+    Adapter adapter;
 
     TimePickerView pvTime; //时间选择控件
 
@@ -115,7 +130,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
                 break;
             case R.id.rrl_third:
-                showAlertView();
+                get_Data_in_AlertView();
                 break;
 
         }
@@ -202,12 +217,71 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     }
 
 
-    public void showAlertView() {
+    public void showAlertView(final List<CarTypeModel> carTypeModels) {
         mAlertViewExt = new AlertView(null, null, null, null, null, this, AlertView.Style.Alert, this);
-        ViewGroup extView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.alertview00, null);
-        mAlertViewExt.addExtView(extView);
+        ViewGroup view = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.alertview00, null);
+        GridView gridView = (GridView) view.findViewById(R.id.gv_list);
+        adapter = new Adapter<CarTypeModel>(getApplication(), R.layout.gv_item00) {
+            @Override
+            protected void convert(final AdapterHelper helper, final CarTypeModel item) {
+                final int position = helper.getPosition();
+                helper
+                        .setText(R.id.btn_show_car_type, item.FTypeName)
+                        .getView(R.id.btn_show_car_type).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        JLog.i(item.PID);
+                        mAlertViewExt.dismiss();
+                        tv_car_type_show.setText(item.FTypeName);
+                    }
+                });
+            }
+        };
+        adapter.addAll(carTypeModels);
+        gridView.setAdapter(adapter);
+        mAlertViewExt.addExtView(view);
         mAlertViewExt.show();
-        // mAlertViewExt.dismiss();
+    }
+
+
+    public void get_Data_in_AlertView() {
+        ParamGetCarType paramGetCarType = new ParamGetCarType();
+        Callback.Cancelable cancelable
+                = x.http().post(paramGetCarType, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                UtilsJson.printJsonData(result);
+                Gson gson = new Gson();
+                Type type = new TypeToken<JsonBase<ArrayList<CarTypeModel>>>() {
+                }.getType();
+                JsonBase<ArrayList<CarTypeModel>> base = gson
+                        .fromJson(result, type);
+                if (!base.status.toString().trim().equals("0")) {
+                    if (base.data.size() > 0) {
+                        showAlertView(base.data);
+                    }
+                } else {
+                    JLog.i(base.info);
+
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
     }
 
     @Override

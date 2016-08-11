@@ -11,12 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/shape5"
+        android:orientation="vertical"
         app:layout_heightPercent="50%w">
 
         <GridView
             android:id="@+id/gv_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></GridView>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:numColumns="3"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_marginRightPercent="5%w"
+            app:layout_marginTopPercent="8%w"></GridView>
 
     </com.zhy.android.percent.support.PercentLinearLayout>
 </com.zhy.android.percent.support.PercentLinearLayout>

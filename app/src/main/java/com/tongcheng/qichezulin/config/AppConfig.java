@@ -44,4 +44,6 @@ public class AppConfig {
     //获取网点列表 根据城市id
     public static final String GET_WANG_DIAN_LIST_BY_CITYID = "api/car/get_countyshop.ashx";
 
+    //获取车的类型
+    public static final String GET_CAR_TYPE = "api/car/get_cartype.ashx";
 }

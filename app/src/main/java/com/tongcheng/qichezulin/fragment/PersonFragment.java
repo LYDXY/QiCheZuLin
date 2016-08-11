@@ -122,18 +122,14 @@ public class PersonFragment extends PuTongFragment {
                         JLog.i("获取个人信息成功");
                         //判断有没有图片
                         if (StringUtils.isEmpty(base.data.FImg)) {
-                            //暂时写死
-                            String UUU = "http://img3.redocn.com/20100506/Redocn_2010042923275910.jpg";
-                            JLog.i("获取个人信息成功");
-                            x.image().bind(iv_blur, UUU);
-                            iv_head_photo.setImageURI(Uri.parse(UUU));
-                            x.image().bind(iv_head_photo, UUU);
+                            iv_head_photo.setImageResource(R.mipmap.default_head_photo);
+                          /*  x.image().bind(iv_head_photo, UUU);
                             Blurry.with(getActivity())
                                     .radius(15)
                                     .sampling(2)
                                     .color(Color.argb(66, 0, 255, 255))
                                     .capture(iv_blur)
-                                    .into(iv_blur);
+                                    .into(iv_blur);*/
 
                         } else {
                             x.image().bind(iv_head_photo,

@@ -95,4 +95,5 @@
     <string name="ka_hao">卡号</string>
     <string name="qing_shu_ru_yin_hang_ka">请输入银行卡</string>
     <string name="jiao_che">轿车</string>
+    <string name="gai_men_dian_yi_jing_zu_man">该门店已经租满</string>
 </resources>

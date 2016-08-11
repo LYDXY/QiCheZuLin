@@ -5,15 +5,16 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/btn_show_car_type"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/shape3"
+        android:background="@drawable/shape6"
         android:gravity="center"
         android:text="@string/jiao_che"
         android:textColor="@color/gray9999999"
-        app:layout_heightPercent="20%w"
+        app:layout_heightPercent="30%w"
         app:layout_marginTopPercent="2%w"
-        app:layout_textSizePercent="10%w"
-        app:layout_widthPercent="80%w" />
+        app:layout_textSizePercent="15%w"
+        app:layout_widthPercent="93%w" />
 </com.zhy.android.percent.support.PercentRelativeLayout>

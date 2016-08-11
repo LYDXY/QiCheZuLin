@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        app:layout_heightPercent="30%w"
+        app:layout_heightPercent="40%w"
         app:layout_widthPercent="100%w">
 
 
@@ -65,12 +65,68 @@
             app:layout_marginTopPercent="2%w"
             app:layout_widthPercent="60%w" />
 
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:id="@+id/pll_is_zu_man"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/line1222"
+            android:layout_toRightOf="@+id/iv_car_picture"
+            android:background="@color/whiteFFFFFF"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_heightPercent="8%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_widthPercent="60%w">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@mipmap/man"
+                android:scaleType="fitXY"
+                app:layout_heightPercent="6%w"
+                app:layout_widthPercent="6%w" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:maxLength="10"
+                android:text="@string/gai_men_dian_yi_jing_zu_man"
+                android:textColor="@color/black"
+                app:layout_marginLeftPercent="3%w"
+                app:layout_textSizePercent="5%w" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@mipmap/geng_huan_men_dian"
+                android:scaleType="fitCenter"
+                app:layout_marginBottomPercent="1%w"
+                app:layout_marginLeftPercent="20%w"
+                app:layout_marginTopPercent="1%w"
+                app:layout_widthPercent="30%w" />
+
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+        <View
+            android:id="@+id/line1233"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/tv_car_remark"
+            android:layout_toRightOf="@+id/iv_car_picture"
+            android:background="@color/black_272727"
+            app:layout_heightPercent="0.1%w"
+            app:layout_marginLeftPercent="3%w"
+            app:layout_marginRightPercent="3%w"
+            app:layout_marginTopPercent="10%w"
+            app:layout_widthPercent="60%w" />
 
         <TextView
             android:id="@+id/tv_car_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line1222"
+            android:layout_below="@+id/line1233"
             android:layout_toRightOf="@+id/iv_car_picture"
             android:text="@string/car_price"
             android:textColor="@color/orange_fd6203"
@@ -82,7 +138,7 @@
             android:id="@+id/tv_ri_jun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line1222"
+            android:layout_below="@+id/line1233"
             android:layout_toRightOf="@+id/tv_car_price"
             android:text="@string/car_everyday"
             android:textColor="@color/gray_6d6d6d"
@@ -94,7 +150,7 @@
             android:id="@+id/tv_car_yue_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line1222"
+            android:layout_below="@+id/line1233"
             android:layout_toRightOf="@+id/tv_ri_jun"
             android:text="@string/car_yue_price"
             android:textColor="@color/orange_fd6203"
@@ -106,7 +162,7 @@
             android:id="@+id/tv_yue_zu_jia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line1222"
+            android:layout_below="@+id/line1233"
             android:layout_toRightOf="@+id/tv_car_yue_price"
             android:text="@string/yue_zu_jia"
             android:textColor="@color/gray_6d6d6d"
