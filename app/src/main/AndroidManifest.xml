@@ -116,6 +116,12 @@
             android:name=".activity.MyBankCardsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!--车辆详情界面-->
+        <activity
+            android:name=".activity.CarDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

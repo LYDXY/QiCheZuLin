@@ -16,6 +16,7 @@ import com.joanzapata.android.QuickAdapter;
 import com.tongcheng.qichezulin.Param.ParamBanner;
 import com.tongcheng.qichezulin.Param.ParamHotCar;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.activity.CarDetailActivity;
 import com.tongcheng.qichezulin.activity.FindCarTypeActivity;
 import com.tongcheng.qichezulin.activity.WangDianSearchActivity;
 import com.tongcheng.qichezulin.activity.ZuCheActivity;
@@ -284,13 +285,14 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
                                     helper.setText(R.id.tv_re_men_or_you_hui, "优惠");
                                 }
                                 helper.setText(R.id.tv_car_name, item.FCarName)
-                                        .setText(R.id.tv_car_price, "¥" + item.FDayMoeny + "/")
+                                        .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
                                         .setText(R.id.tv_car_remark, item.FRemark)
                                         .setImageUrl(R.id.iv_car_picture, item.FImg);
                                 helper.getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         JLog.i("汽车的id===========" + item.KCarID);
+                                        UtilsTiaoZhuang.ToAnotherActivity(getActivity(), CarDetailActivity.class);
 
                                     }
                                 });
