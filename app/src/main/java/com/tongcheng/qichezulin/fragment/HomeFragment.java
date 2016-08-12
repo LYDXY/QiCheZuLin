@@ -292,7 +292,27 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
                                     @Override
                                     public void onClick(View view) {
                                         JLog.i("汽车的id===========" + item.KCarID);
-                                        UtilsTiaoZhuang.ToAnotherActivity(getActivity(), CarDetailActivity.class);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("FImg", item.FImg);
+                                        bundle.putString("FCarName", item.FCarName);
+                                        bundle.putString("FDayMoney", item.FDayMoney);
+                                        bundle.putString("FType", item.FType);
+                                        bundle.putString("KCarID", item.KCarID);
+                                        bundle.putString("FRemark", item.FRemark);
+                                        bundle.putString("PID", item.PID);
+                                        bundle.putString("KTypeID", item.KTypeID);
+                                        bundle.putString("FCreateDate", item.FCreateDate);
+                                        bundle.putString("FHourMoney", item.FHourMoney);
+                                        bundle.putString("FMonthMoney", item.FMonthMoney);
+                                        bundle.putString("FPower", item.FPower);
+                                        bundle.putString("FIsAutomatic", item.FIsAutomatic);
+                                        bundle.putString("FDriveMethod", item.FDriveMethod);
+                                        bundle.putString("FIsNavigation", item.FIsNavigation);
+                                        bundle.putString("FIsCarWindows", item.FIsCarWindows);
+                                        bundle.putString("FState", item.FState);
+                                        bundle.putString("FBond", item.FBond);
+                                        bundle.putString("FSeat", item.FSeat);
+                                        UtilsTiaoZhuang.ToAnotherActivity(getActivity(), CarDetailActivity.class, bundle);
 
                                     }
                                 });

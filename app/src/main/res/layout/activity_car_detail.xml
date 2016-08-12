@@ -95,10 +95,7 @@
                 app:layout_marginBottomPercent="5%w"
                 app:layout_marginLeftPercent="10%w"
                 app:layout_marginTopPercent="1%w"
-                app:layout_paddingLeftPercent="8%w"
-                app:layout_paddingRightPercent="4%w"
-                app:layout_paddingTopPercent="4%w"
-                app:layout_widthPercent="70%w">
+                app:layout_widthPercent="80%w">
 
                 <ImageView
                     android:id="@+id/iv_power"
@@ -107,18 +104,23 @@
                     android:layout_alignParentLeft="true"
                     android:scaleType="centerInside"
                     android:src="@mipmap/power"
-                    app:layout_heightPercent="9%w"
-                    app:layout_widthPercent="9%w" />
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="10%w"
+                    app:layout_widthPercent="10%w" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                    android:id="@+id/tv_power"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_toRightOf="@+id/iv_power"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:text="@string/you_liang"
                     android:textColor="@color/gray9999999"
-                    app:layout_marginLeftPercent="3%w"
-                    app:layout_textSizePercent="7%w" />
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="2%w"
+                    app:layout_textSizePercent="6%w"
+                    app:layout_widthPercent="30%w" />
 
                 <ImageView
                     android:id="@+id/iv_dian_dong"
@@ -128,21 +130,25 @@
                     android:layout_below="@+id/iv_power"
                     android:scaleType="centerInside"
                     android:src="@mipmap/youxiang"
-                    app:layout_heightPercent="9%w"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="10%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_widthPercent="9%w" />
+                    app:layout_widthPercent="10%w" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_car_type_show"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_below="@+id/iv_power"
                     android:layout_toRightOf="@+id/iv_dian_dong"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:text="@string/you_liang"
                     android:textColor="@color/gray9999999"
-                    app:layout_marginLeftPercent="3%w"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="2%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_textSizePercent="7%w" />
+                    app:layout_textSizePercent="6%w"
+                    app:layout_widthPercent="30%w" />
 
                 <ImageView
                     android:id="@+id/iv_che_zai_dao_hang"
@@ -152,92 +158,105 @@
                     android:layout_below="@+id/iv_dian_dong"
                     android:scaleType="centerInside"
                     android:src="@mipmap/daohang"
-                    app:layout_heightPercent="9%w"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="10%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_widthPercent="9%w" />
+                    app:layout_widthPercent="10%w" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_is_have_dao_hang"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_below="@+id/iv_dian_dong"
                     android:layout_toRightOf="@+id/iv_che_zai_dao_hang"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:text="@string/you_liang"
                     android:textColor="@color/gray9999999"
-                    app:layout_marginLeftPercent="3%w"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="2%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_textSizePercent="7%w" />
+                    app:layout_textSizePercent="6%w"
+                    app:layout_widthPercent="30%w" />
 
+
+                <ImageView
+                    android:id="@+id/iv_zi_dong"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_toRightOf="@+id/iv_power"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/zidong"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="40%w"
+                    app:layout_widthPercent="10%w" />
 
                 <TextView
                     android:id="@+id/tv_zi_dong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:text="@string/you_liang"
-                    android:textColor="@color/gray9999999"
-                    app:layout_textSizePercent="7%w" />
-
-                <ImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_toLeftOf="@+id/tv_zi_dong"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/zidong"
-                    app:layout_heightPercent="9%w"
-                    app:layout_marginRightPercent="3%w"
-                    app:layout_widthPercent="9%w" />
+                    android:layout_toRightOf="@+id/iv"
+                    android:gravity="center_vertical"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/gray9999999"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="70%w"
+                    app:layout_textSizePercent="6%w"
+                    app:layout_widthPercent="30%w" />
 
+
+                <ImageView
+                    android:id="@+id/iv_zuo_number"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/iv_zi_dong"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/seat"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="60%w"
+                    app:layout_marginTopPercent="4%w"
+                    app:layout_widthPercent="10%w" />
 
                 <TextView
                     android:id="@+id/tv_zuo_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/tv_zi_dong"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:text="@string/you_liang"
                     android:textColor="@color/gray9999999"
+                    app:layout_heightPercent="10%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_textSizePercent="7%w" />
+                    app:layout_textSizePercent="6%w"
+                    app:layout_widthPercent="30%w" />
+
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_below="@+id/tv_zi_dong"
-                    android:layout_toLeftOf="@+id/tv_zuo_number"
+                    android:layout_below="@+id/iv_zuo_number"
                     android:scaleType="centerInside"
-                    android:src="@mipmap/seat"
-                    app:layout_heightPercent="9%w"
-                    app:layout_marginRightPercent="3%w"
+                    android:src="@mipmap/tianchuang"
+                    app:layout_heightPercent="10%w"
+                    app:layout_marginLeftPercent="60%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_widthPercent="9%w" />
-
+                    app:layout_widthPercent="10%w" />
 
                 <TextView
                     android:id="@+id/tv_tian_chuang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/tv_zuo_number"
-                    android:gravity="center"
-                    android:text="@string/you_liang"
-                    android:textColor="@color/gray9999999"
-                    app:layout_marginTopPercent="4%w"
-                    app:layout_textSizePercent="7%w" />
-
-                <ImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:layout_alignParentRight="true"
                     android:layout_below="@+id/tv_zuo_number"
-                    android:layout_toLeftOf="@+id/tv_tian_chuang"
-                    android:scaleType="centerInside"
-                    android:src="@mipmap/tianchuang"
-                    app:layout_heightPercent="8%w"
-                    app:layout_marginRightPercent="3%w"
+                    android:gravity="center_vertical"
+                    android:text="@string/you_liang"
+                    android:textColor="@color/gray9999999"
+                    app:layout_heightPercent="10%w"
                     app:layout_marginTopPercent="4%w"
-                    app:layout_widthPercent="8%w" />
+                    app:layout_textSizePercent="6%w"
+                    app:layout_widthPercent="30%w" />
+
+
             </com.zhy.android.percent.support.PercentRelativeLayout>
 
 
@@ -245,6 +264,7 @@
 
 
         <TextView
+            android:id="@+id/tv_show_cat_price"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentBottom="true"
