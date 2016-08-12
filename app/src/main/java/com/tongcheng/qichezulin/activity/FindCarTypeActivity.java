@@ -158,27 +158,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                                                     .getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    Bundle bundle = new Bundle();
-                                                    bundle.putString("FImg", item.FImg);
-                                                    bundle.putString("FCarName", item.FCarName);
-                                                    bundle.putString("FDayMoney", item.FDayMoney);
-                                                    bundle.putString("FType", item.FType);
-                                                    bundle.putString("KCarID", item.KCarID);
-                                                    bundle.putString("FRemark", item.FRemark);
-                                                    bundle.putString("PID", item.PID);
-                                                    bundle.putString("KTypeID", item.KTypeID);
-                                                    bundle.putString("FCreateDate", item.FCreateDate);
-                                                    bundle.putString("FHourMoney", item.FHourMoney);
-                                                    bundle.putString("FMonthMoney", item.FMonthMoney);
-                                                    bundle.putString("FPower", item.FPower);
-                                                    bundle.putString("FIsAutomatic", item.FIsAutomatic);
-                                                    bundle.putString("FDriveMethod", item.FDriveMethod);
-                                                    bundle.putString("FIsNavigation", item.FIsNavigation);
-                                                    bundle.putString("FIsCarWindows", item.FIsCarWindows);
-                                                    bundle.putString("FState", item.FState);
-                                                    bundle.putString("FBond", item.FBond);
-                                                    bundle.putString("FSeat", item.FSeat);
-                                                    UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity.this, CarDetailActivity.class, bundle);
+                                                    UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity.this, CarDetailActivity.class, UtilsTiaoZhuang.EveryCar(item));
                                                 }
                                             });
                                         }
