@@ -3,7 +3,6 @@ package com.tongcheng.qichezulin.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -23,7 +22,7 @@ import com.tongcheng.qichezulin.activity.ZuCheActivity;
 import com.tongcheng.qichezulin.holder.NetworkImageHolderView;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.model.BannerModel;
-import com.tongcheng.qichezulin.model.CatModel;
+import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.utils.UtilsJson;
@@ -83,7 +82,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
     //热门车列表
     @ViewInject(R.id.lv_fs)
     ListViewForScrollView2 lv_fs;
-    QuickAdapter<CatModel> adapter;
+    QuickAdapter<CarModel> adapter;
 
 
     @Override
@@ -268,16 +267,16 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
                 UtilsJson.printJsonData(result);
                 Gson gson = new Gson();
-                Type type = new TypeToken<JsonBase<ArrayList<CatModel>>>() {
+                Type type = new TypeToken<JsonBase<ArrayList<CarModel>>>() {
                 }.getType();
-                final JsonBase<ArrayList<CatModel>> base = gson
+                final JsonBase<ArrayList<CarModel>> base = gson
                         .fromJson(result, type);
                 JLog.i(base.data.size() + "");
                 if (base.data != null) {
                     if (base.data.size() > 0) {
-                        adapter = new QuickAdapter<CatModel>(getActivity(), R.layout.listview_item_car, base.data) {
+                        adapter = new QuickAdapter<CarModel>(getActivity(), R.layout.listview_item_car, base.data) {
                             @Override
-                            protected void convert(BaseAdapterHelper helper, final CatModel item) {
+                            protected void convert(BaseAdapterHelper helper, final CarModel item) {
                                 final int position = helper.getPosition();
                                 if (base.data.get(position).FType.equals("1")) {
                                     helper.setText(R.id.tv_re_men_or_you_hui, "热门");

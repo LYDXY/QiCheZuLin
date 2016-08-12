@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 
-public class CatModel2 implements Serializable {
+public class CarModel2 implements Serializable {
 
 
     public String KCarID;//

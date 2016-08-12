@@ -10,7 +10,7 @@ import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.tongcheng.qichezulin.Param.ParamGetAllCar;
 import com.tongcheng.qichezulin.R;
-import com.tongcheng.qichezulin.model.CatModel2;
+import com.tongcheng.qichezulin.model.CarModel2;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
@@ -40,7 +40,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
             PullToRefreshLayout prl_prl;
     @ViewInject(R.id.plv_car_list)
     PullableListView plv_car_list; //listview
-    Adapter<CatModel2> catModel2Adapter;
+    Adapter<CarModel2> catModel2Adapter;
 
 
     private boolean isFirstIn = true;
@@ -129,9 +129,9 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                 try {
                     UtilsJson.printJsonData(result);
                     Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase<ArrayList<CatModel2>>>() {
+                    Type type = new TypeToken<JsonBase<ArrayList<CarModel2>>>() {
                     }.getType();
-                    JsonBase<ArrayList<CatModel2>> base = gson
+                    JsonBase<ArrayList<CarModel2>> base = gson
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {

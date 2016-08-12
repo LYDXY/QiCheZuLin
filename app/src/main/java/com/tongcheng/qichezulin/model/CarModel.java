@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 
 
-public class CatModel implements Serializable {
+public class CarModel implements Serializable {
     public String KCarID;//
     public String FType; // 活动类型【1.热门2.优惠】
     public String FCarName;//汽车名称址
