@@ -48,4 +48,7 @@ public class AppConfig {
 
     //获取车的类型
     public static final String GET_CAR_TYPE = "api/car/get_cartype.ashx";
+
+    //获取全部车型列表
+    public static final String GET_ALL_CAR_LIST = "api/car/get_allcarlist.ashx";
 }

@@ -2,6 +2,8 @@ package com.tongcheng.qichezulin.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 
 import com.jiongbull.jlog.JLog;
@@ -11,6 +13,8 @@ import com.tongcheng.qichezulin.utils.UtilsUser;
 
 
 import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 /**
  * Created by 林尧 on 2016/7/22.
@@ -20,15 +24,25 @@ import org.xutils.view.annotation.ContentView;
 public class StartActivity extends Activity {
 
 
+    @ViewInject(R.id.bt_go)
+    Button bt_go;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        x.view().inject(this);
         JLog.v("onCreate");
         //为空
         if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "") == null
                 || UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").equals("")) {
             JLog.i("第一次打开应用");
             UtilsUser.setSP(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "00000000000");
+            bt_go.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    UtilsTiaoZhuang.ToAnotherActivity(StartActivity.this, loginActivity.class);
+                }
+            });
         }
         //不为空
         else {

@@ -4,14 +4,27 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.jiongbull.jlog.JLog;
+import com.pacific.adapter.Adapter;
+import com.tongcheng.qichezulin.Param.ParamGetAllCar;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.model.CatModel2;
+import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
+import com.tongcheng.qichezulin.utils.Utils;
+import com.tongcheng.qichezulin.utils.UtilsJson;
 
+import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import pl.droidsonroids.gif.GifDrawable;
 
@@ -27,7 +40,11 @@ public class FindCarTypeActivity extends PuTongActivity2 {
             PullToRefreshLayout prl_prl;
     @ViewInject(R.id.plv_car_list)
     PullableListView plv_car_list; //listview
+    Adapter<CatModel2> catModel2Adapter;
+
+
     private boolean isFirstIn = true;
+
 
     @Override
     void initData() {
@@ -68,6 +85,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
         initView();
         setListenerOnView();
         setOnPullListenerOnprl_prl();
+        do_get_data();
     }
 
     @Override
@@ -94,4 +112,59 @@ public class FindCarTypeActivity extends PuTongActivity2 {
         });
     }
 
+
+    // 获取列表数据
+    private void do_get_data() {
+        ParamGetAllCar paramGetAllCar = new ParamGetAllCar();
+        // paramGetAllCar.max_price = "";
+        // paramGetAllCar.min_price = "";
+        paramGetAllCar.page = "1";
+        // paramGetAllCar.page_size = "";
+        //   paramGetAllCar.cartype = "";
+        //   paramGetAllCar.paytype = "";
+        Callback.Cancelable cancelable
+                = x.http().post(paramGetAllCar, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<ArrayList<CatModel2>>>() {
+                    }.getType();
+                    JsonBase<ArrayList<CatModel2>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        if (base.data != null) {
+                            JLog.i(base.data.size() + "");
+                            if (base.data.size() > 0) {
+                                JLog.i("获取数据成功");
+
+                            }
+                        }
+                    } else {
+                        Utils.ShowText(FindCarTypeActivity.this, base.info.toString());
+                    }
+                } catch (Exception E) {
+
+                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                JLog.i(isOnCallback + "");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                JLog.i(cex + "");
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
 }
