@@ -17,6 +17,7 @@ import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
@@ -144,7 +145,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                                 if (catModel2Adapter == null) {
                                     catModel2Adapter = new Adapter<CarModel2>(FindCarTypeActivity.this, R.layout.listview_item_car2) {
                                         @Override
-                                        protected void convert(AdapterHelper helper, CarModel2 item) {
+                                        protected void convert(AdapterHelper helper, final CarModel2 item) {
                                             final int position = helper.getPosition();
                                             JLog.i(position + "");
                                             helper.setImageUrl(R.id.iv_car_picture, item.FImg)
@@ -153,7 +154,33 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                                                     .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
                                                     .setText(R.id.tv_car_yue_price, "¥" + item.FMonthMoney + "/")
                                                     .setVisible(R.id.pll_is_zu_man, View.GONE)
-                                                    .setVisible(R.id.line1233, View.GONE);
+                                                    .setVisible(R.id.line1233, View.GONE)
+                                                    .getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("FImg", item.FImg);
+                                                    bundle.putString("FCarName", item.FCarName);
+                                                    bundle.putString("FDayMoney", item.FDayMoney);
+                                                    bundle.putString("FType", item.FType);
+                                                    bundle.putString("KCarID", item.KCarID);
+                                                    bundle.putString("FRemark", item.FRemark);
+                                                    bundle.putString("PID", item.PID);
+                                                    bundle.putString("KTypeID", item.KTypeID);
+                                                    bundle.putString("FCreateDate", item.FCreateDate);
+                                                    bundle.putString("FHourMoney", item.FHourMoney);
+                                                    bundle.putString("FMonthMoney", item.FMonthMoney);
+                                                    bundle.putString("FPower", item.FPower);
+                                                    bundle.putString("FIsAutomatic", item.FIsAutomatic);
+                                                    bundle.putString("FDriveMethod", item.FDriveMethod);
+                                                    bundle.putString("FIsNavigation", item.FIsNavigation);
+                                                    bundle.putString("FIsCarWindows", item.FIsCarWindows);
+                                                    bundle.putString("FState", item.FState);
+                                                    bundle.putString("FBond", item.FBond);
+                                                    bundle.putString("FSeat", item.FSeat);
+                                                    UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity.this, CarDetailActivity.class, bundle);
+                                                }
+                                            });
                                         }
                                     };
                                     catModel2Adapter.addAll(base.data);

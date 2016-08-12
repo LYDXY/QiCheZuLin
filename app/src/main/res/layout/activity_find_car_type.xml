@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grayF0F0F0"
@@ -15,15 +16,14 @@
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/grayF0F0F0">
 
         <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout
             android:id="@+id/prl_prl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            app:layout_paddingPercent="2%w">
-
+            android:gravity="center_horizontal">
             <com.tongcheng.qichezulin.pulltorefresh.PullableListView
                 android:id="@+id/plv_car_list"
                 android:layout_width="match_parent"
@@ -31,8 +31,6 @@
                 android:background="@color/whiteFFFFFF"
                 android:divider="@color/grayF0F0F0"
                 android:dividerHeight="6dip">
-
-
             </com.tongcheng.qichezulin.pulltorefresh.PullableListView>
         </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
 
