@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_line"
+    android:background="@color/whiteFFFFFF"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        app:layout_heightPercent="40%w"
+        app:layout_heightPercent="35%w"
         app:layout_widthPercent="100%w">
 
 
@@ -22,9 +22,9 @@
             android:id="@+id/iv_car_picture"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="22%w"
+            app:layout_heightPercent="25%w"
             app:layout_marginLeftPercent="4%w"
-            app:layout_marginTopPercent="2%w"
+            app:layout_marginTopPercent="1%w"
             app:layout_widthPercent="25%w" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:text="@string/car_name"
             android:textColor="@color/black272727"
             app:layout_marginLeftPercent="3%w"
-            app:layout_marginTopPercent="2%w"
+            app:layout_marginTopPercent="1%w"
             app:layout_textSizePercent="5%w" />
 
         <TextView
@@ -131,7 +131,7 @@
             android:text="@string/car_price"
             android:textColor="@color/orange_fd6203"
             app:layout_marginLeftPercent="3%w"
-            app:layout_marginTopPercent="1%w"
+            app:layout_marginTopPercent="2%w"
             app:layout_textSizePercent="5%w" />
 
         <TextView
@@ -143,7 +143,7 @@
             android:text="@string/car_everyday"
             android:textColor="@color/gray_6d6d6d"
             app:layout_marginLeftPercent="1%w"
-            app:layout_marginTopPercent="2.5%w"
+            app:layout_marginTopPercent="3.5%w"
             app:layout_textSizePercent="3.5%w" />
 
         <TextView
@@ -155,7 +155,7 @@
             android:text="@string/car_yue_price"
             android:textColor="@color/orange_fd6203"
             app:layout_marginLeftPercent="6%w"
-            app:layout_marginTopPercent="1%w"
+            app:layout_marginTopPercent="2%w"
             app:layout_textSizePercent="5%w" />
 
         <TextView
@@ -167,7 +167,7 @@
             android:text="@string/yue_zu_jia"
             android:textColor="@color/gray_6d6d6d"
             app:layout_marginLeftPercent="1%w"
-            app:layout_marginTopPercent="2.5%w"
+            app:layout_marginTopPercent="3.5%w"
             app:layout_textSizePercent="3.5%w" />
 
     </com.zhy.android.percent.support.PercentRelativeLayout>

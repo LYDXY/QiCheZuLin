@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
+import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamGetAllCar;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.CarModel2;
@@ -66,6 +67,8 @@ public class FindCarTypeActivity extends PuTongActivity2 {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+
     }
 
     @Override
@@ -138,7 +141,27 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                             JLog.i(base.data.size() + "");
                             if (base.data.size() > 0) {
                                 JLog.i("获取数据成功");
-
+                                if (catModel2Adapter == null) {
+                                    catModel2Adapter = new Adapter<CarModel2>(FindCarTypeActivity.this, R.layout.listview_item_car2) {
+                                        @Override
+                                        protected void convert(AdapterHelper helper, CarModel2 item) {
+                                            final int position = helper.getPosition();
+                                            JLog.i(position + "");
+                                            helper.setImageUrl(R.id.iv_car_picture, item.FImg)
+                                                    .setText(R.id.tv_car_name, item.FCarName)
+                                                    .setText(R.id.tv_car_remark, item.FRemark)
+                                                    .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
+                                                    .setText(R.id.tv_car_yue_price, "¥" + item.FMonthMoney + "/")
+                                                    .setVisible(R.id.pll_is_zu_man, View.GONE)
+                                                    .setVisible(R.id.line1233, View.GONE);
+                                        }
+                                    };
+                                    catModel2Adapter.addAll(base.data);
+                                    plv_car_list.setAdapter(catModel2Adapter);
+                                } else {
+                                    catModel2Adapter.addAll(base.data);
+                                    catModel2Adapter.notifyAll();
+                                }
                             }
                         }
                     } else {
