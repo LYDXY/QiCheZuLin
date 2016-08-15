@@ -94,7 +94,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new WangDianFragment());
+        fragmentList.add(new loginFragment());
         fragmentList.add(new loginFragment());
         fragmentList.add(new PersonFragment());
     }
@@ -164,14 +164,6 @@ public class MainActivity2 extends PuTongFragmentActivity {
 
             }
         });
-
-     /*   v4_vp.setPageTransformer(true, new ViewPager.PageTransformer() {
-            @Override
-            public void transformPage(View page, float position) {
-
-            }
-        });*/
-
     }
 
 
@@ -203,12 +195,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //   RootApp.mLocationClient.stop();
     }
 
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
 
-    }
 }
