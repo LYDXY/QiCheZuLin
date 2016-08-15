@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
@@ -32,9 +33,11 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         JLog.v("onCreate");
+
         //为空
         if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "") == null
                 || UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").equals("")) {
+            RootApp.mLocationClient.start(); //开启定位
             JLog.i("第一次打开应用");
             UtilsUser.setSP(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "00000000000");
             bt_go.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +49,7 @@ public class StartActivity extends Activity {
         }
         //不为空
         else {
+            RootApp.mLocationClient.start(); //开启定位
             JLog.i("已经打开多次应用了");
             JLog.i(UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").toString() + "////////////////");
             //为空
@@ -56,15 +60,37 @@ public class StartActivity extends Activity {
             }
             //不为空
             else {
+                RootApp.mLocationClient.start(); //开启定位
                 JLog.i(UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "").toString() + "==================");
                 JLog.i("跳转到主界面");
+
                 UtilsTiaoZhuang.ToAnotherActivity(this, MainActivity2.class);
                 this.finish();
+
             }
         }
 
         //  UtilsUser.cleanAllSP(getApplication());
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RootApp.mLocationClient.stop();
+        JLog.i("onDestroy");
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RootApp.mLocationClient.stop();
+        JLog.i("onStop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        RootApp.mLocationClient.stop();
+        JLog.i("onPause");
+    }
 }

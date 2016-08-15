@@ -18,7 +18,9 @@ import com.tongcheng.qichezulin.entity.TabEntity;
 import com.tongcheng.qichezulin.fragment.HomeFragment;
 import com.tongcheng.qichezulin.fragment.LoginCheckCodeFragment;
 import com.tongcheng.qichezulin.fragment.PersonFragment;
+import com.tongcheng.qichezulin.fragment.WangDianFragment;
 import com.tongcheng.qichezulin.fragment.loginFragment;
+import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.view.ViewPagerWithoutSlide;
 
@@ -65,7 +67,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
         initData();
         initView();
         setListenerOnView();
-        RootApp.mLocationClient.start(); //开启定位
+
     }
 
     @Override
@@ -91,7 +93,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new loginFragment());
+        fragmentList.add(new WangDianFragment());
         fragmentList.add(new loginFragment());
         fragmentList.add(new PersonFragment());
     }
@@ -113,7 +115,6 @@ public class MainActivity2 extends PuTongFragmentActivity {
         }
         ///////////////////////////////
 
-
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -122,12 +123,10 @@ public class MainActivity2 extends PuTongFragmentActivity {
 
             @Override
             public void onTabReselect(int position) {
-                if (position == 0) {
-                 /*   tab.showMsg(0, mRandom.nextInt(100) + 1);
-//                    UnreadMsgUtils.show(tab.getMsgView(0), mRandom.nextInt(100) + 1);*/
-                }
+
             }
         });
+        v4_vp.setCurrentItem(0);
 
         v4_vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -146,6 +145,8 @@ public class MainActivity2 extends PuTongFragmentActivity {
                     tv_first.setText("附近");
                     tv_second.setVisibility(View.GONE);
                     iv_set_up.setVisibility(View.GONE);
+                    JLog.w(MyLocationListener.latitude + "./......纬度.");
+                    JLog.w(MyLocationListener.lontitude + "./......纬度.");
                 } else if (position == 2) {
                     tv_first.setText("消息");
                     tv_second.setVisibility(View.GONE);
@@ -162,7 +163,14 @@ public class MainActivity2 extends PuTongFragmentActivity {
 
             }
         });
-        v4_vp.setCurrentItem(0);
+
+     /*   v4_vp.setPageTransformer(true, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+
+            }
+        });*/
+
     }
 
 
@@ -174,6 +182,32 @@ public class MainActivity2 extends PuTongFragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        RootApp.mLocationClient.stop();
+        JLog.i("onStop");
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JLog.i("onPause");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //   RootApp.mLocationClient.stop();
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+
     }
 }

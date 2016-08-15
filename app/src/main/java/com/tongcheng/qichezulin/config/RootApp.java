@@ -28,7 +28,7 @@ public class RootApp extends Application {
 
     //使用百度地图定位
     public static LocationClient mLocationClient = null;
-    public MyLocationListener myLocationListener = null;
+    public static MyLocationListener myLocationListener = null;
 
     public ImageOptions imageOptionsnew;
 
@@ -91,6 +91,7 @@ public class RootApp extends Application {
         /**
          * 百度地图定位------------end
          */
+        SDKInitializer.initialize(getApplicationContext());
 
 
     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.Adapter.FragmentStateAdaper;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.fragment.LoginCheckCodeFragment;
 import com.tongcheng.qichezulin.fragment.loginFragment;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
@@ -48,7 +49,9 @@ public class loginActivity extends PuTongFragmentActivity {
         initData();
         initView();
         setListenerOnView();
+
     }
+
 
     @Override
     public void onClick(View view) {
@@ -88,4 +91,24 @@ public class loginActivity extends PuTongFragmentActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RootApp.mLocationClient.stop();
+        JLog.i("onDestroy");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RootApp.mLocationClient.stop();
+        JLog.i("onStop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        RootApp.mLocationClient.stop();
+        JLog.i("onPause");
+    }
 }

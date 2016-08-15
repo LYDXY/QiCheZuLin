@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class MyLocationListener implements BDLocationListener {
 
-
     public static String latitude;//经度
     public static String lontitude;//纬度
 
