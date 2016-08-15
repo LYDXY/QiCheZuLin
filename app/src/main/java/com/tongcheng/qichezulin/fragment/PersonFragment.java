@@ -86,7 +86,7 @@ public class PersonFragment extends PuTongFragment {
     @Override
     void initData() {
         user_id = (String) UtilsUser.getSp(getContext(), UtilsUser.KEY_USER_ID, "");
-        JLog.i("参数user_id:" + user_id);
+        JLog.w("参数user_id:" + user_id);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class PersonFragment extends PuTongFragment {
                         .fromJson(result, type);
                 if (!base.status.toString().trim().equals("0")) {
                     if (base.data != null) {
-                        JLog.i("获取个人信息成功");
+                        JLog.w("获取个人信息成功");
                         //判断有没有图片
                         if (StringUtils.isEmpty(base.data.FImg)) {
                             iv_head_photo.setImageResource(R.mipmap.default_head_photo);
@@ -143,7 +143,7 @@ public class PersonFragment extends PuTongFragment {
                         UtilsUser.saveUser(getContext(), base.data);
                     }
                 } else {
-                    JLog.i("获取个人信息失败");
+                    JLog.w("获取个人信息失败");
                 }
             }
 
@@ -167,4 +167,28 @@ public class PersonFragment extends PuTongFragment {
         });
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        JLog.w("onStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        JLog.w("onDestroy");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JLog.w("onPause");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JLog.w("onResume");
+    }
 }

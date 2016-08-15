@@ -65,12 +65,12 @@ public class MyBankCardsActivity extends PuTongActivity2 {
     @Override
     protected void onResume() {
         super.onResume();
-        JLog.i("onResume");
+        JLog.w("onResume");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        JLog.i("onDestroy");
+        JLog.w("onDestroy");
     }
 }

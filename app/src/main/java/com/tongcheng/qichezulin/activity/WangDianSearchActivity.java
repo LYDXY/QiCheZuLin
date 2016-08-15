@@ -119,7 +119,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
         Bundle bundle = getIntent().getExtras();
         latitude = bundle.getString("latitude");
         lontitude = bundle.getString("lontitude");
-        JLog.i("经度:---------" + lontitude + "纬度:+=======" + latitude);
+        JLog.w("经度:---------" + lontitude + "纬度:+=======" + latitude);
         get_near_Wang_dian_List(lontitude, latitude, "1");
         p1 = new LatLng(Double.parseDouble(latitude), Double.parseDouble(lontitude));
     }
@@ -144,9 +144,9 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                 JsonBase<ArrayList<CityQuModel>> base = gson
                         .fromJson(result, type);
 
-                JLog.i(base.data.size() + "");
+                JLog.w(base.data.size() + "");
                 cityQuModels = base.data;
-                JLog.i(cityQuModels.size() + "=============");
+                JLog.w(cityQuModels.size() + "=============");
                 if (base.data.size() > 0) {
                     cityQuModels = base.data;
                     quModelExpandableAdapter = new ExpandableAdapter<CityQuModel, QuModel>(getApplicationContext(), R.layout.e_listview_item_father, R.layout.e_listview_item_child) {
@@ -161,14 +161,14 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                             helper.setText(R.id.tv_city, item.CityName).getView(R.id.rrl_father).setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    JLog.i(item.CityName);
+                                    JLog.w(item.CityName);
                                     if (isExpanded) {
                                         elv_city.collapseGroup(helper.getGroupPosition());
-                                        JLog.i(item.CityId);
+                                        JLog.w(item.CityId);
                                         get_Wang_dian_List_by_cityID(item.CityId);
                                     } else {
                                         elv_city.expandGroup(helper.getGroupPosition(), true);
-                                        JLog.i(item.CityId);
+                                        JLog.w(item.CityId);
                                         get_Wang_dian_List_by_cityID(item.CityId);
 
                                     }
@@ -183,8 +183,8 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                     .setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            JLog.i(item.FName);
-                                            JLog.i(item.PID);
+                                            JLog.w(item.FName);
+                                            JLog.w(item.PID);
                                             get_Wang_dian_List(item.PID, "", "", item.FName);
                                         }
                                     });
@@ -206,12 +206,12 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override
@@ -270,7 +270,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                 helper.getView(R.id.rrl_shop).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        JLog.i("点击了" + item.FShopName);
+                                        JLog.w("点击了" + item.FShopName);
 
                                     }
                                 });
@@ -344,7 +344,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                         Utils.ShowText2(getApplication(), QUNAME + "没有网点");
                     }
                 } else {
-                    JLog.i(base.info);
+                    JLog.w(base.info);
 
                 }
 
@@ -371,7 +371,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
     // 获取附近网点 |根据距离
     public void get_near_Wang_dian_List(String lng, String lat, String type_id) {
         ParamNearWangDian nearWangDian = new ParamNearWangDian();
-        JLog.i(lng + "========" + lat);
+        JLog.w(lng + "========" + lat);
         nearWangDian.lng = lng;
         nearWangDian.lat = lat;
         nearWangDian.type_id = type_id;
@@ -401,7 +401,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                     helper.getView(R.id.rrl_shop).setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            JLog.i("点击了" + item.FShopName);
+                                            JLog.w("点击了" + item.FShopName);
 
                                         }
                                     });
@@ -419,7 +419,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
 
                     }
                 } else {
-                    JLog.i(base.info);
+                    JLog.w(base.info);
                 }
 
             }
@@ -445,18 +445,18 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        JLog.i("onDestroy");
+        JLog.w("onDestroy");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        JLog.i("onResume");
+        JLog.w("onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JLog.i("onPause");
+        JLog.w("onPause");
     }
 }

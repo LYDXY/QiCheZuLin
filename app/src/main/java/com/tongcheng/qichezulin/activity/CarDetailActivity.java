@@ -131,11 +131,11 @@ public class CarDetailActivity extends PuTongActivity {
                 onBackPressed();
                 break;
             case R.id.tv_second:
-                JLog.i("租车界面");
+                JLog.w("租车界面");
                 UtilsTiaoZhuang.ToAnotherActivity(CarDetailActivity.this, ZuCheActivity.class);
                 break;
             case R.id.tv_user_this_car:
-                JLog.i("租用这辆车");
+                JLog.w("租用这辆车");
                 break;
         }
 
@@ -151,12 +151,12 @@ public class CarDetailActivity extends PuTongActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        JLog.i("onResume");
+        JLog.w("onResume");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        JLog.i("onDestroy");
+        JLog.w("onDestroy");
     }
 }

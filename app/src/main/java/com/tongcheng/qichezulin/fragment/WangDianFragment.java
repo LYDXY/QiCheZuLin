@@ -40,49 +40,15 @@ import org.xutils.view.annotation.ViewInject;
 @ContentView(R.layout.fragment_wang_dian_map)
 public class WangDianFragment extends PuTongFragment {
 
-
-    // 定位相关声明
-    public LocationClient locationClient = null;
     @ViewInject(R.id.bmapView)
     MapView mapView;
     BaiduMap baiduMap;
-    public BDLocationListener myListener = new BDLocationListener() {
-        @Override
-        public void onReceiveLocation(BDLocation location) {
 
-            MyLocationData locData = new MyLocationData.Builder()
-                    .accuracy(location.getRadius())
-                    // 此处设置开发者获取到的方向信息，顺时针0-360
-                    .direction(100).latitude(location.getLatitude())
-                    .longitude(location.getLongitude()).build();
-            baiduMap.setMyLocationData(locData);    //设置定位数据
-
-            LatLng ll = new LatLng(location.getLatitude(),
-                    location.getLongitude());
-            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(ll, 16);   //设置地图中心点以及缩放级别
-//              MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-            baiduMap.animateMapStatus(u);
-
-        }
-    };
-    //自定义图标
-    BitmapDescriptor mCurrentMarker = null;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setClickListenerOnView();
-        SDKInitializer.initialize(getContext());
-        mapView.showScaleControl(false);
-        mapView.showZoomControls(false);
-        baiduMap = mapView.getMap();
-        //开启定位图层
-        baiduMap.setMyLocationEnabled(true);
-        locationClient = new LocationClient(getActivity()); // 实例化LocationClient类
-        locationClient.registerLocationListener(myListener); // 注册监听函数
-        this.setLocationOption();   //设置定位参数
-        locationClient.start(); // 开始定位
-        baiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL); // 设置为一般地图
+        initView();
 
     }
 
@@ -96,33 +62,26 @@ public class WangDianFragment extends PuTongFragment {
 
     }
 
-    void initView() {
-    }
-
-    /* @Override
+     @Override
      void initView() {
-         mMapView.showScaleControl(false);
-         mMapView.showZoomControls(false);
-         mBaiduMap = mMapView.getMap();
-         mBaiduMap.setMyLocationEnabled(true);
-
-         // mMapView.setLogoPosition(LogoPosition.logoPostionCenterTop);
-         //定义Maker坐标点
-
+         mapView.showScaleControl(false);
+         mapView.showZoomControls(false);
+         baiduMap = mapView.getMap();
+         baiduMap.setMyLocationEnabled(true);
          if (MyLocationListener.latitude == null || MyLocationListener.lontitude==null) {
 
          }else{
          final LatLng point = new LatLng(Double.parseDouble(MyLocationListener.latitude), Double.parseDouble(MyLocationListener.lontitude));
-             mBaiduMap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
+             baiduMap.setOnMapLoadedCallback(new BaiduMap.OnMapLoadedCallback() {
                  @Override
                  public void onMapLoaded() {
-                     mBaiduMap.setMapStatusLimits(new LatLngBounds.Builder().include(point).include(point).build());
+                     baiduMap.setMapStatusLimits(new LatLngBounds.Builder().include(point).include(point).build());
                  }
              });
 
-             mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL); //设置普通的地图类型
-             JLog.i(mBaiduMap.getMaxZoomLevel() + "---------------"); //获取地图最大缩放级别
-             mBaiduMap.setMaxAndMinZoomLevel(20, 15);
+             baiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL); //设置普通的地图类型
+             JLog.w(baiduMap.getMaxZoomLevel() + "---------------"); //获取地图最大缩放级别
+             baiduMap.setMaxAndMinZoomLevel(20, 15);
              //构建Marker图标
              BitmapDescriptor bitmap = BitmapDescriptorFactory
                      .fromResource(R.mipmap.hong2);
@@ -131,12 +90,12 @@ public class WangDianFragment extends PuTongFragment {
                      .position(point)
                      .icon(bitmap);
              //在地图上添加Marker，并显示
-             mBaiduMap.addOverlay(option);
+             baiduMap.addOverlay(option);
          }
 
 
      }
- */
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -154,18 +113,27 @@ public class WangDianFragment extends PuTongFragment {
     }
 
 
-    /**
-     * 设置定位参数
-     */
-    private void setLocationOption() {
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开GPS
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式
-        option.setCoorType("bd09ll"); // 返回的定位结果是百度经纬度,默认值gcj02
-        option.setScanSpan(5000); // 设置发起定位请求的间隔时间为5000ms
-        option.setIsNeedAddress(true); // 返回的定位结果包含地址信息
-        option.setNeedDeviceDirect(true); // 返回的定位结果包含手机机头的方向
-        locationClient.setLocOption(option);
+    @Override
+    public void onStop() {
+        super.onStop();
+        JLog.w("onStop");
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        JLog.w("onDestroy");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JLog.w("onPause");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JLog.w("onResume");
+    }
 }

@@ -47,7 +47,7 @@ public class Utils {
             way(activity, "手机号码输入不正确");
             return false;
         } else {
-            JLog.i("手机号码输入正确");
+            JLog.w("手机号码输入正确");
             return true;
         }
 

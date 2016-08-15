@@ -12,7 +12,7 @@ public class UtilsJson {
 
 
     public static void printJsonData(String result) {
-        JLog.i(result);
+        JLog.w(result);
         JLog.json(result);
     }
 

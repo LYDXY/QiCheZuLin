@@ -89,7 +89,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        JLog.i("onViewCreated");
+        JLog.w("onViewCreated");
         setPullListenerOnPullToRefreshLayout();
         setOnClickListenerOnView();
         // 第一次进入自动刷新
@@ -140,34 +140,34 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
         switch (view.getId()) {
 
             case R.id.iv_first:
-                JLog.i("一键租车");
+                JLog.w("一键租车");
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), ZuCheActivity.class);
                 break;
 
             case R.id.iv_second:
-                JLog.i("网点查询");
+                JLog.w("网点查询");
                 if (MyLocationListener.latitude != null && MyLocationListener.lontitude != null) {
-                    JLog.i("经度" + MyLocationListener.latitude);
-                    JLog.i("纬度" + MyLocationListener.lontitude);
+                    JLog.w("经度" + MyLocationListener.latitude);
+                    JLog.w("纬度" + MyLocationListener.lontitude);
                     Bundle bundle = new Bundle();
                     bundle.putString("latitude", MyLocationListener.latitude);
                     bundle.putString("lontitude", MyLocationListener.lontitude);
                     UtilsTiaoZhuang.ToAnotherActivity(getActivity(), WangDianSearchActivity.class, bundle);
                 } else {
-                    JLog.i("定位失败");
+                    JLog.w("定位失败");
                 }
 
 
                 break;
 
             case R.id.iv_third:
-                JLog.i("车型查询");
+                JLog.w("车型查询");
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), FindCarTypeActivity.class);
                 //  UtilsTiaoZhuang.ToAnotherActivity(getActivity(), ActivityAAA.class);
                 break;
 
             case R.id.prl_xingcheng:
-                JLog.i("行程点击");
+                JLog.w("行程点击");
                 break;
 
         }
@@ -208,7 +208,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
                 }.getType();
                 JsonBase<ArrayList<BannerModel>> base = gson
                         .fromJson(result, type);
-                JLog.i(base.data.size() + "");
+                JLog.w(base.data.size() + "");
                 if (base.data != null) {
                     if (base.data.size() > 0) {
                         convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
@@ -228,12 +228,12 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override
@@ -247,11 +247,11 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
     // 获取轮播的数据
     @Override
     public void onItemClick(int position) {
-        JLog.i("点击了第" + position + "张轮播图");
+        JLog.w("点击了第" + position + "张轮播图");
         if (bannerModels != null) {
             if (bannerModels.size() > 0) {
                 BannerModel model = bannerModels.get(position);
-                JLog.i("获取到的数据" + model.PID);
+                JLog.w("获取到的数据" + model.PID);
             }
         }
 
@@ -273,7 +273,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
                 }.getType();
                 final JsonBase<ArrayList<CarModel>> base = gson
                         .fromJson(result, type);
-                JLog.i(base.data.size() + "");
+                JLog.w(base.data.size() + "");
                 if (base.data != null) {
                     if (base.data.size() > 0) {
                         adapter = new QuickAdapter<CarModel>(getActivity(), R.layout.listview_item_car, base.data) {
@@ -292,7 +292,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
                                 helper.getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        JLog.i("汽车的id===========" + item.KCarID);
+                                        JLog.w("汽车的id===========" + item.KCarID);
                                         UtilsTiaoZhuang.ToAnotherActivity(getActivity(), CarDetailActivity.class, UtilsTiaoZhuang.EveryCar(item));
 
                                     }
@@ -308,12 +308,12 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override
@@ -323,5 +323,29 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
         });
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        JLog.w("onStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        JLog.w("onDestroy");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JLog.w("onPause");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JLog.w("onResume");
+    }
 
 }

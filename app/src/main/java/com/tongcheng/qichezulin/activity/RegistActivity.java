@@ -67,14 +67,14 @@ public class RegistActivity extends PuTongFragmentActivity {
                 onBackPressed();
                 break;
             case R.id.tv_get_check_code:
-                JLog.i("获取验证码");
+                JLog.w("获取验证码");
                 boolean flag = Utils.isPhoneNumber(et_phone_number, this);
                 if (flag) {
                     do_get_checkcode();
                 }
                 break;
             case R.id.btn_regist:
-                JLog.i("点击注册");
+                JLog.w("点击注册");
                 boolean flag0 = Utils.isPhoneNumber(et_phone_number, this);
                 if (flag0) {
                     boolean flag1 = Utils.yanZhengMaIsEmpty(et_check_code, this, "验证码不能为空");
@@ -88,7 +88,7 @@ public class RegistActivity extends PuTongFragmentActivity {
                 }
                 break;
             case R.id.iv_qu_xiao:
-                JLog.i("清空手机号码");
+                JLog.w("清空手机号码");
                 et_phone_number.setText("");
                 break;
 
@@ -130,10 +130,10 @@ public class RegistActivity extends PuTongFragmentActivity {
                 }.getType();
                 JsonBase<ArrayList<CheckCodeModel>> base = gson
                         .fromJson(result, type);
-                JLog.i(base.data.size() + "");
+                JLog.w(base.data.size() + "");
                 if (base.data != null) {
                     if (base.data.size() > 0) {
-                        JLog.i("获取验证码成功");
+                        JLog.w("获取验证码成功");
                         et_check_code.setText(base.data.get(0).code);
                     }
                 }
@@ -143,12 +143,12 @@ public class RegistActivity extends PuTongFragmentActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override
@@ -177,9 +177,9 @@ public class RegistActivity extends PuTongFragmentActivity {
                         .fromJson(result, type);
                 if (!base.status.toString().trim().equals("0")) {
                     if (base.data != null) {
-                        JLog.i(base.data.size() + "");
+                        JLog.w(base.data.size() + "");
                         if (base.data.size() > 0) {
-                            JLog.i("注册成功");
+                            JLog.w("注册成功");
                             Utils.ShowText(RegistActivity.this, base.info.toString());
                             UtilsUser.setSP(getApplication(), UtilsUser.KEY_USER_ID, base.data.get(0).user_id); //缓存注册的用户id
                         }
@@ -193,12 +193,12 @@ public class RegistActivity extends PuTongFragmentActivity {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override

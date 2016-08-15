@@ -64,7 +64,7 @@ public class AddBankCardActivity extends Activity implements View.OnClickListene
                 onBackPressed();
                 break;
             case R.id.ib_next_step:
-                JLog.i("下一步");
+                JLog.w("下一步");
                 break;
         }
 

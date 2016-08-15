@@ -118,14 +118,14 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 break;
             case R.id.rrl_second:
                 if (MyLocationListener.latitude != null && MyLocationListener.lontitude != null) {
-                    JLog.i("经度" + MyLocationListener.latitude);
-                    JLog.i("纬度" + MyLocationListener.lontitude);
+                    JLog.w("经度" + MyLocationListener.latitude);
+                    JLog.w("纬度" + MyLocationListener.lontitude);
                     Bundle bundle = new Bundle();
                     bundle.putString("latitude", MyLocationListener.latitude);
                     bundle.putString("lontitude", MyLocationListener.lontitude);
                     UtilsTiaoZhuang.ToAnotherActivity(this, WangDianSearchActivity.class, bundle);
                 } else {
-                    JLog.i("定位失败");
+                    JLog.w("定位失败");
                 }
 
                 break;
@@ -230,7 +230,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                         .getView(R.id.btn_show_car_type).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        JLog.i(item.PID);
+                        JLog.w(item.PID);
                         mAlertViewExt.dismiss();
                         tv_car_type_show.setText(item.FTypeName);
                     }
@@ -261,7 +261,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                         showAlertView(base.data);
                     }
                 } else {
-                    JLog.i(base.info);
+                    JLog.w(base.info);
 
                 }
 
@@ -287,12 +287,12 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     @Override
     protected void onResume() {
         super.onResume();
-        JLog.i("onResume");
+        JLog.w("onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JLog.i("onPause");
+        JLog.w("onPause");
     }
 }

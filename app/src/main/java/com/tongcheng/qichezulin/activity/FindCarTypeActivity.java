@@ -139,15 +139,15 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
-                            JLog.i(base.data.size() + "");
+                            JLog.w(base.data.size() + "");
                             if (base.data.size() > 0) {
-                                JLog.i("获取数据成功");
+                                JLog.w("获取数据成功");
                                 if (catModel2Adapter == null) {
                                     catModel2Adapter = new Adapter<CarModel2>(FindCarTypeActivity.this, R.layout.listview_item_car2) {
                                         @Override
                                         protected void convert(AdapterHelper helper, final CarModel2 item) {
                                             final int position = helper.getPosition();
-                                            JLog.i(position + "");
+                                            JLog.w(position + "");
                                             helper.setImageUrl(R.id.iv_car_picture, item.FImg)
                                                     .setText(R.id.tv_car_name, item.FCarName)
                                                     .setText(R.id.tv_car_remark, item.FRemark)
@@ -183,12 +183,12 @@ public class FindCarTypeActivity extends PuTongActivity2 {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override

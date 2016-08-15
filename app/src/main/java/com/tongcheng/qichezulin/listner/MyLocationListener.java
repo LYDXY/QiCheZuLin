@@ -75,7 +75,7 @@ public class MyLocationListener implements BDLocationListener {
                 sb.append(p.getId() + " " + p.getName() + " " + p.getRank());
             }
         }
-        JLog.i("BaiduLocationApiDem" + sb.toString());
+        JLog.w("BaiduLocationApiDem" + sb.toString());
         latitude = location.getLatitude() + "";
         lontitude = location.getLongitude() + "";
     }

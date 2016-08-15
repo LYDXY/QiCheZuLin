@@ -74,11 +74,11 @@ public class loginFragment extends PuTongFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_qu_xiao:
-                JLog.i("清空");
+                JLog.w("清空");
                 et_phone_number.setText("");
                 break;
             case R.id.btn_login:
-                JLog.i("登录");
+                JLog.w("登录");
                 boolean flag0 = Utils.isPhoneNumber(et_phone_number, getActivity());
                 if (flag0) {
                     boolean flag1 = Utils.yanZhengMaIsEmpty(et_password, getActivity(), "密码不能为空");
@@ -112,9 +112,9 @@ public class loginFragment extends PuTongFragment {
                         .fromJson(result, type);
                 if (!base.status.toString().trim().equals("0")) {
                     if (base.data != null) {
-                        JLog.i(base.data.size() + "");
+                        JLog.w(base.data.size() + "");
                         if (base.data.size() > 0) {
-                            JLog.i("登录成功");
+                            JLog.w("登录成功");
                             Utils.ShowText(getActivity(), base.info.toString());
                             UtilsUser.setSP(getContext(), UtilsUser.KEY_USER_ID, base.data.get(0).user_id); //缓存注册的用户id
                             UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MainActivity2.class);
@@ -130,12 +130,12 @@ public class loginFragment extends PuTongFragment {
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                JLog.i(isOnCallback + "");
+                JLog.w(isOnCallback + "");
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-                JLog.i(cex + "");
+                JLog.w(cex + "");
             }
 
             @Override
@@ -145,5 +145,30 @@ public class loginFragment extends PuTongFragment {
         });
 
 
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        JLog.w("onStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        JLog.w("onDestroy");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        JLog.w("onPause");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JLog.w("onResume");
     }
 }

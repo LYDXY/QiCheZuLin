@@ -95,20 +95,20 @@ public class loginActivity extends PuTongFragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         RootApp.mLocationClient.stop();
-        JLog.i("onDestroy");
+        JLog.w("onDestroy");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         RootApp.mLocationClient.stop();
-        JLog.i("onStop");
+        JLog.w("onStop");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         RootApp.mLocationClient.stop();
-        JLog.i("onPause");
+        JLog.w("onPause");
     }
 }

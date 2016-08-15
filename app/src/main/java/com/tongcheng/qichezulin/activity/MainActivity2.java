@@ -51,6 +51,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
     List<Fragment> fragmentList;
     //标签
     private String[] mTitles = {"首页", "附近", "消息", "个人"};
+
     private int[] mIconUnselectIds = {
             R.mipmap.home, R.mipmap.near,
             R.mipmap.information_46, R.mipmap.personal};
@@ -182,14 +183,14 @@ public class MainActivity2 extends PuTongFragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        JLog.i("onStop");
+        JLog.w("onStop");
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        JLog.i("onPause");
+        JLog.w("onPause");
 
     }
 
