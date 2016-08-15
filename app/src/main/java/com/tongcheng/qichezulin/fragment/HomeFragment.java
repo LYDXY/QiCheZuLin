@@ -51,7 +51,7 @@ import pl.droidsonroids.gif.GifDrawable;
 public class HomeFragment extends PuTongFragment2 implements OnItemClickListener {
 
 
-    public MyLocationListener myLocationListener = null;
+
 
 
     // 上下拉控件

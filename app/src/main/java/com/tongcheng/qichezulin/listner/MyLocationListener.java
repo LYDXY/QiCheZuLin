@@ -3,7 +3,9 @@ package com.tongcheng.qichezulin.listner;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
+import com.baidu.mapapi.model.LatLng;
 import com.jiongbull.jlog.JLog;
+import com.jiongbull.jlog.util.PrinterUtils;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class MyLocationListener implements BDLocationListener {
 
     public static String latitude;//经度
     public static String lontitude;//纬度
-
+    public static LatLng LL;
     @Override
     public void onReceiveLocation(BDLocation location) {
         //Receive Location
@@ -78,6 +80,7 @@ public class MyLocationListener implements BDLocationListener {
         JLog.w("BaiduLocationApiDem" + sb.toString());
         latitude = location.getLatitude() + "";
         lontitude = location.getLongitude() + "";
+        LL=new LatLng(location.getLatitude(),location.getLongitude());
     }
 
 }

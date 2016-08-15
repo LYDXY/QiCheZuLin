@@ -37,7 +37,6 @@ public class StartActivity extends Activity {
         //为空
         if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "") == null
                 || UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").equals("")) {
-            RootApp.mLocationClient.start(); //开启定位
             JLog.w("第一次打开应用");
             UtilsUser.setSP(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "00000000000");
             bt_go.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +48,7 @@ public class StartActivity extends Activity {
         }
         //不为空
         else {
-            RootApp.mLocationClient.start(); //开启定位
+
             JLog.w("已经打开多次应用了");
             JLog.w(UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").toString() + "////////////////");
             //为空
@@ -60,10 +59,8 @@ public class StartActivity extends Activity {
             }
             //不为空
             else {
-                RootApp.mLocationClient.start(); //开启定位
                 JLog.w(UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "").toString() + "==================");
                 JLog.w("跳转到主界面");
-
                 UtilsTiaoZhuang.ToAnotherActivity(this, MainActivity2.class);
                 this.finish();
 
@@ -76,21 +73,18 @@ public class StartActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RootApp.mLocationClient.stop();
         JLog.w("onDestroy");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        RootApp.mLocationClient.stop();
         JLog.w("onStop");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        RootApp.mLocationClient.stop();
         JLog.w("onPause");
     }
 }

@@ -1,11 +1,18 @@
 package com.tongcheng.qichezulin.activity;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.Poi;
+import com.baidu.mapapi.model.LatLng;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
@@ -13,6 +20,7 @@ import com.flyco.tablayout.widget.MsgView;
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.Adapter.FragmentStateAdaper2;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.config.AppConfig;
 import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.entity.TabEntity;
 import com.tongcheng.qichezulin.fragment.HomeFragment;
@@ -21,6 +29,7 @@ import com.tongcheng.qichezulin.fragment.PersonFragment;
 import com.tongcheng.qichezulin.fragment.WangDianFragment;
 import com.tongcheng.qichezulin.fragment.loginFragment;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
+import com.tongcheng.qichezulin.utils.UtilsBaiDuMap;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.view.ViewPagerWithoutSlide;
 
@@ -36,6 +45,8 @@ import java.util.List;
 
 @ContentView(R.layout.activity_main2)
 public class MainActivity2 extends PuTongFragmentActivity {
+
+
 
 
     //个人中心图片
@@ -64,10 +75,11 @@ public class MainActivity2 extends PuTongFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        JLog.v("onCreate");
+        JLog.w("onCreate");
         initData();
         initView();
         setListenerOnView();
+        RootApp.mLocationClient.start();
 
     }
 
@@ -193,14 +205,22 @@ public class MainActivity2 extends PuTongFragmentActivity {
 
     @Override
     protected void onDestroy() {
+        RootApp.mLocationClient.stop();
         super.onDestroy();
+        JLog.w("onDestroy");
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        JLog.w("onResume");
+        tab.setCurrentTab(0);
     }
+
+
+
+
 
 
 }
