@@ -82,7 +82,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
                 break;
             case R.id.tv_second:
                 JLog.d("注册");
-                UtilsTiaoZhuang.ToAnotherActivity(this, RegistActivity.class);
+
                 break;
         }
     }
@@ -119,7 +119,12 @@ public class MainActivity2 extends PuTongFragmentActivity {
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                v4_vp.setCurrentItem(position);
+                if (position == 1) {
+                    UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, ActivityAAA.class);
+                }else{
+                    v4_vp.setCurrentItem(position);
+                }
+
             }
 
             @Override
