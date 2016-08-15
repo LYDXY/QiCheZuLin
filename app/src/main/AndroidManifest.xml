@@ -137,7 +137,7 @@
 
         <!--测试界面-->
         <activity
-            android:name=".activity.ActivityAAA"
+            android:name=".activity.ActivityWangDian"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

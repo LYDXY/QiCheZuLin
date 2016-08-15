@@ -9,7 +9,7 @@ import com.tongcheng.qichezulin.R;
 /**
  * Created by 林尧 on 2016/8/15.
  */
-public class ActivityAAA extends Activity {
+public class ActivityWangDian extends Activity {
     private MapView mMapView;
 
     @Override

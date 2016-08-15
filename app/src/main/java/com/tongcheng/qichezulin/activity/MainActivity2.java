@@ -1,18 +1,11 @@
 package com.tongcheng.qichezulin.activity;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
-import com.baidu.mapapi.model.LatLng;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
@@ -20,16 +13,12 @@ import com.flyco.tablayout.widget.MsgView;
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.Adapter.FragmentStateAdaper2;
 import com.tongcheng.qichezulin.R;
-import com.tongcheng.qichezulin.config.AppConfig;
 import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.entity.TabEntity;
 import com.tongcheng.qichezulin.fragment.HomeFragment;
-import com.tongcheng.qichezulin.fragment.LoginCheckCodeFragment;
 import com.tongcheng.qichezulin.fragment.PersonFragment;
-import com.tongcheng.qichezulin.fragment.WangDianFragment;
 import com.tongcheng.qichezulin.fragment.loginFragment;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
-import com.tongcheng.qichezulin.utils.UtilsBaiDuMap;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.view.ViewPagerWithoutSlide;
 
@@ -132,7 +121,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
             @Override
             public void onTabSelect(int position) {
                 if (position == 1) {
-                    UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, ActivityAAA.class);
+                    UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, ActivityWangDian.class);
                 }else{
                     v4_vp.setCurrentItem(position);
                 }

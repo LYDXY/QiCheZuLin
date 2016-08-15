@@ -66,8 +66,6 @@ public class StartActivity extends Activity {
 
             }
         }
-
-        //  UtilsUser.cleanAllSP(getApplication());
     }
 
     @Override

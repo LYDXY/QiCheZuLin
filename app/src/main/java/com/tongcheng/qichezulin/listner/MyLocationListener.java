@@ -16,7 +16,7 @@ public class MyLocationListener implements BDLocationListener {
 
     public static String latitude;//经度
     public static String lontitude;//纬度
-    public static LatLng LL;
+//    public static LatLng LL;
     @Override
     public void onReceiveLocation(BDLocation location) {
         //Receive Location
@@ -80,7 +80,7 @@ public class MyLocationListener implements BDLocationListener {
         JLog.w("BaiduLocationApiDem" + sb.toString());
         latitude = location.getLatitude() + "";
         lontitude = location.getLongitude() + "";
-        LL=new LatLng(location.getLatitude(),location.getLongitude());
+      //  LL=new LatLng(location.getLatitude(),location.getLongitude());
     }
 
 }
