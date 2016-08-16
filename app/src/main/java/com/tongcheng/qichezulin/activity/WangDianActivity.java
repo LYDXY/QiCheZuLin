@@ -46,7 +46,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_wang_dian_map);
+        setContentView(R.layout.activity_wang_dian_map);
         mapView = (MapView) findViewById(R.id.bmapView);
         tv_first = (TextView) findViewById(R.id.tv_first);
         tv_second = (TextView) findViewById(R.id.tv_second);

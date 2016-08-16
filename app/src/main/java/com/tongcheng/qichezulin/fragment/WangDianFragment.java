@@ -1,33 +1,18 @@
 package com.tongcheng.qichezulin.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BaiduMapOptions;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.LogoPosition;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
-import com.baidu.mapapi.model.inner.Point;
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
-import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 
 import org.xutils.view.annotation.ContentView;
@@ -37,7 +22,7 @@ import org.xutils.view.annotation.ViewInject;
  * Created by 林尧 on 2016/7/22.
  */
 
-@ContentView(R.layout.fragment_wang_dian_map)
+@ContentView(R.layout.activity_wang_dian_map)
 public class WangDianFragment extends PuTongFragment {
 
     @ViewInject(R.id.bmapView)
