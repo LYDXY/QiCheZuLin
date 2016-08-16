@@ -54,6 +54,9 @@ import java.util.List;
 public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
 
 
+    @ViewInject(R.id.iv_record)
+    ImageView iv_record;
+
     @ViewInject(R.id.tv_car_type_show)
     TextView tv_car_type_show;
     AlertView mAlertViewExt;//窗口拓展例子
@@ -132,6 +135,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             case R.id.rrl_third:
                 get_Data_in_AlertView();
                 break;
+            case R.id.iv_record:
+                UtilsTiaoZhuang.ToAnotherActivity(this, MenDianRecordActivity.class);
+                break;
+
 
         }
     }
@@ -214,6 +221,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         iv_return.setOnClickListener(this);
         rrl_third.setOnClickListener(this);
         rrl_second.setOnClickListener(this);
+        iv_record.setOnClickListener(this);
     }
 
 

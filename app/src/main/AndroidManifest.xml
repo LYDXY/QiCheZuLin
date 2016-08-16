@@ -140,6 +140,14 @@
             android:name=".activity.ActivityWangDian"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <!--门店记录界面-->
+        <activity
+            android:name=".activity.MenDianRecordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
     </application>
 
 </manifest>
