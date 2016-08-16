@@ -32,6 +32,7 @@ import com.tongcheng.qichezulin.model.QuShopsModel;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsMath;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.view.ExpandableListViewForScrollView;
 
 import org.xutils.common.Callback;
@@ -271,7 +272,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                     @Override
                                     public void onClick(View view) {
                                         JLog.w("点击了" + item.FShopName);
-
+                                        UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, WangDianDetailActivity.class);
                                     }
                                 });
                             }
@@ -402,6 +403,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                         @Override
                                         public void onClick(View view) {
                                             JLog.w("点击了" + item.FShopName);
+                                            UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, WangDianDetailActivity.class);
 
                                         }
                                     });
