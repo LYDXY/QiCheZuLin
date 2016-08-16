@@ -34,7 +34,7 @@ import pl.droidsonroids.gif.GifDrawable;
  * Created by 林尧 on 2016/8/10.
  */
 
-@ContentView(R.layout.activity_find_car_type)
+@ContentView(R.layout.activity_men_dian_record)
 public class MenDianRecordActivity extends PuTongActivity2 {
 
 

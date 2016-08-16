@@ -135,7 +135,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
-        <!--测试界面-->
+        <!--网点地图显示界面-->
         <activity
             android:name=".activity.ActivityWangDian"
             android:screenOrientation="portrait"
@@ -147,6 +147,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <!--费用说明界面-->
+        <activity
+            android:name=".activity.FeiYongShuoMingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
     </application>
 

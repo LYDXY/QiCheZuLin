@@ -56,6 +56,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
     @ViewInject(R.id.iv_record)
     ImageView iv_record;
+    @ViewInject(R.id.iv_help)
+    ImageView iv_help;
+
 
     @ViewInject(R.id.tv_car_type_show)
     TextView tv_car_type_show;
@@ -138,7 +141,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             case R.id.iv_record:
                 UtilsTiaoZhuang.ToAnotherActivity(this, MenDianRecordActivity.class);
                 break;
-
+            case R.id.iv_help:
+                UtilsTiaoZhuang.ToAnotherActivity(this, FeiYongShuoMingActivity.class);
+                break;
 
         }
     }
@@ -222,6 +227,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         rrl_third.setOnClickListener(this);
         rrl_second.setOnClickListener(this);
         iv_record.setOnClickListener(this);
+        iv_help.setOnClickListener(this);
     }
 
 
