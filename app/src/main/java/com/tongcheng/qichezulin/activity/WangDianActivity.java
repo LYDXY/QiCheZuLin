@@ -26,6 +26,10 @@ import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 public class WangDianActivity extends Activity implements View.OnClickListener {
 
 
+    ImageView iv_meng_dian;//门店
+    ImageView iv_chongdianzhan;
+    ImageView iv_ting_ch_che_chang;
+    ImageView iv_mei_rong_rong_yuan;
     ImageView iv_return;
     TextView tv_first;
     TextView tv_second;
