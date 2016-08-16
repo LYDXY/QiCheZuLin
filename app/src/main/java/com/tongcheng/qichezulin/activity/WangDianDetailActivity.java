@@ -31,7 +31,8 @@ public class WangDianDetailActivity extends PuTongActivity0 {
     void initView() {
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("网点详情");
-
+        iv_set_up.setVisibility(View.VISIBLE);
+        iv_set_up.setBackgroundResource(R.mipmap.share);
     }
 
     @Override
