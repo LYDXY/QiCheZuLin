@@ -7,10 +7,67 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true" />
+    <include
+        layout="@layout/common_header3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w"></include>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            app:layout_marginBottomPercent="8%" />
+
+
+        <ImageView
+            android:id="@+id/iv_meng_dian"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/mendian"
+            app:layout_heightPercent="8%"
+            app:layout_widthPercent="20%" />
+
+        <ImageView
+            android:id="@+id/iv_chongdianzhan"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/iv_meng_dian"
+            android:background="@mipmap/chongdianzhan"
+            app:layout_heightPercent="8%"
+            app:layout_marginLeftPercent="1%"
+            app:layout_widthPercent="24%" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/iv_chongdianzhan"
+            android:background="@mipmap/tingchechang"
+            app:layout_heightPercent="8%"
+            app:layout_marginLeftPercent="1%"
+            app:layout_widthPercent="24%" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/weixiumeirongdian"
+            app:layout_heightPercent="8%"
+            app:layout_widthPercent="29%" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
 
 </com.zhy.android.percent.support.PercentLinearLayout>

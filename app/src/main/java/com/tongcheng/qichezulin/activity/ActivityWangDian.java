@@ -2,6 +2,10 @@ package com.tongcheng.qichezulin.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -12,18 +16,24 @@ import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
+import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.listner.MyLocationListener;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 
 /**
  * Created by 林尧 on 2016/8/15.
  */
-public class ActivityWangDian extends Activity {
+public class ActivityWangDian extends Activity implements View.OnClickListener {
 
 
+    ImageView iv_return;
+    TextView tv_first;
+    TextView tv_second;
+    LocationClient locationClient;
     private MapView mapView;
     private BaiduMap baiduMap;
-    LocationClient locationClient;
-    public BDLocationListener bdLocationListener=new BDLocationListener() {
+    public BDLocationListener bdLocationListener = new BDLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             LatLng ll = new LatLng(bdLocation.getLatitude(),
@@ -33,19 +43,30 @@ public class ActivityWangDian extends Activity {
             baiduMap.animateMapStatus(u);
         }
     };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_wang_dian_map);
         mapView = (MapView) findViewById(R.id.bmapView);
-        baiduMap=mapView.getMap();
+        tv_first = (TextView) findViewById(R.id.tv_first);
+        tv_second = (TextView) findViewById(R.id.tv_second);
+        iv_return = (ImageView) findViewById(R.id.iv_return);
+        iv_return.setOnClickListener(this);
+        tv_second.setOnClickListener(this);
+        tv_first.setText("附近服务点");
+        tv_second.setText("列表");
+        tv_first.setVisibility(View.VISIBLE);
+        tv_second.setVisibility(View.VISIBLE);
+
+
+        baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true); //激活定位图层
-        locationClient=new LocationClient(getApplicationContext());
+        locationClient = new LocationClient(getApplicationContext());
         this.setLocationOption();   //设置定位参数
         locationClient.start(); // 开始定位
 
-     }
-
+    }
 
 
     /**
@@ -63,7 +84,7 @@ public class ActivityWangDian extends Activity {
         locationClient = new LocationClient(getApplicationContext()); // 实例化LocationClient类
         locationClient.registerLocationListener(bdLocationListener); // 注册监听函数
 
-        // baiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL); // 设置为一般地图
+        baiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL); // 设置为一般地图
         // baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE); //设置为卫星地图
         // baiduMap.setTrafficEnabled(true); //开启交通图
     }
@@ -75,7 +96,6 @@ public class ActivityWangDian extends Activity {
         //退出时销毁定位
         locationClient.stop();
         baiduMap.setMyLocationEnabled(false);
-        // TODO Auto-generated method stub
         super.onDestroy();
         mapView.onDestroy();
         mapView = null;
@@ -83,15 +103,37 @@ public class ActivityWangDian extends Activity {
 
     @Override
     protected void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
         mapView.onResume();
     }
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
+
         super.onPause();
         mapView.onPause();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.iv_return:
+                onBackPressed();
+                break;
+            case R.id.tv_second:
+                JLog.w("网点查询");
+                if (MyLocationListener.latitude != null && MyLocationListener.lontitude != null) {
+                    JLog.w("经度" + MyLocationListener.latitude);
+                    JLog.w("纬度" + MyLocationListener.lontitude);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("latitude", MyLocationListener.latitude);
+                    bundle.putString("lontitude", MyLocationListener.lontitude);
+                    UtilsTiaoZhuang.ToAnotherActivity(ActivityWangDian.this, WangDianSearchActivity.class, bundle);
+                } else {
+                    JLog.w("定位失败");
+                }
+                break;
+        }
     }
 }
