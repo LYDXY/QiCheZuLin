@@ -137,7 +137,7 @@
 
         <!--网点地图显示界面-->
         <activity
-            android:name=".activity.ActivityWangDian"
+            android:name=".activity.WangDianActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 

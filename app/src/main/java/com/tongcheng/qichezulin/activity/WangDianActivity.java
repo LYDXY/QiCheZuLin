@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -24,7 +23,7 @@ import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 /**
  * Created by 林尧 on 2016/8/15.
  */
-public class ActivityWangDian extends Activity implements View.OnClickListener {
+public class WangDianActivity extends Activity implements View.OnClickListener {
 
 
     ImageView iv_return;
@@ -129,7 +128,7 @@ public class ActivityWangDian extends Activity implements View.OnClickListener {
                     Bundle bundle = new Bundle();
                     bundle.putString("latitude", MyLocationListener.latitude);
                     bundle.putString("lontitude", MyLocationListener.lontitude);
-                    UtilsTiaoZhuang.ToAnotherActivity(ActivityWangDian.this, WangDianSearchActivity.class, bundle);
+                    UtilsTiaoZhuang.ToAnotherActivity(WangDianActivity.this, WangDianSearchActivity.class, bundle);
                 } else {
                     JLog.w("定位失败");
                 }

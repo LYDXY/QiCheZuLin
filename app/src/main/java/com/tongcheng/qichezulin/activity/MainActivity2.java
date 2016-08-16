@@ -121,7 +121,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
             @Override
             public void onTabSelect(int position) {
                 if (position == 1) {
-                    UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, ActivityWangDian.class);
+                    UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, WangDianActivity.class);
                 }else{
                     v4_vp.setCurrentItem(position);
                 }
