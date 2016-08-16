@@ -57,6 +57,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
     ImageView iv_ting_ch_che_chang;
     ImageView iv_mei_rong_rong_yuan;
     ImageView iv_return;
+    ImageView iv_search2; //搜索图
     TextView tv_first;
     TextView tv_second;
     LocationClient locationClient;
@@ -94,6 +95,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
         tv_second = (TextView) findViewById(R.id.tv_second);
         iv_return = (ImageView) findViewById(R.id.iv_return);
         iv_meng_dian = (ImageView) findViewById(R.id.iv_meng_dian);
+        iv_search2 = (ImageView) findViewById(R.id.iv_search2);
         iv_chongdianzhan = (ImageView) findViewById(R.id.iv_chongdianzhan);
         iv_ting_ch_che_chang = (ImageView) findViewById(R.id.iv_ting_ch_che_chang);
         iv_mei_rong_rong_yuan = (ImageView) findViewById(R.id.iv_mei_rong_rong_yuan);
@@ -101,6 +103,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
         iv_chongdianzhan.setOnClickListener(this);
         iv_ting_ch_che_chang.setOnClickListener(this);
         iv_mei_rong_rong_yuan.setOnClickListener(this);
+        iv_search2.setOnClickListener(this);
         iv_return.setOnClickListener(this);
         tv_second.setOnClickListener(this);
         tv_first.setText("附近服务点");
@@ -176,6 +179,9 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.iv_return:
                 onBackPressed();
+                break;
+            case R.id.iv_search2:
+                UtilsTiaoZhuang.ToAnotherActivity(WangDianActivity.this, SearchActivity.class);
                 break;
             case R.id.tv_second:
                 JLog.w("网点查询");

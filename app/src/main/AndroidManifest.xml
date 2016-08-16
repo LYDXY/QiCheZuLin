@@ -160,6 +160,12 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
+        <!--搜索界面-->
+        <activity
+            android:name=".activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
