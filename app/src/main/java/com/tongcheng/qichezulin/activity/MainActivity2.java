@@ -205,6 +205,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
         super.onResume();
         JLog.w("onResume");
         tab.setCurrentTab(0);
+        v4_vp.setCurrentItem(0);
     }
 
 

@@ -53,6 +53,9 @@ import java.util.List;
 public class WangDianSearchActivity extends Activity implements View.OnClickListener {
 
 
+    @ViewInject(R.id.tv_first)
+    TextView tv_first;
+
     @ViewInject(R.id.lv_fu_jin_men_dian)
     ListView lv_fu_jin_men_dian;
     Adapter<BannerShop> shopAdapter;
@@ -95,7 +98,9 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
+            case R.id.tv_first:
+                UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, SearchActivity.class);
+                break;
             case R.id.iv_return:
                 onBackPressed();
                 break;
@@ -128,6 +133,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
 
     public void setClickListner() {
         tv_near_shop.setOnClickListener(this);
+        tv_first.setOnClickListener(this);
     }
 
     // 获取二级目录数据
