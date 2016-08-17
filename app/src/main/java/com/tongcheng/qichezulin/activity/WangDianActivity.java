@@ -1,6 +1,7 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -62,9 +63,6 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
     TextView tv_first;
     TextView tv_second;
     LocationClient locationClient;
-    private List<String> shopid = new ArrayList<String>();
-    private List<String> shopname = new ArrayList<String>();
-    private List<LatLng> latLngs = new ArrayList<LatLng>();
     private List<BannerShop> shops = null;
     private LatLng point;
     private MapView mapView;
@@ -178,10 +176,11 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.iv_meng_dian:
-                JLog.w(latLngs.size() + "");
-                if (latLngs.size() > 0) {
-                    setMarker(latLngs, shopid, shopname);
+
+                if (shops.size() > 0) {
+                    setMarker(shops);
                 }
+
 
                 break;
             case R.id.iv_return:
@@ -224,9 +223,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
                 if (!base.status.toString().trim().equals("0")) {
                     if (base.data.size() > 0) {
                         for (int i = 0; i < base.data.size(); i++) {
-                            latLngs.add(new LatLng(Double.parseDouble(base.data.get(i).FLatitude), Double.parseDouble(base.data.get(i).FLongitude)));
-                            shopid.add(base.data.get(i).PID);
-                            shopname.add(base.data.get(i).FShopName);
+                            shops = base.data;
                         }
                     }
                 } else {
@@ -255,49 +252,57 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
     }
 
 
-    public void setMarker(List<LatLng> points, final List<String> shopid, List<String> shopname) {
-
+    public void setMarker(List<BannerShop> shops) {
 
         //效果
+        Marker marker = null;
+        for (int i = 0; i < shops.size(); i++) {
 
-        for (int i = 0; i < points.size(); i++) {
-            final String ID = shopid.get(i);
-            final String name = shopname.get(i);
-            MarkerOptions ooD = new MarkerOptions().position(points.get(i))
+            LatLng latLng = new LatLng(Double.parseDouble(shops.get(i).FLatitude), Double.parseDouble(shops.get(i).FLongitude));
+            MarkerOptions ooD = new MarkerOptions().position(latLng)
                     .icon(bitmap).zIndex(10).period(1).alpha(0.8f).rotate(0.5f).flat(false);
-
             if (isfirst) {
                 ooD.animateType(MarkerOptions.MarkerAnimateType.drop);
                 isfirst = false;
 
             }
-            baiduMap.addOverlay(ooD);
-            Button button = new Button(getApplicationContext());
-            button.setTag(i + "第几个");
-            button.setBackgroundResource(R.mipmap.bg0000);
-            button.setGravity(0x01);
-            button.setText(name);
-            button.setTextColor(getResources().getColor(R.color.whiteFFFFFF));
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    JLog.w(ID);
-                    UtilsTiaoZhuang.ToAnotherActivity(WangDianActivity.this, WangDianDetailActivity.class);
-                }
-            });
-            InfoWindow mInfoWindow = new InfoWindow(button, points.get(i), -100);
-            showInfoWindow(mInfoWindow);
+            marker = (Marker) baiduMap.addOverlay(ooD);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("shopsitem", shops.get(i));
+            marker.setExtraInfo(bundle);
+
 
         }
-
+        showInfoWindow();
 
     }
 
-    public void showInfoWindow(final InfoWindow mInfoWindow) {
+    public void showInfoWindow() {
+
+
         //标注物点击
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                //获得marker中的数据
+                final BannerShop info = (BannerShop) marker.getExtraInfo().get("shopsitem");
+                Button button = new Button(getApplicationContext());
+                button.setBackgroundResource(R.mipmap.bg0000);
+                button.setGravity(0x01);
+                button.setText(info.FShopName);
+                button.setTextColor(getResources().getColor(R.color.whiteFFFFFF));
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        UtilsTiaoZhuang.ToAnotherActivity(WangDianActivity.this, WangDianDetailActivity.class, UtilsTiaoZhuang.get_BannerShop(info));
+                    }
+                });
+
+                //将marker所在的经纬度的信息转化成屏幕上的坐标
+                final LatLng ll = marker.getPosition();
+                Point p = baiduMap.getProjection().toScreenLocation(ll);
+                LatLng llInfo = baiduMap.getProjection().fromScreenLocation(p);
+                InfoWindow mInfoWindow = new InfoWindow(button, llInfo, -100);
                 baiduMap.showInfoWindow(mInfoWindow);
                 return true;
             }
