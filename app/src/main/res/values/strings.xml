@@ -43,7 +43,7 @@
     <string name="car_yue_price">¥2470/</string>
     <string name="yue_zu_jia">月租价</string>
 
-    <string name="qu_xiao">取消</string>
+    <string name="quxiao">取消</string>
     <string name="que_ding">确定</string>
     <string name="yu_yue_zu_che">预约租车</string>
     <string name="date1">07-22</string>
@@ -107,4 +107,5 @@
     <string name="address">汕头市金凤路桃园51栋102号</string>
     <string name="jiao_ting_zhi_yin">交通指引</string>
     <string name="phone_number">400616666666</string>
+    <string name="guan_jian_zi">请输入关键字</string>
 </resources>

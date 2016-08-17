@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
-            android:background="@mipmap/search2"
+            android:background="@mipmap/zoom2x"
             app:layout_heightPercent="5%"
             app:layout_marginTopPercent="6%w"
             app:layout_widthPercent="80%" />
