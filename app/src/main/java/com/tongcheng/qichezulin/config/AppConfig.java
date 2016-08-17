@@ -51,4 +51,8 @@ public class AppConfig {
 
     //获取全部车型列表
     public static final String GET_ALL_CAR_LIST = "api/car/get_allcarlist.ashx";
+
+    //获取附近网点列表
+    public static final String GET_GET_NEARBYSHOP_WANG_DIAN_LIST = "api/shop/get_nearbyshop.ashx";
+
 }

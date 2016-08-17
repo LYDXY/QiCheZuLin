@@ -30,6 +30,7 @@ import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamNearWangDian;
+import com.tongcheng.qichezulin.Param.ParamNearWangDian1;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.model.BannerShop;
@@ -125,12 +126,18 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
      */
     private void setLocationOption() {
         LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开GPS
-        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式
-        option.setCoorType("bd09ll"); // 返回的定位结果是百度经纬度,默认值gcj02
-        option.setScanSpan(0); // 设置发起定位请求的间隔时间为5000ms
-        option.setIsNeedAddress(true); // 返回的定位结果包含地址信息
-        option.setNeedDeviceDirect(true); // 返回的定位结果包含手机机头的方向
+        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
+        );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
+        option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
+        option.setScanSpan(0);//可选，默认0，即仅定位一次，设置发起定位请求的间隔需要大于等于1000ms才是有效的
+        option.setIsNeedAddress(true);//可选，设置是否需要地址信息，默认不需要
+        option.setOpenGps(true);//可选，默认false,设置是否使用gps
+        option.setLocationNotify(true);//可选，默认false，设置是否当gps有效时按照1S1次频率输出GPS结果
+        option.setIsNeedLocationDescribe(true);//可选，默认false，设置是否需要位置语义化结果，可以在BDLocation.getLocationDescribe里得到，结果类似于“在北京天安门附近”
+        option.setIsNeedLocationPoiList(true);//可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
+        option.setIgnoreKillProcess(false);//可选，默认true，定位SDK内部是一个SERVICE，并放到了独立进程，设置是否在stop的时候杀死这个进程，默认不杀死
+        option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
+        option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤gps仿真结果，默认需要
         locationClient.setLocOption(option);
         locationClient = new LocationClient(getApplicationContext()); // 实例化LocationClient类
         locationClient.registerLocationListener(bdLocationListener); // 注册监听函数
@@ -201,10 +208,9 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
 
     //获取门店数据
     public void get_meng_dian_data() {
-        ParamNearWangDian nearWangDian = new ParamNearWangDian();
+        ParamNearWangDian1 nearWangDian = new ParamNearWangDian1();
         nearWangDian.lng = point.longitude + "";
         nearWangDian.lat = point.latitude + "";
-        nearWangDian.type_id = "1";
         Callback.Cancelable cancelable
                 = x.http().post(nearWangDian, new Callback.CommonCallback<String>() {
             @Override
@@ -267,6 +273,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
             }
             baiduMap.addOverlay(ooD);
             Button button = new Button(getApplicationContext());
+            button.setTag(i + "第几个");
             button.setBackgroundResource(R.mipmap.bg0000);
             button.setGravity(0x01);
             button.setText(name);
@@ -278,18 +285,22 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
                     UtilsTiaoZhuang.ToAnotherActivity(WangDianActivity.this, WangDianDetailActivity.class);
                 }
             });
-            final InfoWindow mInfoWindow = new InfoWindow(button, points.get(i), -100);
-            //标注物点击
-            baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    baiduMap.showInfoWindow(mInfoWindow);
-                    return true;
-                }
-            });
+            InfoWindow mInfoWindow = new InfoWindow(button, points.get(i), -100);
+            showInfoWindow(mInfoWindow);
 
         }
 
 
+    }
+
+    public void showInfoWindow(final InfoWindow mInfoWindow) {
+        //标注物点击
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                baiduMap.showInfoWindow(mInfoWindow);
+                return true;
+            }
+        });
     }
 }

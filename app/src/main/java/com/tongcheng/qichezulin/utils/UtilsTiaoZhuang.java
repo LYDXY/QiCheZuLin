@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.tongcheng.qichezulin.model.BannerShop;
 import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.CarModel2;
 
@@ -72,6 +73,31 @@ public class UtilsTiaoZhuang {
         bundle.putString("FSeat", item.FSeat);
         return bundle;
     }
+
+
+    public static Bundle get_BannerShop(BannerShop item) {
+        Bundle bundle = new Bundle();
+        bundle.putString("FImg", item.FImg);
+        bundle.putString("FAddress", item.FAddress);
+        bundle.putString("FShopName", item.FShopName);
+        bundle.putString("FType", item.FType);
+        bundle.putString("FCreateDate", item.FCreateDate);
+        bundle.putString("FImg1", item.FImg1);
+        bundle.putString("PID", item.PID);
+        bundle.putString("FImg2", item.FImg2);
+        bundle.putString("FImg3", item.FImg3);
+        bundle.putString("FIsBusiness", item.FIsBusiness);
+        bundle.putString("FKFTel", item.FKFTel);
+        bundle.putString("FLatitude", item.FLatitude);
+        bundle.putString("FLongitude", item.FLongitude);
+        bundle.putString("FState", item.FState);
+        bundle.putString("FTel", item.FTel);
+        bundle.putString("FTime", item.FTime);
+        bundle.putString("KCityID", item.KCityID);
+        return bundle;
+    }
+
+
     public static void ToAnotherActivity(Context activity, Class<?> cls, Bundle bundle) {
         Intent intent = new Intent();
         intent.putExtras(bundle);
