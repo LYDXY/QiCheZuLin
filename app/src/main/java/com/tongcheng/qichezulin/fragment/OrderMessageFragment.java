@@ -14,30 +14,22 @@ import org.xutils.view.annotation.ContentView;
 /**
  * Created by 林尧 on 2016/8/18.
  */
-@ContentView(R.layout.fragment_order_message)
-public class OrderMessageFragment extends PuTongFragment {
-    @Override
-    void setClickListenerOnView() {
+public class OrderMessageFragment extends Fragment {
 
+
+    public static OrderMessageFragment getInstance() {
+        OrderMessageFragment sf = new OrderMessageFragment();
+        return sf;
     }
 
     @Override
-    void initData() {
-
-    }
-
-    @Override
-    void initView() {
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.fragment_order_message, null);
+        return v;
     }
 }

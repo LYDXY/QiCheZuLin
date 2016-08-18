@@ -37,7 +37,7 @@ import java.util.List;
 public class MainActivity2 extends PuTongFragmentActivity {
 
 
-
+    public int lastposition;
 
     //个人中心图片
     @ViewInject(R.id.iv_set_up)
@@ -125,6 +125,8 @@ public class MainActivity2 extends PuTongFragmentActivity {
                     UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, WangDianActivity.class);
                 }else{
                     v4_vp.setCurrentItem(position);
+                    lastposition = position;
+                    JLog.w(lastposition + "");
                 }
 
             }
@@ -205,7 +207,6 @@ public class MainActivity2 extends PuTongFragmentActivity {
     protected void onResume() {
         super.onResume();
         JLog.w("onResume");
-
     }
 
 
