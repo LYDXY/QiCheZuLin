@@ -18,10 +18,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/retern"
-            app:layout_heightPercent="4%w"
+            android:src="@mipmap/retern"
+            app:layout_heightPercent="5%w"
             app:layout_marginLeftPercent="3%w"
-            app:layout_widthPercent="4%w" />
+            app:layout_widthPercent="5%w" />
 
         <TextView
             android:id="@+id/tv_first"

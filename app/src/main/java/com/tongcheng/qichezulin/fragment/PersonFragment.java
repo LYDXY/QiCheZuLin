@@ -19,6 +19,12 @@ import com.tongcheng.qichezulin.Param.ParamGetUserInfo;
 import com.tongcheng.qichezulin.Param.ParamRegist;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.activity.AccountActivity;
+import com.tongcheng.qichezulin.activity.MyBaoZhengJinActivity;
+import com.tongcheng.qichezulin.activity.MyFaPiaoctivity;
+import com.tongcheng.qichezulin.activity.MyJiFenActivity;
+import com.tongcheng.qichezulin.activity.MyOrderActivity;
+import com.tongcheng.qichezulin.activity.MyTouSuActivity;
+import com.tongcheng.qichezulin.activity.MyWallectActivity;
 import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.RegistModel;
@@ -54,6 +60,24 @@ import jp.wasabeef.blurry.Blurry;
 @ContentView(R.layout.fragment_person)
 public class PersonFragment extends PuTongFragment {
 
+    @ViewInject(R.id.rrl_zu_che_record) //租车记录
+            PercentRelativeLayout rrl_zu_che_record;
+
+    @ViewInject(R.id.rrl_my_ji_fen) //我的积分
+            PercentRelativeLayout rrl_my_ji_fen;
+
+    @ViewInject(R.id.rrl_my_wallect) //我的钱包
+            PercentRelativeLayout rrl_my_wallect;
+
+    @ViewInject(R.id.rrl_bao_zheng_jin) //我的保证金
+            PercentRelativeLayout rrl_bao_zheng_jin;
+
+    @ViewInject(R.id.rrl_my_fa_piao) //我的发票
+            PercentRelativeLayout rrl_my_fa_piao;
+
+    @ViewInject(R.id.rrl_my_tou_su) //我的投诉
+            PercentRelativeLayout rrl_my_tou_su;
+
 
     @ViewInject(R.id.iv_blur)
     ImageView iv_blur;
@@ -81,6 +105,12 @@ public class PersonFragment extends PuTongFragment {
     @Override
     void setClickListenerOnView() {
         rrl_zhang_hao.setOnClickListener(this);
+        rrl_zu_che_record.setOnClickListener(this);
+        rrl_my_ji_fen.setOnClickListener(this);
+        rrl_my_wallect.setOnClickListener(this);
+        rrl_bao_zheng_jin.setOnClickListener(this);
+        rrl_my_tou_su.setOnClickListener(this);
+        rrl_my_fa_piao.setOnClickListener(this);
     }
 
     @Override
@@ -98,8 +128,34 @@ public class PersonFragment extends PuTongFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rrl_zhang_hao:
+                JLog.w("跳转到我的账号界面");
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), AccountActivity.class);
                 break;
+            case R.id.rrl_zu_che_record:
+                JLog.w("跳转到我的订单界面");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyOrderActivity.class);
+                break;
+            case R.id.rrl_my_ji_fen:
+                JLog.w("跳转到我的积分界面");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyJiFenActivity.class);
+                break;
+            case R.id.rrl_my_wallect:
+                JLog.w("跳转到我的钱包界面");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyWallectActivity.class);
+                break;
+            case R.id.rrl_bao_zheng_jin:
+                JLog.w("跳转到我的保证金界面");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyBaoZhengJinActivity.class);
+                break;
+            case R.id.rrl_my_fa_piao:
+                JLog.w("跳转到我的发票界面");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyFaPiaoctivity.class);
+                break;
+            case R.id.rrl_my_tou_su:
+                JLog.w("跳转到我的投诉界面");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyTouSuActivity.class);
+                break;
+
         }
     }
 

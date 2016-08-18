@@ -90,6 +90,7 @@
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <com.zhy.android.percent.support.PercentRelativeLayout
+            android:id="@+id/rrl_zu_che_record"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
@@ -127,6 +128,7 @@
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <com.zhy.android.percent.support.PercentRelativeLayout
+            android:id="@+id/rrl_my_ji_fen"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
@@ -164,6 +166,7 @@
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <com.zhy.android.percent.support.PercentRelativeLayout
+            android:id="@+id/rrl_my_wallect"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
@@ -200,6 +203,7 @@
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <com.zhy.android.percent.support.PercentRelativeLayout
+            android:id="@+id/rrl_bao_zheng_jin"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
@@ -236,6 +240,7 @@
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <com.zhy.android.percent.support.PercentRelativeLayout
+            android:id="@+id/rrl_my_fa_piao"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
@@ -273,6 +278,7 @@
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <com.zhy.android.percent.support.PercentRelativeLayout
+            android:id="@+id/rrl_my_tou_su"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
