@@ -18,6 +18,7 @@ import com.tongcheng.qichezulin.entity.TabEntity;
 import com.tongcheng.qichezulin.fragment.HomeFragment;
 import com.tongcheng.qichezulin.fragment.MessageFragment;
 import com.tongcheng.qichezulin.fragment.PersonFragment;
+import com.tongcheng.qichezulin.fragment.WhiteFragment;
 import com.tongcheng.qichezulin.fragment.loginFragment;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
@@ -96,7 +97,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new loginFragment());
+        fragmentList.add(new WhiteFragment());
         fragmentList.add(new MessageFragment());
         fragmentList.add(new PersonFragment());
     }
