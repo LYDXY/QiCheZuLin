@@ -16,6 +16,7 @@ import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.entity.TabEntity;
 import com.tongcheng.qichezulin.fragment.HomeFragment;
+import com.tongcheng.qichezulin.fragment.MessageFragment;
 import com.tongcheng.qichezulin.fragment.PersonFragment;
 import com.tongcheng.qichezulin.fragment.loginFragment;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
@@ -96,7 +97,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
         }
         fragmentList.add(new HomeFragment());
         fragmentList.add(new loginFragment());
-        fragmentList.add(new loginFragment());
+        fragmentList.add(new MessageFragment());
         fragmentList.add(new PersonFragment());
     }
 
