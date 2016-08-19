@@ -15,6 +15,7 @@
         app:layout_widthPercent="100%w">
 
         <TextView
+            android:id="@+id/tv_order_number"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentLeft="true"
@@ -115,7 +116,7 @@
             android:layout_toRightOf="@+id/tv_qucheshijian"
             android:layout_below="@+id/tv_show_qu_che_shop"
             app:layout_marginTopPercent="1%w"
-            />
+            android:id="@+id/tv_show_qu_che_time" />
 
 
     </com.zhy.android.percent.support.PercentRelativeLayout>
@@ -130,7 +131,7 @@
         android:layout_height="0dp">
 
         <TextView
-            android:id="@+id/tv_show_crete_date"
+            android:id="@+id/tv_show_price_all"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
@@ -151,7 +152,7 @@
             app:layout_widthPercent="20%w"
             android:src="@mipmap/li_ji_huan_che"
             app:layout_marginLeftPercent="10%w"
-            android:layout_toRightOf="@+id/tv_show_crete_date"
+            android:layout_toRightOf="@+id/tv_show_price_all"
             />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 

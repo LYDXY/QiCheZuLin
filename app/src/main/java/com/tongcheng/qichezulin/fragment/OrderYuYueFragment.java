@@ -130,7 +130,7 @@ public class OrderYuYueFragment extends Fragment {
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
                                                 .setText(R.id.tv_show_huan_che_time,orderModel.FEndTime)
-                                                .setText(R.id.tv_show_crete_date,orderModel.FCreateDate);
+                                                .setText(R.id.tv_show_price_all,orderModel.FCreateDate);
 
 
                                     }

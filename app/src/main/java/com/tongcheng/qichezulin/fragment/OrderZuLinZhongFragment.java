@@ -36,10 +36,10 @@ import java.util.List;
 public class OrderZuLinZhongFragment extends Fragment {
 
 
-    String user_id="";
-    String status="2";
-    int page=1;
-    String page_size="10";
+    String user_id = "";
+    String status = "2";
+    int page = 1;
+    String page_size = "10";
     @ViewInject(R.id.prl_prl_02) //上下拉控件
             PullToRefreshLayout prl_prl_02;
     @ViewInject(R.id.plv_order_zu_lin_zhong_list)
@@ -47,6 +47,7 @@ public class OrderZuLinZhongFragment extends Fragment {
     public Adapter adapter;
 
     private boolean injected = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         injected = true;
@@ -60,9 +61,10 @@ public class OrderZuLinZhongFragment extends Fragment {
             x.view().inject(this, this.getView());
         }
         setOnPullListenerOnprl_prl();
-        user_id= UtilsUser.getUser(getContext()).PID;
-        get_order_yu_yue_list(user_id,status,page,page_size);
+        user_id = UtilsUser.getUser(getContext()).PID;
+        get_order_yu_yue_list(user_id, status, page, page_size);
     }
+
     public void setOnPullListenerOnprl_prl() {
         prl_prl_02.setOnPullListener(new PullToRefreshLayout.OnPullListener() {
             @Override
@@ -79,12 +81,12 @@ public class OrderZuLinZhongFragment extends Fragment {
     }
 
     //获取预约订单数据
-    public void get_order_yu_yue_list(String user_id,String status,int page,String page_size) {
+    public void get_order_yu_yue_list(String user_id, String status, int page, String page_size) {
         ParamOrderList paramOrderList = new ParamOrderList();
-        paramOrderList.user_id=user_id;
-        paramOrderList.status=status;
-        paramOrderList.page=page+"";
-        paramOrderList.page_size=page_size;
+        paramOrderList.user_id = user_id;
+        paramOrderList.status = status;
+        paramOrderList.page = page + "";
+        paramOrderList.page_size = page_size;
         Callback.Cancelable cancelable
                 = x.http().post(paramOrderList, new Callback.CommonCallback<String>() {
             @Override
@@ -121,20 +123,19 @@ public class OrderZuLinZhongFragment extends Fragment {
                                     @Override
                                     protected void convert(final AdapterHelper helper, OrderModel orderModel) {
                                         final int position = helper.getPosition();
-                                     /*   helper.setImageUrl(R.id.iv_car_picture,orderModel.FImg)
+                                        helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
+                                                .setText(R.id.tv_order_number, orderModel.PID)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
-                                                .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
-                                                .setText(R.id.tv_show_huan_che_time,orderModel.FEndTime)
-                                                .setText(R.id.tv_show_crete_date,orderModel.FCreateDate);
-*/
+                                                .setText(R.id.tv_show_price_all, orderModel.TotalAmount)
+                                                .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime);
+
 
                                     }
                                 };
 
                                 adapter.addAll(base.data);
                                 plv_order_zu_lin_zhong_list.setAdapter(adapter);
-                            }
-                            else {
+                            } else {
                                 adapter.addAll(base.data);
                                 adapter.notifyDataSetChanged();
                             }
