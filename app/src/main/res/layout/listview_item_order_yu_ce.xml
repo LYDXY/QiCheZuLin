@@ -14,15 +14,6 @@
         app:layout_heightPercent="10%w"
         app:layout_widthPercent="100%w">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_heightPercent="6%w"
-            android:layout_centerVertical="true"
-            app:layout_marginLeftPercent="4%w"
-            android:src="@mipmap/chooseno"
-            app:layout_widthPercent="6%w"/>
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="0dp"

@@ -1,13 +1,11 @@
 package com.tongcheng.qichezulin.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.code19.library.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
@@ -15,7 +13,6 @@ import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamOrderList;
 import com.tongcheng.qichezulin.R;
-import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.OrderModel;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
@@ -125,7 +122,7 @@ public class OrderYuYueFragment extends Fragment {
                             JLog.w("获取预约订单成功");
 
                             if (adapter == null) {
-                               adapter = new Adapter<OrderModel>(getActivity(), R.layout.listview_item_order) {
+                               adapter = new Adapter<OrderModel>(getActivity(), R.layout.listview_item_order_yu_ce) {
                                     @Override
                                     protected void convert(final AdapterHelper helper, OrderModel orderModel) {
                                         final int position = helper.getPosition();
