@@ -15,6 +15,7 @@ import com.code19.library.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tongcheng.qichezulin.Param.ParamGetUserInfo;
 import com.tongcheng.qichezulin.Param.ParamRegist;
 import com.tongcheng.qichezulin.R;
@@ -48,6 +49,7 @@ import org.xutils.x;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -80,8 +82,8 @@ public class PersonFragment extends PuTongFragment {
             PercentRelativeLayout rrl_my_tou_su;
 
 
-  /*  @ViewInject(R.id.iv_blur)
-    ImageView iv_blur;*/
+    @ViewInject(R.id.iv_blur)
+    ImageView iv_blur;
     @ViewInject(R.id.iv_head_photo)
     CircleImageView iv_head_photo;
     @ViewInject(R.id.rrl_zhang_hao)
@@ -183,6 +185,14 @@ public class PersonFragment extends PuTongFragment {
 
 
                         } else {
+                            ImageLoader.getInstance().displayImage("http://img5.imgtn.bdimg.com/it/u=1921015072,818197963&fm=21&gp=0.jpg", iv_head_photo);
+                            ImageLoader.getInstance().displayImage("http://img5.imgtn.bdimg.com/it/u=1921015072,818197963&fm=21&gp=0.jpg", iv_blur);
+                            Blurry.with(getActivity())
+                                    .radius(25)
+                                    .sampling(1)
+                                    .color(Color.argb(66, 0, 255, 255)).async().animate(500)
+                                    .capture(iv_blur)
+                                    .into(iv_blur);
 
                         }
                         tv_user_account.setText(UtilsString.hidePhoneNumber(base.data.FMobilePhone));
