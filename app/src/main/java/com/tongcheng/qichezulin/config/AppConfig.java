@@ -55,4 +55,8 @@ public class AppConfig {
     //获取附近网点列表
     public static final String GET_GET_NEARBYSHOP_WANG_DIAN_LIST = "api/shop/get_nearbyshop.ashx";
 
+
+    //获取订单列表
+    public static final String GET_GET_ORDERLIST = "api/order/get_orderlist.ashx";
+
 }

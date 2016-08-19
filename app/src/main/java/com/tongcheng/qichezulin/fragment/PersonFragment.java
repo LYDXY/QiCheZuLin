@@ -48,6 +48,7 @@ import org.xutils.x;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.net.URL;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -79,8 +80,8 @@ public class PersonFragment extends PuTongFragment {
             PercentRelativeLayout rrl_my_tou_su;
 
 
-    @ViewInject(R.id.iv_blur)
-    ImageView iv_blur;
+  /*  @ViewInject(R.id.iv_blur)
+    ImageView iv_blur;*/
     @ViewInject(R.id.iv_head_photo)
     CircleImageView iv_head_photo;
     @ViewInject(R.id.rrl_zhang_hao)
@@ -179,23 +180,12 @@ public class PersonFragment extends PuTongFragment {
                         //判断有没有图片
                         if (StringUtils.isEmpty(base.data.FImg)) {
                             iv_head_photo.setImageResource(R.mipmap.default_head_photo);
-                          /*  x.image().bind(iv_head_photo, UUU);
-                            Blurry.with(getActivity())
-                                    .radius(15)
-                                    .sampling(2)
-                                    .color(Color.argb(66, 0, 255, 255))
-                                    .capture(iv_blur)
-                                    .into(iv_blur);*/
+
 
                         } else {
-                            x.image().bind(iv_head_photo,
-                                    base.data.FImg);
-                            x.image().bind(iv_blur,
-                                    base.data.FImg);
 
                         }
-
-                        tv_user_account.setText(UtilsString.hidePhoneNumber(base.data.FUserName));
+                        tv_user_account.setText(UtilsString.hidePhoneNumber(base.data.FMobilePhone));
                         UtilsUser.saveUser(getContext(), base.data);
                     }
                 } else {

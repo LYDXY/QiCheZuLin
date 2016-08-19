@@ -19,12 +19,12 @@
             app:layout_heightPercent="40%w"
             app:layout_widthPercent="100%w">
 
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/iv_blur"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_heightPercent="40%w"
-                app:layout_widthPercent="100%w" />
+                app:layout_widthPercent="100%w" />-->
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_head_photo"
@@ -71,7 +71,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="@string/counnt_number"
                 android:textColor="@color/gray_6d6d6d"
                 app:layout_marginRightPercent="12%w"
                 app:layout_textSizePercent="4.5%w" />

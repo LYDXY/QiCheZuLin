@@ -8,6 +8,10 @@ import com.flyco.tablayout.SegmentTabLayout;
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.fragment.FaPiaoTaiTouFragment;
+import com.tongcheng.qichezulin.fragment.OrderFinishFragment;
+import com.tongcheng.qichezulin.fragment.OrderYiQuXiaoFragment;
+import com.tongcheng.qichezulin.fragment.OrderYuYueFragment;
+import com.tongcheng.qichezulin.fragment.OrderZuLinZhongFragment;
 import com.tongcheng.qichezulin.fragment.PeiSongAddressFragment;
 
 import org.xutils.view.annotation.ContentView;
@@ -30,10 +34,10 @@ public class MyOrderActivity extends PuTongFragmentActivity {
 
     @Override
     void initData() {
-        fragments.add(FaPiaoTaiTouFragment.getInstance());
-        fragments.add(PeiSongAddressFragment.getInstance());
-        fragments.add(FaPiaoTaiTouFragment.getInstance());
-        fragments.add(PeiSongAddressFragment.getInstance());
+        fragments.add(new OrderYuYueFragment());
+        fragments.add(new OrderZuLinZhongFragment());
+        fragments.add(new OrderFinishFragment());
+        fragments.add(new OrderYiQuXiaoFragment());
     }
 
     @Override

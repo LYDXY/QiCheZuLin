@@ -24,7 +24,7 @@ public class CarDetailActivity extends PuTongActivity {
 
     Bundle bundle;
 
-    @ViewInject(R.id.tv_user_this_car) //车大图
+    @ViewInject(R.id.tv_user_this_car) //租用这辆车
             TextView tv_user_this_car;
 
     @ViewInject(R.id.tv_this_car_name) //车名
@@ -51,6 +51,8 @@ public class CarDetailActivity extends PuTongActivity {
 
     @ViewInject(R.id.tv_show_cat_price) //日均价 /月租价
             TextView tv_show_cat_price;
+
+
 
 
     @ViewInject(R.id.iv_this_car)
@@ -115,7 +117,6 @@ public class CarDetailActivity extends PuTongActivity {
             E.printStackTrace();
         }
 
-
         tv_user_this_car.setOnClickListener(this);
         tv_first.setVisibility(View.VISIBLE);
         tv_second.setVisibility(View.VISIBLE);
@@ -136,6 +137,7 @@ public class CarDetailActivity extends PuTongActivity {
                 break;
             case R.id.tv_user_this_car:
                 JLog.w("租用这辆车");
+                UtilsTiaoZhuang.ToAnotherActivity(CarDetailActivity.this, ZuCheActivity.class);
                 break;
         }
 

@@ -38,6 +38,8 @@
     <FrameLayout
         android:id="@+id/fl_change"
         android:layout_width="match_parent"
-        android:layout_height="84dp" />
+        app:layout_marginLeftPercent="2%w"
+        app:layout_marginRightPercent="2%w"
+        android:layout_height="wrap_content" />
 
 </com.zhy.android.percent.support.PercentLinearLayout>
