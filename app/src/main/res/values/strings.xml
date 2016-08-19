@@ -108,4 +108,12 @@
     <string name="jiao_ting_zhi_yin">交通指引</string>
     <string name="phone_number">400616666666</string>
     <string name="guan_jian_zi">请输入关键字</string>
+    <string name="yu_yue_zhong">预约中</string>
+
+    <string name="qu_che_wang_dian">取车网店:</string>
+    <string name="qu_che_time">取车时间:</string>
+    <string name="huan_che_time">还车时间:</string>
+    <string name="address_show">龙湖泰山网店</string>
+    <string name="quche_time_show">2016.10.10 10:00</string>
+    <string name="create_time">2016.10.10 10:00:00</string>
 </resources>

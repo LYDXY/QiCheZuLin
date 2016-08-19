@@ -69,7 +69,7 @@ public class UtilsUser {
     }
 
     //获取用户的信息
-    public UserModel getUser(Context context) {
+    public static UserModel getUser(Context context) {
         Gson gson = new Gson();
         String json = (String) getSp(context, KEY_ACCOUNT_OBJECT, "");
         return gson.fromJson(json, UserModel.class);

@@ -288,7 +288,7 @@ public class PullToRefreshLayout extends RelativeLayout {
                     hide();
                 }
             }
-        }, 2400);
+        }, 1400);
     }
 
     /**
