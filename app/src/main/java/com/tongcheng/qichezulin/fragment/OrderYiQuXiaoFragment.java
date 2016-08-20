@@ -87,25 +87,27 @@ public class OrderYiQuXiaoFragment extends Fragment {
                         new String[]{"删除"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        JLog.w("要删除的总个数" + delete_BooleanHashMap.size());
+                        JLog.w("列表的总个数" + delete_BooleanHashMap.size());
                         Iterator iter = delete_BooleanHashMap.keySet().iterator();
                         List<String> delete_id = new ArrayList<String>();
                         while (iter.hasNext()) {
                             Object key = iter.next();
-                            JLog.w("要删除的订单" + key + "");
+
                             Object val = delete_BooleanHashMap.get(key);
                             JLog.w("true / false ======" + val + "");
                             if (val.toString().equals("true")) {
+                                JLog.w("要删除的订单" + key + "");
                                 delete_id.add(key.toString());
                             }
                         }
                         Iterator iter2 = positon_BooleanHashMap.keySet().iterator();
                         while (iter2.hasNext()) {
                             Object key2 = iter2.next();
-                            JLog.w("要删除的位置" + key2 + "");
+
                             Object val2 = positon_BooleanHashMap.get(key2);
                             JLog.w("true / false ======" + val2 + "");
                             if (val2.toString().equals("true")) {
+                                JLog.w("要删除的位置" + key2 + "");
                                 adapter.removeAt(Integer.parseInt(key2 + ""));
                             }
                         }
