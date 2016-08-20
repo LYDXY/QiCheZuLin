@@ -120,4 +120,5 @@
     <string name="order_number">订单号: 2016053115481</string>
     <string name="show_price">¥2300</string>
     <string name="yi_wan_cheng">已完成</string>
+    <string name="yi_qu_xiao">已取消</string>
 </resources>
