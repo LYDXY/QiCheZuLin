@@ -17,6 +17,8 @@ import org.xutils.x;
 
 @ContentView(R.layout.fragment_order_yu_yue)
 public class OrderYiQuXiaoFragment extends Fragment {
+
+
     private boolean injected = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

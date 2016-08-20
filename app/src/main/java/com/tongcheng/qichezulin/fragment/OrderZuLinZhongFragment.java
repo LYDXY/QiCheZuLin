@@ -36,6 +36,7 @@ import java.util.List;
 public class OrderZuLinZhongFragment extends Fragment {
 
 
+    public Adapter adapter;
     String user_id = "";
     String status = "2";
     int page = 1;
@@ -44,8 +45,6 @@ public class OrderZuLinZhongFragment extends Fragment {
             PullToRefreshLayout prl_prl_02;
     @ViewInject(R.id.plv_order_zu_lin_zhong_list)
     PullableListView plv_order_zu_lin_zhong_list; //list 控件
-    public Adapter adapter;
-
     private boolean injected = false;
 
     @Override
@@ -124,7 +123,7 @@ public class OrderZuLinZhongFragment extends Fragment {
                                     protected void convert(final AdapterHelper helper, OrderModel orderModel) {
                                         final int position = helper.getPosition();
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
-                                                .setText(R.id.tv_order_number, orderModel.PID)
+                                                .setText(R.id.tv_order_number, "订单号:" + orderModel.PID)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_price_all, orderModel.TotalAmount)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime);
