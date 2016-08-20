@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -29,7 +31,9 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 林尧 on 2016/8/18.
@@ -37,6 +41,10 @@ import java.util.List;
 
 @ContentView(R.layout.fragment_order_finish)
 public class OrderFinishFragment extends Fragment {
+
+    public Adapter adapter;
+    Map<String, Boolean> delete_BooleanHashMap = new HashMap<String, Boolean>(); //记录要删除的id
+    Map<Integer, Boolean> positon_BooleanHashMap = new HashMap<Integer, Boolean>(); //记录要移除的位置
 
     @ViewInject(R.id.buuuuuuu)
     Button button;
@@ -153,30 +161,49 @@ public class OrderFinishFragment extends Fragment {
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
-                            JLog.w("获取预约订单成功");
-
-                           /* if (adapter == null) {
-                                adapter = new Adapter<OrderModel>(getActivity(), R.layout.listview_item_order_zhu_lin_zhong) {
+                            JLog.w("获取已完成订单成功");
+                            if (adapter == null) {
+                                adapter = new Adapter<OrderModel>(getActivity(), R.layout.listview_item_order_finish) {
                                     @Override
-                                    protected void convert(final AdapterHelper helper, OrderModel orderModel) {
+                                    protected void convert(final AdapterHelper helper, final OrderModel orderModel) {
                                         final int position = helper.getPosition();
+                                        delete_BooleanHashMap.put(orderModel.PID, false);
+                                        positon_BooleanHashMap.put(position, false);
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
-                                                .setText(R.id.tv_order_number, "订单号:" + orderModel.PID)
+                                                .setText(R.id.tv_order_number_show, orderModel.PID)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
-                                                .setText(R.id.tv_show_price_all, orderModel.TotalAmount)
-                                                .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime);
-
-
+                                                .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
+                                                .setText(R.id.tv_show_crete_date, orderModel.FCreateDate)
+                                                .setImageResource(R.id.iv_is_zia_xian_tou_su, R.mipmap.zai_xian_tou_su);
+                                        helper.getView(R.id.ck_is_choose).setVisibility(View.VISIBLE);
+                                        CheckBox checkBox = helper.getView(R.id.ck_is_choose);
+                                        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                            @Override
+                                            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                                                JLog.w("...>>>>>>" + b);
+                                                if (b) {
+                                                    delete_BooleanHashMap.put(orderModel.PID, true);
+                                                    positon_BooleanHashMap.put(position, true);
+                                                    JLog.w(delete_BooleanHashMap.size() + "");
+                                                    JLog.w(positon_BooleanHashMap.size() + "");
+                                                } else {
+                                                    delete_BooleanHashMap.put(orderModel.PID, false);
+                                                    positon_BooleanHashMap.put(position, false);
+                                                    JLog.w(delete_BooleanHashMap.size() + "");
+                                                    JLog.w(positon_BooleanHashMap.size() + "");
+                                                }
+                                            }
+                                        });
                                     }
                                 };
 
                                 adapter.addAll(base.data);
-                                plv_order_zu_lin_zhong_list.setAdapter(adapter);
+                                plv_order_finish_list.setAdapter(adapter);
                             } else {
                                 adapter.addAll(base.data);
                                 adapter.notifyDataSetChanged();
                             }
-*/
+
 
                         }
                     } else {

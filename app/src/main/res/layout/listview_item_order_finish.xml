@@ -22,6 +22,7 @@
             android:layout_height="0dp"
             android:background="@drawable/selector1"
             android:button="@null"
+            android:checked="false"
             app:layout_heightPercent="5%w"
             app:layout_marginLeftPercent="2%w"
             app:layout_marginTopPercent="1.5%w"
@@ -29,6 +30,7 @@
 
 
         <TextView
+            android:id="@+id/tv_order_number_show"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_toRightOf="@+id/ck_is_choose"
@@ -144,7 +146,7 @@
 
 
         <TextView
-            android:id="@+id/tv_show_price_all"
+            android:id="@+id/tv_show_crete_date"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
@@ -157,7 +159,7 @@
             app:layout_widthPercent="50%w" />
 
         <ImageView
-            android:id="@+id/iv_qu_xiao_yu_yue"
+            android:id="@+id/iv_is_zia_xian_tou_su"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentRight="true"

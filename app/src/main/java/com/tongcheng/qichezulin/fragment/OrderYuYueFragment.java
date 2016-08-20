@@ -37,12 +37,11 @@ import java.util.List;
 public class OrderYuYueFragment extends Fragment {
 
 
+    public Adapter adapter;
     @ViewInject(R.id.prl_prl_01) //上下拉控件
      PullToRefreshLayout prl_prl_01;
     @ViewInject(R.id.plv_order_yu_yue_list)
     PullableListView plv_order_yu_yue_list; //list 控件
-    public Adapter adapter;
-
     String user_id="";
     String status="1";
     int page=1;
@@ -130,7 +129,7 @@ public class OrderYuYueFragment extends Fragment {
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
                                                 .setText(R.id.tv_show_huan_che_time,orderModel.FEndTime)
-                                                .setText(R.id.tv_show_price_all,orderModel.FCreateDate);
+                                                .setText(R.id.tv_show_crete_date, orderModel.FCreateDate);
 
 
                                     }

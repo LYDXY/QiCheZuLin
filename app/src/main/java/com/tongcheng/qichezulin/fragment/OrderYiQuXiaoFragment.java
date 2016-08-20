@@ -50,7 +50,7 @@ public class OrderYiQuXiaoFragment extends Fragment {
     Map<String, Boolean> delete_BooleanHashMap = new HashMap<String, Boolean>(); //记录要删除的id
     Map<Integer, Boolean> positon_BooleanHashMap = new HashMap<Integer, Boolean>(); //记录要移除的位置
     String user_id = "";
-    String status = "3";
+    String status = "4";
     int page = 1;
     String page_size = "10";
     @ViewInject(R.id.prl_prl_04) //上下拉控件
@@ -87,14 +87,11 @@ public class OrderYiQuXiaoFragment extends Fragment {
                         new String[]{"删除"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        JLog.w("列表的总个数" + delete_BooleanHashMap.size());
                         Iterator iter = delete_BooleanHashMap.keySet().iterator();
                         List<String> delete_id = new ArrayList<String>();
                         while (iter.hasNext()) {
                             Object key = iter.next();
-
                             Object val = delete_BooleanHashMap.get(key);
-                            JLog.w("true / false ======" + val + "");
                             if (val.toString().equals("true")) {
                                 JLog.w("要删除的订单" + key + "");
                                 delete_id.add(key.toString());
@@ -103,12 +100,10 @@ public class OrderYiQuXiaoFragment extends Fragment {
                         Iterator iter2 = positon_BooleanHashMap.keySet().iterator();
                         while (iter2.hasNext()) {
                             Object key2 = iter2.next();
-
                             Object val2 = positon_BooleanHashMap.get(key2);
-                            JLog.w("true / false ======" + val2 + "");
                             if (val2.toString().equals("true")) {
                                 JLog.w("要删除的位置" + key2 + "");
-                                adapter.removeAt(Integer.parseInt(key2 + ""));
+                                //  adapter.removeAt(Integer.parseInt(key2 + ""));//防止数组越界
                             }
                         }
                         adapter.notifyDataSetChanged();
@@ -191,13 +186,10 @@ public class OrderYiQuXiaoFragment extends Fragment {
                                                 if (b) {
                                                     delete_BooleanHashMap.put(orderModel.PID, true);
                                                     positon_BooleanHashMap.put(position, true);
-                                                    JLog.w(delete_BooleanHashMap.size() + "");
-                                                    JLog.w(positon_BooleanHashMap.size() + "");
                                                 } else {
                                                     delete_BooleanHashMap.put(orderModel.PID, false);
                                                     positon_BooleanHashMap.put(position, false);
-                                                    JLog.w(delete_BooleanHashMap.size() + "");
-                                                    JLog.w(positon_BooleanHashMap.size() + "");
+
                                                 }
                                             }
                                         });

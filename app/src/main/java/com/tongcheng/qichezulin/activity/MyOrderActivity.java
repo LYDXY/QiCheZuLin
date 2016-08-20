@@ -31,7 +31,6 @@ import java.util.ArrayList;
 public class MyOrderActivity extends PuTongFragmentActivity implements OrderFinishFragment.ListenerOnOrderFinishFragment {
 
 
-    private static int isfinish_or_quxiao = 0;//1 代表已完成 ,2代表 已取消
     //可以用来fg刷新activity 界面----------end
     @ViewInject(R.id.tv_third)
     TextView tv_third;

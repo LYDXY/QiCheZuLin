@@ -125,7 +125,7 @@ public class OrderZuLinZhongFragment extends Fragment {
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
                                                 .setText(R.id.tv_order_number, "订单号:" + orderModel.PID)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
-                                                .setText(R.id.tv_show_price_all, orderModel.TotalAmount)
+                                                .setText(R.id.tv_show_crete_date, orderModel.TotalAmount)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime);
 
 

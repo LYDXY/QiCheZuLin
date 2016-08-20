@@ -63,8 +63,8 @@
             android:id="@+id/tv_qucheshijian"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_toRightOf="@+id/iv_car_picture"
             android:layout_below="@+id/tv_quchewangdian"
+            android:layout_toRightOf="@+id/iv_car_picture"
             android:gravity="center"
             android:text="@string/qu_che_time"
             android:textColor="@color/black"
@@ -77,8 +77,8 @@
             android:id="@+id/tv_huanchetime"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_toRightOf="@+id/iv_car_picture"
             android:layout_below="@+id/tv_qucheshijian"
+            android:layout_toRightOf="@+id/iv_car_picture"
             android:gravity="center"
             android:text="@string/huan_che_time"
             android:textColor="@color/black"
@@ -107,8 +107,8 @@
             android:id="@+id/tv_show_qu_che_time"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_toRightOf="@+id/tv_huanchetime"
             android:layout_below="@+id/tv_show_qu_che_shop"
+            android:layout_toRightOf="@+id/tv_huanchetime"
             android:gravity="center_vertical"
             android:text="@string/quche_time_show"
             android:textColor="@color/gray9999999"
@@ -122,8 +122,8 @@
             android:id="@+id/tv_show_huan_che_time"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_toRightOf="@+id/tv_huanchetime"
             android:layout_below="@+id/tv_show_qu_che_time"
+            android:layout_toRightOf="@+id/tv_huanchetime"
             android:gravity="center_vertical"
             android:text="@string/quche_time_show"
             android:textColor="@color/gray9999999"
@@ -139,35 +139,35 @@
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="0dp"
-        app:layout_heightPercent="10%w"
-        app:layout_widthPercent="100%w"
+        android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="10%w"
         app:layout_marginTopPercent="0.2%w"
-        android:layout_height="0dp">
+        app:layout_widthPercent="100%w">
 
         <TextView
-            android:id="@+id/tv_show_price_all"
+            android:id="@+id/tv_show_crete_date"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
-            app:layout_marginLeftPercent="4%w"
-            app:layout_heightPercent="10%w"
-            android:text="@string/create_time"
-            app:layout_textSizePercent="5%w"
-            android:textColor="@color/gray9999999"
             android:gravity="center_vertical"
+            android:text="@string/create_time"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_marginLeftPercent="4%w"
+            app:layout_textSizePercent="5%w"
             app:layout_widthPercent="50%w"/>
 
         <ImageView
-            android:id="@+id/iv_qu_xiao_yu_yue"
+            android:id="@+id/iv_is_zia_xian_tou_su"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="7%w"
             android:layout_centerVertical="true"
-            app:layout_widthPercent="20%w"
+            android:layout_toRightOf="@+id/tv_show_crete_date"
             android:src="@mipmap/qu_xiao_yu_yue"
+            app:layout_heightPercent="7%w"
             app:layout_marginLeftPercent="2%w"
-            android:layout_toRightOf="@+id/tv_show_price_all"
+            app:layout_widthPercent="20%w"
             />
 
 
@@ -175,12 +175,12 @@
             android:id="@+id/iv_quan_e_zhi_fu"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="7%w"
             android:layout_centerVertical="true"
-            app:layout_widthPercent="20%w"
+            android:layout_toRightOf="@+id/iv_is_zia_xian_tou_su"
             android:src="@mipmap/quan_e_zhi_fu"
+            app:layout_heightPercent="7%w"
             app:layout_marginLeftPercent="2%w"
-            android:layout_toRightOf="@+id/iv_qu_xiao_yu_yue"
+            app:layout_widthPercent="20%w"
             />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
