@@ -47,8 +47,8 @@ public class OrderYiQuXiaoFragment extends Fragment {
 
 
     public Adapter adapter;
-    Map<String, Boolean> delete_BooleanHashMap = new HashMap<String, Boolean>(); //记录要删除的id
-    Map<Integer, Boolean> positon_BooleanHashMap = new HashMap<Integer, Boolean>(); //记录要移除的位置
+    Map<OrderModel, Boolean> delete_BooleanHashMap = new HashMap<OrderModel, Boolean>(); //记录要删除的对象
+
     String user_id = "";
     String status = "4";
     int page = 1;
@@ -87,25 +87,13 @@ public class OrderYiQuXiaoFragment extends Fragment {
                         new String[]{"删除"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
+                        JLog.w(adapter.getCount() + "");
                         Iterator iter = delete_BooleanHashMap.keySet().iterator();
-                        List<String> delete_id = new ArrayList<String>();
+                        List<OrderModel> orderModels = new ArrayList<OrderModel>();
                         while (iter.hasNext()) {
-                            Object key = iter.next();
-                            Object val = delete_BooleanHashMap.get(key);
-                            if (val.toString().equals("true")) {
-                                JLog.w("要删除的订单" + key + "");
-                                delete_id.add(key.toString());
-                            }
+
                         }
-                        Iterator iter2 = positon_BooleanHashMap.keySet().iterator();
-                        while (iter2.hasNext()) {
-                            Object key2 = iter2.next();
-                            Object val2 = positon_BooleanHashMap.get(key2);
-                            if (val2.toString().equals("true")) {
-                                JLog.w("要删除的位置" + key2 + "");
-                                //  adapter.removeAt(Integer.parseInt(key2 + ""));//防止数组越界
-                            }
-                        }
+                        adapter.getCount();
                         adapter.notifyDataSetChanged();
                     }
                 }).show();
@@ -171,8 +159,7 @@ public class OrderYiQuXiaoFragment extends Fragment {
                                     @Override
                                     protected void convert(final AdapterHelper helper, final OrderModel orderModel) {
                                         final int position = helper.getPosition();
-                                        delete_BooleanHashMap.put(orderModel.PID, false);
-                                        positon_BooleanHashMap.put(position, false);
+                                        delete_BooleanHashMap.put(orderModel, false);
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
@@ -184,11 +171,11 @@ public class OrderYiQuXiaoFragment extends Fragment {
                                             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                                                 JLog.w("...>>>>>>" + b);
                                                 if (b) {
-                                                    delete_BooleanHashMap.put(orderModel.PID, true);
-                                                    positon_BooleanHashMap.put(position, true);
+                                                    delete_BooleanHashMap.put(orderModel, true);
+
                                                 } else {
-                                                    delete_BooleanHashMap.put(orderModel.PID, false);
-                                                    positon_BooleanHashMap.put(position, false);
+                                                    delete_BooleanHashMap.put(orderModel, false);
+
 
                                                 }
                                             }
