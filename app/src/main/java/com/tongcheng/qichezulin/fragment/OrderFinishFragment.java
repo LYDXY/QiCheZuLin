@@ -1,10 +1,13 @@
 package com.tongcheng.qichezulin.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,6 +38,9 @@ import java.util.List;
 @ContentView(R.layout.fragment_order_finish)
 public class OrderFinishFragment extends Fragment {
 
+    @ViewInject(R.id.buuuuuuu)
+    Button button;
+    //===============================end
     String user_id = "";
     String status = "3";
     int page = 1;
@@ -43,7 +49,23 @@ public class OrderFinishFragment extends Fragment {
             PullToRefreshLayout prl_prl_03;
     @ViewInject(R.id.plv_order_finish_list)
     PullableListView plv_order_finish_list; //list 控件
+    private ListenerOnOrderFinishFragment listenerOnOrderFinishFragment;
+    private TextView tv_second; //编辑按钮
     private boolean injected = false;
+
+    /**
+     * Fragment第一次附属于Activity时调用,在onCreate之前调用
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            listenerOnOrderFinishFragment = (ListenerOnOrderFinishFragment) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         injected = true;
@@ -59,6 +81,25 @@ public class OrderFinishFragment extends Fragment {
         setOnPullListenerOnprl_prl();
         user_id = UtilsUser.getUser(getContext()).PID;
         get_order_yu_yue_list(user_id, status, page, page_size);
+
+
+        //对activity的 回调
+    /*    button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listenerOnOrderFinishFragment.do_work();
+            }
+        });*/
+
+        tv_second = (TextView) getActivity().findViewById(R.id.tv_second);
+        tv_second.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JLog.w("OrderFinishFragment");
+            }
+        });
+
+
     }
 
     public void setOnPullListenerOnprl_prl() {
@@ -147,5 +188,10 @@ public class OrderFinishFragment extends Fragment {
 
             }
         });
+    }
+
+    //=======fg跟新 acticity可以通过接口方式============begin
+    public interface ListenerOnOrderFinishFragment {
+        void do_work();
     }
 }

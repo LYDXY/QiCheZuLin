@@ -69,7 +69,7 @@
             android:textColor="@color/gray9999999"
             app:layout_heightPercent="6%w"
             app:layout_marginLeftPercent="1%w"
-            app:layout_marginTopPercent="8%w"
+            app:layout_marginTopPercent="4%w"
             app:layout_textSizePercent="4.5%w"
             app:layout_widthPercent="20%w" />
 
@@ -113,7 +113,7 @@
             android:textColor="@color/gray9999999"
             app:layout_heightPercent="6%w"
             app:layout_marginLeftPercent="1%w"
-            app:layout_marginTopPercent="8%w"
+            app:layout_marginTopPercent="4%w"
             app:layout_textSizePercent="4.5%w"
             app:layout_widthPercent="50%w" />
 
