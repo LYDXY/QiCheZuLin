@@ -5,13 +5,13 @@
     android:background="@color/grayF0F0F0">
 
     <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout
-        android:id="@+id/prl_prl_01"
+        android:id="@+id/prl_prl_03"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal">
 
         <com.tongcheng.qichezulin.pulltorefresh.PullableListView
-            android:id="@+id/plv_order_yu_yue_list"
+            android:id="@+id/plv_order_finish_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/whiteFFFFFF"
