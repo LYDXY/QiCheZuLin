@@ -15,7 +15,7 @@ import org.xutils.x;
  * Created by 林尧 on 2016/8/18.
  */
 
-@ContentView(R.layout.fragment_order_yu_yue)
+@ContentView(R.layout.fragment_order_finish)
 public class OrderFinishFragment extends Fragment {
     private boolean injected = false;
     @Override
