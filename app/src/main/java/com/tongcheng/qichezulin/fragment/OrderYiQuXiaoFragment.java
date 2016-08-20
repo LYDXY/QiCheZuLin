@@ -88,13 +88,17 @@ public class OrderYiQuXiaoFragment extends Fragment {
                     @Override
                     public void onItemClick(Object o, int position) {
                         JLog.w(adapter.getCount() + "");
-                        Iterator iter = delete_BooleanHashMap.keySet().iterator();
-                        List<OrderModel> orderModels = new ArrayList<OrderModel>();
-                        while (iter.hasNext()) {
-
+                        List<OrderModel> orderModels=new ArrayList<OrderModel>(); //记录打勾的的子项
+                        List<String> delete_id=new ArrayList<String>(); //记录要删除的ID
+                        for (OrderModel key : delete_BooleanHashMap.keySet()) {
+                            if( delete_BooleanHashMap.get(key)){
+                                orderModels.add(key);
+                                delete_id.add(key.PID);
+                            }
                         }
-                        adapter.getCount();
-                        adapter.notifyDataSetChanged();
+                        // 进行删除操作 ,如果服务器返回成功 ,,,则再刷新界面
+                       // adapter.removeAll(orderModels); 采用本地移除的发有 bug
+                       // adapter.notifyDataSetChanged();
                     }
                 }).show();
             }
@@ -159,7 +163,6 @@ public class OrderYiQuXiaoFragment extends Fragment {
                                     @Override
                                     protected void convert(final AdapterHelper helper, final OrderModel orderModel) {
                                         final int position = helper.getPosition();
-                                        delete_BooleanHashMap.put(orderModel, false);
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
@@ -175,8 +178,6 @@ public class OrderYiQuXiaoFragment extends Fragment {
 
                                                 } else {
                                                     delete_BooleanHashMap.put(orderModel, false);
-
-
                                                 }
                                             }
                                         });
