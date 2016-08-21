@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 
 @ContentView(R.layout.activity_my_order)
-public class MyOrderActivity extends PuTongFragmentActivity implements OrderFinishFragment.ListenerOnOrderFinishFragment {
+public class MyOrderActivity extends PuTongFragmentActivity   {
 
 
     //可以用来fg刷新activity 界面----------end
@@ -43,11 +43,7 @@ public class MyOrderActivity extends PuTongFragmentActivity implements OrderFini
     private OrderFinishFragment finishFragment = new OrderFinishFragment();
     private OrderYiQuXiaoFragment quXiaoFragment = new OrderYiQuXiaoFragment();
 
-    //可以用来fg刷新activity 界面----------begin
-    @Override
-    public void do_work() {
-        JLog.w("=============/////////////");
-    }
+
 
     @Override
     void initData() {

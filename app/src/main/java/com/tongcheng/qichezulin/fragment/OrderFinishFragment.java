@@ -11,17 +11,21 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Param.ParamDeleteOrder;
 import com.tongcheng.qichezulin.Param.ParamOrderList;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.OrderModel;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
+import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
@@ -31,6 +35,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +48,7 @@ import java.util.Map;
 public class OrderFinishFragment extends Fragment {
 
     public Adapter adapter;
-    Map<String, Boolean> delete_BooleanHashMap = new HashMap<String, Boolean>(); //记录要删除的id
-    Map<Integer, Boolean> positon_BooleanHashMap = new HashMap<Integer, Boolean>(); //记录要移除的位置
+    Map<OrderModel, Boolean> delete_BooleanHashMap = new HashMap<OrderModel, Boolean>(); //记录要删除的对象
 
     @ViewInject(R.id.buuuuuuu)
     Button button;
@@ -57,22 +61,10 @@ public class OrderFinishFragment extends Fragment {
             PullToRefreshLayout prl_prl_03;
     @ViewInject(R.id.plv_order_finish_list)
     PullableListView plv_order_finish_list; //list 控件
-    private ListenerOnOrderFinishFragment listenerOnOrderFinishFragment;
     private TextView tv_second; //编辑按钮
     private boolean injected = false;
 
-    /**
-     * Fragment第一次附属于Activity时调用,在onCreate之前调用
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            listenerOnOrderFinishFragment = (ListenerOnOrderFinishFragment) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnArticleSelectedListener");
-        }
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,6 +96,38 @@ public class OrderFinishFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 JLog.w("OrderFinishFragment");
+                new AlertView(null, null, "取消", null,
+                        new String[]{"删除"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object o, int position) {
+                        JLog.w(adapter.getCount() + "");
+                        List<OrderModel> orderModels=new ArrayList<OrderModel>(); //记录打勾的的子项
+                        List<String> delete_id=new ArrayList<String>(); //记录要删除的ID
+                        for (OrderModel key : delete_BooleanHashMap.keySet()) {
+                            if( delete_BooleanHashMap.get(key)){
+                                orderModels.add(key);
+                                delete_id.add(key.PID);
+                            }
+                        }
+                        if (delete_id.size()>0) {
+                            StringBuilder StringBuilder=new StringBuilder();
+                            for (int i=0;i<delete_id.size();i++){
+                                if (i == (delete_id.size()-1)) {
+                                    StringBuilder.append(delete_id.get(i));
+                                }else{
+                                    StringBuilder.append(delete_id.get(i)).append(",");
+                                }
+
+                            }
+                            JLog.w(StringBuilder.toString());
+                            delete_orders(StringBuilder.toString(),orderModels);
+                        }
+                        // 进行删除操作 ,如果服务器返回成功 ,,,则再刷新界面
+                        // adapter.removeAll(orderModels); 采用本地移除的发有 bug
+                        // adapter.notifyDataSetChanged();
+
+                    }
+                }).show();
             }
         });
 
@@ -167,8 +191,6 @@ public class OrderFinishFragment extends Fragment {
                                     @Override
                                     protected void convert(final AdapterHelper helper, final OrderModel orderModel) {
                                         final int position = helper.getPosition();
-                                        delete_BooleanHashMap.put(orderModel.PID, false);
-                                        positon_BooleanHashMap.put(position, false);
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
                                                 .setText(R.id.tv_order_number_show, orderModel.PID)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
@@ -181,16 +203,12 @@ public class OrderFinishFragment extends Fragment {
                                             @Override
                                             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                                                 JLog.w("...>>>>>>" + b);
+                                                JLog.w("...>>>>>>" + b);
                                                 if (b) {
-                                                    delete_BooleanHashMap.put(orderModel.PID, true);
-                                                    positon_BooleanHashMap.put(position, true);
-                                                    JLog.w(delete_BooleanHashMap.size() + "");
-                                                    JLog.w(positon_BooleanHashMap.size() + "");
+                                                    delete_BooleanHashMap.put(orderModel, true);
+
                                                 } else {
-                                                    delete_BooleanHashMap.put(orderModel.PID, false);
-                                                    positon_BooleanHashMap.put(position, false);
-                                                    JLog.w(delete_BooleanHashMap.size() + "");
-                                                    JLog.w(positon_BooleanHashMap.size() + "");
+                                                    delete_BooleanHashMap.put(orderModel, false);
                                                 }
                                             }
                                         });
@@ -217,8 +235,53 @@ public class OrderFinishFragment extends Fragment {
         });
     }
 
-    //=======fg跟新 acticity可以通过接口方式============begin
-    public interface ListenerOnOrderFinishFragment {
-        void do_work();
+    // 删除订单
+    public void delete_orders(String del_ids, final  List<OrderModel> orderModels){
+
+        ParamDeleteOrder paramDeleteOrder = new ParamDeleteOrder();
+        paramDeleteOrder.del_ids=del_ids;
+        Callback.Cancelable cancelable
+                = x.http().post(paramDeleteOrder, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<String>>() {
+                    }.getType();
+                    JsonBase2<String> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        JLog.w("删除订单成功");
+                        Utils.ShowText2(getActivity(),"删除订单成功");
+                        adapter.removeAll(orderModels);// 采用本地移除的发有 bug
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        JLog.w("删除订单失败");
+                        Utils.ShowText2(getActivity(),"删除订单失败");
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
     }
+
 }
