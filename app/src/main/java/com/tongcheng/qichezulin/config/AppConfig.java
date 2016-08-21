@@ -59,4 +59,6 @@ public class AppConfig {
     //获取订单列表
     public static final String GET_GET_ORDERLIST = "api/order/get_orderlist.ashx";
 
+    //删除订单
+    public static final String UPDATE_ORDERDELETE = "api/order/update_orderdelete.ashx";
 }

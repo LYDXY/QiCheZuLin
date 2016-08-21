@@ -17,12 +17,14 @@ import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Param.ParamDeleteOrder;
 import com.tongcheng.qichezulin.Param.ParamOrderList;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.OrderModel;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
+import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
@@ -96,9 +98,23 @@ public class OrderYiQuXiaoFragment extends Fragment {
                                 delete_id.add(key.PID);
                             }
                         }
+                        if (delete_id.size()>0) {
+                            StringBuilder StringBuilder=new StringBuilder();
+                            for (int i=0;i<delete_id.size();i++){
+                                if (i == (delete_id.size()-1)) {
+                                    StringBuilder.append(delete_id.get(i));
+                                }else{
+                                    StringBuilder.append(delete_id.get(i)).append(",");
+                                }
+
+                            }
+                            JLog.w(StringBuilder.toString());
+                            delete_orders(StringBuilder.toString(),orderModels);
+                        }
                         // 进行删除操作 ,如果服务器返回成功 ,,,则再刷新界面
                        // adapter.removeAll(orderModels); 采用本地移除的发有 bug
                        // adapter.notifyDataSetChanged();
+
                     }
                 }).show();
             }
@@ -203,4 +219,57 @@ public class OrderYiQuXiaoFragment extends Fragment {
             }
         });
     }
+
+
+
+    // 删除订单
+    public void delete_orders(String del_ids, final  List<OrderModel> orderModels){
+
+        ParamDeleteOrder paramDeleteOrder = new ParamDeleteOrder();
+        paramDeleteOrder.del_ids=del_ids;
+        Callback.Cancelable cancelable
+                = x.http().post(paramDeleteOrder, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<String>>() {
+                    }.getType();
+                    JsonBase2<String> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        JLog.w("删除订单成功");
+                        Utils.ShowText2(getActivity(),"删除订单成功");
+                         adapter.removeAll(orderModels);// 采用本地移除的发有 bug
+                         adapter.notifyDataSetChanged();
+                    } else {
+                        JLog.w("删除订单失败");
+                        Utils.ShowText2(getActivity(),"删除订单失败");
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+
 }
