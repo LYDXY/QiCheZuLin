@@ -23,16 +23,22 @@
         android:focusableInTouchMode="true">
 
 
-        <com.tongcheng.qichezulin.view.ViewPagerWithoutSlide
-            android:id="@+id/v4_vp"
+        <!-- <com.tongcheng.qichezulin.view.ViewPagerWithoutSlide
+             android:id="@+id/v4_vp"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:background="@color/white"
+             android:scrollbars="none">
+
+         </com.tongcheng.qichezulin.view.ViewPagerWithoutSlide>-->
+
+
+        <FrameLayout
+            android:id="@+id/fl_change"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:scrollbars="none">
-
-        </com.tongcheng.qichezulin.view.ViewPagerWithoutSlide>
-
+            android:background="@color/gray_eeeeee" />
 
         <com.flyco.tablayout.CommonTabLayout
 

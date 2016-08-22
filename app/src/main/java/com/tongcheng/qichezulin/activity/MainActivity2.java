@@ -47,10 +47,10 @@ public class MainActivity2 extends PuTongFragmentActivity {
     @ViewInject(R.id.tab)
     com.flyco.tablayout.CommonTabLayout tab;
     // viewpager
-    @ViewInject(R.id.v4_vp)
-    ViewPagerWithoutSlide v4_vp;
+  /*  @ViewInject(R.id.v4_vp)
+    ViewPagerWithoutSlide v4_vp;*/
     //片段集合
-    List<Fragment> fragmentList;
+    ArrayList<Fragment> fragmentList;
     //标签
     private String[] mTitles = {"首页", "附近", "消息", "个人"};
 
@@ -108,9 +108,8 @@ public class MainActivity2 extends PuTongFragmentActivity {
         tv_first.setVisibility(View.VISIBLE);
         tv_second.setVisibility(View.GONE);
         tv_first.setText("同城租车");
-        v4_vp.setAdapter(new FragmentStateAdaper2(getSupportFragmentManager(), mTitles, fragmentList));
-        tab.setTabData(mTabEntities);
-
+        //  v4_vp.setAdapter(new FragmentStateAdaper2(getSupportFragmentManager(), mTitles, fragmentList));
+        tab.setTabData(mTabEntities, this, R.id.fl_change, fragmentList);
         //设置未读消息红点 -----------根据后台数据判断
         tab.showDot(2);
         MsgView rtv_2_2 = tab.getMsgView(2);
@@ -122,14 +121,23 @@ public class MainActivity2 extends PuTongFragmentActivity {
         tab.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                if (position == 1) {
+                if (position == 0) {
+                    tv_first.setText("同城租车");
+                    tv_second.setVisibility(View.GONE);
+                    iv_set_up.setVisibility(View.GONE);
+                } else if (position == 1) {
                     UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, WangDianActivity.class);
-                }else{
-                    v4_vp.setCurrentItem(position);
-                    lastposition = position;
-                    JLog.w(lastposition + "");
+                    JLog.w(MyLocationListener.latitude + "./......纬度.");
+                    JLog.w(MyLocationListener.lontitude + "./......纬度.");
+                } else if (position == 2) {
+                    tv_first.setText("消息");
+                    tv_second.setVisibility(View.GONE);
+                    iv_set_up.setVisibility(View.GONE);
+                } else if (position == 3) {
+                    tv_first.setText("个人中心");
+                    tv_second.setVisibility(View.GONE);
+                    iv_set_up.setVisibility(View.VISIBLE);
                 }
-
             }
 
             @Override
@@ -137,9 +145,9 @@ public class MainActivity2 extends PuTongFragmentActivity {
 
             }
         });
-        v4_vp.setCurrentItem(0);
+        //   v4_vp.setCurrentItem(0);
 
-        v4_vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+     /*   v4_vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -173,7 +181,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
     }
 
 
@@ -208,6 +216,7 @@ public class MainActivity2 extends PuTongFragmentActivity {
     protected void onResume() {
         super.onResume();
         JLog.w("onResume");
+        tab.setCurrentTab(0);
     }
 
 
