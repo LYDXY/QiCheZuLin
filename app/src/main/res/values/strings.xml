@@ -55,7 +55,7 @@
     <string name="hour_zu">小时租</string>
     <string name="day_zu">日租</string>
     <string name="month_zu">月租</string>
-    <string name="hour_money">时租金</string>
+    <string name="hour_money">时租金 0~40</string>
     <string name="day_money">日租金</string>
     <string name="month_money">月租金</string>
     <string name="help_me_to_chose_car">帮我选车</string>
@@ -122,4 +122,5 @@
     <string name="yi_wan_cheng">已完成</string>
     <string name="yi_qu_xiao">已取消</string>
     <string name="strzero">0</string>
+    <string name="str300">300</string>
 </resources>

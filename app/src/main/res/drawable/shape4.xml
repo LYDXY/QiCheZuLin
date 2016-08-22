@@ -8,12 +8,12 @@
 
 
     <!--填充-->
-    <solid android:color="@color/white" />
+    <solid android:color="@color/whiteFFFFFF" />
 
     <!--边框-->
     <stroke
-        android:width="0.4dip"
-        android:color="@color/gray_6d6d6d" />
+        android:width="1dip"
+        android:color="@color/gray9999999" />
 
     <!--圆角半径 四个角-->
     <corners android:radius="6dip" />

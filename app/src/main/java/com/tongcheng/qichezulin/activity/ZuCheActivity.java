@@ -2,6 +2,7 @@ package com.tongcheng.qichezulin.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -35,6 +36,7 @@ import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -53,6 +55,28 @@ import java.util.List;
 @ContentView(R.layout.activity_zu_che)
 public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
 
+
+    @ViewInject(R.id.tv_hour_zu) //时租金
+            TextView tv_hour_zu;
+
+    @ViewInject(R.id.tv_day_zu) //日加班
+            TextView tv_day_zu;
+
+    @ViewInject(R.id.tv_month_zu) //月加班
+            TextView tv_month_zu;
+
+    @ViewInject(R.id.tv_low) //最低值
+            TextView tv_low;
+
+    @ViewInject(R.id.tv_max) //最高值
+            TextView tv_max;
+
+
+    @ViewInject(R.id.tv_shi_zu_jin) //显示租金范围
+            TextView tv_shi_zu_jin;
+
+    @ViewInject(R.id.dsb_DiscreteSeekBar)
+    DiscreteSeekBar dsb_DiscreteSeekBar;
 
     @ViewInject(R.id.iv_record)
     ImageView iv_record;
@@ -149,7 +173,45 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             case R.id.iv_help:
                 UtilsTiaoZhuang.ToAnotherActivity(this, FeiYongShuoMingActivity.class);
                 break;
-
+            case R.id.tv_hour_zu:
+                tv_low.setText("0");
+                tv_max.setText("300");
+                tv_hour_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
+                tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
+                tv_day_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+                tv_day_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+                tv_month_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+                tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+                dsb_DiscreteSeekBar.setMax(300);
+                dsb_DiscreteSeekBar.setMin(0);
+                dsb_DiscreteSeekBar.setProgress(40);
+                break;
+            case R.id.tv_day_zu:
+                tv_low.setText("0");
+                tv_max.setText("4500");
+                tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+                tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+                tv_day_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
+                tv_day_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
+                tv_month_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+                tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+                dsb_DiscreteSeekBar.setMax(4500);
+                dsb_DiscreteSeekBar.setMin(0);
+                dsb_DiscreteSeekBar.setProgress(100);
+                break;
+            case R.id.tv_month_zu:
+                tv_low.setText("0");
+                tv_max.setText("30000");
+                tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+                tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+                tv_day_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+                tv_day_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+                tv_month_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
+                tv_month_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
+                dsb_DiscreteSeekBar.setMax(30000);
+                dsb_DiscreteSeekBar.setMin(0);
+                dsb_DiscreteSeekBar.setProgress(3000);
+                break;
         }
     }
 
@@ -220,6 +282,25 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         UtilsDate.getDate2(tv_left_date);
         UtilsDate.getTime2(tv_left_time);
         UtilsDate.getTomorrow(tv_Right_date, tv_Right_time);
+        dsb_DiscreteSeekBar.setIndicatorPopupEnabled(true);
+        dsb_DiscreteSeekBar.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+            @Override
+            public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+
+                JLog.w(value + "");
+                tv_shi_zu_jin.setText("时租金:0~" + value);
+            }
+
+            @Override
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
+
+            }
+        });
 
     }
 
@@ -233,6 +314,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         rrl_second.setOnClickListener(this);
         iv_record.setOnClickListener(this);
         iv_help.setOnClickListener(this);
+
+        tv_hour_zu.setOnClickListener(this);
+        tv_day_zu.setOnClickListener(this);
+        tv_month_zu.setOnClickListener(this);
     }
 
 
@@ -250,6 +335,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                     @Override
                     public void onClick(View view) {
                         JLog.w(item.PID);
+                        helper.setTextColor(R.id.btn_show_car_type, getResources().getColor(R.color.whiteFFFFFF));
                         helper.getView(R.id.btn_show_car_type).setBackgroundResource(R.drawable.shape7);
                         mAlertViewExt.dismiss();
                         tv_car_type_show.setText(item.FTypeName);

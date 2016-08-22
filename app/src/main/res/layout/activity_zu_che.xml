@@ -313,20 +313,19 @@
                 android:background="@drawable/shape4"
                 android:gravity="center"
                 android:text="@string/day_zu"
-                android:textColor="@color/gray_6d6d6d"
                 app:layout_heightPercent="6%w"
                 app:layout_marginLeftPercent="4%w"
                 app:layout_textSizePercent="4%w"
                 app:layout_widthPercent="20%w" />
 
             <TextView
+                android:id="@+id/tv_month_zu"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/shape4"
                 android:gravity="center"
                 android:text="@string/month_zu"
-                android:textColor="@color/gray_6d6d6d"
                 app:layout_heightPercent="6%w"
                 app:layout_marginRightPercent="4%w"
                 app:layout_textSizePercent="4%w"
@@ -355,6 +354,7 @@
                 app:layout_widthPercent="4%w" />
 
             <TextView
+                android:id="@+id/tv_shi_zu_jin"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_toRightOf="@+id/iv_money"
@@ -362,8 +362,56 @@
                 android:text="@string/hour_money"
                 android:textColor="@color/orange_ff7220"
                 app:layout_heightPercent="5%w"
+                app:layout_marginLeftPercent="2%w"
                 app:layout_marginTopPercent="4.5%w"
                 app:layout_textSizePercent="3.5%w" />
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/dsb_DiscreteSeekBar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_below="@+id/tv_shi_zu_jin"
+                android:layout_centerHorizontal="true"
+                app:dsb_allowTrackClickToDrag="true"
+                app:dsb_indicatorColor="@color/green_36b57e"
+                app:dsb_indicatorPopupEnabled="true"
+                app:dsb_indicatorSeparation="5dip"
+                app:dsb_indicatorTextAppearance="@style/CustomFloaterTextAppearance"
+                app:dsb_max="300"
+                app:dsb_min="0"
+                app:dsb_progressColor="@color/green_36b57e"
+                app:dsb_scrubberHeight="3dp"
+                app:dsb_thumbSize="7dp"
+                app:dsb_value="40"
+                app:layout_heightPercent="10%w"
+                app:layout_marginTopPercent="13%w"
+                app:layout_widthPercent="80%w" />
+
+            <TextView
+                android:id="@+id/tv_low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dsb_DiscreteSeekBar"
+                android:gravity="center"
+                android:text="@string/strzero"
+                android:textColor="@color/green_36b57e"
+                app:layout_marginLeftPercent="13%w"
+                app:layout_marginTopPercent="1%w"
+                app:layout_textSizePercent="5%w" />
+
+            <TextView
+                android:id="@+id/tv_max"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/dsb_DiscreteSeekBar"
+                android:gravity="center"
+                android:text="@string/str300"
+                android:textColor="@color/green_36b57e"
+                app:layout_marginRightPercent="4%w"
+                app:layout_marginTopPercent="1%w"
+                app:layout_textSizePercent="5%w"
+                app:layout_widthPercent="20%w" />
 
         </com.zhy.android.percent.support.PercentRelativeLayout>
 

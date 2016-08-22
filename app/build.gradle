@@ -60,5 +60,8 @@ dependencies {
     compile files('src/main/libs/IndoorscapeAlbumPlugin.jar')
     compile files('src/main/libs/httpmime-4.1.2.jar')
     compile files('src/main/libs/BaiduLBS_Android.jar')
+
+    //添加选择器控件
+    compile 'org.adw.library:discrete-seekbar:1.0.1'
 }
 
