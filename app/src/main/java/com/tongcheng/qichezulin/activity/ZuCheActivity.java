@@ -55,6 +55,10 @@ import java.util.List;
 @ContentView(R.layout.activity_zu_che)
 public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
 
+    @ViewInject(R.id.btn_help_xuan_che) //帮我选车按钮
+            Button btn_help_xuan_che;
+    @ViewInject(R.id.btn_xuan_che) //我要选车按钮
+            Button btn_xuan_che;
 
     @ViewInject(R.id.tv_hour_zu) //时租金
             TextView tv_hour_zu;
@@ -212,6 +216,13 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 dsb_DiscreteSeekBar.setMin(0);
                 dsb_DiscreteSeekBar.setProgress(3000);
                 break;
+
+            case R.id.btn_help_xuan_che:
+                getHelpMeCar();
+                break;
+            case R.id.btn_xuan_che:
+                getManyCars();
+                break;
         }
     }
 
@@ -318,6 +329,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         tv_hour_zu.setOnClickListener(this);
         tv_day_zu.setOnClickListener(this);
         tv_month_zu.setOnClickListener(this);
+
+        btn_help_xuan_che.setOnClickListener(this);
+        btn_xuan_che.setOnClickListener(this);
     }
 
 
@@ -404,5 +418,16 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     protected void onPause() {
         super.onPause();
         JLog.w("onPause");
+    }
+
+
+    //帮我选车 获取一条数据
+    public void getHelpMeCar() {
+        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class);
+    }
+
+    //我要选车  获取多条数据
+    public void getManyCars() {
+        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity.class);
     }
 }

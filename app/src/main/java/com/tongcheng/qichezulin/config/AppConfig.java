@@ -8,7 +8,7 @@ public class AppConfig {
     //域名 或者ip 地址
     public static final String HOST = "http://120.24.236.80:8090";
 
- //   public static final String HOST = "http://192.168.0.123:8090";
+    //   public static final String HOST = "http://192.168.0.123:8090";
 
     //广告轮播地址
     public static final String GET_BANNER = "api/advert/get_advert.ashx";
@@ -61,4 +61,8 @@ public class AppConfig {
 
     //删除订单
     public static final String UPDATE_ORDERDELETE = "api/order/update_orderdelete.ashx";
+
+
+    //获取门店车型列表
+    public static final String GET_CARLIST = "api/car/get_carlist.ashx";
 }
