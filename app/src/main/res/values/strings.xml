@@ -121,4 +121,5 @@
     <string name="show_price">¥2300</string>
     <string name="yi_wan_cheng">已完成</string>
     <string name="yi_qu_xiao">已取消</string>
+    <string name="strzero">0</string>
 </resources>

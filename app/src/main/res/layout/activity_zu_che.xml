@@ -123,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:text="@string/strzero"
                 android:textColor="@color/orange_ff7220"
                 app:layout_textSizePercent="6%w" />
 
@@ -199,6 +200,7 @@
                 app:layout_textSizePercent="4%w" />
 
             <TextView
+                android:id="@+id/tv_shop_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/tv_dian"

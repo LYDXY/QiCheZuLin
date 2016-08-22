@@ -60,6 +60,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     ImageView iv_help;
 
 
+    @ViewInject(R.id.tv_shop_name) //取车门店
+            TextView tv_shop_name;
+
+
     @ViewInject(R.id.tv_car_type_show)
     TextView tv_car_type_show;
     AlertView mAlertViewExt;//窗口拓展例子
@@ -129,6 +133,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                     Bundle bundle = new Bundle();
                     bundle.putString("latitude", MyLocationListener.latitude);
                     bundle.putString("lontitude", MyLocationListener.lontitude);
+                    bundle.putString("isZuCheActivity", "1");
                     UtilsTiaoZhuang.ToAnotherActivity(this, WangDianSearchActivity.class, bundle);
                 } else {
                     JLog.w("定位失败");
@@ -245,7 +250,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                     @Override
                     public void onClick(View view) {
                         JLog.w(item.PID);
-                        helper.getView(R.id.btn_show_car_type).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        helper.getView(R.id.btn_show_car_type).setBackgroundResource(R.drawable.shape7);
                         mAlertViewExt.dismiss();
                         tv_car_type_show.setText(item.FTypeName);
                     }
@@ -303,6 +308,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     protected void onResume() {
         super.onResume();
         JLog.w("onResume");
+        if (WangDianSearchActivity.shop != null) {
+            JLog.w(WangDianSearchActivity.shop.FShopName);
+            tv_shop_name.setText(WangDianSearchActivity.shop.FShopName);
+        }
     }
 
     @Override

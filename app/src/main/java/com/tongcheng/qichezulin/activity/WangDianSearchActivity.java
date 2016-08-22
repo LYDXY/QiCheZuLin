@@ -53,6 +53,7 @@ import java.util.List;
 public class WangDianSearchActivity extends Activity implements View.OnClickListener {
 
 
+    static BannerShop shop; //用来回传到上一个界面
     @ViewInject(R.id.tv_first)
     TextView tv_first;
 
@@ -73,10 +74,11 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
             TextView tv_near_shop;
     @ViewInject(R.id.elv_shop)
     ExpandableListView elv_shop;
-    ExpandableAdapter<QuShopsModel, QuShopsModel.ShopModel> shopsModelShopModelExpandableAdapter;
+    ExpandableAdapter<QuShopsModel, BannerShop> shopsModelShopModelExpandableAdapter;
     List<QuShopsModel> quShopsModels;
     private String latitude; //纬度
     private String lontitude;//经度
+    private String isZuCheActivity;//判断是不是从ZuCheActivity 页面过来的
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +127,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
         Bundle bundle = getIntent().getExtras();
         latitude = bundle.getString("latitude");
         lontitude = bundle.getString("lontitude");
+        isZuCheActivity = bundle.getString("isZuCheActivity");
         JLog.w("经度:---------" + lontitude + "纬度:+=======" + latitude);
         get_near_Wang_dian_List(lontitude, latitude, "1");
         p1 = new LatLng(Double.parseDouble(latitude), Double.parseDouble(lontitude));
@@ -249,9 +252,9 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                         tv_qu_name.setVisibility(View.GONE);
                         lv_fu_jin_men_dian.setVisibility(View.GONE);
                         quShopsModels = base.data;
-                        shopsModelShopModelExpandableAdapter = new ExpandableAdapter<QuShopsModel, QuShopsModel.ShopModel>(getApplicationContext(), R.layout.e_listview_item_father2, R.layout.listview_item0) {
+                        shopsModelShopModelExpandableAdapter = new ExpandableAdapter<QuShopsModel, BannerShop>(getApplicationContext(), R.layout.e_listview_item_father2, R.layout.listview_item0) {
                             @Override
-                            protected List<QuShopsModel.ShopModel> getChildren(int groupPosition) {
+                            protected List<BannerShop> getChildren(int groupPosition) {
                                 return get(groupPosition).ShopModels;
                             }
 
@@ -267,7 +270,7 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                             }
 
                             @Override
-                            protected void convertChildView(final boolean isLastChild, final ExpandableAdapterHelper helper, final QuShopsModel.ShopModel item) {
+                            protected void convertChildView(final boolean isLastChild, final ExpandableAdapterHelper helper, final BannerShop item) {
                                 helper
                                         .setText(R.id.tv_shop_name, item.FShopName)
                                         .setText(R.id.tv_shop_address, item.FAddress);
@@ -278,6 +281,12 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                     @Override
                                     public void onClick(View view) {
                                         JLog.w("点击了" + item.FShopName);
+                                        if (isZuCheActivity.equals("1")) {
+                                            shop = item;
+                                            onBackPressed();
+                                        } else {
+                                            UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, WangDianDetailActivity.class, UtilsTiaoZhuang.get_BannerShop(item));
+                                        }
                                     }
                                 });
                             }
@@ -408,7 +417,14 @@ public class WangDianSearchActivity extends Activity implements View.OnClickList
                                         @Override
                                         public void onClick(View view) {
                                             JLog.w("点击了" + item.FShopName);
-                                            UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, WangDianDetailActivity.class, UtilsTiaoZhuang.get_BannerShop(item));
+                                            //    UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, WangDianDetailActivity.class, UtilsTiaoZhuang.get_BannerShop(item));
+                                            if (isZuCheActivity.equals("1")) {
+                                                shop = item;
+                                                onBackPressed();
+                                            } else {
+                                                UtilsTiaoZhuang.ToAnotherActivity(WangDianSearchActivity.this, WangDianDetailActivity.class, UtilsTiaoZhuang.get_BannerShop(item));
+                                            }
+
 
                                         }
                                     });

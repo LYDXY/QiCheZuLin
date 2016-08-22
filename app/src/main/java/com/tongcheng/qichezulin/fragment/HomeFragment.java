@@ -151,6 +151,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
                     Bundle bundle = new Bundle();
                     bundle.putString("latitude", MyLocationListener.latitude);
                     bundle.putString("lontitude", MyLocationListener.lontitude);
+                    bundle.putString("isZuCheActivity", "2");
                     UtilsTiaoZhuang.ToAnotherActivity(getActivity(), WangDianSearchActivity.class, bundle);
                 } else {
                     JLog.w("定位失败");
