@@ -104,14 +104,14 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
     void setPullListenerOnPullToRefreshLayout() {
         refresh_view.setOnPullListener(this);
         // 设置带gif动画的上拉头与下拉头
-        try {
+   /*     try {
 
             refresh_view.setGifRefreshView(new GifDrawable(getResources(), R.mipmap.anim));
             refresh_view.setGifLoadmoreView(new GifDrawable(getResources(), R.mipmap.anim));
         } catch (Exception e) {
 
             e.printStackTrace();
-        }
+        }*/
         refresh_view.setPullDownEnable(false);
     }
 

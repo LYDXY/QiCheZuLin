@@ -245,6 +245,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                     @Override
                     public void onClick(View view) {
                         JLog.w(item.PID);
+                        helper.getView(R.id.btn_show_car_type).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         mAlertViewExt.dismiss();
                         tv_car_type_show.setText(item.FTypeName);
                     }

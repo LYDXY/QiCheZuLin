@@ -27,8 +27,7 @@
             <com.tongcheng.qichezulin.pulltorefresh.PullableListView
                 android:id="@+id/plv_car_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/whiteFFFFFF"
+                android:layout_height="wrap_content"
                 android:divider="@color/grayF0F0F0"
                 android:dividerHeight="6dip">
             </com.tongcheng.qichezulin.pulltorefresh.PullableListView>
@@ -40,7 +39,7 @@
             android:layout_height="0dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@mipmap/bgdigao"
+            android:background="@mipmap/fromlow_to_higeht"
             app:layout_heightPercent="13%w"
             app:layout_marginLeftPercent="2%w"
             app:layout_widthPercent="65%w" />
@@ -50,7 +49,7 @@
             android:layout_height="0dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@mipmap/bg_shai_xuan"
+            android:background="@mipmap/shuaixuan"
             app:layout_heightPercent="13%w"
             app:layout_marginRightPercent="2%w"
             app:layout_widthPercent="30%w" />

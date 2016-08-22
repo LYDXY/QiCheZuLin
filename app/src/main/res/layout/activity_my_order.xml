@@ -39,6 +39,9 @@
         android:id="@+id/fl_change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_eeeeee"/>
+        android:background="@color/gray_eeeeee"
+        app:layout_marginLeftPercent="4%w"
+        app:layout_marginRightPercent="4%w"
+        app:layout_marginTopPercent="2%w" />
 
 </com.zhy.android.percent.support.PercentLinearLayout>

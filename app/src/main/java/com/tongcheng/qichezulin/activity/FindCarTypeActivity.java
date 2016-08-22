@@ -57,7 +57,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
     void initView() {
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("选择车型");
-        try {
+      /*  try {
             prl_prl.setGifRefreshView(new GifDrawable(getResources(), R.mipmap.anim));
             prl_prl.setGifLoadmoreView(new GifDrawable(getResources(), R.mipmap.anim));
 
@@ -67,7 +67,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
+        }*/
 
 
     }

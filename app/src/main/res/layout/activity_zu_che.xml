@@ -123,11 +123,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:gravity="center"
                 android:textColor="@color/orange_ff7220"
-                app:layout_textSizePercent="8%w" />
+                app:layout_textSizePercent="6%w" />
 
             <TextView
+                android:id="@+id/tv_tian"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_show_jian_ge"
