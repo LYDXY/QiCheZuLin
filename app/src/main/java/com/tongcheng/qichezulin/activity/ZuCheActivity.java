@@ -25,11 +25,13 @@ import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Param.ParamChooseCar;
 import com.tongcheng.qichezulin.Param.ParamGetCarType;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.model.CarTypeModel;
 import com.tongcheng.qichezulin.model.JsonBase;
+import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsDate;
 import com.tongcheng.qichezulin.utils.UtilsJson;
@@ -59,39 +61,26 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             Button btn_help_xuan_che;
     @ViewInject(R.id.btn_xuan_che) //我要选车按钮
             Button btn_xuan_che;
-
     @ViewInject(R.id.tv_hour_zu) //时租金
             TextView tv_hour_zu;
-
-    @ViewInject(R.id.tv_day_zu) //日加班
+    @ViewInject(R.id.tv_day_zu) //日租金
             TextView tv_day_zu;
-
-    @ViewInject(R.id.tv_month_zu) //月加班
+    @ViewInject(R.id.tv_month_zu) //月租金
             TextView tv_month_zu;
-
     @ViewInject(R.id.tv_low) //最低值
             TextView tv_low;
-
     @ViewInject(R.id.tv_max) //最高值
             TextView tv_max;
-
-
     @ViewInject(R.id.tv_shi_zu_jin) //显示租金范围
             TextView tv_shi_zu_jin;
-
     @ViewInject(R.id.dsb_DiscreteSeekBar)
     DiscreteSeekBar dsb_DiscreteSeekBar;
-
     @ViewInject(R.id.iv_record)
     ImageView iv_record;
     @ViewInject(R.id.iv_help)
     ImageView iv_help;
-
-
     @ViewInject(R.id.tv_shop_name) //取车门店
             TextView tv_shop_name;
-
-
     @ViewInject(R.id.tv_car_type_show)
     TextView tv_car_type_show;
     AlertView mAlertViewExt;//窗口拓展例子
@@ -100,27 +89,22 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     @ViewInject(R.id.rrl_second)
     PercentRelativeLayout rrl_second;
     Adapter adapter;
-
     TimePickerView pvTime; //时间选择控件
-
     @ViewInject(R.id.tv_left_date)
     TextView tv_left_date;
-
     @ViewInject(R.id.tv_left_time)
     TextView tv_left_time;
-
     @ViewInject(R.id.tv_Right_date)
     TextView tv_Right_date;
     @ViewInject(R.id.tv_Right_time)
     TextView tv_Right_time;
-
     @ViewInject(R.id.iv_return)
     ImageView iv_return;
-
     @ViewInject(R.id.tv_show_jian_ge)
     TextView tv_show_jian_ge;
     //选中后的取车时间
     Date get_car_date, back_car_date;
+    private String shop_id;//存放选中的门店id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,16 +124,16 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_left_date:
-                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge);
+                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge, tv_month_zu, tv_day_zu, tv_hour_zu);
                 break;
             case R.id.tv_left_time:
-                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge);
+                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge, tv_month_zu, tv_day_zu, tv_hour_zu);
                 break;
             case R.id.tv_Right_date:
-                show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge);
+                //  show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge,tv_month_zu,tv_day_zu,tv_hour_zu);
                 break;
             case R.id.tv_Right_time:
-                show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge);
+                //  show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge,tv_month_zu,tv_day_zu,tv_hour_zu);
                 break;
             case R.id.iv_return:
                 onBackPressed();
@@ -218,7 +202,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 break;
 
             case R.id.btn_help_xuan_che:
-                getHelpMeCar();
+                getHelpMeCar(shop_id, "1", "300", "0", "1", "");
                 break;
             case R.id.btn_xuan_che:
                 getManyCars();
@@ -238,7 +222,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
 
     //弹出时间选择器---选择取车时间
-    private void show_left_time(final TextView textView1, final TextView textView2, final TextView textView3) {
+    private void show_left_time(final TextView textView1, final TextView textView2, final TextView textView3, final TextView tv_month_zu, final TextView tv_day_zu, final TextView tv_hour_zu) {
         pvTime = new TimePickerView(this, TimePickerView.Type.ALL);
         //控制时间范围
         Calendar calendar = Calendar.getInstance();
@@ -256,7 +240,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 if (back_car_date == null) {
                     UtilsDate.getTimeBetween(date, ZuCheActivity.this, textView1, textView2);
                 } else {
-                    UtilsDate.getTimeBetween3(back_car_date, get_car_date, ZuCheActivity.this, textView1, textView2, textView3);
+                    UtilsDate.getTimeBetween3(back_car_date, get_car_date, ZuCheActivity.this, textView1, textView2, textView3, tv_month_zu, tv_day_zu, tv_hour_zu);
                 }
 
             }
@@ -411,6 +395,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
         if (WangDianSearchActivity.shop != null) {
             JLog.w(WangDianSearchActivity.shop.FShopName);
             tv_shop_name.setText(WangDianSearchActivity.shop.FShopName);
+            shop_id = WangDianSearchActivity.shop.PID;
         }
     }
 
@@ -422,8 +407,60 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
 
     //帮我选车 获取一条数据
-    public void getHelpMeCar() {
-        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class);
+    public void getHelpMeCar(String shop_id, String is_auto, String max_price, String min_price, String paytype, String type) {
+
+        ParamChooseCar paramChooseCar = new ParamChooseCar();
+        paramChooseCar.shop_id = shop_id;
+        paramChooseCar.is_auto = is_auto;
+        paramChooseCar.max_price = max_price;
+        paramChooseCar.min_price = min_price;
+        paramChooseCar.paytype = paytype;
+        paramChooseCar.type = type;
+        Callback.Cancelable cancelable
+                = x.http().post(paramChooseCar, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                 /*   Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<List<OrderModel>>>() {
+                    }.getType();
+                    JsonBase2<List<OrderModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        if (base.data != null) {
+                            JLog.w("获取预约订单成功");
+
+
+
+                        }
+                    } else {
+                        JLog.w("获取预约订单失败");
+                    }*/
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
+
+        //  UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class);
     }
 
     //我要选车  获取多条数据

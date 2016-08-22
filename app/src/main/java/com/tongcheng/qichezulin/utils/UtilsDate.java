@@ -109,17 +109,18 @@ public class UtilsDate {
 
 
     //计算时间差2
-    public static void getTimeBetween3(Date date1, Date date2, Context context, TextView textView1, TextView textView2, TextView textView3) {
+    public static void getTimeBetween3(Date date1, Date date2, Context context, TextView textView1, TextView textView2, TextView textView3,
+                                       TextView tv_month_zu, TextView tv_day_zu, TextView tv_hour_zu) {
         String xingqi;
-        JLog.w("时间差:====" + DateUtils.subtractDate(date1, date2) + "");
+        JLog.w("时间差:====" + DateUtils.subtractDate(date1, date2) + ""); //计算取车时间和还车时间差
         long between = (DateUtils.subtractDate(date1, date2)) / 1000;//除以1000是为了转换成秒
         long day1 = between / (24 * 3600);
         long hour1 = between % (24 * 3600) / 3600;
         long minute1 = between % 3600 / 60;
         long second1 = between % 60 / 60;
-        JLog.w("" + day1 + "天" + hour1 + "小时" + minute1 + "分" + second1 + "秒");
+        JLog.w("" + day1 + "天" + hour1 + "小时" + minute1 + "分" + second1 + "秒"); // 必须都为负数才正常
 
-        //判断当前选择的时间和系统时间的比较
+        //判断当前选择的时间和系统时间的比较-----取车时间 与系统时间做比较
         long between222 = (DateUtils.subtractDate(new Date(), date2)) / 1000;//除以1000是为了转换成秒
         long day2 = between222 / (24 * 3600);
         long hour2 = between222 % (24 * 3600) / 3600;
@@ -140,6 +141,15 @@ public class UtilsDate {
                 xingqi = get_DAY_OF_WEEK(date2);
                 textView1.setText(DateUtils.formatDateCustom(date2, "MM-dd"));
                 textView2.setText(xingqi + " " + DateUtils.formatDateCustom(date2, "HH:mm"));
+
+                if (Math.abs(day1) / 30 > 0) {
+                    //月租
+                } else if (Math.abs(day1) / 30 < 0) {
+                    //日租
+                } else if (Math.abs(hour1) / 24 > 0 || Math.abs(day1) / 24 < 0) {
+                    //小时租
+                }
+
 
                 if (Math.abs(day1) < 10) {
                     textView3.setText("0" + Math.abs(day1));
