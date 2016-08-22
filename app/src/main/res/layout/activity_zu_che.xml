@@ -396,7 +396,6 @@
                 android:text="@string/strzero"
                 android:textColor="@color/green_36b57e"
                 app:layout_marginLeftPercent="13%w"
-                app:layout_marginTopPercent="1%w"
                 app:layout_textSizePercent="5%w" />
 
             <TextView
@@ -409,7 +408,6 @@
                 android:text="@string/str300"
                 android:textColor="@color/green_36b57e"
                 app:layout_marginRightPercent="4%w"
-                app:layout_marginTopPercent="1%w"
                 app:layout_textSizePercent="5%w"
                 app:layout_widthPercent="20%w" />
 

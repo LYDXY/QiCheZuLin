@@ -205,7 +205,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
-        <!--我的发票-->
+        <!--预约界面-->
         <activity
             android:name=".activity.YuYueActivity"
             android:screenOrientation="portrait"

@@ -55,7 +55,7 @@
     <string name="hour_zu">小时租</string>
     <string name="day_zu">日租</string>
     <string name="month_zu">月租</string>
-    <string name="hour_money">时租金 0~40</string>
+    <string name="hour_money">租金 0~40</string>
     <string name="day_money">日租金</string>
     <string name="month_money">月租金</string>
     <string name="help_me_to_chose_car">帮我选车</string>
@@ -123,4 +123,16 @@
     <string name="yi_qu_xiao">已取消</string>
     <string name="strzero">0</string>
     <string name="str300">300</string>
+    <string name="ming_xi">费用明细</string>
+    <string name="shou_xu_fei">手续费</string>
+    <string name="ji_ben_bao_xian_fei">基本保险费</string>
+    <string name="che_shun_fei">车损费</string>
+    <string name="bi_xuan">必选部分,客户只需承担1500以内的车辆损失费</string>
+    <string name="kai_jv_fa_piao">开具发票</string>
+    <string name="tai_tou">发票抬头</string>
+    <string name="pei_song">配送地址</string>
+    <string name="money1">¥2300×1</string>
+    <string name="money2">¥2300×1</string>
+    <string name="tai_tou1">请选择发票抬头</string>
+    <string name="pei_song2">请选择配送地址</string>
 </resources>
