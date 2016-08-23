@@ -165,7 +165,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 UtilsTiaoZhuang.ToAnotherActivity(this, FeiYongShuoMingActivity.class);
                 break;
             case R.id.tv_hour_zu:
-            /*    tv_low.setText("0");
+                tv_low.setText("0");
                 tv_max.setText("300");
                 tv_hour_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
                 tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
@@ -175,10 +175,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 dsb_DiscreteSeekBar.setMax(300);
                 dsb_DiscreteSeekBar.setMin(0);
-                dsb_DiscreteSeekBar.setProgress(40);*/
+                dsb_DiscreteSeekBar.setProgress(40);
                 break;
             case R.id.tv_day_zu:
-          /*      tv_low.setText("0");
+                tv_low.setText("0");
                 tv_max.setText("4500");
                 tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
@@ -188,10 +188,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 dsb_DiscreteSeekBar.setMax(4500);
                 dsb_DiscreteSeekBar.setMin(0);
-                dsb_DiscreteSeekBar.setProgress(100);*/
+                dsb_DiscreteSeekBar.setProgress(100);
                 break;
             case R.id.tv_month_zu:
-            /*    tv_low.setText("0");
+                tv_low.setText("0");
                 tv_max.setText("30000");
                 tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
@@ -201,7 +201,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 tv_month_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
                 dsb_DiscreteSeekBar.setMax(30000);
                 dsb_DiscreteSeekBar.setMin(0);
-                dsb_DiscreteSeekBar.setProgress(3000);*/
+                dsb_DiscreteSeekBar.setProgress(3000);
                 break;
 
             case R.id.btn_help_xuan_che:
@@ -464,6 +464,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                             if (base.data.size() == 1) {
                                 JLog.w("获取帮我选车成功");
                                 Bundle bundle = new Bundle();
+                                bundle.putString("days", tv_show_jian_ge.getText() + "");
                                 bundle.putSerializable("obj", base.data.get(0));
                                 UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class, bundle);
                             } else if (base.data.size() > 1) {

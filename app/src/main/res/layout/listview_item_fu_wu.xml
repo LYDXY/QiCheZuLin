@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="10%w"
+        app:layout_marginTopPercent="0.2%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:id="@+id/tv_show_first"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/shou_xu_fei"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="8%w"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_textSizePercent="4%w"
+            app:layout_widthPercent="20%w" />
+
+        <TextView
+            android:id="@+id/tv_show_second"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_show_first"
+            android:gravity="center_vertical"
+            android:text="@string/money2"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="8%w"
+            app:layout_marginLeftPercent="10%w"
+            app:layout_textSizePercent="4%w"
+            app:layout_widthPercent="20%w" />
+
+
+        <TextView
+            android:id="@+id/show_hao_much0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/show_price"
+            android:textColor="@color/orange_ff7220"
+            app:layout_heightPercent="8%w"
+            app:layout_marginRightPercent="10%w"
+            app:layout_textSizePercent="4%w"
+            app:layout_widthPercent="20%w" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</com.zhy.android.percent.support.PercentRelativeLayout>

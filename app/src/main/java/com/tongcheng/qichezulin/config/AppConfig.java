@@ -65,4 +65,8 @@ public class AppConfig {
 
     //获取门店车型列表
     public static final String GET_CARLIST = "api/car/get_carlist.ashx";
+
+    //获取收费服务项目
+    public static final String GET_EXPENSE = "api/car/get_expense.ashx";
+
 }
