@@ -231,6 +231,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+
+        <!--预约租车界面2-->
+        <activity
+            android:name=".activity.YuYueActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

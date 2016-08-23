@@ -64,7 +64,7 @@ public class RootApp extends Application {
                 // 加载中或错误图片的ScaleType
                 //.setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                .setFailureDrawableId(R.mipmap.fail).setCircular(true).build();
+                .setFailureDrawableId(R.mipmap.fail).setCircular(false).build();
 
 
         /**

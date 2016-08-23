@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
-        app:layout_heightPercent="56%w"
+        app:layout_heightPercent="44%w"
         app:layout_widthPercent="100%w">
 
         <com.zhy.android.percent.support.PercentRelativeLayout
@@ -220,47 +220,6 @@
 
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
-        <com.zhy.android.percent.support.PercentRelativeLayout
-            android:id="@+id/rrl_third"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_below="@+id/rrl_second"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            app:layout_heightPercent="13%w"
-            app:layout_widthPercent="100%w">
-
-            <TextView
-                android:id="@+id/tv_car_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/car_type"
-                android:textColor="@color/black"
-                app:layout_marginLeftPercent="9%w"
-                app:layout_textSizePercent="4%w" />
-
-            <TextView
-                android:id="@+id/tv_car_type_show"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_car_type"
-                android:text="@string/no_limit"
-                android:textColor="@color/gray_6d6d6d"
-                app:layout_marginLeftPercent="12%w"
-                app:layout_textSizePercent="4%w" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_alignParentRight="true"
-                android:src="@mipmap/jiantou"
-                app:layout_heightPercent="4%w"
-                app:layout_marginRightPercent="9%w"
-                app:layout_widthPercent="4%w" />
-
-
-        </com.zhy.android.percent.support.PercentRelativeLayout>
-
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
 
@@ -268,7 +227,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
-        app:layout_heightPercent="66%w"
+        app:layout_heightPercent="56%w"
         app:layout_marginTopPercent="2%w"
         app:layout_widthPercent="100%w">
 
@@ -417,38 +376,19 @@
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
 
-    <com.zhy.android.percent.support.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rrl_fourth"
-        android:orientation="horizontal"
-        app:layout_marginTopPercent="6%w">
+    <Button
 
-        <Button
-            android:id="@+id/btn_help_xuan_che"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@mipmap/bgorange"
-            android:text="@string/help_me_to_chose_car"
-            android:textColor="@color/white"
-            app:layout_heightPercent="8%w"
-            app:layout_marginLeftPercent="10%w"
-            app:layout_textSizePercent="4%w"
-            app:layout_widthPercent="35%w" />
+        android:id="@+id/btn_xuan_che"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/bgorange"
+        android:text="@string/nest_status"
+        android:textColor="@color/white"
+        app:layout_heightPercent="8%w"
+        app:layout_marginTopPercent="5%w"
+        app:layout_textSizePercent="4%w"
+        app:layout_widthPercent="50%w" />
 
-        <Button
-            android:id="@+id/btn_xuan_che"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@mipmap/bgorange"
-            android:text="@string/i_want_to_chose_car"
-            android:textColor="@color/white"
-            app:layout_heightPercent="8%w"
-            app:layout_marginLeftPercent="10%w"
-            app:layout_textSizePercent="4%w"
-            app:layout_widthPercent="35%w" />
-
-
-    </com.zhy.android.percent.support.PercentLinearLayout>
 
 </com.zhy.android.percent.support.PercentLinearLayout>

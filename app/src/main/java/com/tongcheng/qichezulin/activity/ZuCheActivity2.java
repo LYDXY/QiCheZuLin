@@ -52,8 +52,7 @@ import java.util.List;
 @ContentView(R.layout.activity_zu_che2)
 public class ZuCheActivity2 extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
 
-    @ViewInject(R.id.btn_help_xuan_che) //帮我选车按钮
-            Button btn_help_xuan_che;
+
     @ViewInject(R.id.btn_xuan_che) //我要选车按钮
             Button btn_xuan_che;
     @ViewInject(R.id.tv_hour_zu) //时租金
@@ -76,11 +75,9 @@ public class ZuCheActivity2 extends Activity implements View.OnClickListener, On
     ImageView iv_help;
     @ViewInject(R.id.tv_shop_name) //取车门店
             TextView tv_shop_name;
-    @ViewInject(R.id.tv_car_type_show)
-    TextView tv_car_type_show;
+
     AlertView mAlertViewExt;//窗口拓展例子
-    @ViewInject(R.id.rrl_third)
-    PercentRelativeLayout rrl_third;
+
     @ViewInject(R.id.rrl_second)
     PercentRelativeLayout rrl_second;
     Adapter adapter;
@@ -198,20 +195,9 @@ public class ZuCheActivity2 extends Activity implements View.OnClickListener, On
                 dsb_DiscreteSeekBar.setProgress(3000);
                 break;
 
-            case R.id.btn_help_xuan_che:
-                if (type == 0) {
-                    Utils.ShowText2(ZuCheActivity2.this, "请先确定好租车时间");
-                } else if (shop_id == null || shop_id == "") {
-                    Utils.ShowText2(ZuCheActivity2.this, "请先选择取车门店");
-                } else {
-                    JLog.w(dsb_DiscreteSeekBar.getProgress() + "");
-                    getHelpMeCar(shop_id, "1", dsb_DiscreteSeekBar.getProgress() + "", "0", type + "", cartype);
-                }
-
-                break;
             case R.id.btn_xuan_che:
                 Bundle bundle = new Bundle();
-                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, FindCarTypeActivity2.class, bundle);
+                //    UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, YuYueActivity2.class, bundle);
                 break;
         }
     }
@@ -315,16 +301,12 @@ public class ZuCheActivity2 extends Activity implements View.OnClickListener, On
         tv_Right_date.setOnClickListener(this);
         tv_Right_time.setOnClickListener(this);
         iv_return.setOnClickListener(this);
-        rrl_third.setOnClickListener(this);
         rrl_second.setOnClickListener(this);
         iv_record.setOnClickListener(this);
         iv_help.setOnClickListener(this);
-
         tv_hour_zu.setOnClickListener(this);
         tv_day_zu.setOnClickListener(this);
         tv_month_zu.setOnClickListener(this);
-
-        btn_help_xuan_che.setOnClickListener(this);
         btn_xuan_che.setOnClickListener(this);
     }
 
@@ -347,7 +329,7 @@ public class ZuCheActivity2 extends Activity implements View.OnClickListener, On
                         helper.setTextColor(R.id.btn_show_car_type, getResources().getColor(R.color.whiteFFFFFF));
                         helper.getView(R.id.btn_show_car_type).setBackgroundResource(R.drawable.shape7);
                         mAlertViewExt.dismiss();
-                        tv_car_type_show.setText(item.FTypeName);
+
                     }
                 });
             }
@@ -416,76 +398,6 @@ public class ZuCheActivity2 extends Activity implements View.OnClickListener, On
         JLog.w("onPause");
     }
 
-
-    //帮我选车 获取一条数据
-    public void getHelpMeCar(String shop_id, String is_auto, String max_price, String min_price, String paytype, String type) {
-
-        ParamChooseCar paramChooseCar = new ParamChooseCar();
-        paramChooseCar.shop_id = shop_id;
-        paramChooseCar.is_auto = is_auto;
-        paramChooseCar.max_price = max_price;
-        paramChooseCar.min_price = min_price;
-        paramChooseCar.paytype = paytype;
-        paramChooseCar.type = type;
-        Callback.Cancelable cancelable
-                = x.http().post(paramChooseCar, new Callback.CommonCallback<String>() {
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-
-            @Override
-            public void onFinished() {
-
-            }
-
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    UtilsJson.printJsonData(result);
-                    Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase2<List<CarModel3>>>() {
-                    }.getType();
-                    JsonBase2<List<CarModel3>> base = gson
-                            .fromJson(result, type);
-                    if (!base.status.toString().trim().equals("0")) {
-                        if (base.data != null) {
-                            if (base.data.size() == 1) {
-                                JLog.w("获取帮我选车成功");
-                                Bundle bundle = new Bundle();
-                                bundle.putString("days", tv_show_jian_ge.getText() + "");
-                                bundle.putSerializable("obj", base.data.get(0));
-                                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, YuYueActivity.class, bundle);
-                            } else if (base.data.size() > 1) {
-                                //跳到选车列表
-                            } else if (base.data.size() == 0) {
-                                Utils.ShowText2(ZuCheActivity2.this, "不好意思,选不到车");
-                            }
-
-
-                        }
-                    } else {
-                        JLog.w("获取帮我选车失败");
-                    }
-                } catch (Exception E) {
-                    E.printStackTrace();
-                }
-
-            }
-        });
-
-    }
-
-    //我要选车  获取多条数据
-    public void getManyCars() {
-        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, FindCarTypeActivity.class);
-    }
 
     public void change_css(int i) {
         if (i == 1) {

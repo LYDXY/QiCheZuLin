@@ -135,4 +135,5 @@
     <string name="money2">¥2300×1</string>
     <string name="tai_tou1">请选择发票抬头</string>
     <string name="pei_song2">请选择配送地址</string>
+    <string name="nest_status">下一步</string>
 </resources>
