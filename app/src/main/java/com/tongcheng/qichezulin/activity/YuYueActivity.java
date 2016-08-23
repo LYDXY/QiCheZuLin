@@ -13,6 +13,7 @@ import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamGetExpense;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.model.CarModel3;
 import com.tongcheng.qichezulin.model.FuWuModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
@@ -51,7 +52,7 @@ public class YuYueActivity extends PuTongActivity2 {
         carModel3 = (CarModel3) getIntent().getSerializableExtra("obj");
         days = getIntent().getExtras().getString("days");
         getFuWu();
-        x.image().bind(iv_car_picture, carModel3.FImg);
+        x.image().bind(iv_car_picture, carModel3.FImg, RootApp.imageOptionsnew);
         tv_car_name.setText(carModel3.FCarName);
         tv_car_remark.setText(carModel3.FRemark);
 

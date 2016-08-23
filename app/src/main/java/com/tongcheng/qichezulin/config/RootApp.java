@@ -30,7 +30,7 @@ public class RootApp extends Application {
     public static LocationClient mLocationClient = null;
     public static MyLocationListener myLocationListener = null;
 
-    public ImageOptions imageOptionsnew;
+    public static ImageOptions imageOptionsnew;
 
     @Override
     public void onCreate() {
@@ -41,7 +41,9 @@ public class RootApp extends Application {
                 .setDebug(true);
 
         //网络图片例子,结合常用的图片缓存库UIL,你可以根据自己需求自己换其他网络图片库
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().showImageForEmptyUri(R.mipmap.loading).
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .showImageForEmptyUri(R.mipmap.fail)
+                .showImageOnFail(R.mipmap.fail).
                 cacheInMemory(true).cacheOnDisk(true).build();
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
@@ -62,8 +64,7 @@ public class RootApp extends Application {
                 // 加载中或错误图片的ScaleType
                 //.setPlaceholderScaleType(ImageView.ScaleType.MATRIX)
                 .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
-                .setLoadingDrawableId(R.mipmap.ic_launcher)
-                .setFailureDrawableId(R.mipmap.ic_launcher).setCircular(true).build();
+                .setFailureDrawableId(R.mipmap.fail).setCircular(true).build();
 
 
         /**

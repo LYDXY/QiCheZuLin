@@ -26,7 +26,6 @@
                     android:id="@+id/convenientBanner"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:background="@color/blue"
                     app:canLoop="true"
                     app:layout_heightPercent="35%w" />
 

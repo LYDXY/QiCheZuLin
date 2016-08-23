@@ -26,7 +26,7 @@ public class NetworkImageHolderView implements Holder<BannerModel> {
 
     @Override
     public void UpdateUI(Context context, int position, BannerModel data) {
-        imageView.setImageResource(R.mipmap.yi_jian_zu_che);
+        // imageView.setImageResource(R.mipmap.yi_jian_zu_che);
         ImageLoader.getInstance().displayImage(data.FImg, imageView);
     }
 }
