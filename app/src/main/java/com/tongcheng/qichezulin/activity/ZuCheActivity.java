@@ -29,6 +29,7 @@ import com.tongcheng.qichezulin.Param.ParamChooseCar;
 import com.tongcheng.qichezulin.Param.ParamGetCarType;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
+import com.tongcheng.qichezulin.model.CarModel3;
 import com.tongcheng.qichezulin.model.CarTypeModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.JsonBase2;
@@ -104,6 +105,8 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     TextView tv_show_jian_ge;
     //选中后的取车时间
     Date get_car_date, back_car_date;
+    private int type = 0;//标注租车的时间类型
+    private String cartype = "";
     private String shop_id;//存放选中的门店id
 
     @Override
@@ -124,16 +127,16 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_left_date:
-                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge, tv_month_zu, tv_day_zu, tv_hour_zu);
+                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge);
                 break;
             case R.id.tv_left_time:
-                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge, tv_month_zu, tv_day_zu, tv_hour_zu);
+                show_left_time(tv_left_date, tv_left_time, tv_show_jian_ge);
                 break;
             case R.id.tv_Right_date:
-                //  show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge,tv_month_zu,tv_day_zu,tv_hour_zu);
+                show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge);
                 break;
             case R.id.tv_Right_time:
-                //  show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge,tv_month_zu,tv_day_zu,tv_hour_zu);
+                show_Right_time(tv_Right_date, tv_Right_time, tv_show_jian_ge);
                 break;
             case R.id.iv_return:
                 onBackPressed();
@@ -162,7 +165,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 UtilsTiaoZhuang.ToAnotherActivity(this, FeiYongShuoMingActivity.class);
                 break;
             case R.id.tv_hour_zu:
-                tv_low.setText("0");
+            /*    tv_low.setText("0");
                 tv_max.setText("300");
                 tv_hour_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
                 tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
@@ -172,10 +175,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 dsb_DiscreteSeekBar.setMax(300);
                 dsb_DiscreteSeekBar.setMin(0);
-                dsb_DiscreteSeekBar.setProgress(40);
+                dsb_DiscreteSeekBar.setProgress(40);*/
                 break;
             case R.id.tv_day_zu:
-                tv_low.setText("0");
+          /*      tv_low.setText("0");
                 tv_max.setText("4500");
                 tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
@@ -185,10 +188,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 dsb_DiscreteSeekBar.setMax(4500);
                 dsb_DiscreteSeekBar.setMin(0);
-                dsb_DiscreteSeekBar.setProgress(100);
+                dsb_DiscreteSeekBar.setProgress(100);*/
                 break;
             case R.id.tv_month_zu:
-                tv_low.setText("0");
+            /*    tv_low.setText("0");
                 tv_max.setText("30000");
                 tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
                 tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
@@ -198,11 +201,19 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 tv_month_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
                 dsb_DiscreteSeekBar.setMax(30000);
                 dsb_DiscreteSeekBar.setMin(0);
-                dsb_DiscreteSeekBar.setProgress(3000);
+                dsb_DiscreteSeekBar.setProgress(3000);*/
                 break;
 
             case R.id.btn_help_xuan_che:
-                getHelpMeCar(shop_id, "1", "300", "0", "1", "");
+                if (type == 0) {
+                    Utils.ShowText2(ZuCheActivity.this, "请先确定好租车时间");
+                } else if (shop_id == null || shop_id == "") {
+                    Utils.ShowText2(ZuCheActivity.this, "请先选择取车门店");
+                } else {
+                    JLog.w(dsb_DiscreteSeekBar.getProgress() + "");
+                    getHelpMeCar(shop_id, "1", dsb_DiscreteSeekBar.getProgress() + "", "0", type + "", cartype);
+                }
+
                 break;
             case R.id.btn_xuan_che:
                 getManyCars();
@@ -222,7 +233,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
 
     //弹出时间选择器---选择取车时间
-    private void show_left_time(final TextView textView1, final TextView textView2, final TextView textView3, final TextView tv_month_zu, final TextView tv_day_zu, final TextView tv_hour_zu) {
+    private void show_left_time(final TextView textView1, final TextView textView2, final TextView textView3) {
         pvTime = new TimePickerView(this, TimePickerView.Type.ALL);
         //控制时间范围
         Calendar calendar = Calendar.getInstance();
@@ -240,7 +251,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 if (back_car_date == null) {
                     UtilsDate.getTimeBetween(date, ZuCheActivity.this, textView1, textView2);
                 } else {
-                    UtilsDate.getTimeBetween3(back_car_date, get_car_date, ZuCheActivity.this, textView1, textView2, textView3, tv_month_zu, tv_day_zu, tv_hour_zu);
+                    int i = UtilsDate.getTimeBetween3(back_car_date, get_car_date, ZuCheActivity.this, textView1, textView2, textView3);
+                    change_css(i);
+                    type = i;
                 }
 
             }
@@ -267,7 +280,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 if (get_car_date == null) {
                     Utils.ShowText(ZuCheActivity.this, "请先选择取车时间");
                 } else {
-                    UtilsDate.getTimeBetween2(get_car_date, back_car_date, ZuCheActivity.this, textView1, textView2, textView3);
+                    int i = UtilsDate.getTimeBetween2(get_car_date, back_car_date, ZuCheActivity.this, textView1, textView2, textView3);
+                    change_css(i);
+                    type = i;
                 }
             }
         });
@@ -283,7 +298,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
 
                 JLog.w(value + "");
-                tv_shi_zu_jin.setText("时租金:0~" + value);
+                tv_shi_zu_jin.setText("租金:0~" + value);
             }
 
             @Override
@@ -332,6 +347,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                         .getView(R.id.btn_show_car_type).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        cartype = item.PID;
                         JLog.w(item.PID);
                         helper.setTextColor(R.id.btn_show_car_type, getResources().getColor(R.color.whiteFFFFFF));
                         helper.getView(R.id.btn_show_car_type).setBackgroundResource(R.drawable.shape7);
@@ -438,21 +454,29 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             public void onSuccess(String result) {
                 try {
                     UtilsJson.printJsonData(result);
-                 /*   Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase2<List<OrderModel>>>() {
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<List<CarModel3>>>() {
                     }.getType();
-                    JsonBase2<List<OrderModel>> base = gson
+                    JsonBase2<List<CarModel3>> base = gson
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
-                            JLog.w("获取预约订单成功");
-
+                            if (base.data.size() == 1) {
+                                JLog.w("获取帮我选车成功");
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("obj", base.data.get(0));
+                                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class, bundle);
+                            } else if (base.data.size() > 1) {
+                                //跳到选车列表
+                            } else if (base.data.size() == 0) {
+                                Utils.ShowText2(ZuCheActivity.this, "不好意思,无法帮你选");
+                            }
 
 
                         }
                     } else {
-                        JLog.w("获取预约订单失败");
-                    }*/
+                        JLog.w("获取帮我选车失败");
+                    }
                 } catch (Exception E) {
                     E.printStackTrace();
                 }
@@ -466,5 +490,45 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     //我要选车  获取多条数据
     public void getManyCars() {
         UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity.class);
+    }
+
+    public void change_css(int i) {
+        if (i == 1) {
+            tv_low.setText("0");
+            tv_max.setText("300");
+            tv_hour_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
+            tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
+            tv_day_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+            tv_day_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+            tv_month_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+            tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+            dsb_DiscreteSeekBar.setMax(300);
+            dsb_DiscreteSeekBar.setMin(0);
+            dsb_DiscreteSeekBar.setProgress(40);
+        } else if (i == 2) {
+            tv_low.setText("0");
+            tv_max.setText("4500");
+            tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+            tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+            tv_day_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
+            tv_day_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
+            tv_month_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+            tv_month_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+            dsb_DiscreteSeekBar.setMax(4500);
+            dsb_DiscreteSeekBar.setMin(0);
+            dsb_DiscreteSeekBar.setProgress(100);
+        } else if (i == 3) {
+            tv_low.setText("0");
+            tv_max.setText("30000");
+            tv_hour_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+            tv_hour_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+            tv_day_zu.setBackground(getResources().getDrawable(R.drawable.shape4));
+            tv_day_zu.setTextColor(getResources().getColor(R.color.gray9999999));
+            tv_month_zu.setBackground(getResources().getDrawable(R.drawable.shape3));
+            tv_month_zu.setTextColor(getResources().getColor(R.color.green_36b57e));
+            dsb_DiscreteSeekBar.setMax(30000);
+            dsb_DiscreteSeekBar.setMin(0);
+            dsb_DiscreteSeekBar.setProgress(3000);
+        }
     }
 }

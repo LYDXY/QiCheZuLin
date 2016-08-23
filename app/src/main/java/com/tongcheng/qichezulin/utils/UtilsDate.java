@@ -74,7 +74,8 @@ public class UtilsDate {
     }
 
     //计算时间差2
-    public static void getTimeBetween2(Date date1, Date date2, Context context, TextView textView1, TextView textView2, TextView textView3) {
+    public static int getTimeBetween2(Date date1, Date date2, Context context, TextView textView1, TextView textView2, TextView textView3) {
+        int biaozhu = 0;
         String xingqi;
         JLog.w("时间差:====" + DateUtils.subtractDate(date1, date2) + "");
         long between = (DateUtils.subtractDate(date1, date2)) / 1000;//除以1000是为了转换成秒
@@ -85,32 +86,43 @@ public class UtilsDate {
         JLog.w("" + day1 + "天" + hour1 + "小时" + minute1 + "分" + second1 + "秒");
         if (day1 < 0) {
             Utils.ShowText(context, "还车的时间要在取车时间之后");
+            return 0;
         } else if (hour1 < 0) {
             Utils.ShowText(context, "还车的时间要在取车时间之后");
+            return 0;
         } else if (minute1 < 0) {
             Utils.ShowText(context, "还车的时间要在取车时间之后");
+            return 0;
         } else if (second1 < 0) {
             Utils.ShowText(context, "还车的时间要在取车时间之后");
+            return 0;
         } else {
             xingqi = get_DAY_OF_WEEK(date2);
             textView1.setText(DateUtils.formatDateCustom(date2, "MM-dd"));
             textView2.setText(xingqi + " " + DateUtils.formatDateCustom(date2, "HH:mm"));
-            if (day1 < 10) {
+            if (day1 == 0) {
                 textView3.setText("0" + day1);
-            } else {
+                biaozhu = 1;
+            } else if (day1 > 0 && day1 < 30) {
+                textView3.setText(day1 + "");
+                biaozhu = 2;
+            } else if (day1 >= 30) {
+                biaozhu = 3;
                 textView3.setText(day1 + "");
             }
+            JLog.w(biaozhu + "");
             JLog.w(day1 + "//////////////");
             JLog.w(DateUtils.formatDateCustom(date2, "MM-dd"));
             JLog.w(xingqi + " " + DateUtils.formatDateCustom(date2, "HH:mm"));
+            return biaozhu;
         }
 
     }
 
 
     //计算时间差2
-    public static void getTimeBetween3(Date date1, Date date2, Context context, TextView textView1, TextView textView2, TextView textView3,
-                                       TextView tv_month_zu, TextView tv_day_zu, TextView tv_hour_zu) {
+    public static int getTimeBetween3(Date date1, Date date2, Context context, TextView textView1, TextView textView2, TextView textView3) {
+        int biaozhu = 0;
         String xingqi;
         JLog.w("时间差:====" + DateUtils.subtractDate(date1, date2) + ""); //计算取车时间和还车时间差
         long between = (DateUtils.subtractDate(date1, date2)) / 1000;//除以1000是为了转换成秒
@@ -126,39 +138,42 @@ public class UtilsDate {
         long hour2 = between222 % (24 * 3600) / 3600;
         if (day2 < 0) {
             Utils.ShowText(context, "取车的时间要在当前时间的两个小时后");
+            return 0;
         } else if (hour2 < 2) {
             Utils.ShowText(context, "取车的时间要在当前时间的两个小时后");
+            return 0;
         } else {
             if (day1 > 0) {
                 Utils.ShowText(context, "取车的时间要在还车的时间之前");
+                return 0;
             } else if (hour1 > 0) {
                 Utils.ShowText(context, "取车的时间要在还车的时间之前");
+                return 0;
             } else if (minute1 > 0) {
                 Utils.ShowText(context, "取车的时间要在还车的时间之前");
+                return 0;
             } else if (second1 > 0) {
                 Utils.ShowText(context, "取车的时间要在还车的时间之前");
+                return 0;
             } else {
                 xingqi = get_DAY_OF_WEEK(date2);
                 textView1.setText(DateUtils.formatDateCustom(date2, "MM-dd"));
                 textView2.setText(xingqi + " " + DateUtils.formatDateCustom(date2, "HH:mm"));
-
-                if (Math.abs(day1) / 30 > 0) {
-                    //月租
-                } else if (Math.abs(day1) / 30 < 0) {
-                    //日租
-                } else if (Math.abs(hour1) / 24 > 0 || Math.abs(day1) / 24 < 0) {
-                    //小时租
-                }
-
-
-                if (Math.abs(day1) < 10) {
-                    textView3.setText("0" + Math.abs(day1));
+                if (Math.abs(day1) == 0) {
+                    biaozhu = 1;
+                    textView3.setText("" + Math.abs(day1));
+                } else if (Math.abs(day1) < 30 && Math.abs(day1) > 0) {
+                    textView3.setText("" + Math.abs(day1));
+                    biaozhu = 2;
                 } else {
+                    biaozhu = 3;
                     textView3.setText(Math.abs(day1) + "");
                 }
+                JLog.w(biaozhu + "");
                 JLog.w(day1 + "//////////////");
                 JLog.w(DateUtils.formatDateCustom(date2, "MM-dd"));
                 JLog.w(xingqi + " " + DateUtils.formatDateCustom(date2, "HH:mm"));
+                return biaozhu;
             }
         }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.model.CarModel3;
 
 import org.xutils.view.annotation.ContentView;
 
@@ -22,6 +23,7 @@ public class YuYueActivity extends PuTongActivity2 {
     void initView() {
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("提交预约");
+        CarModel3 carModel3 = (CarModel3) getIntent().getSerializableExtra("obj");
     }
 
 
