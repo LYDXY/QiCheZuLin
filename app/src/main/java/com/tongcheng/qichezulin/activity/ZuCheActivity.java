@@ -148,8 +148,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                     Bundle bundle = new Bundle();
                     bundle.putString("latitude", MyLocationListener.latitude);
                     bundle.putString("lontitude", MyLocationListener.lontitude);
-                    bundle.putString("isZuCheActivity", "1");
-                    UtilsTiaoZhuang.ToAnotherActivity(this, WangDianSearchActivity.class, bundle);
+                    UtilsTiaoZhuang.ToAnotherActivity(this, WangDianSearchActivity2.class, bundle);
                 } else {
                     JLog.w("定位失败");
                 }
@@ -409,10 +408,10 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
     protected void onResume() {
         super.onResume();
         JLog.w("onResume");
-        if (WangDianSearchActivity.shop != null) {
-            JLog.w(WangDianSearchActivity.shop.FShopName);
-            tv_shop_name.setText(WangDianSearchActivity.shop.FShopName);
-            shop_id = WangDianSearchActivity.shop.PID;
+        if (WangDianSearchActivity2.shop2 != null) {
+            JLog.w(WangDianSearchActivity2.shop2.FShopName);
+            tv_shop_name.setText(WangDianSearchActivity2.shop2.FShopName);
+            shop_id = WangDianSearchActivity2.shop2.PID;
         }
     }
 
@@ -488,10 +487,6 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
     }
 
-    //我要选车  获取多条数据
-    public void getManyCars() {
-        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity.class);
-    }
 
     public void change_css(int i) {
         if (i == 1) {
