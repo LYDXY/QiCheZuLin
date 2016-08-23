@@ -216,7 +216,6 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
                 break;
             case R.id.btn_xuan_che:
-                getManyCars();
                 break;
         }
     }
@@ -470,7 +469,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                             } else if (base.data.size() > 1) {
                                 //跳到选车列表
                             } else if (base.data.size() == 0) {
-                                Utils.ShowText2(ZuCheActivity.this, "不好意思,无法帮你选");
+                                Utils.ShowText2(ZuCheActivity.this, "不好意思,选不到车");
                             }
 
 
@@ -485,7 +484,6 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             }
         });
 
-        //  UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class);
     }
 
     //我要选车  获取多条数据
