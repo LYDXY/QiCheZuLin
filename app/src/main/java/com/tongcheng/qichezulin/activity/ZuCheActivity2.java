@@ -1,11 +1,7 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +9,11 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnDismissListener;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.bigkoo.pickerview.TimePickerView;
-import com.code19.library.DateUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
@@ -55,8 +49,8 @@ import java.util.List;
  * Created by 林尧 on 2016/7/22.
  */
 
-@ContentView(R.layout.activity_zu_che)
-public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
+@ContentView(R.layout.activity_zu_che2)
+public class ZuCheActivity2 extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
 
     @ViewInject(R.id.btn_help_xuan_che) //帮我选车按钮
             Button btn_help_xuan_che;
@@ -206,9 +200,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
             case R.id.btn_help_xuan_che:
                 if (type == 0) {
-                    Utils.ShowText2(ZuCheActivity.this, "请先确定好租车时间");
+                    Utils.ShowText2(ZuCheActivity2.this, "请先确定好租车时间");
                 } else if (shop_id == null || shop_id == "") {
-                    Utils.ShowText2(ZuCheActivity.this, "请先选择取车门店");
+                    Utils.ShowText2(ZuCheActivity2.this, "请先选择取车门店");
                 } else {
                     JLog.w(dsb_DiscreteSeekBar.getProgress() + "");
                     getHelpMeCar(shop_id, "1", dsb_DiscreteSeekBar.getProgress() + "", "0", type + "", cartype);
@@ -217,7 +211,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                 break;
             case R.id.btn_xuan_che:
                 Bundle bundle = new Bundle();
-                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity2.class, bundle);
+                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, FindCarTypeActivity2.class, bundle);
                 break;
         }
     }
@@ -250,9 +244,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             public void onTimeSelect(Date date) {
                 get_car_date = date;
                 if (back_car_date == null) {
-                    UtilsDate.getTimeBetween(date, ZuCheActivity.this, textView1, textView2);
+                    UtilsDate.getTimeBetween(date, ZuCheActivity2.this, textView1, textView2);
                 } else {
-                    int i = UtilsDate.getTimeBetween3(back_car_date, get_car_date, ZuCheActivity.this, textView1, textView2, textView3);
+                    int i = UtilsDate.getTimeBetween3(back_car_date, get_car_date, ZuCheActivity2.this, textView1, textView2, textView3);
                     change_css(i);
                     type = i;
                 }
@@ -279,9 +273,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             public void onTimeSelect(Date date) {
                 back_car_date = date;
                 if (get_car_date == null) {
-                    Utils.ShowText(ZuCheActivity.this, "请先选择取车时间");
+                    Utils.ShowText(ZuCheActivity2.this, "请先选择取车时间");
                 } else {
-                    int i = UtilsDate.getTimeBetween2(get_car_date, back_car_date, ZuCheActivity.this, textView1, textView2, textView3);
+                    int i = UtilsDate.getTimeBetween2(get_car_date, back_car_date, ZuCheActivity2.this, textView1, textView2, textView3);
                     change_css(i);
                     type = i;
                 }
@@ -467,11 +461,11 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                                 Bundle bundle = new Bundle();
                                 bundle.putString("days", tv_show_jian_ge.getText() + "");
                                 bundle.putSerializable("obj", base.data.get(0));
-                                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class, bundle);
+                                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, YuYueActivity.class, bundle);
                             } else if (base.data.size() > 1) {
                                 //跳到选车列表
                             } else if (base.data.size() == 0) {
-                                Utils.ShowText2(ZuCheActivity.this, "不好意思,选不到车");
+                                Utils.ShowText2(ZuCheActivity2.this, "不好意思,选不到车");
                             }
 
 
@@ -490,7 +484,7 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
     //我要选车  获取多条数据
     public void getManyCars() {
-        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity.class);
+        UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity2.this, FindCarTypeActivity.class);
     }
 
     public void change_css(int i) {

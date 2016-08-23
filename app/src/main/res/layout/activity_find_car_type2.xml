@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayF0F0F0"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/common_header2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w"></include>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grayF0F0F0">
+
+        <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/prl_prl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <com.tongcheng.qichezulin.pulltorefresh.PullableListView
+                android:id="@+id/plv_car_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/grayF0F0F0"
+                android:dividerHeight="6dip"></com.tongcheng.qichezulin.pulltorefresh.PullableListView>
+        </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="@mipmap/fromlow_to_higeht"
+            app:layout_heightPercent="13%w"
+            app:layout_marginLeftPercent="2%w"
+            app:layout_widthPercent="65%w" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/shuaixuan"
+            app:layout_heightPercent="13%w"
+            app:layout_marginRightPercent="2%w"
+            app:layout_widthPercent="30%w" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+</com.zhy.android.percent.support.PercentLinearLayout>

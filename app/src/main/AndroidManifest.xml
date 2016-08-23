@@ -211,6 +211,26 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <!--选车车型界面2-->
+        <activity
+            android:name=".activity.FindCarTypeActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <!--选车车型界面2-->
+        <activity
+            android:name=".activity.CarDetailActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <!--选车车型界面2-->
+        <activity
+            android:name=".activity.ZuCheActivity2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>
