@@ -75,5 +75,7 @@ public class AppConfig {
     //获取用户积分
     public static final String GET_USERJF = "api/user/get_userjf.ashx";
 
+    //插入订单
+    public static final String SET_ORDER = "api/order/set_order.ashx";
 
 }
