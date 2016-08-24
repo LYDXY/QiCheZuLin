@@ -30,8 +30,8 @@ public class MyFaPiaoctivity extends PuTongFragmentActivity2 {
 
     @Override
     void initData() {
-        fragments.add(FaPiaoTaiTouFragment.getInstance());
-        fragments.add(PeiSongAddressFragment.getInstance());
+        fragments.add(new FaPiaoTaiTouFragment());
+        fragments.add(new PeiSongAddressFragment());
     }
 
     @Override

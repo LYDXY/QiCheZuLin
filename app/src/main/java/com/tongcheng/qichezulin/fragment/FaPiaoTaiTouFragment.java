@@ -44,10 +44,6 @@ public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListen
     private TextView iv_add_fa_piao;
     private PullToRefreshLayout prl_prl_05;
     private PullableListView plv_fa_piao_list; //list 控件
-    public static FaPiaoTaiTouFragment getInstance() {
-        FaPiaoTaiTouFragment sf = new FaPiaoTaiTouFragment();
-        return sf;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
