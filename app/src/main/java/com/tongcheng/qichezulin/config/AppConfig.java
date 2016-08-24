@@ -78,4 +78,7 @@ public class AppConfig {
     //插入订单
     public static final String SET_ORDER = "api/order/set_order.ashx";
 
+    //获取发票抬头
+    public static final String GET_INVOICELIST = "api/invoice/get_invoicelist.ashx";
+
 }

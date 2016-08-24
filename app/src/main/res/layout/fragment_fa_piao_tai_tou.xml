@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/grayF0F0F0">
 
-</LinearLayout>
+    <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/prl_prl_05"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
+        <com.tongcheng.qichezulin.pulltorefresh.PullableListView
+            android:id="@+id/plv_fa_piao_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_eeeeee"
+            android:divider="@color/grayF0F0F0"
+            android:dividerHeight="6dip">
+
+        </com.tongcheng.qichezulin.pulltorefresh.PullableListView>
+    </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
+</com.zhy.android.percent.support.PercentRelativeLayout>
