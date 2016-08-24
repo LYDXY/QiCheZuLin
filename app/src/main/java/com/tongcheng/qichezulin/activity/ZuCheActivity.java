@@ -412,6 +412,9 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             JLog.w(WangDianSearchActivity2.shop2.FShopName);
             tv_shop_name.setText(WangDianSearchActivity2.shop2.FShopName);
             shop_id = WangDianSearchActivity2.shop2.PID;
+            JLog.w("选中的门店" + WangDianSearchActivity2.shop2.FShopName);
+        } else {
+            JLog.w("没去选门店");
         }
     }
 

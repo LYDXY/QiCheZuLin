@@ -136,4 +136,13 @@
     <string name="tai_tou1">请选择发票抬头</string>
     <string name="pei_song2">请选择配送地址</string>
     <string name="nest_status">下一步</string>
+    <string name="pay_ways">支付方式</string>
+    <string name="yu_er_pay">余额支付/支付宝/微信</string>
+    <string name="yu_fu_kuan">预付款</string>
+    <string name="ji_fen_di_kou">积分抵扣</string>
+    <string name="account_yu_e">账户余额</string>
+    <string name="bind_phone_number">已绑定手机</string>
+    <string name="qie_huan">切换</string>
+    <string name="pay_money">还需支付 : ¥ 50</string>
+
 </resources>

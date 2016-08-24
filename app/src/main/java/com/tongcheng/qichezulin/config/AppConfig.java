@@ -69,4 +69,11 @@ public class AppConfig {
     //获取收费服务项目
     public static final String GET_EXPENSE = "api/car/get_expense.ashx";
 
+    //获取预付款比例
+    public static final String GET_PROPORTION = "api/system/get_proportion.ashx";
+
+    //获取用户积分
+    public static final String GET_USERJF = "api/user/get_userjf.ashx";
+
+
 }

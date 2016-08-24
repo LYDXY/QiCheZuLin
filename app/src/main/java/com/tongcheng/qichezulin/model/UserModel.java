@@ -15,7 +15,7 @@ public class UserModel implements Serializable {
     public String FPassWord;//密码
     public String FMobilePhone;//手机
     public String FSex;//性别【1男0女】
-    public String FMoeny;//钱包金额
+    public String FMoney;//钱包金额
     public String FPayWord;//支付密码
     public String FBondMoeny;//保证金
     public String FJiFen;//积分

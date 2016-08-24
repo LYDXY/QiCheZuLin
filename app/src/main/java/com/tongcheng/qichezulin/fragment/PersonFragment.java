@@ -101,7 +101,13 @@ public class PersonFragment extends PuTongFragment {
         initView();
         setClickListenerOnView();
         //获取个人信息
-        get_User_info();
+        if (UtilsUser.getUser(getContext().getApplicationContext()) != null) {
+            ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_head_photo);
+            ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_blur);
+        } else {
+            get_User_info();
+        }
+
 
     }
 
@@ -185,8 +191,8 @@ public class PersonFragment extends PuTongFragment {
 
 
                         } else {
-                            ImageLoader.getInstance().displayImage("http://img5.imgtn.bdimg.com/it/u=1921015072,818197963&fm=21&gp=0.jpg", iv_head_photo);
-                            ImageLoader.getInstance().displayImage("http://img5.imgtn.bdimg.com/it/u=1921015072,818197963&fm=21&gp=0.jpg", iv_blur);
+                            ImageLoader.getInstance().displayImage(base.data.FImg, iv_head_photo);
+                            ImageLoader.getInstance().displayImage(base.data.FImg, iv_blur);
                             Blurry.with(getActivity())
                                     .radius(25)
                                     .sampling(1)
