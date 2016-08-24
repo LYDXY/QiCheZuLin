@@ -253,6 +253,12 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
+        <!--新增发票抬头界面-->
+        <activity
+            android:name=".activity.AddFaPiaoTaiTouActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,12 +17,14 @@ import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamInvoicelist;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.activity.AddFaPiaoTaiTouActivity;
 import com.tongcheng.qichezulin.model.InvoicelistModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
@@ -34,9 +38,10 @@ import java.util.List;
  * Created by 林尧 on 2016/8/18.
  */
 
-public class FaPiaoTaiTouFragment extends Fragment {
+public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListener {
 
     public Adapter adapter;
+    private TextView iv_add_fa_piao;
     private PullToRefreshLayout prl_prl_05;
     private PullableListView plv_fa_piao_list; //list 控件
     public static FaPiaoTaiTouFragment getInstance() {
@@ -54,6 +59,8 @@ public class FaPiaoTaiTouFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_fa_piao_tai_tou, null);
         prl_prl_05 = (PullToRefreshLayout) v.findViewById(R.id.prl_prl_05);
         plv_fa_piao_list = (PullableListView) v.findViewById(R.id.plv_fa_piao_list);
+        iv_add_fa_piao = (TextView) v.findViewById(R.id.iv_add_fa_piao);
+        iv_add_fa_piao.setOnClickListener(this);
         setOnPullListenerOnprl_prl();
         return v;
     }
@@ -142,5 +149,14 @@ public class FaPiaoTaiTouFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_add_fa_piao:
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), AddFaPiaoTaiTouActivity.class);
+                break;
+        }
     }
 }
