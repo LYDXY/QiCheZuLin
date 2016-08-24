@@ -103,6 +103,12 @@ public class PersonFragment extends PuTongFragment {
         //获取个人信息
         if (UtilsUser.getUser(getContext().getApplicationContext()) != null) {
             ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_head_photo);
+            Blurry.with(getActivity())
+                    .radius(10)
+                    .sampling(8)
+                    .color(Color.argb(66, 0, 255, 255)).async().animate(500)
+                    .capture(iv_blur)
+                    .into(iv_blur);
             ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_blur);
         } else {
             get_User_info();
@@ -188,18 +194,15 @@ public class PersonFragment extends PuTongFragment {
                         //判断有没有图片
                         if (StringUtils.isEmpty(base.data.FImg)) {
                             iv_head_photo.setImageResource(R.mipmap.default_head_photo);
-
-
                         } else {
                             ImageLoader.getInstance().displayImage(base.data.FImg, iv_head_photo);
-                            ImageLoader.getInstance().displayImage(base.data.FImg, iv_blur);
                             Blurry.with(getActivity())
-                                    .radius(25)
-                                    .sampling(1)
+                                    .radius(10)
+                                    .sampling(8)
                                     .color(Color.argb(66, 0, 255, 255)).async().animate(500)
                                     .capture(iv_blur)
                                     .into(iv_blur);
-
+                            ImageLoader.getInstance().displayImage(base.data.FImg, iv_blur);
                         }
                         tv_user_account.setText(UtilsString.hidePhoneNumber(base.data.FMobilePhone));
                         UtilsUser.saveUser(getContext(), base.data);
