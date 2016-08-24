@@ -17,6 +17,7 @@
         app:layout_marginBottomPercent="5%w"
         app:layout_marginLeftPercent="5%w"
         app:layout_marginTopPercent="5%w"
+        app:layout_paddingPercent="2%w"
         app:layout_widthPercent="25%w" />
 
     <ImageView
@@ -39,6 +40,7 @@
         app:layout_marginBottomPercent="5%w"
         app:layout_marginRightPercent="5%w"
         app:layout_marginTopPercent="5%w"
+        app:layout_paddingPercent="2%w"
         app:layout_widthPercent="25%w" />
 
 </com.zhy.android.percent.support.PercentRelativeLayout>

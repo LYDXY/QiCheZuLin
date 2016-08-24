@@ -170,9 +170,8 @@ public class OrderDetailActivity extends PuTongActivity2 {
     }
 
 
-
-   /* //获取服务项目数据
-    public void getFuWu() {
+    //下单按钮的确定操作
+    public void get_order_que_ding() {
 
         ParamGetExpense paramGetExpense = new ParamGetExpense();
         Callback.Cancelable cancelable
@@ -205,26 +204,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
                             JLog.w("获取收费服务项目成功");
-                            adapter = new Adapter<FuWuModel>(OrderDetailActivity.this, R.layout.listview_item_fu_wu) {
-                                @Override
-                                protected void convert(final AdapterHelper helper, FuWuModel item) {
 
-                                    if (item.FIsSingle.equals("true")) {
-                                        helper.setText(R.id.tv_show_first, item.FName)
-                                                .setText(R.id.tv_show_second, "¥" + item.FPrice + "×1")
-                                                .setText(R.id.show_hao_much0, "¥" + item.FPrice);
-                                    } else {
-                                        helper.setText(R.id.tv_show_first, item.FName)
-                                                .setText(R.id.tv_show_second, "¥" + item.FPrice + "×" + days)
-                                                .setText(R.id.show_hao_much0, "¥" + Float.parseFloat(item.FPrice.trim()) * Integer.parseInt(days));
-                                    }
-
-
-                                }
-
-                            };
-                            adapter.addAll(base.data);
-                            lv_fu_wu.setAdapter(adapter);
                         }
 
                     } else {
@@ -237,6 +217,6 @@ public class OrderDetailActivity extends PuTongActivity2 {
             }
         });
 
-    }*/
+    }
 
 }
