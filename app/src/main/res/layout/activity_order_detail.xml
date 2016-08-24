@@ -36,6 +36,7 @@
             app:layout_widthPercent="20%w" />
 
         <TextView
+            android:id="@+id/tv_chose_pay_ways"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"

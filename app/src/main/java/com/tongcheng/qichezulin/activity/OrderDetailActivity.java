@@ -1,12 +1,16 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
@@ -37,6 +41,9 @@ import java.util.List;
 @ContentView(R.layout.activity_order_detail)
 public class OrderDetailActivity extends PuTongActivity2 {
 
+    @ViewInject(R.id.tv_chose_pay_ways) //支付方式
+            TextView tv_chose_pay_ways;
+
 
     @ViewInject(R.id.tv_show_pay_money) //预付款
             TextView tv_show_pay_money;
@@ -54,6 +61,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
     @ViewInject(R.id.tv_show_phone_number) //手机号码
             TextView tv_show_phone_number;
 
+    private String payType;//支付类型
 
     @Override
     void initData() {
@@ -90,7 +98,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("确定订单");
-
+        tv_chose_pay_ways.setOnClickListener(this);
 
     }
 
@@ -101,6 +109,10 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
             case R.id.iv_return:
                 onBackPressed();
+                break;
+
+            case R.id.tv_chose_pay_ways:
+                alert_pay_ways();
                 break;
 
 
@@ -114,6 +126,50 @@ public class OrderDetailActivity extends PuTongActivity2 {
         initView();
         setListenerOnView();
     }
+
+
+    //弹出选择支付方式的窗口
+
+    public void alert_pay_ways() {
+
+        //拓展窗口
+        final AlertView alertView = new AlertView(null, null, null, null, null, this, AlertView.Style.Alert, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Object o, int position) {
+
+            }
+        });
+        ViewGroup extView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.alertview01, null);
+        extView.findViewById(R.id.iv_yu_er_pay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertView.dismiss();
+                tv_chose_pay_ways.setText("余额支付");
+                payType = "1";
+            }
+        });
+        extView.findViewById(R.id.iv_zhi_fu_bao_pay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertView.dismiss();
+                tv_chose_pay_ways.setText("支付宝");
+                payType = "2";
+            }
+        });
+        extView.findViewById(R.id.iv_wei_xin_pay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertView.dismiss();
+                tv_chose_pay_ways.setText("微信");
+                payType = "3";
+            }
+        });
+        alertView.addExtView(extView);
+        alertView.show();
+
+    }
+
+
 
    /* //获取服务项目数据
     public void getFuWu() {
