@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.android.percent.support.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grayF0F0F0">
@@ -20,4 +21,18 @@
 
         </com.tongcheng.qichezulin.pulltorefresh.PullableListView>
     </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/orange_fd6203"
+        android:gravity="center"
+        android:text="@string/fa_piao_tai_tou"
+        android:textColor="@color/whiteFFFFFF"
+        app:layout_heightPercent="13%w"
+        app:layout_textSizePercent="5%w"
+        app:layout_widthPercent="70%w" />
+
 </com.zhy.android.percent.support.PercentRelativeLayout>

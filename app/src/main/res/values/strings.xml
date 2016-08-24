@@ -144,5 +144,5 @@
     <string name="bind_phone_number">已绑定手机</string>
     <string name="qie_huan">切换</string>
     <string name="pay_money">还需支付 : ¥ 50</string>
-
+    <string name="fa_piao_tai_tou">新增发票抬头</string>
 </resources>
