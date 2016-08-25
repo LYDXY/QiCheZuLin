@@ -37,7 +37,7 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
     private TextView iv_add_pei_song_address;
     private PullToRefreshLayout prl_prl_05;
     private PullableListView plv_pei_song_list; //list 控件
-
+    public Adapter adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +85,63 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
 
     //获取配送地址
     public void get_address(String user_id) {
+        ParamInvoicelist paramInvoicelist = new ParamInvoicelist();
+        paramInvoicelist.user_id = user_id;
+        Callback.Cancelable cancelable
+                = x.http().post(paramInvoicelist, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
 
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<List<InvoicelistModel>>>() {
+                    }.getType();
+                    JsonBase2<List<InvoicelistModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        JLog.w("获取发票抬头成功");
+                        if (adapter == null) {
+                            adapter = new Adapter<InvoicelistModel>(getActivity(), R.layout.listview_item_pei_song_address) {
+                                @Override
+                                protected void convert(final AdapterHelper helper, final InvoicelistModel item) {
+                                    final int position = helper.getPosition();
+                                    helper.setText(R.id.tv_show_fapiao_title, item.FName);
+
+                                }
+                            };
+
+                            adapter.addAll(base.data);
+                            plv_pei_song_list.setAdapter(adapter);
+                        } else {
+                            adapter.addAll(base.data);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                    } else {
+                        JLog.w("获取发票抬头失败");
+
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
     }
 }

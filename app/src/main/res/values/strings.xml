@@ -146,4 +146,7 @@
     <string name="pay_money">还需支付 : ¥ 50</string>
     <string name="fa_piao_tai_tou">新增发票抬头</string>
     <string name="pei_song_address">新增配送地址</string>
+    <string name="ya_suo">亚索</string>
+    <string name="you_bian">515000</string>
+    <string name="test_address">广东省汕头市龙湖区衡山路6号锦江之星酒店6楼</string>
 </resources>
