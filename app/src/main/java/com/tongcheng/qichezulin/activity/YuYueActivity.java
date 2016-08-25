@@ -94,7 +94,8 @@ public class YuYueActivity extends PuTongActivity2 {
                 break;
 
             case R.id.iv_next_stats: //下一步
-                Float Money = 0f;
+                Float Money = Float.parseFloat(carModel3.FDayMoney.trim()) * Float.parseFloat(days);
+                JLog.w("不加手续费:"+Money);
                 if (bilizhi != null && !bilizhi.equals("") && Jifen != null && !Jifen.equals("")) {
                     float bili = Float.parseFloat(bilizhi.trim()) / 100f;
                     JLog.w(bili + "");
@@ -103,6 +104,7 @@ public class YuYueActivity extends PuTongActivity2 {
                             JLog.w(floats.get(i) + "");
                             Money += floats.get(i);
                         }
+                        JLog.w("加L手续费:"+Money);
                         //计算预付款
                         Money = Money * bili;
                         Bundle bundle = new Bundle();
