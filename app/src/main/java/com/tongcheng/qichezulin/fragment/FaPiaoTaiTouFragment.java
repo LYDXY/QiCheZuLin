@@ -182,6 +182,7 @@ public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListen
             if (UtilsUser.getUser(getContext()) != null) {
                 get_fa_piaos(UtilsUser.getUser(getContext()).PID);
             }
+            AddFaPiaoTaiTouActivity.flag = 0;
         }
 
     }
