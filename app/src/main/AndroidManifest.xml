@@ -260,6 +260,11 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
+        <!--新增添加发票地址界面-->
+        <activity
+            android:name=".activity.AddFaPiaoAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!--友盟推送-->
         <meta-data

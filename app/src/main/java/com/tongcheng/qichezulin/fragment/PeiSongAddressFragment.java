@@ -16,12 +16,14 @@ import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamInvoiceAddresslist;
 import com.tongcheng.qichezulin.Param.ParamInvoicelist;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.activity.AddFaPiaoAddressActivity;
 import com.tongcheng.qichezulin.model.InvoicelistAddressModel;
 import com.tongcheng.qichezulin.model.InvoicelistModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
 import com.tongcheng.qichezulin.utils.UtilsJson;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
@@ -68,6 +70,11 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View view) {
 
+        switch (view.getId()){
+           case R.id.iv_add_pei_song_address:
+               UtilsTiaoZhuang.ToAnotherActivity(getActivity(), AddFaPiaoAddressActivity.class);
+               break;
+        }
     }
 
     public void setOnPullListenerOnprl_prl() {
