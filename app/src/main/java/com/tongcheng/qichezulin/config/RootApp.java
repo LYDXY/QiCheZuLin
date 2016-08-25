@@ -1,12 +1,14 @@
 package com.tongcheng.qichezulin.config;
 
 import android.app.Application;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.widget.ImageView;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
+import com.code19.library.DeviceUtils;
 import com.jiongbull.jlog.JLog;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -15,6 +17,10 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
+import com.umeng.common.message.Log;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UmengRegistrar;
 
 import org.xutils.common.util.DensityUtil;
 import org.xutils.image.ImageOptions;
@@ -94,6 +100,29 @@ public class RootApp extends Application {
         SDKInitializer.initialize(getApplicationContext());
 
 
+        // 开启友盟推送服务
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+        mPushAgent.enable((new IUmengRegisterCallback() {
+
+            @Override
+            public void onRegistered( final String registrationId) {
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //onRegistered方法的参数registrationId即是device_token
+                        JLog.w("device_token", registrationId);
+                    }
+                });
+            }
+        }));
+
+        //获取设备的相关信息
+        JLog.w("获取AndroidID"+ DeviceUtils.getAndroidID(this));
+        JLog.w("获取设备IMEI码"+ DeviceUtils.getIMEI(this));
+        JLog.w("获取设备序列号"+ DeviceUtils.getSerial());
+
+        String device_token = UmengRegistrar.getRegistrationId(this);
+        JLog.w("友盟发过来的 token"+ UmengRegistrar.getRegistrationId(this));
     }
 
 }

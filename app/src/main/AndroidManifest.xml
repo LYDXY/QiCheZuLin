@@ -259,6 +259,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+
+
+        <!--友盟推送-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57be516267e58e2204002531" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="9fc449a4cdd3604da683e8e4d8f3f3c9" >
+        </meta-data>
+
     </application>
 
 </manifest>
