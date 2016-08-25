@@ -13,8 +13,10 @@ import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Param.ParamInvoiceAddresslist;
 import com.tongcheng.qichezulin.Param.ParamInvoicelist;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.model.InvoicelistAddressModel;
 import com.tongcheng.qichezulin.model.InvoicelistModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
@@ -85,10 +87,10 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
 
     //获取配送地址
     public void get_address(String user_id) {
-        ParamInvoicelist paramInvoicelist = new ParamInvoicelist();
-        paramInvoicelist.user_id = user_id;
+        ParamInvoiceAddresslist paramInvoiceAddresslist = new ParamInvoiceAddresslist();
+        paramInvoiceAddresslist.user_id = user_id;
         Callback.Cancelable cancelable
-                = x.http().post(paramInvoicelist, new Callback.CommonCallback<String>() {
+                = x.http().post(paramInvoiceAddresslist, new Callback.CommonCallback<String>() {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
@@ -110,18 +112,21 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
                 try {
                     UtilsJson.printJsonData(result);
                     Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase2<List<InvoicelistModel>>>() {
+                    Type type = new TypeToken<JsonBase2<List<InvoicelistAddressModel>>>() {
                     }.getType();
-                    JsonBase2<List<InvoicelistModel>> base = gson
+                    JsonBase2<List<InvoicelistAddressModel>> base = gson
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
-                        JLog.w("获取发票抬头成功");
+                        JLog.w("获取配送地址成功");
                         if (adapter == null) {
-                            adapter = new Adapter<InvoicelistModel>(getActivity(), R.layout.listview_item_pei_song_address) {
+                            adapter = new Adapter<InvoicelistAddressModel>(getActivity(), R.layout.listview_item_pei_song_address) {
                                 @Override
-                                protected void convert(final AdapterHelper helper, final InvoicelistModel item) {
+                                protected void convert(final AdapterHelper helper, final InvoicelistAddressModel item) {
                                     final int position = helper.getPosition();
-                                    helper.setText(R.id.tv_show_fapiao_title, item.FName);
+                                    helper.setText(R.id.tv_show_name, item.FName)
+                                    .setText(R.id.tv_show_phone_number,item.FMobile)
+                                    .setText(R.id.tv_show_address,item.FInvoiceAddress)
+                                    .setText(R.id.tv_show_you_bian,item.FPostCode);
 
                                 }
                             };
@@ -134,7 +139,7 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
                         }
 
                     } else {
-                        JLog.w("获取发票抬头失败");
+                        JLog.w("获取配送地址失败");
 
                     }
                 } catch (Exception E) {
