@@ -124,13 +124,13 @@ public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListen
                                 protected void convert(final AdapterHelper helper, final InvoicelistModel item) {
                                     final int position = helper.getPosition();
                                     helper.setText(R.id.tv_show_fapiao_title, item.FName);
-
                                 }
                             };
 
                             adapter.addAll(base.data);
                             plv_fa_piao_list.setAdapter(adapter);
                         } else {
+                            adapter.clear();
                             adapter.addAll(base.data);
                             adapter.notifyDataSetChanged();
                         }
@@ -154,5 +154,35 @@ public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListen
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), AddFaPiaoTaiTouActivity.class);
                 break;
         }
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        JLog.w("onStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        JLog.w("onDestroy");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        JLog.w("onResume");
+        if (AddFaPiaoTaiTouActivity.flag == null) {
+            
+        }else if (AddFaPiaoTaiTouActivity.flag == 0) {
+
+        }else if (AddFaPiaoTaiTouActivity.flag == 1) {
+            prl_prl_05.autoRefresh();
+            if (UtilsUser.getUser(getContext()) != null) {
+                get_fa_piaos(UtilsUser.getUser(getContext()).PID);
+            }
+        }
+
     }
 }

@@ -149,5 +149,6 @@
     <string name="ya_suo">亚索</string>
     <string name="you_bian">515000</string>
     <string name="test_address">广东省汕头市龙湖区衡山路6号锦江之星酒店6楼</string>
-
+    <string name="title_tai_tou">发票抬头:</string>
+    <string name="danwei_name">个人/单位名称</string>
 </resources>
