@@ -14,5 +14,12 @@ public class UtilsString {
         return PhoneNumber.substring(0, 3) + "****" + PhoneNumber.substring(7, 11);
     }
 
+    //
+    public static int moneyToInt(String Money){
+
+
+        return 0;
+    }
+
 
 }
