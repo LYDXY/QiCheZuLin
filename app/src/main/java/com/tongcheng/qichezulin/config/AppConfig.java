@@ -86,4 +86,9 @@ public class AppConfig {
     public static final String GET_INVOICEADDRESSLIST = "api/invoice/get_invoiceaddresslist.ashx";
 
 
+    //插入发票抬头信息
+    public static final String SET_INVOICE ="api/invoice/set_invoice.ashx";
+
+    //插入发票地址信息
+    public static final String SET_INVOICEADDRESS ="api/invoice/set_invoiceaddress.ashx";
 }
