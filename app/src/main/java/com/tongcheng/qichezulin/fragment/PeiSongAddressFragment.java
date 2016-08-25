@@ -125,7 +125,7 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
                                     final int position = helper.getPosition();
                                     helper.setText(R.id.tv_show_name, item.FName)
                                     .setText(R.id.tv_show_phone_number,item.FMobile)
-                                    .setText(R.id.tv_show_address,item.FInvoiceAddress)
+                                    .setText(R.id.tv_show_address,item.SName+item.CName+item.DName+item.FInvoiceAddress)
                                     .setText(R.id.tv_show_you_bian,item.FPostCode);
 
                                 }

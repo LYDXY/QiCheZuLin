@@ -19,4 +19,7 @@ public class InvoicelistAddressModel implements Serializable {
     public String FInvoiceAddress;//地址
     public String FPostCode;//邮政编码
     public String FState; //状态【1正常0作废】
+    public String SName;//省
+    public String CName;//市
+    public String DName;//区
 }
