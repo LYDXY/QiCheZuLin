@@ -91,4 +91,9 @@ public class AppConfig {
 
     //插入发票地址信息
     public static final String SET_INVOICEADDRESS ="api/invoice/set_invoiceaddress.ashx";
+
+
+    // 取消订单
+    public static final String CANCEL_ORDER = "api/order/cancel_order.ashx";
+
 }
