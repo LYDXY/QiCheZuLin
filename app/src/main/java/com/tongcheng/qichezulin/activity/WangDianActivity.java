@@ -263,7 +263,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
             MarkerOptions ooD = new MarkerOptions().position(latLng)
                     .icon(bitmap).zIndex(10).period(1).alpha(0.8f).rotate(0.5f).flat(false);
             if (isfirst) {
-                ooD.animateType(MarkerOptions.MarkerAnimateType.drop);
+                ooD.animateType(MarkerOptions.MarkerAnimateType.grow);
                 isfirst = false;
 
             }
