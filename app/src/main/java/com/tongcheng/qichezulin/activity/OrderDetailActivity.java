@@ -29,6 +29,7 @@ import com.tongcheng.qichezulin.model.UserModel;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
+import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
@@ -280,6 +281,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
                         if (base.data != null) {
                             JLog.w("插入订单成功");
                             Utils.ShowText2(OrderDetailActivity.this,"插入订单成功");
+                            UtilsTiaoZhuang.ToAnotherActivity(OrderDetailActivity.this,MyOrderActivity.class);
                         }
                     } else {
                         JLog.w("插入订单失败");
