@@ -224,6 +224,7 @@ public class WangDianActivity extends Activity implements View.OnClickListener {
                     if (base.data.size() > 0) {
                         for (int i = 0; i < base.data.size(); i++) {
                             shops = base.data;
+                            setMarker(shops);
                         }
                     }
                 } else {
