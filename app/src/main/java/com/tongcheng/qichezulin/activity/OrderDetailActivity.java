@@ -264,7 +264,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
             @Override
             public void onFinished() {
-
+//
             }
 
             @Override
