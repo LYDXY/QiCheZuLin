@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bigkoo.alertview.AlertView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
@@ -127,7 +128,26 @@ public class OrderZuLinZhongFragment extends Fragment {
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_crete_date, orderModel.TotalAmount)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime);
-
+                                        if (orderModel.FIsBack.equals("1")) {
+                                            //立即还车
+                                            helper.setImageResource(R.id.iv_quan_e_zhi_fu,R.mipmap.li_ji_huan_che);
+                                            helper.getView(R.id.iv_quan_e_zhi_fu).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                      JLog.w("申请还车");
+                                                    show_huanche_dialog();
+                                                }
+                                            });
+                                        }else{
+                                            //已经还车
+                                            helper.setImageResource(R.id.iv_quan_e_zhi_fu,R.mipmap.dengdaichuli);
+                                            helper.getView(R.id.iv_quan_e_zhi_fu).setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    JLog.w("等待处理");
+                                                }
+                                            });
+                                        }
 
                                     }
                                 };
@@ -152,4 +172,11 @@ public class OrderZuLinZhongFragment extends Fragment {
         });
     }
 
+
+
+    //show 还车 对话框
+    public  void   show_huanche_dialog(){
+        new AlertView("确定归该车吗?",null,null, new String[]{"取消","确定"}, null, getActivity(),
+                AlertView.Style.Alert, null).show();
+    }
 }
