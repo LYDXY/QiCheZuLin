@@ -1,6 +1,5 @@
 package com.tongcheng.qichezulin.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -82,15 +81,6 @@ public class OrderFinishFragment extends Fragment {
         user_id = UtilsUser.getUser(getContext()).PID;
         get_order_yu_yue_list(user_id, status, page, page_size);
 
-
-        //对activity的 回调
-    /*    button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listenerOnOrderFinishFragment.do_work();
-            }
-        });*/
-
         tv_second = (TextView) getActivity().findViewById(R.id.tv_second);
         tv_second.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,27 +90,30 @@ public class OrderFinishFragment extends Fragment {
                         new String[]{"删除"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        JLog.w(adapter.getCount() + "");
-                        List<OrderModel> orderModels=new ArrayList<OrderModel>(); //记录打勾的的子项
-                        List<String> delete_id=new ArrayList<String>(); //记录要删除的ID
-                        for (OrderModel key : delete_BooleanHashMap.keySet()) {
-                            if( delete_BooleanHashMap.get(key)){
-                                orderModels.add(key);
-                                delete_id.add(key.PID);
-                            }
-                        }
-                        if (delete_id.size()>0) {
-                            StringBuilder StringBuilder=new StringBuilder();
-                            for (int i=0;i<delete_id.size();i++){
-                                if (i == (delete_id.size()-1)) {
-                                    StringBuilder.append(delete_id.get(i));
-                                }else{
-                                    StringBuilder.append(delete_id.get(i)).append(",");
-                                }
 
+                        if (position != -1) {
+                            JLog.w(adapter.getCount() + "");
+                            List<OrderModel> orderModels = new ArrayList<OrderModel>(); //记录打勾的的子项
+                            List<String> delete_id = new ArrayList<String>(); //记录要删除的ID
+                            for (OrderModel key : delete_BooleanHashMap.keySet()) {
+                                if (delete_BooleanHashMap.get(key)) {
+                                    orderModels.add(key);
+                                    delete_id.add(key.PID);
+                                }
                             }
-                            JLog.w(StringBuilder.toString());
-                            delete_orders(StringBuilder.toString(),orderModels);
+                            if (delete_id.size() > 0) {
+                                StringBuilder StringBuilder = new StringBuilder();
+                                for (int i = 0; i < delete_id.size(); i++) {
+                                    if (i == (delete_id.size() - 1)) {
+                                        StringBuilder.append(delete_id.get(i));
+                                    } else {
+                                        StringBuilder.append(delete_id.get(i)).append(",");
+                                    }
+
+                                }
+                                JLog.w(StringBuilder.toString());
+                                delete_orders(StringBuilder.toString(), orderModels);
+                            }
                         }
                         // 进行删除操作 ,如果服务器返回成功 ,,,则再刷新界面
                         // adapter.removeAll(orderModels); 采用本地移除的发有 bug
@@ -138,12 +131,17 @@ public class OrderFinishFragment extends Fragment {
         prl_prl_03.setOnPullListener(new PullToRefreshLayout.OnPullListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                page = 1;
+                adapter.clear();
+                get_order_yu_yue_list(user_id, status, page, page_size);
                 pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-                // get_order_yu_yue_list(user_id,status,page,page_size);
+                page++;
+                JLog.w("第几页:" + page);
+                get_order_yu_yue_list(user_id, status, page, page_size);
                 pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
@@ -196,13 +194,12 @@ public class OrderFinishFragment extends Fragment {
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
                                                 .setText(R.id.tv_show_crete_date, orderModel.FCreateDate)
-                                                .setImageResource(R.id.iv_is_zia_xian_tou_su, R.mipmap.zai_xian_tou_su);
+                                                .setImageResource(R.id.iv_is_qu_xiao_yu_yue, R.mipmap.zai_xian_tou_su);
                                         helper.getView(R.id.ck_is_choose).setVisibility(View.VISIBLE);
                                         CheckBox checkBox = helper.getView(R.id.ck_is_choose);
                                         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                             @Override
                                             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                                                JLog.w("...>>>>>>" + b);
                                                 JLog.w("...>>>>>>" + b);
                                                 if (b) {
                                                     delete_BooleanHashMap.put(orderModel, true);
@@ -270,8 +267,11 @@ public class OrderFinishFragment extends Fragment {
                     if (!base.status.toString().trim().equals("0")) {
                         JLog.w("删除订单成功");
                         Utils.ShowText2(getActivity(),"删除订单成功");
-                        adapter.removeAll(orderModels);// 采用本地移除的发有 bug
-                        adapter.notifyDataSetChanged();
+                        //   adapter.removeAll(orderModels);// 采用本地移除的发有 bug
+                        //   adapter.notifyDataSetChanged();
+                        adapter.clear();
+                        //   get_order_yu_yue_list(user_id, status, 1, page_size);
+                        prl_prl_03.autoRefresh();
                     } else {
                         JLog.w("删除订单失败");
                         Utils.ShowText2(getActivity(),"删除订单失败");

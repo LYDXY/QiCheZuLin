@@ -62,6 +62,7 @@ public class OrderYiQuXiaoFragment extends Fragment {
     private TextView tv_third; //编辑按钮
     private boolean injected = false;
 
+    //
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         injected = true;
@@ -89,32 +90,35 @@ public class OrderYiQuXiaoFragment extends Fragment {
                         new String[]{"删除"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        JLog.w(adapter.getCount() + "");
-                        List<OrderModel> orderModels=new ArrayList<OrderModel>(); //记录打勾的的子项
-                        List<String> delete_id=new ArrayList<String>(); //记录要删除的ID
-                        for (OrderModel key : delete_BooleanHashMap.keySet()) {
-                            if( delete_BooleanHashMap.get(key)){
-                                orderModels.add(key);
-                                delete_id.add(key.PID);
-                            }
-                        }
-                        if (delete_id.size()>0) {
-                            StringBuilder StringBuilder=new StringBuilder();
-                            for (int i=0;i<delete_id.size();i++){
-                                if (i == (delete_id.size()-1)) {
-                                    StringBuilder.append(delete_id.get(i));
-                                }else{
-                                    StringBuilder.append(delete_id.get(i)).append(",");
+                        if (position != -1) {
+
+                            JLog.w(adapter.getCount() + "");
+                            List<OrderModel> orderModels = new ArrayList<OrderModel>(); //记录打勾的的子项
+                            List<String> delete_id = new ArrayList<String>(); //记录要删除的ID
+                            for (OrderModel key : delete_BooleanHashMap.keySet()) {
+                                if (delete_BooleanHashMap.get(key)) {
+                                    orderModels.add(key);
+                                    delete_id.add(key.PID);
                                 }
-
                             }
-                            JLog.w(StringBuilder.toString());
-                            delete_orders(StringBuilder.toString(),orderModels);
-                        }
-                        // 进行删除操作 ,如果服务器返回成功 ,,,则再刷新界面
-                       // adapter.removeAll(orderModels); 采用本地移除的发有 bug
-                       // adapter.notifyDataSetChanged();
+                            if (delete_id.size() > 0) {
+                                StringBuilder StringBuilder = new StringBuilder();
+                                for (int i = 0; i < delete_id.size(); i++) {
+                                    if (i == (delete_id.size() - 1)) {
+                                        StringBuilder.append(delete_id.get(i));
+                                    } else {
+                                        StringBuilder.append(delete_id.get(i)).append(",");
+                                    }
 
+                                }
+                                JLog.w(StringBuilder.toString());
+                                delete_orders(StringBuilder.toString(), orderModels);
+                            }
+                            // 进行删除操作 ,如果服务器返回成功 ,,,则再刷新界面
+                            // adapter.removeAll(orderModels); 采用本地移除的发有 bug
+                            // adapter.notifyDataSetChanged();
+
+                        }
                     }
                 }).show();
             }
@@ -125,12 +129,18 @@ public class OrderYiQuXiaoFragment extends Fragment {
         prl_prl_04.setOnPullListener(new PullToRefreshLayout.OnPullListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                page = 1;
+                adapter.clear();
+                get_order_yu_yue_list(user_id, status, page, page_size);
                 pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-                // get_order_yu_yue_list(user_id,status,page,page_size);
+                page++;
+
+                JLog.w("第几页:" + page);
+                get_order_yu_yue_list(user_id, status, page, page_size);
                 pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
@@ -172,7 +182,7 @@ public class OrderYiQuXiaoFragment extends Fragment {
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
-                            JLog.w("获取订单已取消成功");
+                            JLog.w("获取已取消订单成功");
 
                             if (adapter == null) {
                                 adapter = new Adapter<OrderModel>(getActivity(), R.layout.listview_item_order_qu_xiao) {
@@ -210,7 +220,7 @@ public class OrderYiQuXiaoFragment extends Fragment {
 
                         }
                     } else {
-                        JLog.w("获取预约订单失败");
+                        JLog.w("获取已取消订单失败");
                     }
                 } catch (Exception E) {
                     E.printStackTrace();
@@ -221,12 +231,11 @@ public class OrderYiQuXiaoFragment extends Fragment {
     }
 
 
-
-    // 删除订单
-    public void delete_orders(String del_ids, final  List<OrderModel> orderModels){
+    // 删除已取消订单
+    public void delete_orders(String del_ids, final List<OrderModel> orderModels) {
 
         ParamDeleteOrder paramDeleteOrder = new ParamDeleteOrder();
-        paramDeleteOrder.del_ids=del_ids;
+        paramDeleteOrder.del_ids = del_ids;
         Callback.Cancelable cancelable
                 = x.http().post(paramDeleteOrder, new Callback.CommonCallback<String>() {
             @Override
@@ -255,13 +264,16 @@ public class OrderYiQuXiaoFragment extends Fragment {
                     JsonBase2<String> base = gson
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
-                        JLog.w("删除订单成功");
-                        Utils.ShowText2(getActivity(),"删除订单成功");
-                         adapter.removeAll(orderModels);// 采用本地移除的发有 bug
-                         adapter.notifyDataSetChanged();
+                        JLog.w("删除已取消订单成功");
+                        Utils.ShowText2(getActivity(), "删除订单成功");
+                        //   adapter.removeAll(orderModels);// 采用本地移除的发有 bug
+                        //   adapter.notifyDataSetChanged();
+                        adapter.clear();
+                        prl_prl_04.autoRefresh();
+
                     } else {
-                        JLog.w("删除订单失败");
-                        Utils.ShowText2(getActivity(),"删除订单失败");
+                        JLog.w("删除已取消订单失败");
+                        Utils.ShowText2(getActivity(), "删除已取消订单失败");
                     }
                 } catch (Exception E) {
                     E.printStackTrace();

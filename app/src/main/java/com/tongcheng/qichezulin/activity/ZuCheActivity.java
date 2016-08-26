@@ -3,6 +3,7 @@ package com.tongcheng.qichezulin.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.nfc.tech.NfcBarcode;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -57,6 +58,7 @@ import java.util.List;
 
 @ContentView(R.layout.activity_zu_che)
 public class ZuCheActivity extends Activity implements View.OnClickListener, OnItemClickListener, OnDismissListener {
+
 
     @ViewInject(R.id.btn_help_xuan_che) //帮我选车按钮
             Button btn_help_xuan_che;
@@ -469,6 +471,11 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                                 Bundle bundle = new Bundle();
                                 bundle.putString("days", tv_show_jian_ge.getText() + "");
                                 bundle.putSerializable("obj", base.data.get(0));
+                                //加入开始时间和结束时间
+                                bundle.putString("start_time", DateUtils.formatDateCustom(get_car_date, "yyyy-MM-dd HH:mm:ss"));
+                                bundle.putString("end_time", DateUtils.formatDateCustom(back_car_date, "yyyy-MM-dd HH:mm:ss"));
+                                JLog.w(DateUtils.formatDateCustom(get_car_date, "yyyy-MM-dd HH:mm:ss"));
+                                JLog.w(DateUtils.formatDateCustom(back_car_date, "yyyy-MM-dd HH:mm:ss"));
                                 UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, YuYueActivity.class, bundle);
                             } else if (base.data.size() > 1) {
                                 //跳到选车列表

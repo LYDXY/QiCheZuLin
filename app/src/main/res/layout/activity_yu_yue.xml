@@ -15,6 +15,9 @@
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w" />
 
+
+
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -32,6 +35,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w">
+        <TextView
+            android:id="@+id/tv_show_car_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="8%w"
+            app:layout_widthPercent="20%w"
+            android:textColor="@color/gray9999999"
+            android:text="@string/zu_che_fei_yong"
+            app:layout_textSizePercent="4%w"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="5%w"
+            />
+        
+        <TextView
+            android:id="@+id/tv_ji_suan"
+            android:layout_toRightOf="@+id/tv_show_car_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="8%w"
+            app:layout_widthPercent="40%w"
+            android:text="@string/price_and_days"
+            android:gravity="center_vertical"
+            android:textColor="@color/gray9999999"
+            android:layout_centerVertical="true"
+            app:layout_marginLeftPercent="10%w"
+            app:layout_textSizePercent="4%w"
+            />
+
+        <TextView
+            android:id="@+id/tv_ji_suan_jie_guo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/show_price"
+            android:textColor="@color/orange_ff7220"
+            app:layout_heightPercent="8%w"
+            app:layout_marginRightPercent="10%w"
+            app:layout_textSizePercent="4%w"
+            app:layout_widthPercent="20%w"
+            />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <TextView
         android:layout_width="0dp"
@@ -59,7 +114,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/che_xing_cha_xun"
             app:layout_heightPercent="20%w"
 
             app:layout_marginLeftPercent="5%w"
