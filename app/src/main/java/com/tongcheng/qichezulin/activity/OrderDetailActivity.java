@@ -17,13 +17,18 @@ import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamGetExpense;
+import com.tongcheng.qichezulin.Param.ParamSetOrder;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.config.RootApp;
+import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.CarModel3;
 import com.tongcheng.qichezulin.model.FuWuModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
+import com.tongcheng.qichezulin.model.SetOrderModel;
 import com.tongcheng.qichezulin.model.UserModel;
+import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
+import com.tongcheng.qichezulin.utils.UtilsString;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
@@ -41,8 +46,16 @@ import java.util.List;
 @ContentView(R.layout.activity_order_detail)
 public class OrderDetailActivity extends PuTongActivity2 {
 
+    private CarModel3 carModel3;
+    private String dingjing;
+    private Integer use_ji_fen = 0;//记录使用了多少积分;
+
     @ViewInject(R.id.tv_chose_pay_ways) //支付方式
             TextView tv_chose_pay_ways;
+
+
+    @ViewInject(R.id.iv_is_sure)//确认下单按钮
+            ImageView iv_is_sure;
 
 
     @ViewInject(R.id.tv_show_pay_money) //预付款
@@ -61,7 +74,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
     @ViewInject(R.id.tv_show_phone_number) //手机号码
             TextView tv_show_phone_number;
 
-    private String payType;//支付类型
+    private String payType = "0";//支付类型
 
     @Override
     void initData() {
@@ -73,32 +86,42 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
 
         try {
+
+
+            if (UtilsUser.getUser(this) != null) {
+                tv_user_money.setText("¥" + UtilsString.strToFloat2(Float.parseFloat(UtilsUser.getUser(this).FMoney),"0.00"));
+                tv_show_phone_number.setText(UtilsUser.getUser(this).FMobilePhone);
+            }
+
             if (getIntent().getExtras().getString("yufukuan") != null) {
                 tv_show_yu_fu_money.setText("¥" + getIntent().getExtras().getString("yufukuan"));
             }
             if (getIntent().getExtras().getString("jifen") != null) {
-                Float diyong = Float.parseFloat(getIntent().getExtras().getString("yufukuan")) * 0.1f;
+                Float diyong = Float.parseFloat(UtilsString.strToFloat2(Float.parseFloat(getIntent().getExtras().getString("yufukuan")) * 0.1f,"#"));
                 if (diyong < Float.parseFloat(getIntent().getExtras().getString("jifen"))) {
-                    tv_shou_ji_fen.setText("-" + diyong + "");
-                    tv_show_pay_money.setText("还需支付 ¥" + (Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong));
+                    tv_shou_ji_fen.setText("-¥" + diyong + "");
+                    tv_show_pay_money.setText("还需支付 ¥" + UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong),"0.00"));
+                    dingjing = UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong),"0.00");
+
                 } else {
                     tv_shou_ji_fen.setText("积分不够抵用预付款的10%");
-                    tv_show_pay_money.setText("还需支付 ¥" + getIntent().getExtras().getString("yufukuan"));
+                    tv_show_pay_money.setText("还需支付 ¥" + UtilsString.strToFloat2(Float.parseFloat(getIntent().getExtras().getString("yufukuan")),"0.00"));
+                    dingjing =UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan"))),"#.00");
                 }
+                //使用了多少积分
+                use_ji_fen = Integer.parseInt(diyong.toString());
+            }
 
-            }
-            if (UtilsUser.getUser(this) != null) {
-                tv_user_money.setText("¥" + UtilsUser.getUser(this).FMoney);
-                tv_show_phone_number.setText(UtilsUser.getUser(this).FMobilePhone);
-            }
+
 
         } catch (Exception E) {
 
         }
-
+        carModel3 = (CarModel3) getIntent().getSerializableExtra("car");
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("确定订单");
         tv_chose_pay_ways.setOnClickListener(this);
+        iv_is_sure.setOnClickListener(this);
 
     }
 
@@ -113,6 +136,46 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
             case R.id.tv_chose_pay_ways:
                 alert_pay_ways();
+                break;
+
+            case R.id.iv_is_sure:
+                if (UtilsUser.getUser(this).PID == null || UtilsUser.getUser(this).PID.equals("")) {
+                    JLog.w("用户id不能为空");
+                } else if (carModel3.PID == null || carModel3.PID.equals("")) {
+                    JLog.w("车id不能为空");
+                } else if (carModel3.KShopID == null || carModel3.KShopID.equals("")) {
+                    JLog.w("店铺id不能为空");
+                } else if (getIntent().getExtras().getString("end_time").trim().equals("") || getIntent().getExtras().getString("end_time") == null) {
+                    JLog.w("结束时间不能为空");
+                } else if (getIntent().getExtras().getString("start_time").trim().equals("") || getIntent().getExtras().getString("start_time") == null) {
+                    JLog.w("开始时间不能为空");
+                } else if (dingjing.equals("") || dingjing == null) {
+                    JLog.w("定金不能为空,就是预付款");
+                } else if (getIntent().getExtras().getString("all_money").trim().equals("") || getIntent().getExtras().getString("all_money") == null) {
+                    JLog.w("总支付的金额不能为空");
+                } else if (getIntent().getExtras().getString("sheng_yu").trim().equals("") || getIntent().getExtras().getString("sheng_yu") == null) {
+                    JLog.w("剩余的金额不能为空");
+                } else if (getIntent().getExtras().getString("fu_wu_id_list").trim().equals("") || getIntent().getExtras().getString("fu_wu_id_list") == null) {
+                    JLog.w("服务项目id集合不能为空");
+                } else if (getIntent().getExtras().getString("zu_lin_fei_yong").trim().equals("") || getIntent().getExtras().getString("zu_lin_fei_yong") == null) {
+                    JLog.w("租赁费用不能为空");
+                } else if (payType.equals("0")) {
+                    JLog.w("没有选择支付类型");
+                    Utils.ShowText2(OrderDetailActivity.this,"没有选择支付方式");
+                }else{
+                    JLog.w("可以提交订单");
+                    get_order_que_ding(UtilsUser.getUser(this).PID,carModel3.PID,carModel3.KShopID,
+                            getIntent().getExtras().getString("start_time").trim(),
+                            getIntent().getExtras().getString("end_time").trim(),
+                            dingjing,
+                            getIntent().getExtras().getString("all_money").trim(),
+                            getIntent().getExtras().getString("sheng_yu").trim(),
+                            use_ji_fen+"",
+                            getIntent().getExtras().getString("fu_wu_id_list").trim(),"","",
+                            payType);
+                }
+
+
                 break;
 
 
@@ -171,11 +234,23 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
 
     //下单按钮的确定操作
-    public void get_order_que_ding() {
-
-        ParamGetExpense paramGetExpense = new ParamGetExpense();
+    public void get_order_que_ding(String user_id, String car_id, String shop_id, String start_time, String end_time, String deposit, String money, String lessmoney, String jifen, String expenseid, String invoiceId, String invoiceaddressId, String paytype) {
+        ParamSetOrder paramSetOrder = new ParamSetOrder();
+        paramSetOrder.user_id = user_id;
+        paramSetOrder.car_id = car_id;
+        paramSetOrder.shop_id = shop_id;
+        paramSetOrder.start_time = start_time;
+        paramSetOrder.end_time = end_time;
+        paramSetOrder.deposit = deposit;
+        paramSetOrder.money = money;
+        paramSetOrder.lessmoney = lessmoney;
+        paramSetOrder.jifen = jifen;
+        paramSetOrder.expenseid = expenseid;
+        paramSetOrder.invoiceId = invoiceId;
+        paramSetOrder.invoiceaddressId = invoiceaddressId;
+        paramSetOrder.paytype = paytype;
         Callback.Cancelable cancelable
-                = x.http().post(paramGetExpense, new Callback.CommonCallback<String>() {
+                = x.http().post(paramSetOrder, new Callback.CommonCallback<String>() {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
 
@@ -197,18 +272,18 @@ public class OrderDetailActivity extends PuTongActivity2 {
                 try {
                     UtilsJson.printJsonData(result);
                     Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase2<List<FuWuModel>>>() {
+                    Type type = new TypeToken<JsonBase2<List<SetOrderModel>>>() {
                     }.getType();
-                    JsonBase2<List<FuWuModel>> base = gson
+                    JsonBase2<List<SetOrderModel>> base = gson
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
-                            JLog.w("获取收费服务项目成功");
-
+                            JLog.w("插入订单成功");
+                            Utils.ShowText2(OrderDetailActivity.this,"插入订单成功");
                         }
-
                     } else {
-                        JLog.w("获取收费服务项目成功失败");
+                        JLog.w("插入订单失败");
+                        Utils.ShowText2(OrderDetailActivity.this,"插入订单失败");
                     }
                 } catch (Exception E) {
                     E.printStackTrace();

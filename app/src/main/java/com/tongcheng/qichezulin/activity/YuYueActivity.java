@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.code19.library.L;
 import com.code19.library.SPUtils;
 import com.code19.library.StringUtils;
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ import com.tongcheng.qichezulin.model.FuWuModel;
 import com.tongcheng.qichezulin.model.JiFenModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.utils.UtilsJson;
+import com.tongcheng.qichezulin.utils.UtilsString;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
@@ -48,6 +50,13 @@ import java.util.List;
 public class YuYueActivity extends PuTongActivity2 {
 
 
+    StringBuilder stringBuilder = new StringBuilder();//记录服务项目的id
+    @ViewInject(R.id.tv_ji_suan)
+    TextView tv_ji_suan;
+    @ViewInject(R.id.tv_ji_suan_jie_guo)
+    TextView tv_ji_suan_jie_guo;
+
+
     @ViewInject(R.id.iv_next_stats)
     Button iv_next_stats;//点击下一步
     @ViewInject(R.id.lv_fu_wu)
@@ -58,7 +67,7 @@ public class YuYueActivity extends PuTongActivity2 {
     TextView tv_car_name;
     @ViewInject(R.id.tv_car_remark)
     TextView tv_car_remark;
-    private String Jifen = "";
+    private String Jifen = "0";
     private List<Float> floats = new ArrayList<>();
     private String bilizhi = null;
     private Adapter<FuWuModel> adapter;
@@ -73,7 +82,8 @@ public class YuYueActivity extends PuTongActivity2 {
         x.image().bind(iv_car_picture, carModel3.FImg, RootApp.imageOptionsnew);
         tv_car_name.setText(carModel3.FCarName);
         tv_car_remark.setText(carModel3.FRemark);
-
+        tv_ji_suan.setText("¥" + UtilsString.strToFloat2(Float.valueOf(carModel3.FDayMoney.trim()), "0.00") + "×" + days + "");
+        tv_ji_suan_jie_guo.setText("¥" + UtilsString.strToFloat2(Float.parseFloat(carModel3.FDayMoney) * Float.parseFloat(days), "0.00") + "");
     }
 
     @Override
@@ -94,24 +104,26 @@ public class YuYueActivity extends PuTongActivity2 {
                 break;
 
             case R.id.iv_next_stats: //下一步
-                Float Money = Float.parseFloat(carModel3.FDayMoney.trim()) * Float.parseFloat(days);
-                JLog.w("不加手续费:"+Money);
-                if (bilizhi != null && !bilizhi.equals("") && Jifen != null && !Jifen.equals("")) {
+                Bundle bundle = new Bundle();
+                Float Money = Float.parseFloat(carModel3.FDayMoney.trim()) * Float.parseFloat(days); //日租金 * 天数
+                bundle.putString("zu_lin_fei_yong", UtilsString.strToFloat2(Money,"0.00"));
+                if (bilizhi != null && !bilizhi.equals("")) {
                     float bili = Float.parseFloat(bilizhi.trim()) / 100f;
                     JLog.w(bili + "");
                     if (floats.size() > 0) {
+                        //加上各种手续费
                         for (int i = 0; i < floats.size(); i++) {
                             JLog.w(floats.get(i) + "");
                             Money += floats.get(i);
                         }
-                        JLog.w("加L手续费:"+Money);
-                        //计算预付款
-                        Money = Money * bili;
-                        Bundle bundle = new Bundle();
-                        bundle.putString("yufukuan", Money + "");
-                        JLog.w("yufukuan" + Money);
-                        JLog.w("用户的积分值" + Jifen);
-                        bundle.putString("jifen", Jifen + "");
+                        bundle.putString("all_money", UtilsString.strToFloat2(Money,"0.00") + "");//总金额
+                        bundle.putString("yufukuan", UtilsString.strToFloat2(Money * bili,"0.00") + "");//预付款
+                        bundle.putString("sheng_yu", UtilsString.strToFloat2((Money - Money * bili),"0.00"));  //还需支付
+                        bundle.putString("jifen", Jifen + "");//用户的积分,默认0
+                        bundle.putSerializable("car", carModel3);//整辆车的信息
+                        bundle.putString("start_time", getIntent().getExtras().getString("start_time"));//开始时间
+                        bundle.putString("end_time", getIntent().getExtras().getString("end_time"));//结束时间
+                        bundle.putString("fu_wu_id_list", stringBuilder.toString());//将服务项目的id传到订单界面
                         UtilsTiaoZhuang.ToAnotherActivity(YuYueActivity.this, OrderDetailActivity.class, bundle);
                     }
                 } else {
@@ -176,8 +188,14 @@ public class YuYueActivity extends PuTongActivity2 {
                                 } else {
                                     floats.add(Float.parseFloat(base.data.get(i).FPrice.trim()) * Float.parseFloat(days));
                                 }
-                            }
 
+                                if (i == base.data.size() - 1) {
+                                    stringBuilder.append(base.data.get(i).PID);
+                                } else {
+                                    stringBuilder.append(base.data.get(i).PID + ",");
+                                }
+
+                            }
 
 
                             adapter = new Adapter<FuWuModel>(YuYueActivity.this, R.layout.listview_item_fu_wu) {
@@ -186,13 +204,13 @@ public class YuYueActivity extends PuTongActivity2 {
 
                                     if (item.FIsSingle.equals("true")) {
                                         helper.setText(R.id.tv_show_first, item.FName)
-                                                .setText(R.id.tv_show_second, "¥" + item.FPrice + "×1")
-                                                .setText(R.id.show_hao_much0, "¥" + item.FPrice);
+                                                .setText(R.id.tv_show_second, "¥" + UtilsString.strToFloat2(Float.parseFloat(item.FPrice), "0.00") + "×1")
+                                                .setText(R.id.show_hao_much0, "¥" + UtilsString.strToFloat2(Float.parseFloat(item.FPrice), "0.00"));
 
                                     } else if (item.FIsSingle.equals("false")) {
                                         helper.setText(R.id.tv_show_first, item.FName)
-                                                .setText(R.id.tv_show_second, "¥" + item.FPrice + "×" + days)
-                                                .setText(R.id.show_hao_much0, "¥" + Float.parseFloat(item.FPrice.trim()) * Integer.parseInt(days));
+                                                .setText(R.id.tv_show_second, "¥" + UtilsString.strToFloat2(Float.parseFloat(item.FPrice), "0.00") + "×" + days)
+                                                .setText(R.id.show_hao_much0, "¥" + UtilsString.strToFloat2(Float.parseFloat(item.FPrice.trim()) * Integer.parseInt(days), "0.00"));
 
                                     }
 
