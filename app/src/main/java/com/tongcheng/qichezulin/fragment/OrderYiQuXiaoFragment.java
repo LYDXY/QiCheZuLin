@@ -61,7 +61,7 @@ public class OrderYiQuXiaoFragment extends Fragment {
     PullableListView plv_order_qu_xiao_list; //list 控件
     private TextView tv_third; //编辑按钮
     private boolean injected = false;
-
+//
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         injected = true;
