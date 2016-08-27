@@ -38,6 +38,7 @@ import java.util.ArrayList;
 public class loginFragment extends PuTongFragment {
 
 
+    //
     @ViewInject(R.id.et_phone_number)
     EditText et_phone_number;
     @ViewInject(R.id.et_password)
