@@ -242,7 +242,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
         });
     }
 
-
+    //
     // 获取轮播的数据
     @Override
     public void onItemClick(int position) {
