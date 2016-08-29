@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout2ToMain xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -189,7 +189,7 @@
         </com.tongcheng.qichezulin.pulltorefresh.PullableScrollView>
 
 
-    </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
+    </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout2ToMain>
 
 
 </com.zhy.android.percent.support.PercentLinearLayout>

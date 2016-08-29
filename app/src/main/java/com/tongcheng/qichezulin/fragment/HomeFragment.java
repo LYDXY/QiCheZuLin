@@ -25,6 +25,7 @@ import com.tongcheng.qichezulin.model.BannerModel;
 import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
+import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout2ToMain;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.view.ListViewForScrollView2;
@@ -47,7 +48,7 @@ import pl.droidsonroids.gif.GifDrawable;
  */
 
 @ContentView(R.layout.fragment_home)
-public class HomeFragment extends PuTongFragment2 implements OnItemClickListener {
+public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListener {
 
 
 
@@ -55,7 +56,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
     // 上下拉控件
     @ViewInject(R.id.refresh_view)
-    PullToRefreshLayout refresh_view;
+    PullToRefreshLayout2ToMain refresh_view;
 
     //平台的公告轮播
     @ViewInject(R.id.convenientBanner)
@@ -112,7 +113,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
             e.printStackTrace();
         }*/
-        refresh_view.setPullDownEnable(false);
+        refresh_view.setPullDownEnable(true);
     }
 
     @Override
@@ -173,23 +174,7 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
 
     }
 
-    @Override
-    public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-        // 下拉刷新操作
 
-        refresh_view.refreshFinish(PullToRefreshLayout.SUCCEED);
-
-
-    }
-
-    @Override
-    public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-
-        // 千万别忘了告诉控件加载完毕了哦！
-        refresh_view.loadmoreFinish(PullToRefreshLayout.SUCCEED);
-
-
-    }
 
 
     // 获取广播轮播数据
@@ -347,4 +332,13 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
         JLog.w("onResume");
     }
 
+    @Override
+    public void onRefresh(PullToRefreshLayout2ToMain pullToRefreshLayout) {
+        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+    }
+
+    @Override
+    public void onLoadMore(PullToRefreshLayout2ToMain pullToRefreshLayout) {
+        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+    }
 }
