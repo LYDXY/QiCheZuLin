@@ -98,4 +98,8 @@ public class AppConfig {
 
     //申请还车
     public static final String UPDATE_ORDERBACK = "update_orderback.ashx";
+
+
+    //积分记录
+    public static final String GET_USERJFLOG = "api/user/get_userjflog.ashx";
 }

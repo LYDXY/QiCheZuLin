@@ -92,10 +92,10 @@ public class HomeFragment extends PuTongFragment2 implements OnItemClickListener
         setPullListenerOnPullToRefreshLayout();
         setOnClickListenerOnView();
         // 第一次进入自动刷新
-        if (isFirstIn) {
+       /* if (isFirstIn) {
             refresh_view.autoRefresh();
             isFirstIn = false;
-        }
+        }*/
         getbanner();
         do_get_hot_cars();
     }

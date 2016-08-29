@@ -153,5 +153,6 @@
     <string name="danwei_name">个人/单位名称</string>
     <string name="zu_che_fei_yong">租车费用</string>
     <string name="price_and_days">¥ 50.0×60</string>
-
+    <string name="jifen_des">当前的积分是:</string>
+    <string name="ji_fen">500</string>
 </resources>

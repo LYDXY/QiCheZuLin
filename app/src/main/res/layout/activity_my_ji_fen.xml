@@ -14,5 +14,64 @@
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w"></include>
 
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@mipmap/jifenbackg"
+        app:layout_heightPercent="40%w"
+        app:layout_widthPercent="100%">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/jifen_des"
+            android:textColor="@color/whiteFFFFFF"
+            app:layout_heightPercent="6%w"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_marginTopPercent="4%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_widthPercent="40%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/tuoyuan_bag"
+            app:layout_heightPercent="28%w"
+            app:layout_widthPercent="28%w" />
+
+
+        <TextView
+            android:id="@+id/tv_show_ji_fen"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:src="@mipmap/tuoyuan_bag"
+            android:textColor="@color/whiteFFFFFF"
+            app:layout_heightPercent="28%w"
+            app:layout_textSizePercent="10%w"
+            app:layout_widthPercent="28%w" />
+
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.tongcheng.qichezulin.view.ListViewForScrollView2
+                android:id="@+id/list_for_s2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.tongcheng.qichezulin.view.ListViewForScrollView2>
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+    </ScrollView>
+
 
 </com.zhy.android.percent.support.PercentLinearLayout>
