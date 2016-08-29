@@ -192,7 +192,8 @@ public class OrderYiQuXiaoFragment extends Fragment {
                                         helper.setImageUrl(R.id.iv_car_picture, orderModel.FImg)
                                                 .setText(R.id.tv_show_qu_che_shop, orderModel.FShopName)
                                                 .setText(R.id.tv_show_qu_che_time, orderModel.FStartTime)
-                                                .setText(R.id.tv_show_huan_che_time, orderModel.FEndTime);
+                                                .setText(R.id.tv_show_huan_che_time, orderModel.FEndTime)
+                                        .setText(R.id.tv_show_crete_date,orderModel.FCreateDate);
                                         helper.getView(R.id.ck_is_choose).setVisibility(View.VISIBLE);
                                         CheckBox checkBox = helper.getView(R.id.ck_is_choose);
                                         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

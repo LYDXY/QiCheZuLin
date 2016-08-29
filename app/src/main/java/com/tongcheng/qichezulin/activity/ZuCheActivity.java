@@ -482,8 +482,6 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
                             } else if (base.data.size() == 0) {
                                 Utils.ShowText2(ZuCheActivity.this, "不好意思,选不到车");
                             }
-
-
                         }
                     } else {
                         JLog.w("获取帮我选车失败");

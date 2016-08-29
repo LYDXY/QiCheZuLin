@@ -102,4 +102,8 @@ public class AppConfig {
 
     //积分记录
     public static final String GET_USERJFLOG = "api/user/get_userjflog.ashx";
+
+    //获取用户余额
+    public static final String GET_USERMONEY = "api/user/get_usermoney.ashx";
+
 }

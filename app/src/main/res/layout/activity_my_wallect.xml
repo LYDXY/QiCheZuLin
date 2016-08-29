@@ -14,5 +14,202 @@
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w"></include>
 
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="35%w"
+        app:layout_marginTopPercent="3%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:id="@+id/tv_my_money"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/my_money"
+            android:textColor="@color/black272727"
+            app:layout_heightPercent="15%w"
+            app:layout_marginTopPercent="4%w"
+            app:layout_textSizePercent="6%w"
+            app:layout_widthPercent="30%w" />
+
+        <TextView
+            android:id="@+id/tv_show_my_money"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_below="@+id/tv_my_money"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/show_my_money"
+            android:textColor="@color/red_CC0000"
+            app:layout_heightPercent="13%w"
+            app:layout_textSizePercent="7%w"
+            app:layout_widthPercent="60%w" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/chong_zhi"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_widthPercent="20%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/go"
+            app:layout_heightPercent="4.5%w"
+            app:layout_marginRightPercent="4.5%w"
+            app:layout_widthPercent="5%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="0.2%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/ti_xian"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_widthPercent="20%w" />
+
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/yu_e_pay"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_marginRightPercent="15%w"
+            app:layout_widthPercent="20%w" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/go"
+            app:layout_heightPercent="4.5%w"
+            app:layout_marginRightPercent="4.5%w"
+            app:layout_widthPercent="5%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="1.5%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/safe_account"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_widthPercent="20%w" />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/set_up_pay_password"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_marginRightPercent="15%w"
+            app:layout_widthPercent="30%w" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/go"
+            app:layout_heightPercent="4.5%w"
+            app:layout_marginRightPercent="4.5%w"
+            app:layout_widthPercent="5%w" />
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/whiteFFFFFF"
+        app:layout_heightPercent="12%w"
+        app:layout_marginTopPercent="1.5%w"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="@string/use_des"
+            android:textColor="@color/gray9999999"
+            app:layout_heightPercent="10%w"
+            app:layout_marginLeftPercent="4.5%w"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_widthPercent="50%w" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/go"
+            app:layout_heightPercent="4.5%w"
+            app:layout_marginRightPercent="5%w"
+            app:layout_widthPercent="4.5%w" />
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+
+
+
+
 
 </com.zhy.android.percent.support.PercentLinearLayout>

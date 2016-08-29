@@ -17,6 +17,7 @@ import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamGetExpense;
+import com.tongcheng.qichezulin.Param.ParamGetUserMoney;
 import com.tongcheng.qichezulin.Param.ParamSetOrder;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.config.RootApp;
@@ -24,6 +25,7 @@ import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.CarModel3;
 import com.tongcheng.qichezulin.model.FuWuModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
+import com.tongcheng.qichezulin.model.MoneyModel;
 import com.tongcheng.qichezulin.model.SetOrderModel;
 import com.tongcheng.qichezulin.model.UserModel;
 import com.tongcheng.qichezulin.utils.Utils;
@@ -90,7 +92,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
 
             if (UtilsUser.getUser(this) != null) {
-                tv_user_money.setText("¥" + UtilsString.strToFloat2(Float.parseFloat(UtilsUser.getUser(this).FMoney),"0.00"));
+                get_now_my_money(UtilsUser.getUser(this).PID);
                 tv_show_phone_number.setText(UtilsUser.getUser(this).FMobilePhone);
             }
 
@@ -296,4 +298,51 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
     }
 
+
+    //获取现在的个人钱包金额
+    public void get_now_my_money(String user_id){
+        ParamGetUserMoney paramGetUserMoney=new ParamGetUserMoney();
+        paramGetUserMoney.user_id=user_id;
+        Callback.Cancelable cancelable
+                = x.http().post(paramGetUserMoney, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<List<MoneyModel>>>() {
+                    }.getType();
+                    JsonBase2<List<MoneyModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        if (base.data != null) {
+                            JLog.w("获取用户余额成功");
+                            tv_user_money.setText("¥" + UtilsString.strToFloat2(Float.valueOf(base.data.get(0).FMoney), "0.00"));
+                        }
+                    } else {
+                        JLog.w("获取用户余额失败");
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
+    }
 }
