@@ -2,6 +2,7 @@ package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +33,11 @@ import java.util.ArrayList;
 
 @ContentView(R.layout.activity_find_car_type2)
 public class FindCarTypeActivity2 extends PuTongActivity2 {
+
+
+
+    @ViewInject(R.id.iv_my_chose)
+    ImageButton iv_my_chose; //筛选按钮
 
 
     @ViewInject(R.id.prl_prl) //下拉刷新控件
@@ -75,6 +81,9 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
             case R.id.iv_return:
                 onBackPressed();
                 break;
+            case R.id.iv_my_chose:
+                UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this,ChoseActivity.class);
+                break;
         }
 
     }
@@ -82,6 +91,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        iv_my_chose.setOnClickListener(this);
         initView();
         setListenerOnView();
         setOnPullListenerOnprl_prl();

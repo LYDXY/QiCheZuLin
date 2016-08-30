@@ -164,4 +164,5 @@
     <string name="yu_e_pay">余额支付</string>
     <string name="set_up_pay_password">设置支付密码</string>
     <string name="input_user_name">请输入昵称</string>
+    <string name="sure_chose">确定</string>
 </resources>

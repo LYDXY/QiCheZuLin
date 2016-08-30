@@ -283,7 +283,11 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
-
+        <!--筛选条件界面-->
+        <activity
+            android:name=".activity.ChoseActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
 
 
