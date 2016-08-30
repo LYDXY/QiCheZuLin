@@ -22,7 +22,7 @@ import com.tongcheng.qichezulin.activity.MyJiFenActivity;
 import com.tongcheng.qichezulin.activity.MyOrderActivity;
 import com.tongcheng.qichezulin.activity.MyTouSuActivity;
 import com.tongcheng.qichezulin.activity.MyWallectActivity;
-import com.tongcheng.qichezulin.activity.LoginActivity222;
+import com.tongcheng.qichezulin.activity.LoginActivity;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.UserModel;
 import com.tongcheng.qichezulin.utils.UtilsJson;
@@ -164,7 +164,7 @@ public class PersonFragment extends PuTongFragment {
             case R.id.btn_login_out:
                 JLog.w("退出操作");
                 UtilsUser.cleanAllSP(getContext());
-                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), LoginActivity222.class);
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), LoginActivity.class);
                 break;
 
         }

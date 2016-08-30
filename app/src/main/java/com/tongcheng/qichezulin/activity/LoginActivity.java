@@ -10,7 +10,7 @@ import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.Adapter.FragmentStateAdaper;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.fragment.LoginCheckCodeFragment;
-import com.tongcheng.qichezulin.fragment.LoginFragment;
+import com.tongcheng.qichezulin.fragment.LoginFragment22;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 
 import org.xutils.view.annotation.ContentView;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 @ContentView(R.layout.activity_login_regist)
-public class LoginActivity222 extends PuTongFragmentActivity {
+public class LoginActivity extends PuTongFragmentActivity {
 
 
     //切换的 tab
@@ -71,7 +71,7 @@ public class LoginActivity222 extends PuTongFragmentActivity {
         stringList.add("密码登录");
         stringList.add("验证码登录");
         fragmentList = new ArrayList<>();
-        fragmentList.add(new LoginFragment());
+        fragmentList.add(new LoginFragment22());
         fragmentList.add(new LoginCheckCodeFragment());
     }
 

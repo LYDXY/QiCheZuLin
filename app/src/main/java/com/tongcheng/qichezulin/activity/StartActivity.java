@@ -41,7 +41,7 @@ public class StartActivity extends Activity {
             bt_go.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    UtilsTiaoZhuang.ToAnotherActivity(StartActivity.this, LoginActivity222.class);
+                    UtilsTiaoZhuang.ToAnotherActivity(StartActivity.this, LoginActivity.class);
                 }
             });
         }
@@ -53,7 +53,7 @@ public class StartActivity extends Activity {
             //为空
             if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "") == null || UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "").equals("")) {
                 JLog.w("跳转到登录界面");
-                UtilsTiaoZhuang.ToAnotherActivity(this, LoginActivity222.class);
+                UtilsTiaoZhuang.ToAnotherActivity(this, LoginActivity.class);
                 this.finish();
             }
             //不为空
