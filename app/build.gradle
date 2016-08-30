@@ -56,14 +56,12 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     //图片模糊效果
     compile 'jp.wasabeef:blurry:2.0.2'
-
     compile files('src/main/libs/IndoorscapeAlbumPlugin.jar')
     compile files('src/main/libs/httpmime-4.1.2.jar')
     compile files('src/main/libs/BaiduLBS_Android.jar')
-
     //添加选择器控件
     compile 'org.adw.library:discrete-seekbar:1.0.1'
-
     compile project(':PushSDK')
+    compile files('src/main/libs/alipaySdk-20160825.jar')
 }
 

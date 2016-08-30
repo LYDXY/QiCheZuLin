@@ -5,20 +5,16 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.Adapter.FragmentStateAdaper;
 import com.tongcheng.qichezulin.R;
-import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.fragment.LoginCheckCodeFragment;
-import com.tongcheng.qichezulin.fragment.loginFragment;
+import com.tongcheng.qichezulin.fragment.LoginFragment;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +71,7 @@ public class LoginActivity extends PuTongFragmentActivity {
         stringList.add("密码登录");
         stringList.add("验证码登录");
         fragmentList = new ArrayList<>();
-        fragmentList.add(new loginFragment());
+        fragmentList.add(new LoginFragment());
         fragmentList.add(new LoginCheckCodeFragment());
     }
 
