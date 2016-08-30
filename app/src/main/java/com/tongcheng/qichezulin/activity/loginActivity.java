@@ -28,7 +28,7 @@ import java.util.List;
  */
 
 @ContentView(R.layout.activity_login_regist)
-public class loginActivity extends PuTongFragmentActivity {
+public class LoginActivity extends PuTongFragmentActivity {
 
 
     //切换的 tab
