@@ -165,4 +165,11 @@
     <string name="set_up_pay_password">设置支付密码</string>
     <string name="input_user_name">请输入昵称</string>
     <string name="sure_chose">确定</string>
+
+    <string name="jia_ge_bu_xian">价格不限</string>
+    <string name="under_150">¥ 150以下</string>
+    <string name="under_300">¥ 150-¥ 300</string>
+    <string name="under_500">¥ 300-¥ 500</string>
+    <string name="up_500">¥ 500以上</string>
+
 </resources>

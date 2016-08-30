@@ -38,10 +38,103 @@
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/whiteFFFFFF"
         app:layout_marginTopPercent="2%w"
-        app:layout_widthPercent="90%w">
+        app:layout_widthPercent="95%w">
 
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio_first"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:checked="true"
+                android:button="@null"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/selector3"
+                android:textColor="@color/gray9999999"
+                android:textSize="16sp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/jia_ge_bu_xian"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/grayF0F0F0"/>
+            <RadioButton
+                android:id="@+id/radio_second"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:button="@null"
+                android:drawableRight="@drawable/selector3"
+                android:gravity="center_vertical"
+                android:textColor="@color/gray9999999"
+                android:textSize="16sp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/under_150"
+                android:checked="false"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/grayF0F0F0"/>
+            <RadioButton
+                android:id="@+id/radio_three"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:button="@null"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/selector3"
+                android:textColor="@color/gray9999999"
+                android:textSize="16sp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:text="@string/under_300"
+                android:checked="false"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/grayF0F0F0"/>
+            <RadioButton
+                android:id="@+id/radio_fourth"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:button="@null"
+                android:drawableRight="@drawable/selector3"
+                android:gravity="center_vertical"
+                android:textColor="@color/gray9999999"
+                android:textSize="16sp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/under_500"
+                android:checked="false"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/grayF0F0F0"/>
+            <RadioButton
+                android:id="@+id/radio_fifth"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:button="@null"
+                android:drawableRight="@drawable/selector3"
+                android:gravity="center_vertical"
+                android:textColor="@color/gray9999999"
+                android:textSize="16sp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/up_500"
+                android:checked="false"></RadioButton>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dip"
+                android:background="@color/grayF0F0F0"/>
+        </RadioGroup>
 
 
         <ListView
