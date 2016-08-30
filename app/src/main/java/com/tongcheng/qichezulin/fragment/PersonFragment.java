@@ -1,15 +1,11 @@
 package com.tongcheng.qichezulin.fragment;
 
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.code19.library.StringUtils;
@@ -18,7 +14,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tongcheng.qichezulin.Param.ParamGetUserInfo;
-import com.tongcheng.qichezulin.Param.ParamRegist;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.activity.AccountActivity;
 import com.tongcheng.qichezulin.activity.MyBaoZhengJinActivity;
@@ -27,21 +22,13 @@ import com.tongcheng.qichezulin.activity.MyJiFenActivity;
 import com.tongcheng.qichezulin.activity.MyOrderActivity;
 import com.tongcheng.qichezulin.activity.MyTouSuActivity;
 import com.tongcheng.qichezulin.activity.MyWallectActivity;
-import com.tongcheng.qichezulin.activity.loginActivity;
-import com.tongcheng.qichezulin.config.RootApp;
+import com.tongcheng.qichezulin.activity.LoginActivity;
 import com.tongcheng.qichezulin.model.JsonBase;
-import com.tongcheng.qichezulin.model.RegistModel;
 import com.tongcheng.qichezulin.model.UserModel;
-import com.tongcheng.qichezulin.utils.Utils;
-import com.tongcheng.qichezulin.utils.UtilsDate;
-import com.tongcheng.qichezulin.utils.UtilsFastBlur;
-import com.tongcheng.qichezulin.utils.UtilsImage;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
-import com.wingjay.blurimageviewlib.BlurImageView;
-import com.wingjay.blurimageviewlib.FastBlurUtil;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import org.xutils.common.Callback;
@@ -49,11 +36,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.URI;
-import java.net.URL;
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.blurry.Blurry;
@@ -181,7 +164,7 @@ public class PersonFragment extends PuTongFragment {
             case R.id.btn_login_out:
                 JLog.w("退出操作");
                 UtilsUser.cleanAllSP(getContext());
-                UtilsTiaoZhuang.ToAnotherActivity(getActivity(),loginActivity.class);
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(),LoginActivity.class);
                 break;
 
         }

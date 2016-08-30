@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
-import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
@@ -42,7 +41,7 @@ public class StartActivity extends Activity {
             bt_go.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    UtilsTiaoZhuang.ToAnotherActivity(StartActivity.this, loginActivity.class);
+                    UtilsTiaoZhuang.ToAnotherActivity(StartActivity.this, LoginActivity.class);
                 }
             });
         }
@@ -54,7 +53,7 @@ public class StartActivity extends Activity {
             //为空
             if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "") == null || UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "").equals("")) {
                 JLog.w("跳转到登录界面");
-                UtilsTiaoZhuang.ToAnotherActivity(this, loginActivity.class);
+                UtilsTiaoZhuang.ToAnotherActivity(this, LoginActivity.class);
                 this.finish();
             }
             //不为空
