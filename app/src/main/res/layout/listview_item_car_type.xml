@@ -8,8 +8,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
-        app:layout_heightPercent="15%w"
-        app:layout_marginTopPercent="0.2%w"
+        app:layout_heightPercent="11%w"
         app:layout_widthPercent="100%w">
 
         <TextView
@@ -19,22 +18,25 @@
             android:gravity="center_vertical"
             android:layout_centerVertical="true"
             android:text="@string/small_car"
-            android:textColor="@color/black272727"
+            android:textColor="@color/gray9999999"
             app:layout_heightPercent="8%w"
             app:layout_marginLeftPercent="5%w"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.7%w"
             app:layout_widthPercent="30%w" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_heightPercent="8%w"
-            app:layout_widthPercent="8%w"
-            android:src="@mipmap/nochose"
-            android:layout_alignParentRight="true"
+        <RadioButton
+            android:id="@+id/rb_is_chose"
             android:layout_centerVertical="true"
-            app:layout_marginRightPercent="5%w"
-            android:background="@color/whiteFFFFFF" />
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:padding="3dp"
+            android:layout_alignParentRight="true"
+            app:layout_marginRightPercent="4%w"
+            android:clickable="false"
+            android:focusable="false"
+            android:button="@null"
+            android:focusableInTouchMode="false"
+            android:background="@drawable/selector3" />
 
     </com.zhy.android.percent.support.PercentRelativeLayout>
 

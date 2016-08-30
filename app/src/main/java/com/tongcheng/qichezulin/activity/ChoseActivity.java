@@ -2,6 +2,8 @@ package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,6 +14,9 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.pacific.adapter.Adapter;
+import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Adapter.CarTypeAdapter;
 import com.tongcheng.qichezulin.Param.ParamGetCarType;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.CarTypeModel;
@@ -37,12 +42,15 @@ import java.util.ArrayList;
 public class ChoseActivity extends PuTongActivity2 {
 
 
+    String carType;
+
     @ViewInject(R.id.radioGroup)
     RadioGroup radioGroup;
 
 
     @ViewInject(R.id.lv_hao_do_you_chose)
     ListView lv_hao_do_you_chose;
+    private CarTypeAdapter adapter;
 
     @ViewInject(R.id.tl_4)
     SegmentTabLayout tl_4;
@@ -58,7 +66,7 @@ public class ChoseActivity extends PuTongActivity2 {
 
     @Override
     void initData() {
-
+        get_carType();
     }
 
     @Override
@@ -72,8 +80,10 @@ public class ChoseActivity extends PuTongActivity2 {
                 JLog.w(position + "");
                 if (position == 0) {
                     radioGroup.setVisibility(View.VISIBLE);
+                    lv_hao_do_you_chose.setVisibility(View.GONE);
                 } else if (position == 1) {
                     radioGroup.setVisibility(View.GONE);
+                    lv_hao_do_you_chose.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -111,7 +121,16 @@ public class ChoseActivity extends PuTongActivity2 {
 
             }
         });
+        lv_hao_do_you_chose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                JLog.w("点击的位置=" + i);
+                JLog.w("选中的位置=" + lv_hao_do_you_chose.getCheckedItemPosition() + "");   // 即获取选中位置);
+                JLog.w(adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).FTypeName);
+
+            }
+        });
     }
 
 
@@ -148,12 +167,18 @@ public class ChoseActivity extends PuTongActivity2 {
                         .fromJson(result, type);
                 if (!base.status.toString().trim().equals("0")) {
                     if (base.data.size() > 0) {
+
+                        if (adapter == null) {
+                            adapter = new CarTypeAdapter(ChoseActivity.this, base.data);
+                            lv_hao_do_you_chose.setAdapter(adapter);
+
+                        }
+                    } else {
+                        JLog.w(base.info);
+
                     }
-                } else {
-                    JLog.w(base.info);
 
                 }
-
             }
 
             @Override

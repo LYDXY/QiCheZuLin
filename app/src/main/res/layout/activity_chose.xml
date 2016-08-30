@@ -57,6 +57,7 @@
                 android:button="@null"
                 android:gravity="center_vertical"
                 android:drawableRight="@drawable/selector3"
+                android:drawablePadding="8dp"
                 android:textColor="@color/gray9999999"
                 android:textSize="16sp"
                 android:paddingLeft="16dp"
@@ -138,13 +139,17 @@
 
 
         <ListView
+            android:choiceMode="singleChoice"
+            android:layout_centerVertical="true"
             android:id="@+id/lv_hao_do_you_chose"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/whiteFFFFFF"
             android:visibility="gone"
             app:layout_marginTopPercent="2%w"
-            app:layout_widthPercent="90%w"></ListView>
+            android:divider="@color/grayF0F0F0"
+            android:dividerHeight="0.6dp"
+            app:layout_widthPercent="100%w"></ListView>
 
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
