@@ -171,5 +171,5 @@
     <string name="under_300">¥ 150-¥ 300</string>
     <string name="under_500">¥ 300-¥ 500</string>
     <string name="up_500">¥ 500以上</string>
-
+    <string name="small_car">轿车</string>
 </resources>
