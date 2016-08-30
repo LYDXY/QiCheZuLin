@@ -23,7 +23,7 @@ import java.util.List;
 @ContentView(R.layout.activity_my_fa_piao)
 public class MyFaPiaoctivity extends PuTongFragmentActivity2 {
 
-
+    //
 
     @ViewInject(R.id.tl_4)
     SegmentTabLayout tl_4;
