@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.tongcheng.qichezulin.activity.MyJiFenActivity;
 import com.tongcheng.qichezulin.activity.MyOrderActivity;
 import com.tongcheng.qichezulin.activity.MyTouSuActivity;
 import com.tongcheng.qichezulin.activity.MyWallectActivity;
+import com.tongcheng.qichezulin.activity.loginActivity;
 import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.RegistModel;
@@ -62,6 +64,10 @@ import jp.wasabeef.blurry.Blurry;
 
 @ContentView(R.layout.fragment_person)
 public class PersonFragment extends PuTongFragment {
+
+    @ViewInject(R.id.btn_login_out) //退出按钮
+     Button btn_login_out;
+
 
     @ViewInject(R.id.rrl_zu_che_record) //租车记录
             PercentRelativeLayout rrl_zu_che_record;
@@ -110,6 +116,7 @@ public class PersonFragment extends PuTongFragment {
                     .capture(iv_blur)
                     .into(iv_blur);
             ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_blur);
+            tv_user_account.setText(UtilsString.hidePhoneNumber(UtilsUser.getUser(getContext().getApplicationContext()).FMobilePhone));
         } else {
             get_User_info();
         }
@@ -119,6 +126,7 @@ public class PersonFragment extends PuTongFragment {
 
     @Override
     void setClickListenerOnView() {
+        btn_login_out.setOnClickListener(this);
         rrl_zhang_hao.setOnClickListener(this);
         rrl_zu_che_record.setOnClickListener(this);
         rrl_my_ji_fen.setOnClickListener(this);
@@ -169,6 +177,11 @@ public class PersonFragment extends PuTongFragment {
             case R.id.rrl_my_tou_su:
                 JLog.w("跳转到我的投诉界面");
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyTouSuActivity.class);
+                break;
+            case R.id.btn_login_out:
+                JLog.w("退出操作");
+                UtilsUser.cleanAllSP(getContext());
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(),loginActivity.class);
                 break;
 
         }

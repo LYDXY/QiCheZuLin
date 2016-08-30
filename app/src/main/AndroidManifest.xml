@@ -266,6 +266,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+
+        <!--更新用户昵称-->
+        <activity
+            android:name=".activity.UpdateAccountUserNameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+
+
+
+
+
         <!--友盟推送-->
         <meta-data
             android:name="UMENG_APPKEY"

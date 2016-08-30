@@ -324,6 +324,7 @@
             app:layout_heightPercent="10%w"
             app:layout_marginTopPercent="5%w"
             app:layout_textSizePercent="5%w"
-            app:layout_widthPercent="55%w" />
+            app:layout_widthPercent="55%w"
+            android:id="@+id/btn_login_out" />
     </com.zhy.android.percent.support.PercentLinearLayout>
 </ScrollView>

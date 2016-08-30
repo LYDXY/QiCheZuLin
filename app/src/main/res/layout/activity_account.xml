@@ -21,7 +21,8 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         app:layout_heightPercent="10%w"
-        app:layout_widthPercent="100%w">
+        app:layout_widthPercent="100%w"
+        android:id="@+id/prl_first">
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,7 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/counnt_number"
             android:textColor="@color/gray_6d6d6d"
             app:layout_marginRightPercent="12%w"
             app:layout_textSizePercent="4%w" />
@@ -60,7 +60,8 @@
         android:gravity="center_vertical"
         app:layout_heightPercent="10%w"
         app:layout_marginTopPercent="0.5%w"
-        app:layout_widthPercent="100%w">
+        app:layout_widthPercent="100%w"
+        android:id="@+id/prl_second">
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,10 +72,10 @@
             app:layout_textSizePercent="4%w" />
 
         <TextView
+            android:id="@+id/tv_show_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="@string/counnt_number"
             android:textColor="@color/gray_6d6d6d"
             app:layout_marginRightPercent="12%w"
             app:layout_textSizePercent="4%w" />
@@ -128,7 +129,8 @@
         android:gravity="center_vertical"
         app:layout_heightPercent="10%w"
         app:layout_marginTopPercent="2%w"
-        app:layout_widthPercent="100%w">
+        app:layout_widthPercent="100%w"
+        android:id="@+id/prl_set_pass">
 
         <TextView
             android:layout_width="wrap_content"

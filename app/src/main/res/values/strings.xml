@@ -163,4 +163,5 @@
     <string name="use_des">余额使用说明</string>
     <string name="yu_e_pay">余额支付</string>
     <string name="set_up_pay_password">设置支付密码</string>
+    <string name="input_user_name">请输入昵称</string>
 </resources>
