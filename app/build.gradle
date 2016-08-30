@@ -62,6 +62,7 @@ dependencies {
     //添加选择器控件
     compile 'org.adw.library:discrete-seekbar:1.0.1'
     compile project(':PushSDK')
-    compile files('src/main/libs/alipaySdk-20160825.jar')
+    // compile files('src/main/libs/alipaySdk-20160825.jar')
+    compile files('src/main/libs/alipaySingle-20160825.jar')
 }
 
