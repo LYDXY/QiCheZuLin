@@ -2,7 +2,6 @@ package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,7 +10,6 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
 import com.flyco.tablayout.widget.MsgView;
 import com.jiongbull.jlog.JLog;
-import com.tongcheng.qichezulin.Adapter.FragmentStateAdaper2;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.config.RootApp;
 import com.tongcheng.qichezulin.entity.TabEntity;
@@ -19,16 +17,13 @@ import com.tongcheng.qichezulin.fragment.HomeFragment;
 import com.tongcheng.qichezulin.fragment.MessageFragment;
 import com.tongcheng.qichezulin.fragment.PersonFragment;
 import com.tongcheng.qichezulin.fragment.WhiteFragment;
-import com.tongcheng.qichezulin.fragment.loginFragment;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
-import com.tongcheng.qichezulin.view.ViewPagerWithoutSlide;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by 林尧 on 2016/7/22.

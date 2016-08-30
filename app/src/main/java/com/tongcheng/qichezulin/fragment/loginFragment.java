@@ -35,7 +35,7 @@ import java.util.ArrayList;
  */
 
 @ContentView(R.layout.fragment_login)
-public class loginFragment extends PuTongFragment {
+public class LoginFragment extends PuTongFragment {
 
 
     //
