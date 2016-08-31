@@ -41,8 +41,9 @@ import java.util.ArrayList;
 @ContentView(R.layout.activity_chose)
 public class ChoseActivity extends PuTongActivity2 {
 
-
-    String carType;
+    public static  String min="";
+    public static  String max="";
+    public static   String carType="";
 
     @ViewInject(R.id.radioGroup)
     RadioGroup radioGroup;
@@ -106,15 +107,20 @@ public class ChoseActivity extends PuTongActivity2 {
                         break;
                     case R.id.radio_second:
                         JLog.w("150");
+                        min="0";
+                        max="150";
                         break;
                     case R.id.radio_three:
                         JLog.w("300");
+                        min="150";
+                        max="300";
                         break;
                     case R.id.radio_fourth:
                         JLog.w("500");
+                        min="300";
+                        max="500";
                         break;
                     case R.id.radio_fifth:
-                        JLog.w("1500");
                         break;
                 }
 
@@ -124,10 +130,10 @@ public class ChoseActivity extends PuTongActivity2 {
         lv_hao_do_you_chose.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 JLog.w("点击的位置=" + i);
                 JLog.w("选中的位置=" + lv_hao_do_you_chose.getCheckedItemPosition() + "");   // 即获取选中位置);
                 JLog.w(adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).FTypeName);
+                carType=adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).PID;
 
             }
         });

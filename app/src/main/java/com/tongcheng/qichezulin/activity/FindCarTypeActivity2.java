@@ -35,10 +35,10 @@ import java.util.ArrayList;
 public class FindCarTypeActivity2 extends PuTongActivity2 {
 
 
-
     @ViewInject(R.id.iv_my_chose)
     ImageButton iv_my_chose; //筛选按钮
 
+    int page=1;
 
     @ViewInject(R.id.prl_prl) //下拉刷新控件
             PullToRefreshLayout prl_prl;
@@ -82,7 +82,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                 onBackPressed();
                 break;
             case R.id.iv_my_chose:
-                UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this,ChoseActivity.class);
+                UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this, ChoseActivity.class);
                 break;
         }
 
@@ -95,7 +95,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         initView();
         setListenerOnView();
         setOnPullListenerOnprl_prl();
-        do_get_data();
+        do_get_data("","",page+"","10","","");
     }
 
     @Override
@@ -124,14 +124,14 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
 
 
     // 获取列表数据
-    private void do_get_data() {
+    private void do_get_data(String min_price,String max_price,String page,String page_size,String cartype,String paytype) {
         ParamGetAllCar paramGetAllCar = new ParamGetAllCar();
-        // paramGetAllCar.max_price = "";
-        // paramGetAllCar.min_price = "";
-        paramGetAllCar.page = "1";
-        // paramGetAllCar.page_size = "";
-        //   paramGetAllCar.cartype = "";
-        //   paramGetAllCar.paytype = "";
+        paramGetAllCar.max_price =max_price;
+        paramGetAllCar.min_price = min_price;
+        paramGetAllCar.page = page;
+        paramGetAllCar.page_size =page_size;
+        paramGetAllCar.cartype =cartype;
+        paramGetAllCar.paytype =paytype;
         Callback.Cancelable cancelable
                 = x.http().post(paramGetAllCar, new Callback.CommonCallback<String>() {
             @Override
@@ -202,5 +202,40 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JLog.w("onResume");
+        if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("")) {
+            page=1;
+            catModel2Adapter.clear();
+            prl_prl.autoRefresh();
+            do_get_data(ChoseActivity.min,ChoseActivity.max,page+"","10","","");
+            ChoseActivity.min="";
+            ChoseActivity.max="";
+        } else if (!ChoseActivity.carType.equals("")) {
+            page=1;
+            do_get_data("","",page+"","10",ChoseActivity.carType,"");
+            catModel2Adapter.clear();
+            prl_prl.autoRefresh();
+            ChoseActivity.carType="";
+        } else if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("") && !ChoseActivity.carType.equals("")) {
+            page=1;
+            catModel2Adapter.clear();
+            prl_prl.autoRefresh();
+            do_get_data(ChoseActivity.min,ChoseActivity.max,page+"","10",ChoseActivity.carType,"");
+            ChoseActivity.min="";
+            ChoseActivity.max="";
+            ChoseActivity.carType="";
+
+        }else if (ChoseActivity.min==null ||ChoseActivity.carType==null||ChoseActivity.carType==null){
+
+        }else if (ChoseActivity.min.equals("")||ChoseActivity.max.equals("")||ChoseActivity.carType.equals("")) {
+
+        }
+
     }
 }
