@@ -146,7 +146,9 @@ public class ChoseActivity extends PuTongActivity2 {
             case R.id.iv_return:
                 onBackPressed();
                 break;
-
+            case R.id.tv_first:
+                onBackPressed();
+                break;
 
         }
     }
