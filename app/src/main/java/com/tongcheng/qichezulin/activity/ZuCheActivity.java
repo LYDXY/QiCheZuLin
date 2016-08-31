@@ -217,8 +217,21 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
 
                 break;
             case R.id.btn_xuan_che:
-                Bundle bundle = new Bundle();
-                UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity2.class, bundle);
+                if (type == 0) {
+                    Utils.ShowText2(ZuCheActivity.this, "请先确定好租车时间");
+                }else if (shop_id == null || shop_id == "") {
+                    Utils.ShowText2(ZuCheActivity.this, "请先选择取车门店");
+
+                }else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("days", tv_show_jian_ge.getText() + "");
+                    bundle.putString("start_time", DateUtils.formatDateCustom(get_car_date, "yyyy-MM-dd HH:mm:ss"));
+                    bundle.putString("end_time", DateUtils.formatDateCustom(back_car_date, "yyyy-MM-dd HH:mm:ss"));
+                    bundle.putString("shop_id", shop_id);
+                    UtilsTiaoZhuang.ToAnotherActivity(ZuCheActivity.this, FindCarTypeActivity2.class, bundle);
+                }
+
+
                 break;
         }
     }

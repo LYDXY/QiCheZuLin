@@ -4,14 +4,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.code19.library.DateUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.pacific.adapter.Adapter;
 import com.pacific.adapter.AdapterHelper;
+import com.tongcheng.qichezulin.Param.ParamChooseCar;
 import com.tongcheng.qichezulin.Param.ParamGetAllCar;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.CarModel2;
+import com.tongcheng.qichezulin.model.CarModel3;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullableListView;
@@ -44,7 +47,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
             PullToRefreshLayout prl_prl;
     @ViewInject(R.id.plv_car_list)
     PullableListView plv_car_list; //listview
-    Adapter<CarModel2> catModel2Adapter;
+    Adapter<CarModel3> catModel2Adapter;
 
 
     private boolean isFirstIn = true;
@@ -95,7 +98,12 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         initView();
         setListenerOnView();
         setOnPullListenerOnprl_prl();
-        do_get_data("","",page+"","10","","");
+        if (getIntent().getExtras().getString("shop_id")!=null && getIntent().getExtras().getString("start_time")!=null
+                && getIntent().getExtras().getString("end_time")!=null) {
+            do_get_data(getIntent().getExtras().getString("shop_id"),"","","","","");
+        }
+
+
     }
 
     @Override
@@ -124,24 +132,24 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
 
 
     // 获取列表数据
-    private void do_get_data(String min_price,String max_price,String page,String page_size,String cartype,String paytype) {
-        ParamGetAllCar paramGetAllCar = new ParamGetAllCar();
-        paramGetAllCar.max_price =max_price;
-        paramGetAllCar.min_price = min_price;
-        paramGetAllCar.page = page;
-        paramGetAllCar.page_size =page_size;
-        paramGetAllCar.cartype =cartype;
-        paramGetAllCar.paytype =paytype;
+    private void do_get_data(String shop_id,String is_auto,String type,String paytype,String min_price,String max_price) {
+        ParamChooseCar paramChooseCar = new ParamChooseCar();
+        paramChooseCar.shop_id = shop_id;
+        paramChooseCar.is_auto =is_auto;
+        paramChooseCar.type =type;
+        paramChooseCar.paytype =paytype;
+        paramChooseCar.max_price =max_price;
+        paramChooseCar.min_price = min_price;
         Callback.Cancelable cancelable
-                = x.http().post(paramGetAllCar, new Callback.CommonCallback<String>() {
+                = x.http().post(paramChooseCar, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 try {
                     UtilsJson.printJsonData(result);
                     Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase<ArrayList<CarModel2>>>() {
+                    Type type = new TypeToken<JsonBase<ArrayList<CarModel3>>>() {
                     }.getType();
-                    JsonBase<ArrayList<CarModel2>> base = gson
+                    JsonBase<ArrayList<CarModel3>> base = gson
                             .fromJson(result, type);
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
@@ -149,9 +157,9 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                             if (base.data.size() > 0) {
                                 JLog.w("获取数据成功");
                                 if (catModel2Adapter == null) {
-                                    catModel2Adapter = new Adapter<CarModel2>(FindCarTypeActivity2.this, R.layout.listview_item_car2) {
+                                    catModel2Adapter = new Adapter<CarModel3>(FindCarTypeActivity2.this, R.layout.listview_item_car2) {
                                         @Override
-                                        protected void convert(AdapterHelper helper, final CarModel2 item) {
+                                        protected void convert(AdapterHelper helper, final CarModel3 item) {
                                             final int position = helper.getPosition();
                                             JLog.w(position + "");
                                             helper.setImageUrl(R.id.iv_car_picture, item.FImg)
@@ -164,7 +172,15 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                                                     .getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View view) {
-                                                    UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this, CarDetailActivity2.class, UtilsTiaoZhuang.EveryCar(item));
+
+                                                        Bundle bundle = new Bundle();
+                                                        bundle.putString("days",getIntent().getExtras().getString("days"));
+                                                        bundle.putString("start_time", getIntent().getExtras().getString("start_time"));
+                                                        bundle.putString("end_time",getIntent().getExtras().getString("end_time"));
+                                                        bundle.putString("shop_id", getIntent().getExtras().getString("shop_id"));
+                                                        bundle.putSerializable("obj",item);
+                                                        UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this, YuYueActivity2.class, bundle);
+
                                                 }
                                             });
                                         }
@@ -176,6 +192,10 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                                     catModel2Adapter.notifyAll();
                                 }
                             }
+                            else{
+                                Utils.ShowText(FindCarTypeActivity2.this, "没有符合条件的车");
+                            }
+
                         }
                     } else {
                         Utils.ShowText(FindCarTypeActivity2.this, base.info.toString());
@@ -210,23 +230,21 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         super.onResume();
         JLog.w("onResume");
         if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("")) {
-            page=1;
             catModel2Adapter.clear();
             prl_prl.autoRefresh();
-            do_get_data(ChoseActivity.min,ChoseActivity.max,page+"","10","","");
+            do_get_data(getIntent().getExtras().getString("shop_id"),"","","2",ChoseActivity.min,ChoseActivity.max);
             ChoseActivity.min="";
             ChoseActivity.max="";
         } else if (!ChoseActivity.carType.equals("")) {
-            page=1;
-            do_get_data("","",page+"","10",ChoseActivity.carType,"");
+            do_get_data(getIntent().getExtras().getString("shop_id"),"",ChoseActivity.carType,"","","");
             catModel2Adapter.clear();
             prl_prl.autoRefresh();
             ChoseActivity.carType="";
         } else if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("") && !ChoseActivity.carType.equals("")) {
-            page=1;
+
             catModel2Adapter.clear();
             prl_prl.autoRefresh();
-            do_get_data(ChoseActivity.min,ChoseActivity.max,page+"","10",ChoseActivity.carType,"");
+            do_get_data(getIntent().getExtras().getString("shop_id"),"",ChoseActivity.carType,"2",ChoseActivity.min,ChoseActivity.max);
             ChoseActivity.min="";
             ChoseActivity.max="";
             ChoseActivity.carType="";
