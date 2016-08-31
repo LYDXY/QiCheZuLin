@@ -1,6 +1,7 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -204,5 +205,16 @@ public class ChoseActivity extends PuTongActivity2 {
 
             }
         });
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 }

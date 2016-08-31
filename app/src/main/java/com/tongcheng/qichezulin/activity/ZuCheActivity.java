@@ -7,6 +7,7 @@ import android.nfc.tech.NfcBarcode;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -546,6 +547,17 @@ public class ZuCheActivity extends Activity implements View.OnClickListener, OnI
             dsb_DiscreteSeekBar.setMax(30000);
             dsb_DiscreteSeekBar.setMin(0);
             dsb_DiscreteSeekBar.setProgress(3000);
+        }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+            return false;
+        }
+        else{
+            return true;
         }
     }
 }

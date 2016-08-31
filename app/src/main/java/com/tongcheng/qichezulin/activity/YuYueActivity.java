@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -332,5 +333,8 @@ public class YuYueActivity extends PuTongActivity2 {
             }
         });
     }
+
+
+
 
 }

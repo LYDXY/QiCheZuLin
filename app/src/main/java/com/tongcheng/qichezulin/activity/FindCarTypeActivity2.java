@@ -1,6 +1,7 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -41,7 +42,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
     @ViewInject(R.id.iv_my_chose)
     ImageButton iv_my_chose; //筛选按钮
 
-    int page=1;
+    int page = 1;
 
     @ViewInject(R.id.prl_prl) //下拉刷新控件
             PullToRefreshLayout prl_prl;
@@ -98,9 +99,9 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         initView();
         setListenerOnView();
         setOnPullListenerOnprl_prl();
-        if (getIntent().getExtras().getString("shop_id")!=null && getIntent().getExtras().getString("start_time")!=null
-                && getIntent().getExtras().getString("end_time")!=null) {
-            do_get_data(getIntent().getExtras().getString("shop_id"),"","","","","");
+        if (getIntent().getExtras().getString("shop_id") != null && getIntent().getExtras().getString("start_time") != null
+                && getIntent().getExtras().getString("end_time") != null) {
+            do_get_data(getIntent().getExtras().getString("shop_id"), "", "", "", "", "");
         }
 
 
@@ -110,10 +111,10 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         // 第一次进入自动刷新
-        if (isFirstIn) {
+      /*  if (isFirstIn) {
             prl_prl.autoRefresh();
             isFirstIn = false;
-        }
+        }*/
     }
 
     public void setOnPullListenerOnprl_prl() {
@@ -132,13 +133,13 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
 
 
     // 获取列表数据
-    private void do_get_data(String shop_id,String is_auto,String type,String paytype,String min_price,String max_price) {
+    private void do_get_data(String shop_id, String is_auto, String type, String paytype, String min_price, String max_price) {
         ParamChooseCar paramChooseCar = new ParamChooseCar();
         paramChooseCar.shop_id = shop_id;
-        paramChooseCar.is_auto =is_auto;
-        paramChooseCar.type =type;
-        paramChooseCar.paytype =paytype;
-        paramChooseCar.max_price =max_price;
+        paramChooseCar.is_auto = is_auto;
+        paramChooseCar.type = type;
+        paramChooseCar.paytype = paytype;
+        paramChooseCar.max_price = max_price;
         paramChooseCar.min_price = min_price;
         Callback.Cancelable cancelable
                 = x.http().post(paramChooseCar, new Callback.CommonCallback<String>() {
@@ -162,27 +163,42 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                                         protected void convert(AdapterHelper helper, final CarModel3 item) {
                                             final int position = helper.getPosition();
                                             JLog.w(position + "");
-                                            helper.setImageUrl(R.id.iv_car_picture, item.FImg)
-                                                    .setText(R.id.tv_car_name, item.FCarName)
-                                                    .setText(R.id.tv_car_remark, item.FRemark)
-                                                    .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
-                                                    .setText(R.id.tv_car_yue_price, "¥" + item.FMonthMoney + "/")
-                                                    .setVisible(R.id.pll_is_zu_man, View.GONE)
-                                                    .setVisible(R.id.line1233, View.GONE)
-                                                    .getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
-
+                                            if (Integer.parseInt(item.FCount.trim()) - Integer.parseInt(item.FUseCount.trim()) > 0) {
+                                                helper.setImageUrl(R.id.iv_car_picture, item.FImg)
+                                                        .setText(R.id.tv_car_name, item.FCarName)
+                                                        .setText(R.id.tv_car_remark, item.FRemark)
+                                                        .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
+                                                        .setText(R.id.tv_car_yue_price, "¥" + item.FMonthMoney + "/")
+                                                        .setVisible(R.id.pll_is_zu_man, View.GONE)
+                                                        .setVisible(R.id.line1233, View.GONE)
+                                                        .getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
                                                         Bundle bundle = new Bundle();
-                                                        bundle.putString("days",getIntent().getExtras().getString("days"));
+                                                        bundle.putString("days", getIntent().getExtras().getString("days"));
                                                         bundle.putString("start_time", getIntent().getExtras().getString("start_time"));
-                                                        bundle.putString("end_time",getIntent().getExtras().getString("end_time"));
+                                                        bundle.putString("end_time", getIntent().getExtras().getString("end_time"));
                                                         bundle.putString("shop_id", getIntent().getExtras().getString("shop_id"));
-                                                        bundle.putSerializable("obj",item);
+                                                        bundle.putSerializable("obj", item);
                                                         UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this, YuYueActivity2.class, bundle);
 
-                                                }
-                                            });
+                                                    }
+                                                });
+                                            } else {
+                                                helper.setImageUrl(R.id.iv_car_picture, item.FImg)
+                                                        .setText(R.id.tv_car_name, item.FCarName)
+                                                        .setText(R.id.tv_car_remark, item.FRemark)
+                                                        .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
+                                                        .setText(R.id.tv_car_yue_price, "¥" + item.FMonthMoney + "/")
+                                                        .setVisible(R.id.pll_is_zu_man, View.VISIBLE)
+                                                        .setVisible(R.id.line1233, View.VISIBLE)
+                                                        .getView(R.id.rrl_item).setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Utils.ShowText2(FindCarTypeActivity2.this, "该车已经被组满");
+                                                    }
+                                                });
+                                            }
                                         }
                                     };
                                     catModel2Adapter.addAll(base.data);
@@ -191,8 +207,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                                     catModel2Adapter.addAll(base.data);
                                     catModel2Adapter.notifyAll();
                                 }
-                            }
-                            else{
+                            } else {
                                 Utils.ShowText(FindCarTypeActivity2.this, "没有符合条件的车");
                             }
 
@@ -232,28 +247,37 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("")) {
             catModel2Adapter.clear();
             prl_prl.autoRefresh();
-            do_get_data(getIntent().getExtras().getString("shop_id"),"","","2",ChoseActivity.min,ChoseActivity.max);
-            ChoseActivity.min="";
-            ChoseActivity.max="";
+            do_get_data(getIntent().getExtras().getString("shop_id"), "", "", "2", ChoseActivity.min, ChoseActivity.max);
+            ChoseActivity.min = "";
+            ChoseActivity.max = "";
         } else if (!ChoseActivity.carType.equals("")) {
-            do_get_data(getIntent().getExtras().getString("shop_id"),"",ChoseActivity.carType,"","","");
+            do_get_data(getIntent().getExtras().getString("shop_id"), "", ChoseActivity.carType, "", "", "");
             catModel2Adapter.clear();
             prl_prl.autoRefresh();
-            ChoseActivity.carType="";
+            ChoseActivity.carType = "";
         } else if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("") && !ChoseActivity.carType.equals("")) {
 
             catModel2Adapter.clear();
             prl_prl.autoRefresh();
-            do_get_data(getIntent().getExtras().getString("shop_id"),"",ChoseActivity.carType,"2",ChoseActivity.min,ChoseActivity.max);
-            ChoseActivity.min="";
-            ChoseActivity.max="";
-            ChoseActivity.carType="";
+            do_get_data(getIntent().getExtras().getString("shop_id"), "", ChoseActivity.carType, "2", ChoseActivity.min, ChoseActivity.max);
+            ChoseActivity.min = "";
+            ChoseActivity.max = "";
+            ChoseActivity.carType = "";
 
-        }else if (ChoseActivity.min==null ||ChoseActivity.carType==null||ChoseActivity.carType==null){
+        } else if (ChoseActivity.min == null || ChoseActivity.carType == null || ChoseActivity.carType == null) {
 
-        }else if (ChoseActivity.min.equals("")||ChoseActivity.max.equals("")||ChoseActivity.carType.equals("")) {
+        } else if (ChoseActivity.min.equals("") || ChoseActivity.max.equals("") || ChoseActivity.carType.equals("")) {
 
         }
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+            return false;
+        } else {
+            return true;
+        }
     }
 }
