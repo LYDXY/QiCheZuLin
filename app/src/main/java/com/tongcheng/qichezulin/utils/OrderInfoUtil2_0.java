@@ -20,7 +20,7 @@ public class OrderInfoUtil2_0 {
 	
 	/**
 	 * 构造授权参数列表
-	 * 
+	 *
 	 * @param pid
 	 * @param app_id
 	 * @param target_id
@@ -76,7 +76,7 @@ public class OrderInfoUtil2_0 {
 		keyValues.put("notify_url", "api/order/notify_url.aspx");
 		return keyValues;
 	}
-	
+
 
 	public static String buildOrderParam(Map<String, String> map) {
 		List<String> keys = new ArrayList<String>(map.keySet());

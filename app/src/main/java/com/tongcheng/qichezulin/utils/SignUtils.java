@@ -26,7 +26,6 @@ public class SignUtils {
 			signature.update(content.getBytes(DEFAULT_CHARSET));
 
 			byte[] signed = signature.sign();
-
 			return Base64.encode(signed);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -37,6 +37,7 @@ import com.tongcheng.qichezulin.model.UserModel;
 import com.tongcheng.qichezulin.model.ZhiFuBaoOrderModel;
 import com.tongcheng.qichezulin.utils.OrderInfoUtil2_0;
 import com.tongcheng.qichezulin.utils.PayResult;
+import com.tongcheng.qichezulin.utils.SignUtils;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
@@ -50,6 +51,8 @@ import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -100,13 +103,10 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
 
         try {
-
-
             if (UtilsUser.getUser(this) != null) {
                 get_now_my_money(UtilsUser.getUser(this).PID);
                 tv_show_phone_number.setText(UtilsUser.getUser(this).FMobilePhone);
             }
-
             if (getIntent().getExtras().getString("yufukuan") != null) {
                 tv_show_yu_fu_money.setText("¥" + getIntent().getExtras().getString("yufukuan"));
             }
@@ -384,19 +384,31 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
         String APPID = AppConfig.ZHI_FU_BAO_APPID;
         String RSA_PRIVATE = AppConfig.ZHI_FU_BAO_KEY;
-        Map<String, String> map = OrderInfoUtil2_0.buildOrderParamMap(APPID);
+        Map<String, String> map = new HashMap<String, String>();;//公共参数
         map.put("biz_content", orderjson_str);
-        String str = OrderInfoUtil2_0.buildOrderParam(map); //拼接操作
-        JLog.w(str);
-        String signstr = OrderInfoUtil2_0.getSign(map, RSA_PRIVATE);//对原始字符串进行签名
-        //最终的订单信息+签名
-        final String orderInfo = str + "&" + signstr;
+        map.put("app_id", APPID);
+        map.put("method", "alipay.trade.app.pay");
+        map.put("charset", "utf-8");
+        map.put("sign_type", "RSA");
+        map.put("timestamp", OrderInfoUtil2_0.getOutTradeNo2());
+        map.put("version", "1.0");
+        map.put("notify_url", AppConfig.HOST+"/api/order/notify_url.aspx");
+        StringBuilder sb = new StringBuilder();
+        for (String key : map.keySet()) {
+            sb.append(key+"="+ map.get(key)+"&");
+        }
+        JLog.w(sb.substring(0,sb.length()-1)); //请求体
+        String orderInfo =sb.substring(0,sb.length()-1) + "&sign=" + RSA_PRIVATE;
+        JLog.w(orderInfo);
+    //    String qianming=SignUtils.sign(orderInfo,RSA_PRIVATE);//签名
+        final String encodedSign = URLEncoder.encode(orderInfo, "UTF-8");
+        JLog.w(encodedSign);
         Runnable payRunnable = new Runnable() {
             @Override
             public void run() {
                 PayTask alipay = new PayTask(OrderDetailActivity.this);
-                Map<String, String> result = alipay.payV2(orderInfo, true);
-                JLog.w("msp", result.toString());
+                Map<String, String> result = alipay.payV2(encodedSign, true);
+                JLog.w("============"+result.toString());
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -420,6 +432,9 @@ public class OrderDetailActivity extends PuTongActivity2 {
                      */
                     String resultInfo = payResult.getResult();// 同步返回需要验证的信息
                     String resultStatus = payResult.getResultStatus();
+
+                    JLog.w(resultInfo);
+                    JLog.w(resultStatus);
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
