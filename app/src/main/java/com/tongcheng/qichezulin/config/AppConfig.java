@@ -113,4 +113,11 @@ public class AppConfig {
     public static final String ZHI_FU_BAO_KEY="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAO3rtlLikfdS9YeS1fIAfJca3k1DBd+3WZ89OcmOUmw8u8ajFpPkNkXgQPPype++ST+y39d+uqj8ZSreXCAoTCcKUdE8e6/p8zea6Z2/AXxFH4DZsdBENDeStt3rLtR9CnKiuYgr5bB2D20mSGcusPznaNNaXosmMIUYYfz7UUT/AgMBAAECgYB7YzcXHTGeFoQHX3tdGiuDIggQAaZWM3xjPRlvEkRkpcqsZYAcCsqqynZlDX5JK2JJirbTx4F+igbdiJw2gS+cP53nfll/mlVV62CfNbiovDa294wpd6vSIvRjdxjNEymQxAbvocUubm75pYUnbrwRVKIN8hsuZptoMGWPTcHhQQJBAPdgzIbuhXBaVdi8sx+Dd6gwSq21EBYMEjfsTNK/qqJhbU3Yzsc4sCFYkracUZhrCJVlSvtQoA/58WMHkkmCDHkCQQD2NofyMTMfga5iaJx7lJDLGFfHJ44rKhc0Hh/Y3I7YK3oRD7JeOOKoT0WJ3NrWc0ROQJ0JwLIZyOtK9QHacY83AkAo4CDLhuwbpYGb34pFgcaqztf4Hfv7eKEmBnCnPi5myGx0OYfpWU+ZIvaTH/9HjSAM94DNSAQ6v5UIRP8CEHAZAkEAwqheVub7Cj/XBUq73SCaUVfPnk7xocLHUZc3ipbmAJZvDaohVUkYOgVibxrDkaTULiH7hkhpBuXI0Rxf+LqrhQJBALDun4Hc+K5/EDD3lG1gw1/FLqTz/h2muoAo7O6ZeP0KQGvaxy5pvWr/DBSCpzl3qaoW0naC9ckVDe8Ql/ZCsd8=";
     //支付宝 appid
     public static final String ZHI_FU_BAO_APPID="2015121200963374";
+
+    //收款的账号
+    public static final String SELLER_ID = "2088121527311366";
+
+    //支付宝回调地址
+    public static final String ZHI_FU_BAO_ADDRESS_BACK = "api/order/notify_url.aspx";
+
 }

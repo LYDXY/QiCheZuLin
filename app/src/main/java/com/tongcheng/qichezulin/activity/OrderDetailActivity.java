@@ -7,9 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,25 +17,16 @@ import com.bigkoo.alertview.OnItemClickListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
-import com.pacific.adapter.Adapter;
-import com.pacific.adapter.AdapterHelper;
-import com.tongcheng.qichezulin.Param.ParamGetExpense;
 import com.tongcheng.qichezulin.Param.ParamGetUserMoney;
 import com.tongcheng.qichezulin.Param.ParamSetOrder;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.config.AppConfig;
-import com.tongcheng.qichezulin.config.RootApp;
-import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.CarModel3;
-import com.tongcheng.qichezulin.model.FuWuModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.MoneyModel;
 import com.tongcheng.qichezulin.model.SetOrderModel;
-import com.tongcheng.qichezulin.model.UserModel;
-import com.tongcheng.qichezulin.model.ZhiFuBaoOrderModel;
-import com.tongcheng.qichezulin.utils.OrderInfoUtil2_0;
+import com.tongcheng.qichezulin.utils.PayOrderInfoUtil2_0;
 import com.tongcheng.qichezulin.utils.PayResult;
-import com.tongcheng.qichezulin.utils.SignUtils;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
@@ -189,16 +178,9 @@ public class OrderDetailActivity extends PuTongActivity2 {
                                 getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
                                 payType);
                     } else if (payType.equals("2")) {
-                        ZhiFuBaoOrderModel zhiFuBaoOrderModel = new ZhiFuBaoOrderModel();
-                        zhiFuBaoOrderModel.out_trade_no = carModel3.PID+"-1";
-                        zhiFuBaoOrderModel.total_amount = "0.01";
-                        zhiFuBaoOrderModel.subject = "标题";
-                        zhiFuBaoOrderModel.body="租车";
-                        Gson gson = new Gson();
-                        String json = gson.toJson(zhiFuBaoOrderModel);
-                        JLog.w(json);
+
                         try {
-                            pay_to_zhi_fu_bao(json);
+                            pay_to_zhi_fu_bao(carModel3.PID + "-1", carModel3.FCarName, "0.01");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
@@ -380,34 +362,17 @@ public class OrderDetailActivity extends PuTongActivity2 {
 
 
     //调用支付宝支付
-    public void pay_to_zhi_fu_bao(String orderjson_str) throws UnsupportedEncodingException {
+    public void pay_to_zhi_fu_bao(String orderid, String ordertitle, String money) throws UnsupportedEncodingException {
 
-        String APPID = AppConfig.ZHI_FU_BAO_APPID;
-        String RSA_PRIVATE = AppConfig.ZHI_FU_BAO_KEY;
-        Map<String, String> map = new HashMap<String, String>();;//公共参数
-        map.put("biz_content", orderjson_str);
-        map.put("app_id", APPID);
-        map.put("method", "alipay.trade.app.pay");
-        map.put("charset", "utf-8");
-        map.put("sign_type", "RSA");
-        map.put("timestamp", OrderInfoUtil2_0.getOutTradeNo2());
-        map.put("version", "1.0");
-        map.put("notify_url", AppConfig.HOST+"/api/order/notify_url.aspx");
-        StringBuilder sb = new StringBuilder();
-        for (String key : map.keySet()) {
-            sb.append(key+"="+ map.get(key)+"&");
-        }
-        JLog.w(sb.substring(0,sb.length()-1)); //请求体
-        String orderInfo =sb.substring(0,sb.length()-1) + "&sign=" + RSA_PRIVATE;
-        JLog.w(orderInfo);
-    //    String qianming=SignUtils.sign(orderInfo,RSA_PRIVATE);//签名
-        final String encodedSign = URLEncoder.encode(orderInfo, "UTF-8");
-        JLog.w(encodedSign);
+        Map<String, String> params = PayOrderInfoUtil2_0.buildOrderParamMap(AppConfig.SELLER_ID, AppConfig.ZHI_FU_BAO_APPID, orderid, ordertitle, money);
+        String orderParam = PayOrderInfoUtil2_0.buildOrderParam(params);
+        String sign = PayOrderInfoUtil2_0.getSign(params, AppConfig.ZHI_FU_BAO_KEY);
+        final String orderInfo = orderParam + "&" + sign;
         Runnable payRunnable = new Runnable() {
             @Override
             public void run() {
                 PayTask alipay = new PayTask(OrderDetailActivity.this);
-                Map<String, String> result = alipay.payV2(encodedSign, true);
+                Map<String, String> result = alipay.payV2(orderInfo, true);
                 JLog.w("============"+result.toString());
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
