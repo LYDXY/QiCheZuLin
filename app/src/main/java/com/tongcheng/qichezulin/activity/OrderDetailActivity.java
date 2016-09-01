@@ -396,7 +396,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
         Map<String, String> params = PayOrderInfoUtil2_0.buildOrderParamMap(AppConfig.SELLER_ID, AppConfig.ZHI_FU_BAO_APPID, orderid, ordertitle, money);
         String orderParam = PayOrderInfoUtil2_0.buildOrderParam(params);
-        String sign = PayOrderInfoUtil2_0.getSign(params, AppConfig.ZHI_FU_BAO_KEY);
+        String sign = PayOrderInfoUtil2_0.getSign(params, AppConfig.ZHI_FU_BAO_KEY2);
         final String orderInfo = orderParam + "&" + sign;
         Runnable payRunnable = new Runnable() {
             @Override
