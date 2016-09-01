@@ -283,7 +283,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
             @Override
             public void onFinished() {
-//
+
             }
 
             @Override
@@ -298,7 +298,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
                             JLog.w("插入订单成功");
-                            Utils.ShowText2(OrderDetailActivity.this, "插入订单成功");
+                            pay_to_wei_xin1(base.data.get(0).order_code,"测试","再次测试","1","APP");
                         }
                     } else {
                         JLog.w("插入订单失败");
@@ -416,7 +416,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
     };
 
-    //用微信支付
+    //微信预下单接口
     public void pay_to_wei_xin1(String out_trade_no, String body, String detail, String total_fee, String trade_type) {
         ParamWeiXin paramWeiXin = new ParamWeiXin();
         paramWeiXin.out_trade_no = out_trade_no;
@@ -454,7 +454,6 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
                             JLog.w("调用微信预下单接口成功");
-                            weiXinModel=base.data.get(0);
                         }
                     } else {
 
@@ -489,7 +488,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
     //微信支付后的回到
     @Override
     public void onReq(BaseReq baseReq) {
-      /*  switch (baseReq.getType()) {
+     switch (baseReq.getType()) {
             case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
                 break;
             case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
@@ -499,12 +498,12 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                 break;
             default:
                 break;
-        }*/
+        }
     }
 
     @Override
     public void onResp(BaseResp baseResp) {
-        /*if (baseResp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
+        if (baseResp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
             Toast.makeText(this, "code = " + ((SendAuth.Resp) baseResp).code, Toast.LENGTH_SHORT).show();
         }
         int result = 0;
@@ -516,7 +515,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
                 break;
-        }*/
+        }
     }
 }
 
