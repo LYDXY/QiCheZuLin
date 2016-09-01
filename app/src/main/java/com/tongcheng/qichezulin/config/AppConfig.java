@@ -6,9 +6,9 @@ package com.tongcheng.qichezulin.config;
 public class AppConfig {
 
     //域名 或者ip 地址
-    public static final String HOST = "http://120.24.236.80:8090";
+  //  public static final String HOST = "http://120.24.236.80:8090";
 
-    // public static final String HOST = "http://192.168.0.123:8090";
+     public static final String HOST = "http://192.168.0.123:8090";
 
     //广告轮播地址
     public static final String GET_BANNER = "api/advert/get_advert.ashx";
@@ -120,4 +120,22 @@ public class AppConfig {
     //支付宝回调地址
     public static final String ZHI_FU_BAO_ADDRESS_BACK = "api/order/notify_url.aspx";
 
+    //微信的appid
+    public static final String WEI_XIN_APP_ID = "wxb1e3074074a83283";
+
+    //商户号
+    public static final String WEI_XIN_MCH_ID = "1322911401";
+
+    //微信的秘钥
+    public static final String WEI_XIN_PARTNERKEY="TXesTUR0uR7RZ4rN3AevoHwGiAIsAOLH";
+
+
+    //微信支付测试地址
+    //微信支付统一接口(POST)
+    public final static String UNIFIED_ORDER_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+
+
+    //微信预下单地址
+    public final static String MY_SEVICE_WEI_XIN="api/pay/unifiedorderwx.ashx";
+    //微信的回调地址
 }

@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.code19.library.VerificationUtils;
 import com.jiongbull.jlog.JLog;
 
+import java.util.Random;
+
 /**
  * Created by 林尧 on 2016/7/23.
  * 找控件的 方法
@@ -87,4 +89,7 @@ public class Utils {
         }
         toast.show();
     }
+
+
+
 }

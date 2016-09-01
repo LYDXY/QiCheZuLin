@@ -17,14 +17,26 @@ import com.bigkoo.alertview.OnItemClickListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.tencent.mm.sdk.constants.Build;
+import com.tencent.mm.sdk.constants.ConstantsAPI;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tongcheng.qichezulin.Param.ParamGetUserMoney;
 import com.tongcheng.qichezulin.Param.ParamSetOrder;
+import com.tongcheng.qichezulin.Param.ParamWeiXin;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.config.AppConfig;
 import com.tongcheng.qichezulin.model.CarModel3;
+import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.MoneyModel;
 import com.tongcheng.qichezulin.model.SetOrderModel;
+import com.tongcheng.qichezulin.model.WeiXinModel;
 import com.tongcheng.qichezulin.utils.PayOrderInfoUtil2_0;
 import com.tongcheng.qichezulin.utils.PayResult;
 import com.tongcheng.qichezulin.utils.Utils;
@@ -32,6 +44,7 @@ import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
+import com.tongcheng.qichezulin.utils.UtilsWeiXin;
 
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
@@ -40,8 +53,6 @@ import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,8 +61,10 @@ import java.util.Map;
  */
 
 @ContentView(R.layout.activity_order_detail)
-public class OrderDetailActivity extends PuTongActivity2 {
+public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventHandler {
 
+    private SetOrderModel setOrderModel;
+    private WeiXinModel weiXinModel;
     private CarModel3 carModel3;
     private String dingjing;
     private Integer use_ji_fen = 0;//记录使用了多少积分;
@@ -167,8 +180,8 @@ public class OrderDetailActivity extends PuTongActivity2 {
                 } else {
                     JLog.w("可以提交订单");
                     JLog.w(payType);
-                    if (payType.equals("1")) {
-                        get_order_que_ding(UtilsUser.getUser(this).PID, carModel3.PID, carModel3.KShopID,
+                    if (payType.equals("3")) {
+                        get_order_que_ding(UtilsUser.getUser(getApplicationContext()).PID, carModel3.PID, carModel3.KShopID,
                                 getIntent().getExtras().getString("start_time").trim(),
                                 getIntent().getExtras().getString("end_time").trim(),
                                 dingjing,
@@ -176,16 +189,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
                                 getIntent().getExtras().getString("sheng_yu").trim(),
                                 use_ji_fen + "",
                                 getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
-                                payType);
-                    } else if (payType.equals("2")) {
-
-                        try {
-                            pay_to_zhi_fu_bao(carModel3.PID + "-1", carModel3.FCarName, "0.01");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                    } else if (payType.equals("3")) {
-
+                                "3");
                     }
 
                 }
@@ -219,7 +223,6 @@ public class OrderDetailActivity extends PuTongActivity2 {
         extView.findViewById(R.id.iv_yu_er_pay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 tv_chose_pay_ways.setText("余额支付");
                 payType = "1";
                 alertView.dismiss();
@@ -296,7 +299,6 @@ public class OrderDetailActivity extends PuTongActivity2 {
                         if (base.data != null) {
                             JLog.w("插入订单成功");
                             Utils.ShowText2(OrderDetailActivity.this, "插入订单成功");
-                            UtilsTiaoZhuang.ToAnotherActivity(OrderDetailActivity.this, MyOrderActivity.class);
                         }
                     } else {
                         JLog.w("插入订单失败");
@@ -360,7 +362,6 @@ public class OrderDetailActivity extends PuTongActivity2 {
     }
 
 
-
     //调用支付宝支付
     public void pay_to_zhi_fu_bao(String orderid, String ordertitle, String money) throws UnsupportedEncodingException {
 
@@ -373,7 +374,7 @@ public class OrderDetailActivity extends PuTongActivity2 {
             public void run() {
                 PayTask alipay = new PayTask(OrderDetailActivity.this);
                 Map<String, String> result = alipay.payV2(orderInfo, true);
-                JLog.w("============"+result.toString());
+                JLog.w("============" + result.toString());
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
                 msg.obj = result;
@@ -414,4 +415,108 @@ public class OrderDetailActivity extends PuTongActivity2 {
         }
 
     };
+
+    //用微信支付
+    public void pay_to_wei_xin1(String out_trade_no, String body, String detail, String total_fee, String trade_type) {
+        ParamWeiXin paramWeiXin = new ParamWeiXin();
+        paramWeiXin.out_trade_no = out_trade_no;
+        paramWeiXin.body = body;
+        paramWeiXin.detail = detail;
+        paramWeiXin.total_fee = total_fee;
+        paramWeiXin.trade_type = trade_type;
+        Callback.Cancelable cancelable
+                = x.http().post(paramWeiXin, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<List<WeiXinModel>>>() {
+                    }.getType();
+                    final JsonBase<List<WeiXinModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        if (base.data != null) {
+                            JLog.w("调用微信预下单接口成功");
+                            weiXinModel=base.data.get(0);
+                        }
+                    } else {
+
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+
+    //调用微信支付
+    public void pay_to_wei_xin2(final String appId,final String partnerId,final String prepayId, final String packageValue, final String nonceStr, final String timeStamp, final String sign) {
+        final IWXAPI msgApi = WXAPIFactory.createWXAPI(getApplicationContext(), null);
+        msgApi.registerApp(AppConfig.WEI_XIN_APP_ID);
+                PayReq request = new PayReq();
+                request.appId = AppConfig.WEI_XIN_APP_ID;
+                request.partnerId = AppConfig.WEI_XIN_MCH_ID;
+                request.prepayId = prepayId;
+                request.packageValue = "Sign=WXPay";
+                request.nonceStr = nonceStr;
+                request.timeStamp = timeStamp;
+                request.sign = sign;
+                msgApi.sendReq(request);
+
+    }
+
+
+    //微信支付后的回到
+    @Override
+    public void onReq(BaseReq baseReq) {
+      /*  switch (baseReq.getType()) {
+            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+                break;
+            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+                break;
+            case ConstantsAPI.COMMAND_LAUNCH_BY_WX:
+
+                break;
+            default:
+                break;
+        }*/
+    }
+
+    @Override
+    public void onResp(BaseResp baseResp) {
+        /*if (baseResp.getType() == ConstantsAPI.COMMAND_SENDAUTH) {
+            Toast.makeText(this, "code = " + ((SendAuth.Resp) baseResp).code, Toast.LENGTH_SHORT).show();
+        }
+        int result = 0;
+        switch (baseResp.errCode) {
+            case BaseResp.ErrCode.ERR_OK:
+                JLog.w("展示成功页面");
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                break;
+        }*/
+    }
 }
+

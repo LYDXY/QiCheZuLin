@@ -10,4 +10,5 @@ import java.io.Serializable;
 
 public class SetOrderModel implements Serializable {
      public  String  order_id;//订单id
+     public  String    order_code;//
 }
