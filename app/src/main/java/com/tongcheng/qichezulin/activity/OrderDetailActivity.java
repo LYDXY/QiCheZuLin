@@ -191,6 +191,28 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                                 getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
                                 "3");
                     }
+                    else if (payType.equals("2")) {
+                        get_order_que_ding(UtilsUser.getUser(getApplicationContext()).PID, carModel3.PID, carModel3.KShopID,
+                                getIntent().getExtras().getString("start_time").trim(),
+                                getIntent().getExtras().getString("end_time").trim(),
+                                dingjing,
+                                getIntent().getExtras().getString("all_money").trim(),
+                                getIntent().getExtras().getString("sheng_yu").trim(),
+                                use_ji_fen + "",
+                                getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
+                                "2");
+                    }
+                    else if (view == null) {
+                        get_order_que_ding(UtilsUser.getUser(getApplicationContext()).PID, carModel3.PID, carModel3.KShopID,
+                                getIntent().getExtras().getString("start_time").trim(),
+                                getIntent().getExtras().getString("end_time").trim(),
+                                dingjing,
+                                getIntent().getExtras().getString("all_money").trim(),
+                                getIntent().getExtras().getString("sheng_yu").trim(),
+                                use_ji_fen + "",
+                                getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
+                                "1");
+                    }
 
                 }
                 break;
@@ -253,7 +275,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
 
     //下单按钮的确定操作
-    public void get_order_que_ding(String user_id, String car_id, String shop_id, String start_time, String end_time, String deposit, String money, String lessmoney, String jifen, String expenseid, String invoiceId, String invoiceaddressId, String paytype) {
+    public void get_order_que_ding(String user_id, String car_id, String shop_id, String start_time, String end_time, String deposit, String money, String lessmoney, String jifen, String expenseid, String invoiceId, String invoiceaddressId,final String paytype) {
         ParamSetOrder paramSetOrder = new ParamSetOrder();
         paramSetOrder.user_id = user_id;
         paramSetOrder.car_id = car_id;
@@ -298,7 +320,14 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                     if (!base.status.toString().trim().equals("0")) {
                         if (base.data != null) {
                             JLog.w("插入订单成功");
-                            pay_to_wei_xin1(base.data.get(0).order_code,"测试","再次测试","1","APP");
+                            if (paytype.equals("1")) {
+
+                            }else if (paytype.equals("2")){
+                                pay_to_zhi_fu_bao(base.data.get(0).order_code+"-1","再次测试","0.01");
+                            }else if (paytype.equals("3")) {
+                                pay_to_wei_xin1(base.data.get(0).order_code+"-1","测试","再次测试","1","APP");
+                            }
+
                         }
                     } else {
                         JLog.w("插入订单失败");
