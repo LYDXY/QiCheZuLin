@@ -64,5 +64,6 @@ dependencies {
     compile project(':PushSDK')
     // compile files('src/main/libs/alipaySdk-20160825.jar')
     compile files('src/main/libs/alipaySingle-20160825.jar')
+    compile files('src/main/libs/libammsdk.jar')
 }
 
