@@ -22,7 +22,7 @@ import org.xutils.x;
  */
 
 //
-
+//nihaomafff ddd 提交到所有分支
 @ContentView(R.layout.activity_add_bank_card)
 public class AddBankCardActivity extends Activity implements View.OnClickListener {
 
