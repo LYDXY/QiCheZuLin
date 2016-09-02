@@ -137,6 +137,23 @@ public class MainActivity2 extends PuTongFragmentActivity {
 
             @Override
             public void onTabReselect(int position) {
+                if (position == 0) {
+                    tv_first.setText("同城租车");
+                    tv_second.setVisibility(View.GONE);
+                    iv_set_up.setVisibility(View.GONE);
+                } else if (position == 1) {
+                    UtilsTiaoZhuang.ToAnotherActivity(MainActivity2.this, WangDianActivity.class);
+                    JLog.w(MyLocationListener.latitude + "./......纬度.");
+                    JLog.w(MyLocationListener.lontitude + "./......纬度.");
+                } else if (position == 2) {
+                    tv_first.setText("消息");
+                    tv_second.setVisibility(View.GONE);
+                    iv_set_up.setVisibility(View.GONE);
+                } else if (position == 3) {
+                    tv_first.setText("个人中心");
+                    tv_second.setVisibility(View.GONE);
+                    iv_set_up.setVisibility(View.VISIBLE);
+                }
 
             }
         });

@@ -1,6 +1,7 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -121,6 +122,7 @@ public class AddFaPiaoTaiTouActivity extends PuTongActivity {
                         JLog.w("插入发票抬头成功");
                         Utils.ShowText2(AddFaPiaoTaiTouActivity.this,base.info);
                         flag=1;
+                        finish();
                     } else {
                         JLog.w("插入发票抬头失败");
                         Utils.ShowText2(AddFaPiaoTaiTouActivity.this,base.info);
@@ -134,4 +136,13 @@ public class AddFaPiaoTaiTouActivity extends PuTongActivity {
         });
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

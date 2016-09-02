@@ -31,8 +31,8 @@ public abstract class PuTongActivity extends Activity implements View.OnClickLis
 
     void setListenerOnView() {
         iv_return.setOnClickListener(this);
-        tv_first.setOnClickListener(this);
-        tv_second.setOnClickListener(this);
+       tv_first.setOnClickListener(this);
+       tv_second.setOnClickListener(this);
 
     }
 

@@ -12,6 +12,7 @@ import com.tongcheng.qichezulin.Param.ParamSetInvoiceAddress;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.SetInvoiceModel;
+import com.tongcheng.qichezulin.spinnerView.NiceSpinner;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsUser;
@@ -22,6 +23,8 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,7 +35,6 @@ import java.util.List;
 public class AddFaPiaoAddressActivity extends PuTongActivity {
 
 
-    public static Integer flag=0;
 
 
     @Override
@@ -46,6 +48,9 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
         tv_first.setText("新增配送地址");
         tv_second.setText("保存");
         tv_second.setVisibility(View.VISIBLE);
+        List<String> dataset = new LinkedList<>(Arrays.asList("One", "Two", "Three", "Four", "Five"));
+//        NiceSpinner_area.attachDataSource(dataset);
+
     }
 
 
@@ -57,16 +62,6 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
                 break;
             case R.id.tv_second:
                 JLog.i("保存");
-            /*    if (et_fa_piao_title.getText().toString().equals("") ||et_fa_piao_title.getText()==null) {
-                    Utils.ShowText2(this,"请输入个人或者单位名称");
-
-                }else{
-                    if (UtilsUser.getUser(this).PID != null) {
-                        add_fa_piao_tai_tou(UtilsUser.getUser(this).PID,et_fa_piao_title.getText().toString().trim());
-                    }
-
-                }*/
-
                 break;
         }
     }
@@ -80,8 +75,8 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
     }
 
 
-    //保存一条新的发票抬头
-    public void add_fa_piao_tai_tou(String user_id,String text) {
+    //保存一条新的配送地址
+    public void add_fa_piao_address(String user_id,String text) {
         ParamSetInvoiceAddress paramSetInvoice = new ParamSetInvoiceAddress();
         paramSetInvoice.user_id = user_id;
         paramSetInvoice.name=text;
@@ -115,7 +110,7 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
                     if (!base.status.toString().trim().equals("0")) {
                         JLog.w("插入发票抬头成功");
                         Utils.ShowText2(AddFaPiaoAddressActivity.this,base.info);
-                        flag=1;
+
                     } else {
                         JLog.w("插入发票抬头失败");
                         Utils.ShowText2(AddFaPiaoAddressActivity.this,base.info);
