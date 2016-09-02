@@ -15,7 +15,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 
 /**
- * Created by 林尧 on 2016/8/3.
+ * Created by 林尧 on 2016/8/3. ceshi
  */
 @ContentView(R.layout.activity_account)
 public class AccountActivity extends PuTongActivity {
