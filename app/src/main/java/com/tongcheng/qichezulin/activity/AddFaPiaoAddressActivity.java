@@ -1,21 +1,19 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.View;
-import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jiongbull.jlog.JLog;
-import com.tongcheng.qichezulin.Param.ParamSetInvoice;
 import com.tongcheng.qichezulin.Param.ParamSetInvoiceAddress;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.SetInvoiceModel;
-import com.tongcheng.qichezulin.spinnerView.NiceSpinner;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
-import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
@@ -34,9 +32,14 @@ import java.util.List;
 @ContentView(R.layout.activity_add_fa_piao_address)
 public class AddFaPiaoAddressActivity extends PuTongActivity {
 
+    @ViewInject(R.id.spinner)
+    MaterialSpinner spinner;
 
+    @ViewInject(R.id.spinner2)
+    MaterialSpinner spinner2;
 
-
+    @ViewInject(R.id.spinner3)
+    MaterialSpinner spinner3;
     @Override
     void initData() {
 
@@ -48,8 +51,29 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
         tv_first.setText("新增配送地址");
         tv_second.setText("保存");
         tv_second.setVisibility(View.VISIBLE);
-        List<String> dataset = new LinkedList<>(Arrays.asList("One", "Two", "Three", "Four", "Five"));
-//        NiceSpinner_area.attachDataSource(dataset);
+        spinner.setItems("广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省");
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+               // Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        spinner2.setItems("广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省");
+        spinner2.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+              //  Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        spinner3.setItems("广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省","广东省", "广东省", "广东省", "广东省", "广东省");
+        spinner3.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+             //   Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+            }
+        });
 
     }
 

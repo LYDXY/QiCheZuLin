@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/grayF0F0F0"
     android:gravity="center_horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <include
@@ -19,21 +21,21 @@
         android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
         app:layout_heightPercent="10%w"
-        app:layout_widthPercent="90%w"
-        app:layout_marginTopPercent="5%w"
+        app:layout_widthPercent="95%w"
+        app:layout_marginTopPercent="3%w"
         android:orientation="horizontal"
         >
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             app:layout_widthPercent="20%w"
             android:text="@string/name"
-            android:textColor="@color/gray9999999"
+            android:textColor="@color/black272727"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.5%w"
             app:layout_marginLeftPercent="5%w"
             />
 
@@ -41,13 +43,13 @@
             android:layout_toRightOf="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             android:textColor="@color/gray9999999"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="5%w"
             android:hint="@string/input_name"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.5%w"
             android:background="@null"
             android:textColorHint="@color/gray9999999"
             />
@@ -58,21 +60,21 @@
         android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
         app:layout_heightPercent="10%w"
-        app:layout_widthPercent="90%w"
-        app:layout_marginTopPercent="0.1%w"
+        app:layout_widthPercent="95%w"
+        app:layout_marginTopPercent="0.2%w"
         android:orientation="horizontal"
         >
         <TextView
             android:id="@+id/tv_phone_number"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             app:layout_widthPercent="20%w"
             android:text="@string/phone_number2"
-            android:textColor="@color/gray9999999"
+            android:textColor="@color/black272727"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.5%w"
             app:layout_marginLeftPercent="5%w"
             />
 
@@ -80,41 +82,74 @@
             android:layout_toRightOf="@+id/tv_phone_number"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             android:textColor="@color/gray9999999"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="5%w"
-            android:hint="@string/input_name"
-            app:layout_textSizePercent="5%w"
+            android:hint="@string/input_phone_number2"
+            app:layout_textSizePercent="4.5%w"
             android:background="@null"
-            android:textColorHint="@color/gray9999999"
-            android:text="@string/input_phone_number2" />
+            android:textColorHint="@color/gray9999999" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
-        app:layout_heightPercent="10%w"
-        app:layout_widthPercent="90%w"
-        app:layout_marginTopPercent="0.1%w"
-        android:orientation="horizontal"
+        app:layout_heightPercent="40%w"
+        app:layout_widthPercent="95%w"
+        app:layout_marginTopPercent="0.2%w"
         >
         <TextView
             android:id="@+id/tv_area"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            android:layout_height="wrap_content"
             app:layout_widthPercent="20%w"
             android:text="@string/address_you"
-            android:textColor="@color/gray9999999"
-            android:layout_centerVertical="true"
+            android:textColor="@color/black272727"
             android:gravity="center_vertical"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.5%w"
             app:layout_marginLeftPercent="5%w"
+            app:layout_marginTopPercent="4%w"
+            />
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:layout_toRightOf="@+id/tv_area"
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            app:layout_widthPercent="80%w"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_heightPercent="13%w"
+            android:textColor="@color/colorPrimary"
+
+            />
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:layout_toRightOf="@+id/tv_area"
+            android:layout_below="@+id/spinner"
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            app:layout_widthPercent="80%w"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_heightPercent="13%w"
+            android:textColor="@color/colorPrimary"
             />
 
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:layout_toRightOf="@+id/tv_area"
+            android:layout_below="@+id/spinner2"
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            app:layout_widthPercent="80%w"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            app:layout_textSizePercent="4.5%w"
+            app:layout_heightPercent="13%w"
+            android:textColor="@color/colorPrimary"
+            />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
 
@@ -124,21 +159,21 @@
         android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
         app:layout_heightPercent="10%w"
-        app:layout_widthPercent="90%w"
-        app:layout_marginTopPercent="0.1%w"
+        app:layout_widthPercent="95%w"
+        app:layout_marginTopPercent="0.2%w"
         android:orientation="horizontal"
         >
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             app:layout_widthPercent="20%w"
             android:text="@string/address_detail"
-            android:textColor="@color/gray9999999"
+            android:textColor="@color/black272727"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.5%w"
             app:layout_marginLeftPercent="5%w"
             />
 
@@ -146,16 +181,16 @@
             android:layout_toRightOf="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             android:textColor="@color/gray9999999"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="5%w"
-            android:hint="@string/input_name"
-            app:layout_textSizePercent="5%w"
+            android:hint="@string/address_specier"
+            app:layout_textSizePercent="4.5%w"
             android:background="@null"
             android:textColorHint="@color/gray9999999"
-            android:text="@string/address_specier" />
+            />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
 
@@ -164,22 +199,22 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/whiteFFFFFF"
-        app:layout_heightPercent="10%w"
-        app:layout_widthPercent="90%w"
-        app:layout_marginTopPercent="0.1%w"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="95%w"
+        app:layout_marginTopPercent="0.2%w"
         android:orientation="horizontal"
         >
         <TextView
             android:id="@+id/tv_post"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             app:layout_widthPercent="20%w"
             android:text="@string/post"
-            android:textColor="@color/gray9999999"
+            android:textColor="@color/black272727"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            app:layout_textSizePercent="5%w"
+            app:layout_textSizePercent="4.5%w"
             app:layout_marginLeftPercent="5%w"
             />
 
@@ -187,16 +222,16 @@
             android:layout_toRightOf="@+id/tv_post"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_heightPercent="12%w"
+            app:layout_heightPercent="10%w"
             android:textColor="@color/gray9999999"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="5%w"
-            android:hint="@string/input_name"
-            app:layout_textSizePercent="5%w"
+            android:hint="@string/post_code"
+            app:layout_textSizePercent="4.5%w"
             android:background="@null"
             android:textColorHint="@color/gray9999999"
-            android:text="@string/post_code" />
+            />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
 </com.zhy.android.percent.support.PercentLinearLayout>
