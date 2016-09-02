@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayF0F0F0"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="12%w"
+        app:layout_widthPercent="100%w"
+        layout="@layout/common_header2" />
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="40%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_widthPercent="100%w"
+        android:background="@color/white" >
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            app:layout_heightPercent="50%h"
+            app:layout_widthPercent="100%w" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                app:layout_textSizePercent="6%w"
+                android:text="保证金余额"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                app:layout_textSizePercent="6%w"
+                android:text="10000"
+                android:textColor="#cc0000"
+                android:textStyle="bold" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_marginLeftPercent="5%w"
+        app:layout_marginRightPercent="5%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_textSizePercent="3.5%w"
+        android:text="保证金在租车订单完成后会返还，期间用于车损、租车延长等情况造成的损失赔偿"
+        android:textColor="@color/gray1" />
+
+</com.zhy.android.percent.support.PercentLinearLayout>

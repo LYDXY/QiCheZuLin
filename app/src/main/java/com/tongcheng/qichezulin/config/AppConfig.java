@@ -142,4 +142,14 @@ public class AppConfig {
     //微信预下单地址
     public final static String MY_SEVICE_WEI_XIN="api/pay/unifiedorderwx.ashx";
     //微信的回调地址
+
+
+    //获取省份
+    public final static String GET_PROVINCE="api/invoice/get_allprovince.ashx";
+
+    //获取城市
+    public final static String GET_ALLCITY="api/invoice/get_allcity.ashx";
+
+    //获取区县
+    public final static String GET_ALLCOUNTY="api/invoice/get_allcounty.ashx";
 }

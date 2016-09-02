@@ -84,10 +84,10 @@ public class AccountActivity extends PuTongActivity {
                 UtilsTiaoZhuang.ToAnotherActivity(AccountActivity.this, UpdateAccountUserNameActivity.class);
                 break;
             case R.id.prl_second:
-
+                UtilsTiaoZhuang.ToAnotherActivity(AccountActivity.this, BindPhoneNumberActivity.class);
                 break;
             case R.id.prl_set_pass:
-
+                UtilsTiaoZhuang.ToAnotherActivity(AccountActivity.this, SetPasswordActivity.class);
                 break;
 
         }

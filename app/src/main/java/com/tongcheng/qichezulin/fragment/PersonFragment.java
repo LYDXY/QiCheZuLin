@@ -16,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tongcheng.qichezulin.Param.ParamGetUserInfo;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.activity.AccountActivity;
+import com.tongcheng.qichezulin.activity.DepositActivity;
 import com.tongcheng.qichezulin.activity.MyBaoZhengJinActivity;
 import com.tongcheng.qichezulin.activity.MyFaPiaoctivity;
 import com.tongcheng.qichezulin.activity.MyJiFenActivity;
@@ -151,7 +152,7 @@ public class PersonFragment extends PuTongFragment {
                 break;
             case R.id.rrl_bao_zheng_jin:
                 JLog.w("跳转到我的保证金界面");
-                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyBaoZhengJinActivity.class);
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), DepositActivity.class);
                 break;
             case R.id.rrl_my_fa_piao:
                 JLog.w("跳转到我的发票界面");
