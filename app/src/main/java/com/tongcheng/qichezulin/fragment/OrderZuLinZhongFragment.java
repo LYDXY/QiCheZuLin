@@ -91,7 +91,7 @@ public class OrderZuLinZhongFragment extends Fragment {
         });
     }
 
-    //获取预约订单数据
+    //获取租赁中的订单数据
     public void get_order_yu_yue_list(String user_id, String status, int page, String page_size) {
         ParamOrderList paramOrderList = new ParamOrderList();
         paramOrderList.user_id = user_id;
