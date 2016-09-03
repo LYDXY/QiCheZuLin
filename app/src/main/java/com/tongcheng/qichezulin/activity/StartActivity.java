@@ -24,6 +24,7 @@ import org.xutils.x;
 public class StartActivity extends Activity {
 
 
+
     @ViewInject(R.id.bt_go)
     Button bt_go;
 
@@ -51,7 +52,7 @@ public class StartActivity extends Activity {
             JLog.w("已经打开多次应用了");
             JLog.w(UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").toString() + "////////////////");
             //为空
-            if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "") == null || UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "").equals("")) {
+            if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "") == null) {
                 JLog.w("跳转到登录界面");
                 UtilsTiaoZhuang.ToAnotherActivity(this, LoginActivity.class);
                 this.finish();

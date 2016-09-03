@@ -39,10 +39,10 @@ public class XingChengHolderView implements Holder<OrderModel> {
         long hour1 = jiange % (24 * 3600) / 3600;
         long minute1 = jiange % 3600 / 60;
         long second1 = jiange % 60 / 60;
-        if (jiange <0) {
-            tv_end_to_now_time.setText("已超时" +Math.abs(day1) + "天" + Math.abs(hour1) + "小时" + Math.abs(minute1) + "分" + Math.abs(second1) + "秒");
-        }else{
+        if (jiange >0) {
             tv_end_to_now_time.setText(Math.abs(day1) + "天" + Math.abs(hour1) + "小时" + Math.abs(minute1) + "分" + Math.abs(second1) + "秒");
+        }else{
+            tv_end_to_now_time.setText("已超时" +Math.abs(day1) + "天" + Math.abs(hour1) + "小时" + Math.abs(minute1) + "分" + Math.abs(second1) + "秒");
         }
 
     }

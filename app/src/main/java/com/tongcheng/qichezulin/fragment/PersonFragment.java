@@ -166,6 +166,7 @@ public class PersonFragment extends PuTongFragment {
                 JLog.w("退出操作");
                 UtilsUser.cleanAllSP(getContext());
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), LoginActivity.class);
+                getActivity().finish();
                 break;
 
         }

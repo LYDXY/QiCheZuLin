@@ -82,7 +82,7 @@
 
         <!--登录界面-->
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.tongcheng.qichezulin.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 

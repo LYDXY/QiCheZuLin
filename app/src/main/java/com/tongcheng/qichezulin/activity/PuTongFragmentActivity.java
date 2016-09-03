@@ -39,4 +39,5 @@ public abstract class PuTongFragmentActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         x.view().inject(this);
     }
+
 }

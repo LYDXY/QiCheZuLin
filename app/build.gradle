@@ -8,7 +8,6 @@ android {
     defaultConfig {
         applicationId "com.tongcheng.qichezulin"
         minSdkVersion 19
-        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }

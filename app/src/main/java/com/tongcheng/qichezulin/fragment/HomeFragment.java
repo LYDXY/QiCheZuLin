@@ -133,6 +133,7 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
         iv_second.setOnClickListener(this);
         iv_third.setOnClickListener(this);
         prl_xingcheng.setOnClickListener(this);
+
     }
 
     @Override
@@ -357,7 +358,9 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
     //获取租赁中的订单数据
     public void get_order_zu_lin_list() {
         ParamOrderList paramOrderList = new ParamOrderList();
-        if (null != UtilsUser.getUser(getContext()).PID && !UtilsUser.getUser(getContext()).PID.equals("")) {
+
+        if (UtilsUser.getUser(getContext()) == null) {
+        } else {
             paramOrderList.user_id = UtilsUser.getUser(getContext()).PID;
             paramOrderList.status = "2";
             paramOrderList.page = "1";
@@ -415,6 +418,7 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
                 }
             });
         }
+
 
     }
 
