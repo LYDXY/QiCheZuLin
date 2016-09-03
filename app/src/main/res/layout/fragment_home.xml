@@ -146,7 +146,7 @@
                         android:layout_centerVertical="true"
                         app:canLoop="true"
                         app:layout_marginLeftPercent="5%w"
-                        app:layout_widthPercent="60%w"
+                        app:layout_widthPercent="70%w"
                         app:layout_heightPercent="12%w" />
 
 
@@ -155,12 +155,11 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_alignParentRight="true"
-                        android:background="@mipmap/go"
-                        android:scaleType="fitXY"
-                        app:layout_heightPercent="5%w"
+                        android:src="@mipmap/go"
+                        android:scaleType="centerInside"
+                        app:layout_heightPercent="12%w"
                         android:layout_centerVertical="true"
-                        app:layout_marginRightPercent="4%w"
-                        app:layout_widthPercent="5%w" />
+                        app:layout_widthPercent="16%w" />
 
                 </com.zhy.android.percent.support.PercentRelativeLayout>
 

@@ -15,28 +15,26 @@
             android:id="@+id/tv_car_name"
             android:layout_width="0dp"
             android:layout_centerVertical="true"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:layout_height="0dp"
             app:layout_heightPercent="14%w"
             app:layout_widthPercent="30%w"
             android:text="@string/car_name"
             android:textColor="@color/gray9999999"
-            app:layout_marginLeftPercent="5%w"
-            app:layout_textSizePercent="6%w" />
+            app:layout_textSizePercent="5%w" />
 
         <TextView
             android:layout_toRightOf="@+id/tv_car_name"
             android:id="@+id/tv_end_to_now_time"
             android:layout_width="0dp"
             android:layout_centerVertical="true"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:layout_height="0dp"
             app:layout_heightPercent="14%w"
-            app:layout_widthPercent="60%w"
+            app:layout_widthPercent="70%w"
             android:text="@string/car_name"
             android:textColor="@color/green_36b57e"
-            app:layout_marginLeftPercent="5%w"
-            app:layout_textSizePercent="6%w" />
+            app:layout_textSizePercent="5%w" />
     </com.zhy.android.percent.support.PercentRelativeLayout>
 
 </com.zhy.android.percent.support.PercentRelativeLayout>
