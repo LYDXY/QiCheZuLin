@@ -64,10 +64,10 @@ public class MessageFragment extends PuTongFragment {
     @Override
     void initView() {
         if (UtilsUser.getUser(getContext()) == null) {
-            getSystemMessage(getActivity().getIntent().getExtras().get("user_id").toString(),"3");
+            getSystemMessage(getActivity().getIntent().getExtras().get("user_id").toString(),"2");
         }
         else {
-            getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"3");
+            getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"2");
         }
 
 
@@ -89,6 +89,7 @@ public class MessageFragment extends PuTongFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tl_4.setTabData(mTitles_2);
+        tl_4.setCurrentTab(0);
      //   tl_4.showDot(1);
         tl_4.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -104,6 +105,13 @@ public class MessageFragment extends PuTongFragment {
 
             @Override
             public void onTabReselect(int position) {
+                if (position == 0) {
+                    adapter.clear();
+                    getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"2");
+                }else if (position == 1) {
+                    adapter.clear();
+                    getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"3");
+                }
 
             }
         });
