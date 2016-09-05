@@ -19,14 +19,6 @@
             app:layout_heightPercent="40%w"
             app:layout_widthPercent="100%w">
 
-          <ImageView
-                android:id="@+id/iv_blur"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="fitXY"
-                app:layout_heightPercent="40%w"
-                app:layout_widthPercent="100%w" />
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_head_photo"
                 android:layout_width="0dp"
@@ -44,7 +36,7 @@
                 android:layout_below="@+id/iv_head_photo"
                 android:layout_centerHorizontal="true"
                 android:text="@string/click_change_photo"
-                android:textColor="@color/white"
+                android:textColor="@color/gray9999999"
                 app:layout_marginTopPercent="2%w"
                 app:layout_textSizePercent="4%w" />
 
