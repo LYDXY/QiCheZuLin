@@ -152,4 +152,8 @@ public class AppConfig {
 
     //获取区县
     public final static String GET_ALLCOUNTY="api/invoice/get_allcounty.ashx";
+
+    //获取消息列表
+    public final static String GET_MESSAGELIST="api/message/get_messagelist.ashx";
+
 }

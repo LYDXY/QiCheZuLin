@@ -277,9 +277,11 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
                             protected void convert(BaseAdapterHelper helper, final CarModel item) {
                                 final int position = helper.getPosition();
                                 if (base.data.get(position).FType.equals("1")) {
-                                    helper.setText(R.id.tv_re_men_or_you_hui, "热门");
+                                 //   helper.setText(R.id.tv_re_men_or_you_hui, "热门");
+                                    helper.setImageResource(R.id.iv_re_men_or_you_hui,R.mipmap.hot2x);
+
                                 } else {
-                                    helper.setText(R.id.tv_re_men_or_you_hui, "优惠");
+                                    helper.setImageResource(R.id.iv_re_men_or_you_hui,R.mipmap.youhui2x);
                                 }
                                 helper.setText(R.id.tv_car_name, item.FCarName)
                                         .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")

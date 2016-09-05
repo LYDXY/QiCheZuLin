@@ -27,6 +27,26 @@
         tl:tl_indicator_margin_top="2dp"
         tl:tl_tab_space_equal="true" />
 
+    <com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/prl_prl_03"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        app:layout_widthPercent="95%w"
+        app:layout_marginTopPercent="2%w"
+        android:gravity="center_horizontal">
+
+        <com.tongcheng.qichezulin.pulltorefresh.PullableListView
+            android:id="@+id/plv_order_finish_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_eeeeee"
+            android:divider="@color/grayF0F0F0"
+
+            android:dividerHeight="6dip">
+
+        </com.tongcheng.qichezulin.pulltorefresh.PullableListView>
+    </com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout>
 
 
 </com.zhy.android.percent.support.PercentLinearLayout>
