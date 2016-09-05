@@ -25,7 +25,7 @@ public class XingChengHolderView implements Holder<OrderModel> {
     @Override
     public View createView(Context context) {
         //你可以通过layout文件来创建，也可以像我一样用代码创建，不一定是Image，任何控件都可以进行翻页
-        view = LayoutInflater.from(context).inflate(R.layout.convenientbanner_item0, null);
+        view = LayoutInflater.from(context).inflate(R.layout.convenientbanner_item1, null);
         return view;
     }
 
