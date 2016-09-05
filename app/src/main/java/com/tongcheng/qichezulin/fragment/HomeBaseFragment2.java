@@ -13,6 +13,7 @@ import org.xutils.x;
 
 /**
  * Created by 林尧 on 2016/7/22. 带上下拉控件的 片段 ,并且实现了 监听
+ * //
  */
 public abstract class HomeBaseFragment2 extends Fragment implements View.OnClickListener, PullToRefreshLayout2ToMain.OnPullListener {
 
