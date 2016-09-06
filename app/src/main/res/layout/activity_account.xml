@@ -19,6 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
+        app:layout_marginTopPercent="2%w"
         android:gravity="center_vertical"
         app:layout_heightPercent="10%w"
         app:layout_widthPercent="100%w"
