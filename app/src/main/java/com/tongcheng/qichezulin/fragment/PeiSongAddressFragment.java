@@ -61,9 +61,8 @@ public class PeiSongAddressFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (UtilsUser.getUser(getContext()) != null) {
-            get_address(UtilsUser.getUser(getContext()).PID);
-        }
+        get_address(UtilsUser.getUserID(getActivity()));
+
 
     }
 

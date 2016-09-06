@@ -64,9 +64,8 @@ public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListen
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (UtilsUser.getUser(getContext()) != null) {
-            get_fa_piaos(UtilsUser.getUser(getContext()).PID);
-        }
+        get_fa_piaos(UtilsUser.getUserID(getActivity()));
+
 
     }
 
@@ -74,7 +73,7 @@ public class FaPiaoTaiTouFragment extends Fragment implements View.OnClickListen
         prl_prl_05.setOnPullListener(new PullToRefreshLayout.OnPullListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-                get_fa_piaos(UtilsUser.getUser(getContext()).PID);
+                get_fa_piaos(UtilsUser.getUserID(getActivity()));
                 pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
             }
 
