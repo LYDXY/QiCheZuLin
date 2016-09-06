@@ -93,13 +93,8 @@ public class PersonFragment extends PuTongFragment {
         initData();
         initView();
         setClickListenerOnView();
-        //获取个人信息
-        if (UtilsUser.getUser(getContext().getApplicationContext()) != null) {
-            ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_head_photo);
-            tv_user_account.setText(UtilsString.hidePhoneNumber(UtilsUser.getUser(getContext().getApplicationContext()).FMobilePhone));
-        } else {
-            get_User_info();
-        }
+
+
 
 
     }
@@ -119,13 +114,17 @@ public class PersonFragment extends PuTongFragment {
 
     @Override
     void initData() {
-        user_id = (String) UtilsUser.getSp(getContext(), UtilsUser.KEY_USER_ID, "");
+        user_id = (String) UtilsUser.getUserID(getActivity());
         JLog.w("参数user_id:" + user_id);
     }
 
     @Override
     void initView() {
-
+        if (UtilsUser.getUSER_PHOTO(getActivity()).equals("")) {
+            get_User_info();
+        }else{
+            ImageLoader.getInstance().displayImage(UtilsUser.getUSER_PHOTO(getActivity()), iv_head_photo);
+        }
     }
 
     @Override
@@ -176,6 +175,7 @@ public class PersonFragment extends PuTongFragment {
     public void get_User_info() {
         ParamGetUserInfo paramGetUserInfo = new ParamGetUserInfo();
         paramGetUserInfo.user_id = user_id.trim();
+        paramGetUserInfo.token = UtilsUser.getToken(getActivity());
         Callback.Cancelable cancelable
                 = x.http().post(paramGetUserInfo, new Callback.CommonCallback<String>() {
             @Override
@@ -197,7 +197,11 @@ public class PersonFragment extends PuTongFragment {
 
                         }
                         tv_user_account.setText(UtilsString.hidePhoneNumber(base.data.FMobilePhone));
-                        UtilsUser.saveUser(getContext(), base.data);
+                        UtilsUser.setSP(getContext(), UtilsUser.USER_PHOTO,base.data.FImg); //缓存头像地址
+                        UtilsUser.setSP(getContext(), UtilsUser.USER_NAME,base.data.FUserName); //缓存头像地址
+                        UtilsUser.setSP(getContext(), UtilsUser.USER_PHOEN,base.data.FMobilePhone); //缓存头像地址
+                        UtilsUser.setSP(getContext(), UtilsUser.FBONDMOENY,base.data.FBondMoeny); //缓存用户保证金
+
                     }
                 } else {
                     JLog.w("获取个人信息失败");

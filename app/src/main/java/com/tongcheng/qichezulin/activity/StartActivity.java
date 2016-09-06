@@ -35,8 +35,7 @@ public class StartActivity extends Activity {
         JLog.v("onCreate");
 
         //为空
-        if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "") == null
-                || UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").equals("")) {
+        if (UtilsUser.getKEY_FIRST_OPEN_YES_OR_NO(getApplicationContext()).equals("")) {
             JLog.w("第一次打开应用");
             UtilsUser.setSP(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "00000000000");
             bt_go.setOnClickListener(new View.OnClickListener() {
@@ -48,11 +47,9 @@ public class StartActivity extends Activity {
         }
         //不为空
         else {
-
             JLog.w("已经打开多次应用了");
-            JLog.w(UtilsUser.getSp(getApplication(), UtilsUser.KEY_FIRST_OPEN_YES_OR_NO, "").toString() + "////////////////");
             //为空
-            if (UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, "") == null) {
+            if (UtilsUser.getUserID(getApplicationContext()).equals("")) {
                 JLog.w("跳转到登录界面");
                 UtilsTiaoZhuang.ToAnotherActivity(this, LoginActivity.class);
                 this.finish();

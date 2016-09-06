@@ -10,9 +10,10 @@ import org.xutils.http.annotation.HttpRequest;
  */
 @HttpRequest(
         host = AppConfig.HOST,
-        path = AppConfig.GET_USERMONEY
+        path = AppConfig.SET_PW
 )
-public class ParamGetUserMoney extends RequestParams {
-    public String user_id;// 用户id
-    public String token;// 用户id
+public class ParamSetPassword extends RequestParams {
+    public String user_id;//用户ID
+    public String new_password;//新密码
+    public String token;//密匙
 }

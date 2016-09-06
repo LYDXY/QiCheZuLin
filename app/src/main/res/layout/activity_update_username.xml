@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grayF0F0F0"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
 
 
@@ -15,47 +14,120 @@
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w" />
 
-    <com.zhy.android.percent.support.PercentRelativeLayout
+    <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        app:layout_heightPercent="15%w"
-        app:layout_widthPercent="100%w"
-        app:layout_marginTopPercent="4%w"
-        android:id="@+id/prl_first">
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_widthPercent="100%w">
 
-        <TextView
-            android:id="@+id/tv_ni_cheng"
+        <com.zhy.android.percent.support.PercentRelativeLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="@string/ni_cheng"
-            android:textColor="@color/gray_6d6d6d"
-            app:layout_heightPercent="12%w"
-            app:layout_widthPercent="15%w"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            app:layout_marginLeftPercent="6%w"
-            app:layout_textSizePercent="5%w" />
+            android:layout_height="match_parent"
+            app:layout_widthPercent="25%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="昵称"
+                android:textColor="@color/black"
+                app:layout_textSizePercent="16%w" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <EditText
-            android:id="@+id/et_user_name"
+            android:id="@+id/et_a_update_username_name"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_toRightOf="@+id/tv_ni_cheng"
-            android:textColor="@color/gray_6d6d6d"
-            app:layout_heightPercent="12%w"
-            app:layout_widthPercent="70%w"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@null"
-            android:layout_centerVertical="true"
-            android:hint="@string/input_user_name"
-            android:gravity="center_vertical"
-            android:textColorHint="@color/gray9999999"
+            android:cursorVisible="true"
+            android:hint="请输个人信息"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@null"
             app:layout_textSizePercent="4%w" />
 
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="25%w">
 
+            <ImageView
+                android:id="@+id/iv_a_bindphonenumber_cancelname"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@mipmap/quxiao"
+                android:visibility="invisible"
+                app:layout_heightPercent="50%h"
+                app:layout_widthPercent="50%h" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+    </com.zhy.android.percent.support.PercentLinearLayout>
 
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%w"
+        app:layout_widthPercent="100%w">
 
-    </com.zhy.android.percent.support.PercentRelativeLayout>
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="25%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="性别"
+                android:textColor="@color/black"
+                app:layout_textSizePercent="16%w" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_a_update_username_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_textSizePercent="5.5%w" />
+
+            <RadioButton
+                android:id="@+id/rb_a_update_username_women"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_marginLeftPercent="30%w"
+                app:layout_textSizePercent="5.5%w" />
+        </RadioGroup>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="限4-20个字符,一个字子为两个字符"
+        android:textColor="@color/gray1"
+        app:layout_marginLeftPercent="5%w"
+        app:layout_marginRightPercent="5%w"
+        app:layout_marginTopPercent="2%w"
+        app:layout_textSizePercent="3.5%w" />
 
 </com.zhy.android.percent.support.PercentLinearLayout>

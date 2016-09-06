@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w"
-        layout="@layout/common_header3" />
+        layout="@layout/common_header" />
 
     <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="0dp"

@@ -35,6 +35,8 @@ import java.util.List;
 public class MyJiFenActivity extends PuTongActivity2 {
 
 
+    private String userid;
+    private String token;
     private Adapter adapter;
 
     @ViewInject(R.id.list_for_s2)
@@ -72,17 +74,19 @@ public class MyJiFenActivity extends PuTongActivity2 {
         initData();
         initView();
         setListenerOnView();
-        if (UtilsUser.getUser(this).PID != null && !UtilsUser.getUser(this).PID.equals("")) {
-            get_now_ji_fen(UtilsUser.getUser(this).PID);
-            get_use_case_list(UtilsUser.getUser(this).PID);
-        }
+        userid=UtilsUser.getUserID(MyJiFenActivity.this);
+        token=UtilsUser.getToken(MyJiFenActivity.this);
+        get_now_ji_fen(userid,token);
+        get_use_case_list(userid,token);
+
 
     }
 
     //获取当前的积分
-    public void get_now_ji_fen(String user_id) {
+    public void get_now_ji_fen(String user_id,String token) {
         ParamUserJf paramUserJf = new ParamUserJf();
         paramUserJf.user_id = user_id;
+        paramUserJf.token=token;
         Callback.Cancelable cancelable
                 = x.http().post(paramUserJf, new Callback.CommonCallback<String>() {
             @Override
@@ -130,9 +134,10 @@ public class MyJiFenActivity extends PuTongActivity2 {
 
 
     //获取积分使用情况列表
-    public void get_use_case_list(String user_id) {
+    public void get_use_case_list(String user_id,String token) {
         ParamJiFenLog paramJiFenLog = new ParamJiFenLog();
         paramJiFenLog.user_id = user_id;
+        paramJiFenLog.token = token;
         Callback.Cancelable cancelable
                 = x.http().post(paramJiFenLog, new Callback.CommonCallback<String>() {
             @Override
@@ -175,10 +180,10 @@ public class MyJiFenActivity extends PuTongActivity2 {
                                             helper.setText(R.id.tv_show_ji_fen_type, "充电赠送");
                                         } else if (item.FType.equals("4")) {
                                             helper.setText(R.id.tv_show_ji_fen_type, "美容赠送");
-                                        }else if (item.FType.equals("5")){
+                                        } else if (item.FType.equals("5")) {
                                             helper.setText(R.id.tv_show_ji_fen_type, "维修赠送");
                                         }
-                                        helper.setText(R.id.show_hao_ji_fen,item.FJiFen);
+                                        helper.setText(R.id.show_hao_ji_fen, item.FJiFen);
                                         helper.setText(R.id.tv_show_ji_fen_date, item.FCreateDate);
 
                                     }

@@ -10,12 +10,14 @@ import android.widget.ImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.tongcheng.qichezulin.Param.ParamGetToKen;
 import com.tongcheng.qichezulin.Param.ParamLoginPassword;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.activity.MainActivity2;
 import com.tongcheng.qichezulin.activity.RegistActivity;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.RegistModel;
+import com.tongcheng.qichezulin.model.TokenModel;
 import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
@@ -118,10 +120,8 @@ public class LoginFragment22 extends PuTongFragment {
                             JLog.w("登录成功");
                             Utils.ShowText(getActivity(), base.info.toString());
                             UtilsUser.setSP(getContext().getApplicationContext(), UtilsUser.KEY_USER_ID, base.data.get(0).user_id); //缓存注册的用户id
-                            Bundle bundle=new Bundle();
-                            bundle.putCharSequence("user_id",base.data.get(0).user_id);
-                            UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MainActivity2.class,bundle );
-                            getActivity().finish();
+                            UtilsUser.setSP(getContext().getApplicationContext(), UtilsUser.PWD, base.data.get(0).pwd); //缓存注册的用户密码
+                            getToken(et_phone_number.getText().toString().trim(),base.data.get(0).pwd);
                         }
                     }
                 } else {
@@ -173,5 +173,62 @@ public class LoginFragment22 extends PuTongFragment {
     public void onResume() {
         super.onResume();
         JLog.w("onResume");
+    }
+
+
+    //获取用户的token
+    private void getToken(String phone,String pwd) {
+        ParamGetToKen paramGetToKen = new ParamGetToKen();
+        paramGetToKen.phone = phone;
+        paramGetToKen.pwd = pwd;
+        Callback.Cancelable cancelable
+                = x.http().post(paramGetToKen, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                UtilsJson.printJsonData(result);
+                Gson gson = new Gson();
+                Type type = new TypeToken<JsonBase<ArrayList<TokenModel>>>() {
+                }.getType();
+                JsonBase<ArrayList<TokenModel>> base = gson
+                        .fromJson(result, type);
+                if (!base.status.toString().trim().equals("0")) {
+                    if (base.data != null) {
+                        JLog.w(base.data.size() + "获取token成功");
+                        if (base.data.size() > 0) {
+                            //缓存token , 和过期时间
+                            UtilsUser.setSP(getActivity(), UtilsUser.TOKEN,base.data.get(0).token); //缓存TOKEN
+                            UtilsUser.setSP(getActivity(), UtilsUser.TOKEN_TIME,base.data.get(0).time); //过期时间
+                            Bundle bundle=new Bundle();
+                            bundle.putCharSequence("user_id",UtilsUser.getUserID(getActivity()));
+                            UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MainActivity2.class,bundle);
+                            getActivity().finish();
+
+                        }
+                    }
+                } else {
+                    JLog.w("获取token失败");
+                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                JLog.w(isOnCallback + "");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                JLog.w(cex + "");
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
     }
 }

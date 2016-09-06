@@ -34,6 +34,8 @@ import java.util.List;
 public class MyWallectActivity extends PuTongActivity {
 
 
+    private String user_id;
+    private String token;
     @ViewInject(R.id.tv_show_my_money)
     TextView tv_show_my_money;
     @Override
@@ -68,16 +70,18 @@ public class MyWallectActivity extends PuTongActivity {
         initData();
         initView();
         setListenerOnView();
-        if (UtilsUser.getUser(this).PID != null && !UtilsUser.getUser(this).PID.equals("")) {
-            get_now_my_money(UtilsUser.getUser(this).PID);
-        }
+        user_id=UtilsUser.getUserID(MyWallectActivity.this);
+        token=UtilsUser.getToken(MyWallectActivity.this);
+        get_now_my_money(user_id,token);
+
 
     }
 
     //获取现在的个人钱包金额
-    public void get_now_my_money(String user_id){
+    public void get_now_my_money(String user_id,String token){
         ParamGetUserMoney paramGetUserMoney=new ParamGetUserMoney();
         paramGetUserMoney.user_id=user_id;
+        paramGetUserMoney.token=token;
         Callback.Cancelable cancelable
                 = x.http().post(paramGetUserMoney, new Callback.CommonCallback<String>() {
             @Override

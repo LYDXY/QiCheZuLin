@@ -17,4 +17,5 @@ public class ParamOrderList extends RequestParams {
    public String status; //订单状态1.预约 2.租凭中 3.已完成 4.已取消
    public String page;//第几页
    public String page_size;//页数（不传默认10）
+   public String token;//页数（不传默认10）
 }

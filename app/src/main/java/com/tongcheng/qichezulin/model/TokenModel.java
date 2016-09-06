@@ -8,7 +8,8 @@ import java.io.Serializable;
  */
 
 
-public class RegistModel implements Serializable {
-    public String user_id;//用户id
-    public String pwd;//密码
+public class TokenModel implements Serializable {
+    public String token;
+    public String time;
+
 }

@@ -3,10 +3,12 @@ package com.tongcheng.qichezulin.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.jiongbull.jlog.JLog;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
+import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -20,6 +22,8 @@ public class DepositActivity extends PuTongActivity2 {
 
 
 
+    @ViewInject(R.id.tv_show_money)
+    TextView tv_show_money;
 
     @Override
     void initData() {
@@ -28,9 +32,11 @@ public class DepositActivity extends PuTongActivity2 {
 
     @Override
     void initView() {
-
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("保证金");
+        tv_show_money.setVisibility(View.VISIBLE);
+        JLog.w(UtilsUser.get_fbondmoeny(DepositActivity.this)+"");
+        tv_show_money.setText(UtilsUser.get_fbondmoeny(DepositActivity.this));
     }
 
     @Override

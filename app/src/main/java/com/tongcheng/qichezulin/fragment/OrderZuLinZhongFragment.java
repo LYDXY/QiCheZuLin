@@ -44,6 +44,7 @@ public class OrderZuLinZhongFragment extends Fragment {
 
     public Adapter adapter;
     String user_id = "";
+    String token = "";
     String status = "2";
     int page = 1;
     String page_size = "10";
@@ -67,8 +68,9 @@ public class OrderZuLinZhongFragment extends Fragment {
             x.view().inject(this, this.getView());
         }
         setOnPullListenerOnprl_prl();
-        user_id = UtilsUser.getUser(getContext()).PID;
-        get_order_yu_yue_list(user_id, status, page, page_size);
+        token = UtilsUser.getToken(getActivity());
+        user_id = UtilsUser.getUserID(getActivity());
+        get_order_yu_yue_list(user_id, status, page, page_size,token);
     }
 
     public void setOnPullListenerOnprl_prl() {
@@ -77,7 +79,7 @@ public class OrderZuLinZhongFragment extends Fragment {
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 page = 1;
                 adapter.clear();
-                get_order_yu_yue_list(user_id, status, page, page_size);
+                get_order_yu_yue_list(user_id, status, page, page_size,token);
                 pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
             }
 
@@ -85,19 +87,20 @@ public class OrderZuLinZhongFragment extends Fragment {
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 page++;
                 JLog.w("第几页:" + page);
-                get_order_yu_yue_list(user_id, status, page, page_size);
+                get_order_yu_yue_list(user_id, status, page, page_size,token);
                 pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
     }
 
     //获取租赁中的订单数据
-    public void get_order_yu_yue_list(String user_id, String status, int page, String page_size) {
+    public void get_order_yu_yue_list(String user_id, String status, int page, String page_size,String token) {
         ParamOrderList paramOrderList = new ParamOrderList();
         paramOrderList.user_id = user_id;
         paramOrderList.status = status;
         paramOrderList.page = page + "";
         paramOrderList.page_size = page_size;
+        paramOrderList.token = token;
         Callback.Cancelable cancelable
                 = x.http().post(paramOrderList, new Callback.CommonCallback<String>() {
             @Override

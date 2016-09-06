@@ -63,14 +63,7 @@ public class MessageFragment extends PuTongFragment {
 
     @Override
     void initView() {
-        if (UtilsUser.getUser(getContext()) == null) {
-            getSystemMessage(getActivity().getIntent().getExtras().get("user_id").toString(),"2");
-        }
-        else {
-            getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"2");
-        }
-
-
+        getSystemMessage(UtilsUser.getUserID(getActivity()),"2");
     }
 
     @Override
@@ -96,10 +89,10 @@ public class MessageFragment extends PuTongFragment {
             public void onTabSelect(int position) {
                 if (position == 0) {
                     adapter.clear();
-                    getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"2");
+                    getSystemMessage(UtilsUser.getUserID(getActivity()),"2");
                 }else if (position == 1) {
                     adapter.clear();
-                    getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"3");
+                    getSystemMessage(UtilsUser.getUserID(getActivity()),"3");
                 }
             }
 
@@ -107,10 +100,10 @@ public class MessageFragment extends PuTongFragment {
             public void onTabReselect(int position) {
                 if (position == 0) {
                     adapter.clear();
-                    getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"2");
+                    getSystemMessage(UtilsUser.getUserID(getActivity()),"2");
                 }else if (position == 1) {
                     adapter.clear();
-                    getSystemMessage(UtilsUser.getUser(getContext()).PID.toString(),"3");
+                    getSystemMessage(UtilsUser.getUserID(getActivity()),"3");
                 }
 
             }

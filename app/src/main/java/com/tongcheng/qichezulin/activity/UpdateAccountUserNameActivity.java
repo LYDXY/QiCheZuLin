@@ -1,34 +1,34 @@
 package com.tongcheng.qichezulin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.tongcheng.lqs.listener.Etlistener_textwatcher;
+import com.tongcheng.lqs.network.Network_lqs;
+import com.tongcheng.lqs.staticdata.Staticdata;
 import com.tongcheng.qichezulin.Param.ParamUpdateUser;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.JsonBase;
-import com.tongcheng.qichezulin.model.JsonBase2;
-import com.tongcheng.qichezulin.model.UserIDModel;
 import com.tongcheng.qichezulin.model.UserModel;
-import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
-import com.tongcheng.qichezulin.utils.UtilsString;
-import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
-import com.zhy.android.percent.support.PercentRelativeLayout;
 
 import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.reflect.Type;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by 林尧 on 2016/8/3.
@@ -37,16 +37,91 @@ import java.util.List;
 public class UpdateAccountUserNameActivity extends PuTongActivity {
 
 
-    public static String new_user_name="";
+    private String name = "";
+    private int sex = -1;
 
-    @ViewInject(R.id.et_user_name)
-    EditText et_user_name;
+    @ViewInject(R.id.et_a_update_username_name) //et昵称
+            EditText et_a_update_username_name;
+
+    @ViewInject(R.id.iv_a_bindphonenumber_cancelname) //iv清空et昵称
+            ImageView iv_a_bindphonenumber_cancelname;
+
+    @ViewInject(R.id.rb_a_update_username_man) //rb男
+            RadioButton rb_a_update_username_man;
+
+    @ViewInject(R.id.rb_a_update_username_women) //rb女
+            RadioButton rb_a_update_username_women;
+
+    //绑定手机号
+    public void update_name(String user_id, String name, int sex) {
+        ParamUpdateUser paramUpdateUser = new ParamUpdateUser();
+        paramUpdateUser.user_id = user_id;
+        paramUpdateUser.name = name;
+        paramUpdateUser.sex = String.valueOf(sex).trim();
+        Callback.Cancelable cancelable
+                = x.http().post(paramUpdateUser, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<ArrayList<UserModel>>>() {
+                    }.getType();
+                    JsonBase<ArrayList<UserModel>> base = gson
+                            .fromJson(result, type);
+                    JLog.w(base.data.size() + "");
+                    if (Integer.valueOf(base.status.trim()) == 1) {
+                        Toast.makeText(UpdateAccountUserNameActivity.this, "修改个人信息成功", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        intent.putExtra("name", et_a_update_username_name.getText().toString());
+                        UpdateAccountUserNameActivity.this.setResult(1, intent);
+                        UpdateAccountUserNameActivity.this.finish();
+                    } else {
+                        Toast.makeText(UpdateAccountUserNameActivity.this, "修改个人信息失败", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception E) {
+                    Toast.makeText(UpdateAccountUserNameActivity.this, "修改个人信息失败", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(UpdateAccountUserNameActivity.this, "修改个人信息失败", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+            }
+
+
+            @Override
+            public void onFinished() {
+            }
+        });
+    }
+
+    private void init_lqs() {
+        et_a_update_username_name.addTextChangedListener(new Etlistener_textwatcher(et_a_update_username_name) {
+            @Override
+            public void callback_empty() {
+                iv_a_bindphonenumber_cancelname.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void callback_notempty() {
+                iv_a_bindphonenumber_cancelname.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setListenerOnView();
         initData();
         initView();
+        init_lqs();
     }
 
     @Override
@@ -60,6 +135,10 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
         tv_first.setVisibility(View.VISIBLE);
         tv_second.setText("保存");
         tv_second.setVisibility(View.VISIBLE);
+        et_a_update_username_name.setOnClickListener(this);
+        iv_a_bindphonenumber_cancelname.setOnClickListener(this);
+        rb_a_update_username_man.setOnClickListener(this);
+        rb_a_update_username_women.setOnClickListener(this);
     }
 
 
@@ -67,74 +146,26 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_return:
-                onBackPressed();
+                this.finish();
                 break;
             case R.id.tv_second:
-                if (!et_user_name.getText().equals("")) {
-                    if (!UtilsUser.getUser(this).PID.equals("")&&UtilsUser.getUser(this).PID!=null) {
-                        update_user(et_user_name.getText().toString(),UtilsUser.getUser(this).PID);
-                    }
-                }else {
-                    Utils.ShowText2(UpdateAccountUserNameActivity.this,"请输入昵称,再点击保存");
+                if (et_a_update_username_name.length() > 0 && sex != -1) {
+                    RequestParams requestParams = new RequestParams(Staticdata.url_updateuserinfo);
+                    update_name(UtilsUser.getUserID(this), et_a_update_username_name.getText().toString(), sex);
+                } else {
+                    Toast.makeText(UpdateAccountUserNameActivity.this, "请先填写好个人信息", Toast.LENGTH_LONG).show();
                 }
-
+                break;
+            case R.id.iv_a_bindphonenumber_cancelname:
+                et_a_update_username_name.setText("");
+                break;
+            case R.id.rb_a_update_username_man:
+                sex = 1;
+                break;
+            case R.id.rb_a_update_username_women:
+                sex = 0;
                 break;
         }
     }
 
-    //跟新用户的信息
-    public void update_user(String username,String user_id){
-        JLog.w(username+""+user_id);
-        ParamUpdateUser paramUpdateUser=new ParamUpdateUser();
-        paramUpdateUser.name=username;
-        paramUpdateUser.user_id=user_id;
-        paramUpdateUser.phone="";
-        paramUpdateUser.sex="";
-        Callback.Cancelable cancelable
-                = x.http().post(paramUpdateUser, new Callback.CommonCallback<String>() {
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-
-
-            @Override
-            public void onFinished() {
-
-            }
-
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    UtilsJson.printJsonData(result);
-                    Gson gson = new Gson();
-                    Type type = new TypeToken<JsonBase<List<UserIDModel>>>() {
-                    }.getType();
-                    JsonBase<List<UserIDModel>> base = gson
-                            .fromJson(result, type);
-                    if (!base.status.toString().trim().equals("0")) {
-                        if (base.data != null) {
-                            JLog.w("修改用户名成功");
-                            Utils.ShowText(UpdateAccountUserNameActivity.this,"修改昵称成功");
-                            UserModel userModel=UtilsUser.getUser(getApplicationContext());
-                            userModel.FUserName=et_user_name.getText().toString();
-                            UtilsUser.saveUser(getApplicationContext(),userModel);
-                            new_user_name=et_user_name.getText().toString();
-                        }
-
-                    } else {
-                        JLog.w("修改昵称失败");
-                    }
-                } catch (Exception E) {
-                    E.printStackTrace();
-                }
-
-            }
-        });
-    }
 }

@@ -14,4 +14,5 @@ import org.xutils.http.annotation.HttpRequest;
 )
 public class ParamGetUserInfo extends RequestParams {
     public String user_id;
+    public String token;
 }

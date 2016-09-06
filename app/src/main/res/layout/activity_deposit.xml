@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         app:layout_heightPercent="12%w"
         app:layout_widthPercent="100%w"
-        layout="@layout/common_header2" />
+        layout="@layout/common_header" />
 
     <com.zhy.android.percent.support.PercentRelativeLayout
         android:layout_width="0dp"
@@ -44,9 +44,9 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 app:layout_textSizePercent="6%w"
-                android:text="10000"
                 android:textColor="#cc0000"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/tv_show_money" />
         </com.zhy.android.percent.support.PercentRelativeLayout>
     </com.zhy.android.percent.support.PercentRelativeLayout>
 

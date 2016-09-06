@@ -6,9 +6,9 @@ package com.tongcheng.qichezulin.config;
 public class AppConfig {
 
     //域名 或者ip 地址
-    public static final String HOST = "http://120.24.236.80:8090";
+   // public static final String HOST = "http://120.24.236.80:8090";
 
-  //   public static final String HOST = "http://192.168.0.123:8090";
+     public static final String HOST = "http://192.168.0.123:8090";
 
     //广告轮播地址
     public static final String GET_BANNER = "api/advert/get_advert.ashx";
@@ -155,5 +155,18 @@ public class AppConfig {
 
     //获取消息列表
     public final static String GET_MESSAGELIST="api/message/get_messagelist.ashx";
+
+    //获取消息列表
+    public final static String GET_TOKEN="api/user/get_token.ashx";
+
+
+    //修改密码 lqs
+    public final static String SET_PW="api/usert_changepwd.ashx";
+
+    //获取银行卡名 lqs
+    public final static String GET_BANKCARDNAME="api/user/get_bankname.ashx";
+
+    //添加银行卡 lqs
+    public final static String ADD_BANKCARDN="api/usert_bankaccount.ashx";
 
 }

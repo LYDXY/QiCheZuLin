@@ -14,4 +14,5 @@ import org.xutils.http.annotation.HttpRequest;
 )
 public class ParamUserJf extends RequestParams {
     public String user_id;//用户id
+    public String token;//
 }
