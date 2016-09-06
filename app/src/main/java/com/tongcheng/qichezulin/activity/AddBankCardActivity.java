@@ -21,7 +21,8 @@ import org.xutils.x;
  * Created by 林尧 on 2016/7/22.
  */
 
-
+//
+//nihaomafff ddd 提交到所有分支
 @ContentView(R.layout.activity_add_bank_card)
 public class AddBankCardActivity extends Activity implements View.OnClickListener {
 

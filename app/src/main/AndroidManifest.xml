@@ -81,11 +81,12 @@
 
 
         <!--登录界面-->
+
+        <!--注册界面-->
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
 
         <!--注册界面-->
         <activity

@@ -10,11 +10,15 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jaredrummler.materialspinner.MaterialSpinnerAdapter;
 import com.jaredrummler.materialspinner.MaterialSpinnerBaseAdapter;
 import com.jiongbull.jlog.JLog;
+import com.tongcheng.qichezulin.Param.ParamGetCity;
+import com.tongcheng.qichezulin.Param.ParamGetCountry;
 import com.tongcheng.qichezulin.Param.ParamGetProvince;
 import com.tongcheng.qichezulin.Param.ParamSetInvoiceAddress;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.model.CityModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.JsonBase2;
+import com.tongcheng.qichezulin.model.QuModel;
 import com.tongcheng.qichezulin.model.SetInvoiceModel;
 import com.tongcheng.qichezulin.model.ShengFenModel;
 import com.tongcheng.qichezulin.utils.Utils;
@@ -59,24 +63,6 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
         tv_second.setText("保存");
         tv_second.setVisibility(View.VISIBLE);
         get_shengs_data();
-
-   /*     spinner2.setItems();
-        spinner2.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-              //  Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-            }
-        });*/
-
-        spinner3.setItems("广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省", "广东省");
-        spinner3.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                //   Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-            }
-        });
-
     }
 
 
@@ -196,6 +182,7 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
                             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                                 JLog.w("position" + position);
                                 JLog.w("城市id" + sheng_ids.get(position).toString() + "");
+                                get_city_date(sheng_ids.get(position).toString());
 
                             }
                         });
@@ -213,5 +200,130 @@ public class AddFaPiaoAddressActivity extends PuTongActivity {
         });
     }
     //读取城市数据
+    public void get_city_date(String province_id){
+        ParamGetCity paramGetCity=new ParamGetCity();
+        paramGetCity.province_id=province_id;
+        Callback.Cancelable cancelable
+                = x.http().post(paramGetCity, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
 
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<List<CityModel>>>() {
+                    }.getType();
+                    JsonBase<List<CityModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        JLog.w("获取城市数据成功");
+                        List<String> strings = new ArrayList<String>();
+                        final List<String> city_ids = new ArrayList<String>();
+                        for (int i = 0; i < base.data.size(); i++) {
+                            strings.add(base.data.get(i).FName.toString());
+                            city_ids.add(base.data.get(i).PID.toString());
+                        }
+
+                        spinner2.setItems(strings);
+                        spinner2.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                            @Override
+                            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                                JLog.w("position" + position);
+                                JLog.w("城市id" + city_ids.get(position).toString() + "");
+                                get_qu_data(city_ids.get(position).toString());
+                            }
+                        });
+
+                    } else {
+                        JLog.w("获取城市数据失败");
+
+
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+    //获取区县数据
+    public void get_qu_data(String city_id){
+        ParamGetCountry paramGetCountry=new ParamGetCountry();
+        paramGetCountry.city_id=city_id;
+        Callback.Cancelable cancelable
+                = x.http().post(paramGetCountry, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+
+            @Override
+            public void onFinished() {
+
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<List<QuModel>>>() {
+                    }.getType();
+                    JsonBase<List<QuModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        JLog.w("获取区县数据成功");
+                        List<String> strings = new ArrayList<String>();
+                        final List<String> qu_ids = new ArrayList<String>();
+                        for (int i = 0; i < base.data.size(); i++) {
+                            strings.add(base.data.get(i).FName.toString());
+                            qu_ids.add(base.data.get(i).PID.toString());
+                        }
+
+                        spinner3.setItems(strings);
+                        spinner3.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                            @Override
+                            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                                JLog.w("position" + position);
+                                JLog.w("区县id" + qu_ids.get(position).toString() + "");
+
+                            }
+                        });
+
+                    } else {
+                        JLog.w("获取区县数据失败");
+
+
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
+                }
+
+            }
+        });
+    }
 }

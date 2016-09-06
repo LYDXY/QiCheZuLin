@@ -15,27 +15,27 @@
         app:layout_heightPercent="30%w"
         app:layout_widthPercent="100%w">
 
-        <TextView
-            android:id="@+id/tv_re_men_or_you_hui"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/remen"
-            android:gravity="center"
-            android:textColor="@color/white"
-            app:layout_marginLeftPercent="4%w"
-            app:layout_marginTopPercent="2%w"
-            app:layout_paddingPercent="0.5%w"
-            app:layout_textSizePercent="3%w" />
+
 
         <ImageView
             android:id="@+id/iv_car_picture"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_below="@+id/tv_re_men_or_you_hui"
-            app:layout_heightPercent="15%w"
+            app:layout_heightPercent="25%w"
+            app:layout_marginLeftPercent="4%w"
+            app:layout_widthPercent="30%w" />
+
+        <ImageView
+            android:id="@+id/iv_re_men_or_you_hui"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
             app:layout_marginLeftPercent="4%w"
             app:layout_marginTopPercent="2%w"
-            app:layout_widthPercent="23%w" />
+            app:layout_paddingPercent="0.5%w"
+            app:layout_heightPercent="10%w"
+            app:layout_widthPercent="10%w"
+            />
 
         <TextView
             android:id="@+id/tv_car_name"

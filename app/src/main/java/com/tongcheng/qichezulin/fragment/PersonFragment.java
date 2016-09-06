@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.code19.library.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,6 +27,7 @@ import com.tongcheng.qichezulin.activity.MyTouSuActivity;
 import com.tongcheng.qichezulin.activity.MyWallectActivity;
 import com.tongcheng.qichezulin.activity.LoginActivity;
 import com.tongcheng.qichezulin.model.JsonBase;
+import com.tongcheng.qichezulin.model.OrderModel;
 import com.tongcheng.qichezulin.model.UserModel;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
@@ -38,6 +41,8 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.blurry.Blurry;
@@ -50,7 +55,7 @@ import jp.wasabeef.blurry.Blurry;
 public class PersonFragment extends PuTongFragment {
 
     @ViewInject(R.id.btn_login_out) //退出按钮
-     Button btn_login_out;
+            Button btn_login_out;
 
 
     @ViewInject(R.id.rrl_zu_che_record) //租车记录
@@ -72,8 +77,6 @@ public class PersonFragment extends PuTongFragment {
             PercentRelativeLayout rrl_my_tou_su;
 
 
-    @ViewInject(R.id.iv_blur)
-    ImageView iv_blur;
     @ViewInject(R.id.iv_head_photo)
     CircleImageView iv_head_photo;
     @ViewInject(R.id.rrl_zhang_hao)
@@ -93,13 +96,6 @@ public class PersonFragment extends PuTongFragment {
         //获取个人信息
         if (UtilsUser.getUser(getContext().getApplicationContext()) != null) {
             ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_head_photo);
-            Blurry.with(getActivity())
-                    .radius(10)
-                    .sampling(8)
-                    .color(Color.argb(66, 0, 255, 255)).async().animate(500)
-                    .capture(iv_blur)
-                    .into(iv_blur);
-            ImageLoader.getInstance().displayImage(UtilsUser.getUser(getContext().getApplicationContext()).FImg, iv_blur);
             tv_user_account.setText(UtilsString.hidePhoneNumber(UtilsUser.getUser(getContext().getApplicationContext()).FMobilePhone));
         } else {
             get_User_info();
@@ -118,6 +114,7 @@ public class PersonFragment extends PuTongFragment {
         rrl_bao_zheng_jin.setOnClickListener(this);
         rrl_my_tou_su.setOnClickListener(this);
         rrl_my_fa_piao.setOnClickListener(this);
+        iv_head_photo.setOnClickListener(this);
     }
 
     @Override
@@ -166,7 +163,11 @@ public class PersonFragment extends PuTongFragment {
                 JLog.w("退出操作");
                 UtilsUser.cleanAllSP(getContext());
                 UtilsTiaoZhuang.ToAnotherActivity(getActivity(), LoginActivity.class);
+                getActivity().finish();
                 break;
+            case R.id.iv_head_photo:
+                JLog.w("换头像");
+                showAlertView();
 
         }
     }
@@ -193,13 +194,7 @@ public class PersonFragment extends PuTongFragment {
                             iv_head_photo.setImageResource(R.mipmap.default_head_photo);
                         } else {
                             ImageLoader.getInstance().displayImage(base.data.FImg, iv_head_photo);
-                            Blurry.with(getActivity())
-                                    .radius(10)
-                                    .sampling(8)
-                                    .color(Color.argb(66, 0, 255, 255)).async().animate(500)
-                                    .capture(iv_blur)
-                                    .into(iv_blur);
-                            ImageLoader.getInstance().displayImage(base.data.FImg, iv_blur);
+
                         }
                         tv_user_account.setText(UtilsString.hidePhoneNumber(base.data.FMobilePhone));
                         UtilsUser.saveUser(getContext(), base.data);
@@ -252,5 +247,25 @@ public class PersonFragment extends PuTongFragment {
     public void onResume() {
         super.onResume();
         JLog.w("onResume");
+    }
+
+
+    public void showAlertView() {
+
+        new AlertView(null, null, "取消", null,
+                new String[]{"拍照", "从相册中选择"}, getActivity(), AlertView.Style.ActionSheet, new OnItemClickListener() {
+            @Override
+            public void onItemClick(Object o, int position) {
+                if (position == 0) {
+
+                } else if (position == 1) {
+
+                } else if (position == -1) {
+
+                }
+            }
+        }).show();
+
+
     }
 }

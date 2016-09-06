@@ -18,4 +18,5 @@ public class OrderModel implements Serializable {
   public String  FCreateDate;//下单时间
   public String  TotalAmount;//订单总金额
   public String  FIsBack;//申请归还【1.申请2.归还】
+  public String  FCode;//订单号
 }

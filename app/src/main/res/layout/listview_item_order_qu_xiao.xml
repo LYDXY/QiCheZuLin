@@ -25,7 +25,8 @@
             app:layout_heightPercent="5%w"
             app:layout_marginLeftPercent="2%w"
             app:layout_marginTopPercent="1.5%w"
-            app:layout_widthPercent="5%w" />
+            app:layout_widthPercent="5%w"
+            android:checked="false" />
 
 
         <TextView

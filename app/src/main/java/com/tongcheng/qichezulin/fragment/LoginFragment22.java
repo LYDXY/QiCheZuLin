@@ -117,8 +117,10 @@ public class LoginFragment22 extends PuTongFragment {
                         if (base.data.size() > 0) {
                             JLog.w("登录成功");
                             Utils.ShowText(getActivity(), base.info.toString());
-                            UtilsUser.setSP(getContext(), UtilsUser.KEY_USER_ID, base.data.get(0).user_id); //缓存注册的用户id
-                            UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MainActivity2.class);
+                            UtilsUser.setSP(getContext().getApplicationContext(), UtilsUser.KEY_USER_ID, base.data.get(0).user_id); //缓存注册的用户id
+                            Bundle bundle=new Bundle();
+                            bundle.putCharSequence("user_id",base.data.get(0).user_id);
+                            UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MainActivity2.class,bundle );
                             getActivity().finish();
                         }
                     }

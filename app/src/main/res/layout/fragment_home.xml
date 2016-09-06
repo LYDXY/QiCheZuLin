@@ -104,6 +104,7 @@
                         android:textColor="@color/gray9999999"
                         app:layout_marginRightPercent="9%w"
                         app:layout_marginTopPercent="2%w"
+
                         app:layout_textSizePercent="3.5%w" />
 
 
@@ -116,12 +117,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:background="@color/white"
-                    android:gravity="center_vertical"
                     android:visibility="gone"
-                    app:layout_heightPercent="9%w"
+                    app:layout_heightPercent="12%w"
                     app:layout_marginLeftPercent="2.5%w"
                     app:layout_marginRightPercent="2.5%w"
-                    app:layout_marginTopPercent="2%w">
+                    app:layout_marginTopPercent="2%w"
+                    >
 
                     <TextView
                         android:id="@+id/tv_Xing_Cheng"
@@ -131,42 +132,34 @@
                         android:gravity="center"
                         android:text="@string/xing_cheng"
                         android:textColor="@color/white"
+                        android:layout_centerVertical="true"
                         app:layout_marginLeftPercent="4%w"
                         app:layout_paddingPercent="0.5%w"
                         app:layout_textSizePercent="3%w" />
 
-                    <TextView
-                        android:id="@+id/tv_che_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <!--广告轮播控件-->
+                    <com.bigkoo.convenientbanner.ConvenientBanner
                         android:layout_toRightOf="@+id/tv_Xing_Cheng"
-                        android:gravity="center"
-                        android:text="@string/RuiChi"
-                        android:textColor="@color/gray0"
-                        app:layout_marginLeftPercent="20%w"
-                        app:layout_textSizePercent="4%w" />
-
-                    <TextView
-                        android:id="@+id/tv_che_xing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/tv_che_name"
-                        android:gravity="center"
-                        android:text="@string/xing_che_number"
-                        android:textColor="@color/green_36b57e"
+                        android:id="@+id/convenientBanner2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_centerVertical="true"
+                        app:canLoop="true"
                         app:layout_marginLeftPercent="5%w"
-                        app:layout_textSizePercent="4%w" />
+                        app:layout_widthPercent="70%w"
+                        app:layout_heightPercent="12%w" />
+
 
                     <ImageView
                         android:id="@+id/iv_go"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_alignParentRight="true"
-                        android:background="@mipmap/go"
-                        android:scaleType="fitXY"
-                        app:layout_heightPercent="5%w"
-                        app:layout_marginRightPercent="4%w"
-                        app:layout_widthPercent="5%w" />
+                        android:src="@mipmap/go"
+                        android:scaleType="centerInside"
+                        app:layout_heightPercent="12%w"
+                        android:layout_centerVertical="true"
+                        app:layout_widthPercent="16%w" />
 
                 </com.zhy.android.percent.support.PercentRelativeLayout>
 

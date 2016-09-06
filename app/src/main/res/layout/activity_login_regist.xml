@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/common_header"
+        layout="@layout/common_header3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_heightPercent="12%w"
@@ -24,8 +24,6 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/black"
         app:tabTextColor="@color/gray">
-
-
     </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager

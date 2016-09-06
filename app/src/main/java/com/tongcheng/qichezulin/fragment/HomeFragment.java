@@ -12,22 +12,30 @@ import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
+import com.pacific.adapter.Adapter;
+import com.pacific.adapter.AdapterHelper;
 import com.tongcheng.qichezulin.Param.ParamBanner;
 import com.tongcheng.qichezulin.Param.ParamHotCar;
+import com.tongcheng.qichezulin.Param.ParamOrderList;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.activity.CarDetailActivity;
 import com.tongcheng.qichezulin.activity.FindCarTypeActivity;
+import com.tongcheng.qichezulin.activity.MyOrderActivity;
 import com.tongcheng.qichezulin.activity.WangDianSearchActivity;
 import com.tongcheng.qichezulin.activity.ZuCheActivity;
 import com.tongcheng.qichezulin.holder.NetworkImageHolderView;
+import com.tongcheng.qichezulin.holder.XingChengHolderView;
 import com.tongcheng.qichezulin.listner.MyLocationListener;
 import com.tongcheng.qichezulin.model.BannerModel;
 import com.tongcheng.qichezulin.model.CarModel;
 import com.tongcheng.qichezulin.model.JsonBase;
+import com.tongcheng.qichezulin.model.JsonBase2;
+import com.tongcheng.qichezulin.model.OrderModel;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout2ToMain;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
+import com.tongcheng.qichezulin.utils.UtilsUser;
 import com.tongcheng.qichezulin.view.ListViewForScrollView2;
 import com.zhy.android.percent.support.PercentRelativeLayout;
 
@@ -51,9 +59,6 @@ import pl.droidsonroids.gif.GifDrawable;
 public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListener {
 
 
-
-
-
     // 上下拉控件
     @ViewInject(R.id.refresh_view)
     PullToRefreshLayout2ToMain refresh_view;
@@ -62,6 +67,11 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
     @ViewInject(R.id.convenientBanner)
     ConvenientBanner convenientBanner;
     List<BannerModel> bannerModels;
+
+    //平台行程轮播
+    @ViewInject(R.id.convenientBanner2)
+    ConvenientBanner convenientBanner2;
+    List<OrderModel> orderModels;
 
     //一键租车
     @ViewInject(R.id.iv_first)
@@ -99,6 +109,7 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
         }*/
         getbanner();
         do_get_hot_cars();
+        get_order_zu_lin_list();
     }
 
     @Override
@@ -122,6 +133,7 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
         iv_second.setOnClickListener(this);
         iv_third.setOnClickListener(this);
         prl_xingcheng.setOnClickListener(this);
+
     }
 
     @Override
@@ -168,13 +180,12 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
 
             case R.id.prl_xingcheng:
                 JLog.w("行程点击");
+                UtilsTiaoZhuang.ToAnotherActivity(getActivity(), MyOrderActivity.class);
                 break;
 
         }
 
     }
-
-
 
 
     // 获取广播轮播数据
@@ -204,6 +215,7 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
                                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                                 .setOnItemClickListener(HomeFragment.this).startTurning(5000);
                         bannerModels = base.data;
+                        prl_xingcheng.setVisibility(View.VISIBLE);
                     }
                 }
 
@@ -265,9 +277,11 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
                             protected void convert(BaseAdapterHelper helper, final CarModel item) {
                                 final int position = helper.getPosition();
                                 if (base.data.get(position).FType.equals("1")) {
-                                    helper.setText(R.id.tv_re_men_or_you_hui, "热门");
+                                 //   helper.setText(R.id.tv_re_men_or_you_hui, "热门");
+                                    helper.setImageResource(R.id.iv_re_men_or_you_hui,R.mipmap.hot2x);
+
                                 } else {
-                                    helper.setText(R.id.tv_re_men_or_you_hui, "优惠");
+                                    helper.setImageResource(R.id.iv_re_men_or_you_hui,R.mipmap.youhui2x);
                                 }
                                 helper.setText(R.id.tv_car_name, item.FCarName)
                                         .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
@@ -341,4 +355,73 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
     public void onLoadMore(PullToRefreshLayout2ToMain pullToRefreshLayout) {
         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
     }
+
+
+    //获取租赁中的订单数据
+    public void get_order_zu_lin_list() {
+        ParamOrderList paramOrderList = new ParamOrderList();
+
+        if (UtilsUser.getUser(getContext()) == null) {
+        } else {
+            paramOrderList.user_id = UtilsUser.getUser(getContext()).PID;
+            paramOrderList.status = "2";
+            paramOrderList.page = "1";
+            paramOrderList.page_size = "10";
+            Callback.Cancelable cancelable
+                    = x.http().post(paramOrderList, new Callback.CommonCallback<String>() {
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+
+                }
+
+
+                @Override
+                public void onFinished() {
+
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    try {
+                        UtilsJson.printJsonData(result);
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<JsonBase2<List<OrderModel>>>() {
+                        }.getType();
+                        JsonBase2<List<OrderModel>> base = gson
+                                .fromJson(result, type);
+                        if (!base.status.toString().trim().equals("0")) {
+                            if (base.data != null) {
+                                JLog.w("获取租赁中的订单成功");
+                                if (base.data.size() > 0) {
+                                    convenientBanner2.startTurning(10000);
+                                    //convenientBanner2.setScrollDuration(10000);
+                                    convenientBanner2.setPages(new CBViewHolderCreator<XingChengHolderView>() {
+                                        @Override
+                                        public XingChengHolderView createHolder() {
+                                            return new XingChengHolderView();
+                                        }
+                                    }, base.data).setClickable(false);
+                                    orderModels = base.data;
+                                }
+
+                            }
+                        } else {
+                            JLog.w("获取租赁中的订单失败");
+                        }
+                    } catch (Exception E) {
+                        E.printStackTrace();
+                    }
+
+                }
+            });
+        }
+
+
+    }
+
 }
