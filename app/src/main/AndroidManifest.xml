@@ -297,10 +297,6 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!--设置密码界面-->
-        <activity
-            android:name=".activity.SetPasswordActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!--保证金界面-->
         <activity

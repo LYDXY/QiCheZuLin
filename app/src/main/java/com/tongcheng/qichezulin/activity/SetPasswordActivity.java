@@ -1,6 +1,8 @@
 package com.tongcheng.qichezulin.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,24 +12,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
-import com.tongcheng.lqs.listener.Etlistener_textwatcher;
-import com.tongcheng.lqs.network.Httpclass_getgetverificationcode;
-import com.tongcheng.lqs.network.Network_lqs;
-import com.tongcheng.lqs.staticdata.Staticdata;
-import com.tongcheng.lqs.utils.Log_lqs;
-import com.tongcheng.lqs.utils.Timekeeper_lqs;
 import com.tongcheng.qichezulin.Param.ParamCheckCode;
 import com.tongcheng.qichezulin.Param.ParamSetPassword;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.CheckCodeModel;
 import com.tongcheng.qichezulin.model.JsonBase;
 import com.tongcheng.qichezulin.model.UserIDModel;
-import com.tongcheng.qichezulin.utils.Utils;
+import com.tongcheng.qichezulin.utils.Timekeeper_lqs;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -214,7 +209,6 @@ public class SetPasswordActivity extends PuTongActivity {
         timekeeper_lqs = new Timekeeper_lqs() {
             @Override
             public void callback(int timekey) {
-                Log_lqs.activity_log("Timekey", "" + timekey);
                 tv_a_set_password_getverificationcode.setText(timekey + "秒后重新发送");
                 if (timekey <= 0) {
                     tv_a_set_password_getverificationcode.setText("获取验证码");
@@ -222,26 +216,45 @@ public class SetPasswordActivity extends PuTongActivity {
                 }
             }
         };
-        et_a_set_password_inputnewpassword.addTextChangedListener(new Etlistener_textwatcher(et_a_set_password_inputnewpassword) {
+
+        et_a_set_password_inputnewpassword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void callback_empty() {
-                iv_a_setpassword_cancelnewpassword.setVisibility(View.INVISIBLE);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void callback_notempty() {
-                iv_a_setpassword_cancelnewpassword.setVisibility(View.VISIBLE);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (et_a_set_password_inputnewpassword.length() > 0) {
+                    iv_a_setpassword_cancelnewpassword.setVisibility(View.VISIBLE);
+                } else {
+                    iv_a_setpassword_cancelnewpassword.setVisibility(View.GONE);
+                }
             }
         });
-        et_a_set_password_inputverificationcode.addTextChangedListener(new Etlistener_textwatcher(et_a_set_password_inputverificationcode) {
+        et_a_set_password_inputverificationcode.addTextChangedListener(new TextWatcher() {
             @Override
-            public void callback_empty() {
-                iv_a_set_password_cancelverificationcode.setVisibility(View.INVISIBLE);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void callback_notempty() {
-                iv_a_set_password_cancelverificationcode.setVisibility(View.VISIBLE);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (et_a_set_password_inputverificationcode.length() > 0) {
+                    iv_a_set_password_cancelverificationcode.setVisibility(View.VISIBLE);
+                } else {
+                    iv_a_set_password_cancelverificationcode.setVisibility(View.GONE);
+                }
             }
         });
     }

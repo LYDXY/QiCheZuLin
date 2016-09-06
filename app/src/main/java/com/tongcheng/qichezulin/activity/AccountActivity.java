@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jiongbull.jlog.JLog;
-import com.tongcheng.lqs.staticdata.Staticid;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.utils.UtilsString;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
@@ -53,7 +52,7 @@ public class AccountActivity extends PuTongActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (1 == resultCode) {
             switch (requestCode) {
-                case Staticid.AccountActivity_UpdateAccountUserNameActivity:
+                case 1:
                     String name = data.getStringExtra("name");
                     tv_user_ccount.setText(name);
                     break;
@@ -64,8 +63,14 @@ public class AccountActivity extends PuTongActivity {
     }
 
     private void init_lqs() {
-        tv_show_phone_number.setText(UtilsString.hidePhoneNumber(UtilsUser.get_user_phoen(AccountActivity.this)));
-        tv_user_ccount.setText(UtilsUser.get_user_name(AccountActivity.this));
+        if (UtilsUser.getUser(this) != null) {
+            if (UtilsUser.getUser(this).FMobilePhone != null) {
+                tv_show_phone_number.setText(UtilsString.hidePhoneNumber(UtilsUser.getUser(this).FMobilePhone).trim());
+            }
+            if (UtilsUser.getUser(this).FUserName != null) {
+                tv_user_ccount.setText(UtilsUser.getUser(this).FUserName);
+            }
+        }
     }
 
     @Override
@@ -91,7 +96,7 @@ public class AccountActivity extends PuTongActivity {
                 onBackPressed();
                 break;
             case R.id.prl_first:
-                startActivityForResult(new Intent(AccountActivity.this, UpdateAccountUserNameActivity.class), Staticid.AccountActivity_UpdateAccountUserNameActivity);
+                startActivityForResult(new Intent(AccountActivity.this, UpdateAccountUserNameActivity.class), 1);
                 break;
             case R.id.prl_band_card: //绑定银卡模块
                 UtilsTiaoZhuang.ToAnotherActivity(AccountActivity.this, MyBankCardsActivity.class);

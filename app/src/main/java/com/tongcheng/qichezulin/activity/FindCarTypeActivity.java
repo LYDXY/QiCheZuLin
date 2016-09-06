@@ -1,8 +1,10 @@
 package com.tongcheng.qichezulin.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -44,9 +46,9 @@ public class FindCarTypeActivity extends PuTongActivity2 {
     PullableListView plv_car_list; //listview
     Adapter<CarModel2> catModel2Adapter;
 
-
+    @ViewInject(R.id.ib_shai_xuan)
+    ImageButton ib_shai_xuan;
     private boolean isFirstIn = true;
-
 
     @Override
     void initData() {
@@ -57,19 +59,6 @@ public class FindCarTypeActivity extends PuTongActivity2 {
     void initView() {
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("选择车型");
-      /*  try {
-            prl_prl.setGifRefreshView(new GifDrawable(getResources(), R.mipmap.anim));
-            prl_prl.setGifLoadmoreView(new GifDrawable(getResources(), R.mipmap.anim));
-
-        } catch (Resources.NotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }*/
-
-
     }
 
     @Override
@@ -79,6 +68,11 @@ public class FindCarTypeActivity extends PuTongActivity2 {
             case R.id.iv_return:
                 onBackPressed();
                 break;
+            case R.id.ib_shai_xuan:
+                Bundle bundle=new Bundle();
+                UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity.this, ChoseActivity.class, 0);
+                break;
+
         }
 
     }
@@ -88,6 +82,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
         super.onCreate(savedInstanceState);
         initView();
         setListenerOnView();
+        ib_shai_xuan.setOnClickListener(this);
         setOnPullListenerOnprl_prl();
         do_get_data();
     }
@@ -120,12 +115,12 @@ public class FindCarTypeActivity extends PuTongActivity2 {
     // 获取列表数据
     private void do_get_data() {
         ParamGetAllCar paramGetAllCar = new ParamGetAllCar();
-        // paramGetAllCar.max_price = "";
-        // paramGetAllCar.min_price = "";
+        paramGetAllCar.max_price = "";
+        paramGetAllCar.min_price = "";
         paramGetAllCar.page = "1";
-        // paramGetAllCar.page_size = "";
-        //   paramGetAllCar.cartype = "";
-        //   paramGetAllCar.paytype = "";
+        paramGetAllCar.page_size = "";
+        paramGetAllCar.cartype = "";
+        paramGetAllCar.paytype = "";
         Callback.Cancelable cancelable
                 = x.http().post(paramGetAllCar, new Callback.CommonCallback<String>() {
             @Override
@@ -196,5 +191,21 @@ public class FindCarTypeActivity extends PuTongActivity2 {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case RESULT_OK:
+                Bundle b = data.getExtras(); //data为B中回传的Intent
+                String min = b.getString("min");//str即为回传的值
+                String max = b.getString("max");//str即为回传的值
+                String carType= b.getString("carType");//str即为回传的值
+                JLog.w(min);
+                JLog.w(max);
+                JLog.w(carType);
+        }
     }
 }

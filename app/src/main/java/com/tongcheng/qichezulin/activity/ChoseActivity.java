@@ -1,5 +1,6 @@
 package com.tongcheng.qichezulin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,9 +43,9 @@ import java.util.ArrayList;
 @ContentView(R.layout.activity_chose)
 public class ChoseActivity extends PuTongActivity2 {
 
-    public static  String min="";
-    public static  String max="";
-    public static   String carType="";
+    public static String min = "";
+    public static String max = "";
+    public static String carType = "";
 
     @ViewInject(R.id.radioGroup)
     RadioGroup radioGroup;
@@ -108,18 +109,18 @@ public class ChoseActivity extends PuTongActivity2 {
                         break;
                     case R.id.radio_second:
                         JLog.w("150");
-                        min="0";
-                        max="150";
+                        min = "0";
+                        max = "150";
                         break;
                     case R.id.radio_three:
                         JLog.w("300");
-                        min="150";
-                        max="300";
+                        min = "150";
+                        max = "300";
                         break;
                     case R.id.radio_fourth:
                         JLog.w("500");
-                        min="300";
-                        max="500";
+                        min = "300";
+                        max = "500";
                         break;
                     case R.id.radio_fifth:
                         break;
@@ -134,7 +135,7 @@ public class ChoseActivity extends PuTongActivity2 {
                 JLog.w("点击的位置=" + i);
                 JLog.w("选中的位置=" + lv_hao_do_you_chose.getCheckedItemPosition() + "");   // 即获取选中位置);
                 JLog.w(adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).FTypeName);
-                carType=adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).PID;
+                carType = adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).PID;
 
             }
         });
@@ -148,7 +149,14 @@ public class ChoseActivity extends PuTongActivity2 {
                 onBackPressed();
                 break;
             case R.id.tv_first:
-                onBackPressed();
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("min", min);
+                bundle.putString("max", max);
+                bundle.putString("carType", carType);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
                 break;
 
         }
@@ -162,7 +170,7 @@ public class ChoseActivity extends PuTongActivity2 {
     }
 
     //获取车的类型
-    public void get_carType(){
+    public void get_carType() {
         ParamGetCarType paramGetCarType = new ParamGetCarType();
         Callback.Cancelable cancelable
                 = x.http().post(paramGetCarType, new Callback.CommonCallback<String>() {
@@ -210,11 +218,12 @@ public class ChoseActivity extends PuTongActivity2 {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+        if (keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
+
+
 }

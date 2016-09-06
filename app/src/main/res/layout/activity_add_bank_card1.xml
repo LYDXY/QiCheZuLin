@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grayF0F0F0"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     android:background="@color/grayF0F0F0"
+                                                     android:focusable="true"
+                                                     android:focusableInTouchMode="true"
+                                                     android:orientation="vertical">
 
     <include
         layout="@layout/common_header2"
@@ -37,7 +37,7 @@
                 android:layout_centerVertical="true"
                 android:text="持卡人"
                 android:textColor="@color/black"
-                app:layout_textSizePercent="20%w" />
+                app:layout_textSizePercent="20%w"/>
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
 
@@ -46,8 +46,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textColor="@color/black"
-            app:layout_textSizePercent="4%w" />
+            android:textColor="@color/gray"
+            app:layout_textSizePercent="4%w"/>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%w"
+        app:layout_widthPercent="100%w">
+
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_marginLeftPercent="5%w"
+            app:layout_widthPercent="20%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="银行卡"
+                android:textColor="@color/black"
+                app:layout_textSizePercent="20%w"/>
+        </com.zhy.android.percent.support.PercentRelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_a_add_bank_card1_bankname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/gray"
+            app:layout_textSizePercent="4%w"/>
     </com.zhy.android.percent.support.PercentLinearLayout>
 
     <com.zhy.android.percent.support.PercentLinearLayout
@@ -72,41 +106,7 @@
                 android:layout_centerVertical="true"
                 android:text="手机号"
                 android:textColor="@color/black"
-                app:layout_textSizePercent="20%w" />
-        </com.zhy.android.percent.support.PercentRelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_a_add_bank_card1_bankname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textColor="@color/gray"
-            app:layout_textSizePercent="4%w" />
-    </com.zhy.android.percent.support.PercentLinearLayout>
-
-    <com.zhy.android.percent.support.PercentLinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_heightPercent="10%w"
-        app:layout_widthPercent="100%w">
-
-        <com.zhy.android.percent.support.PercentRelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:layout_marginLeftPercent="5%w"
-            app:layout_widthPercent="20%w">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="卡号"
-                android:textColor="@color/gray"
-                app:layout_textSizePercent="20%w" />
+                app:layout_textSizePercent="20%w"/>
         </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <EditText
@@ -122,7 +122,7 @@
             android:singleLine="true"
             android:textColor="@color/black"
             android:textCursorDrawable="@null"
-            app:layout_textSizePercent="4%w" />
+            app:layout_textSizePercent="4%w"/>
 
 
         <ImageView
@@ -135,11 +135,11 @@
             android:visibility="invisible"
             app:layout_heightPercent="50%h"
             app:layout_marginRightPercent="6%w"
-            app:layout_widthPercent="50%h" />
+            app:layout_widthPercent="50%h"/>
     </com.zhy.android.percent.support.PercentLinearLayout>
 
     <TextView
-        android:id="@+id/tv_a_add_bank_card1_next"
+        android:id="@+id/tv_a_add_bank_card1_ok"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
@@ -149,7 +149,7 @@
         android:textColor="@color/white"
         app:layout_heightPercent="10%w"
         app:layout_marginTopPercent="5%w"
-        app:layout_widthPercent="50%w" />
+        app:layout_widthPercent="50%w"/>
 
 
 </com.zhy.android.percent.support.PercentLinearLayout>

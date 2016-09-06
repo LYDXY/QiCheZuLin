@@ -6,9 +6,9 @@ package com.tongcheng.qichezulin.config;
 public class AppConfig {
 
     //域名 或者ip 地址
-   // public static final String HOST = "http://120.24.236.80:8090";
+    public static final String HOST = "http://120.24.236.80:8090";
 
-     public static final String HOST = "http://192.168.0.123:8090";
+   //  public static final String HOST = "http://192.168.0.123:8090";
 
     //广告轮播地址
     public static final String GET_BANNER = "api/advert/get_advert.ashx";

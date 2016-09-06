@@ -2,6 +2,8 @@ package com.tongcheng.qichezulin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,9 +13,6 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
-import com.tongcheng.lqs.listener.Etlistener_textwatcher;
-import com.tongcheng.lqs.network.Network_lqs;
-import com.tongcheng.lqs.staticdata.Staticdata;
 import com.tongcheng.qichezulin.Param.ParamUpdateUser;
 import com.tongcheng.qichezulin.R;
 import com.tongcheng.qichezulin.model.JsonBase;
@@ -22,7 +21,6 @@ import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsUser;
 
 import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -52,7 +50,7 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
     @ViewInject(R.id.rb_a_update_username_women) //rb女
             RadioButton rb_a_update_username_women;
 
-    //绑定手机号
+    //修改个人信息
     public void update_name(String user_id, String name, int sex) {
         ParamUpdateUser paramUpdateUser = new ParamUpdateUser();
         paramUpdateUser.user_id = user_id;
@@ -101,15 +99,24 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
     }
 
     private void init_lqs() {
-        et_a_update_username_name.addTextChangedListener(new Etlistener_textwatcher(et_a_update_username_name) {
+        et_a_update_username_name.addTextChangedListener(new TextWatcher() {
             @Override
-            public void callback_empty() {
-                iv_a_bindphonenumber_cancelname.setVisibility(View.INVISIBLE);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void callback_notempty() {
-                iv_a_bindphonenumber_cancelname.setVisibility(View.VISIBLE);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (et_a_update_username_name.length() > 0) {
+                    iv_a_bindphonenumber_cancelname.setVisibility(View.VISIBLE);
+                } else {
+                    iv_a_bindphonenumber_cancelname.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -150,7 +157,6 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
                 break;
             case R.id.tv_second:
                 if (et_a_update_username_name.length() > 0 && sex != -1) {
-                    RequestParams requestParams = new RequestParams(Staticdata.url_updateuserinfo);
                     update_name(UtilsUser.getUserID(this), et_a_update_username_name.getText().toString(), sex);
                 } else {
                     Toast.makeText(UpdateAccountUserNameActivity.this, "请先填写好个人信息", Toast.LENGTH_LONG).show();

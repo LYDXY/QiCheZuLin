@@ -1,5 +1,6 @@
 package com.tongcheng.qichezulin.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,6 +43,10 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
     @ViewInject(R.id.iv_my_chose)
     ImageButton iv_my_chose; //筛选按钮
 
+    String shop_id="";
+    String start_time="";
+    String end_time="";
+
     int page = 1;
 
     @ViewInject(R.id.prl_prl) //下拉刷新控件
@@ -63,19 +68,6 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
     void initView() {
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("选择车型");
-      /*  try {
-            prl_prl.setGifRefreshView(new GifDrawable(getResources(), R.mipmap.anim));
-            prl_prl.setGifLoadmoreView(new GifDrawable(getResources(), R.mipmap.anim));
-
-        } catch (Resources.NotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }*/
-
-
     }
 
     @Override
@@ -86,7 +78,7 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
                 onBackPressed();
                 break;
             case R.id.iv_my_chose:
-                UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this, ChoseActivity.class);
+                UtilsTiaoZhuang.ToAnotherActivity(FindCarTypeActivity2.this, ChoseActivity.class, 0);
                 break;
         }
 
@@ -99,10 +91,11 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         initView();
         setListenerOnView();
         setOnPullListenerOnprl_prl();
-        if (getIntent().getExtras().getString("shop_id") != null && getIntent().getExtras().getString("start_time") != null
-                && getIntent().getExtras().getString("end_time") != null) {
-            do_get_data(getIntent().getExtras().getString("shop_id"), "", "", "", "", "");
-        }
+        shop_id=getIntent().getExtras().getString("shop_id");
+        start_time=getIntent().getExtras().getString("start_time");
+        end_time=getIntent().getExtras().getString("end_time");
+        do_get_data(shop_id, "", "", "", "", "");
+
 
 
     }
@@ -239,45 +232,30 @@ public class FindCarTypeActivity2 extends PuTongActivity2 {
         });
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        JLog.w("onResume");
-        if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("")) {
-            catModel2Adapter.clear();
-            prl_prl.autoRefresh();
-            do_get_data(getIntent().getExtras().getString("shop_id"), "", "", "2", ChoseActivity.min, ChoseActivity.max);
-            ChoseActivity.min = "";
-            ChoseActivity.max = "";
-        } else if (!ChoseActivity.carType.equals("")) {
-            do_get_data(getIntent().getExtras().getString("shop_id"), "", ChoseActivity.carType, "", "", "");
-            catModel2Adapter.clear();
-            prl_prl.autoRefresh();
-            ChoseActivity.carType = "";
-        } else if (!ChoseActivity.min.equals("") && !ChoseActivity.max.equals("") && !ChoseActivity.carType.equals("")) {
-
-            catModel2Adapter.clear();
-            prl_prl.autoRefresh();
-            do_get_data(getIntent().getExtras().getString("shop_id"), "", ChoseActivity.carType, "2", ChoseActivity.min, ChoseActivity.max);
-            ChoseActivity.min = "";
-            ChoseActivity.max = "";
-            ChoseActivity.carType = "";
-
-        } else if (ChoseActivity.min == null || ChoseActivity.carType == null || ChoseActivity.carType == null) {
-
-        } else if (ChoseActivity.min.equals("") || ChoseActivity.max.equals("") || ChoseActivity.carType.equals("")) {
-
-        }
-
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
             return false;
         } else {
             return true;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case RESULT_OK:
+                Bundle b = data.getExtras(); //data为B中回传的Intent
+                String min = b.getString("min");//str即为回传的值
+                String max = b.getString("max");//str即为回传的值
+                String carType= b.getString("carType");//str即为回传的值
+                JLog.w(min);
+                JLog.w(max);
+                JLog.w(carType);
+                catModel2Adapter.clear();
+                prl_prl.autoRefresh();
+                do_get_data(shop_id, "",carType, "2", min,max);
         }
     }
 }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,42 +14,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.tongcheng.lqs.listener.Etlistener_textwatcher;
-import com.tongcheng.lqs.network.Network_lqs;
-import com.tongcheng.lqs.staticdata.Staticdata;
-import com.tongcheng.lqs.staticdata.Staticid;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.jiongbull.jlog.JLog;
+import com.tongcheng.qichezulin.Param.ParamAddBankcardname;
 import com.tongcheng.qichezulin.R;
+import com.tongcheng.qichezulin.model.BandcardnameModel;
+import com.tongcheng.qichezulin.model.JsonBase;
+import com.tongcheng.qichezulin.utils.UtilsJson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xutils.http.RequestParams;
+import org.xutils.common.Callback;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 
 /**
- * Created by lqs on 2016.9.6
+ * Created by 林尧 on 2016/7/22.
  */
+
 
 @ContentView(R.layout.activity_add_bank_card)
 public class AddBankCardActivity extends Activity implements View.OnClickListener {
-
-    private Network_lqs network_lqs_next;
-
-    private Handler handler_atoa = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            String bankname = msg.obj.toString();
-            Intent intent = new Intent();
-            intent.putExtra("name", et_a_add_bank_card_name.getText().toString());
-            intent.putExtra("bankcardnumber", et_a_add_bank_card_number.getText().toString());
-            intent.putExtra("bankname", bankname);
-            intent.setClass(AddBankCardActivity.this, AddBankCardActivity1.class);
-            AddBankCardActivity.this.startActivity(intent);
-        }
-    };
 
     @ViewInject(R.id.tv_first) //标题
             TextView tv_first;
@@ -70,58 +61,117 @@ public class AddBankCardActivity extends Activity implements View.OnClickListene
     @ViewInject(R.id.iv_a_add_bank_card_cancelcardnumber) //iv取消卡号
             ImageView iv_a_add_bank_card_cancelcardnumber;
 
-    @Override
+    private Handler handler_atoa = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Intent intent = new Intent();
+            intent.putExtra("name", et_a_add_bank_card_name.getText().toString());
+            intent.putExtra("cardnum", et_a_add_bank_card_number.getText().toString());
+            intent.putExtra("bankname", (String) msg.obj);
+            intent.setClass(AddBankCardActivity.this, AddBankCardActivity1.class);
+            AddBankCardActivity.this.startActivity(intent);
+        }
+    };
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (1 == resultCode) {
-            switch (requestCode) {
-                case Staticid.AddBankCardActivity_AddBankCardActivity1:
-                    break;
-            }
         }
     }
 
     private void init_lqs() {
-        network_lqs_next = new Network_lqs() {
+
+        et_a_add_bank_card_name.addTextChangedListener(new TextWatcher() {
             @Override
-            public void callback(boolean success, String result) {
-                if (success) {
-                    try {
-                        JSONArray ja = new JSONArray(result);
-                        JSONObject jo = ja.getJSONObject(0);
-                        String bankname = jo.getString("bankname");
-                        Message msg = new Message();
-                        msg.obj = bankname;
-                        handler_atoa.sendMessage(msg);
-                    } catch (JSONException je) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (et_a_add_bank_card_name.length() > 0) {
+                    iv_a_add_bank_card_cancelname.setVisibility(View.VISIBLE);
+                } else {
+                    iv_a_add_bank_card_cancelname.setVisibility(View.GONE);
+                }
+            }
+        });
+        et_a_add_bank_card_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (et_a_add_bank_card_number.length() > 0) {
+                    iv_a_add_bank_card_cancelcardnumber.setVisibility(View.VISIBLE);
+                } else {
+                    iv_a_add_bank_card_cancelcardnumber.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    //获取银行卡名
+    public void get_bankcardname(String cardnumber) {
+        ParamAddBankcardname paramAddBankcardname = new ParamAddBankcardname();
+        paramAddBankcardname.cardnumber = cardnumber;
+        Callback.Cancelable cancelable
+                = x.http().post(paramAddBankcardname, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase<ArrayList<BandcardnameModel>>>() {
+                    }.getType();
+                    JsonBase<ArrayList<BandcardnameModel>> base = gson
+                            .fromJson(result, type);
+                    JLog.w(base.data.size() + "");
+                    if (base.data != null) {
+                        if (base.data.size() > 0) {
+                            JLog.w("获取银行名成功" + base.data);
+                            String bankname = base.data.get(0).bankname;
+                            JLog.w("获取银行名成功" + bankname);
+                            Message msg = new Message();
+                            msg.obj = bankname;
+                            handler_atoa.sendMessage(msg);
+                        } else {
+                            Toast.makeText(AddBankCardActivity.this, "error", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        JLog.w("获取银行名失败");
                         Toast.makeText(AddBankCardActivity.this, "error", Toast.LENGTH_LONG).show();
                     }
-                    Toast.makeText(AddBankCardActivity.this, "error", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(AddBankCardActivity.this, "请输入正确的银行卡号", Toast.LENGTH_LONG).show();
+                } catch (Exception E) {
+                    Toast.makeText(AddBankCardActivity.this, "Exception", Toast.LENGTH_LONG).show();
                 }
                 tv_a_add_bank_next.setEnabled(true);
             }
-        };
-        et_a_add_bank_card_name.addTextChangedListener(new Etlistener_textwatcher(et_a_add_bank_card_name) {
+
             @Override
-            public void callback_empty() {
-                iv_a_add_bank_card_cancelname.setVisibility(View.GONE);
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(AddBankCardActivity.this, "请输入正确的银行卡号", Toast.LENGTH_LONG).show();
+                tv_a_add_bank_next.setEnabled(true);
             }
 
             @Override
-            public void callback_notempty() {
-                iv_a_add_bank_card_cancelname.setVisibility(View.VISIBLE);
-            }
-        });
-        et_a_add_bank_card_number.addTextChangedListener(new Etlistener_textwatcher(et_a_add_bank_card_number) {
-            @Override
-            public void callback_empty() {
-                iv_a_add_bank_card_cancelcardnumber.setVisibility(View.GONE);
+            public void onCancelled(CancelledException cex) {
             }
 
+
             @Override
-            public void callback_notempty() {
-                iv_a_add_bank_card_cancelcardnumber.setVisibility(View.VISIBLE);
+            public void onFinished() {
             }
         });
     }
@@ -157,9 +207,7 @@ public class AddBankCardActivity extends Activity implements View.OnClickListene
                     Toast.makeText(this, "请输入银行卡号", Toast.LENGTH_SHORT).show();
                 } else {
                     tv_a_add_bank_next.setEnabled(false);
-                    RequestParams requestParams = new RequestParams(Staticdata.url_getbankcardname);
-                    requestParams.addBodyParameter("cardnumber", et_a_add_bank_card_number.getText().toString());
-                    network_lqs_next.post_jsonobject(requestParams);
+                    get_bankcardname(et_a_add_bank_card_number.getText().toString());
                 }
                 break;
             case R.id.iv_a_add_bank_card_cancelname:
