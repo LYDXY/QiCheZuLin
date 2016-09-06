@@ -18,85 +18,132 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/qing_bang_ding_ni_de_yin_hang_ka"
-        android:textColor="@color/gray9999999"
+        android:text="请绑定持卡人本人的银行卡"
+        android:textColor="@color/gray1"
         app:layout_marginLeftPercent="5%w"
-        app:layout_marginTopPercent="5%w"
-        app:layout_textSizePercent="5%w" />
+        app:layout_marginRightPercent="5%w"
+        app:layout_marginTopPercent="6%w"
+        app:layout_textSizePercent="3.5%w" />
 
-    <com.zhy.android.percent.support.PercentRelativeLayout
+    <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white"
-        app:layout_heightPercent="12%w"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%w"
         app:layout_marginTopPercent="5%w"
         app:layout_widthPercent="100%w">
 
-        <TextView
-            android:id="@+id/tv_chi_ka_ren"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/chi_ka_ren"
-            android:textColor="@color/black"
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             app:layout_marginLeftPercent="5%w"
-            app:layout_textSizePercent="5%w" />
+            app:layout_widthPercent="20%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="持卡人"
+                android:textColor="@color/black"
+                app:layout_textSizePercent="20%w" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <EditText
-            android:id="@+id/et_chi_ka_ren"
+            android:id="@+id/et_a_add_bank_card_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_chi_ka_ren"
+            android:layout_weight="1"
             android:background="@null"
-            android:hint="@string/chi_ka_ren_name"
-            android:textColor="@color/gray9999999"
-            app:layout_marginLeftPercent="5%w"
-            app:layout_textSizePercent="5%w"
-            app:layout_widthPercent="50%w" />
-    </com.zhy.android.percent.support.PercentRelativeLayout>
+            android:cursorVisible="true"
+            android:hint="请输入持卡人姓名"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@null"
+            app:layout_textSizePercent="4%w" />
 
-    <com.zhy.android.percent.support.PercentRelativeLayout
+        <ImageView
+            android:id="@+id/iv_a_add_bank_card_cancelname"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/quxiao"
+            android:visibility="invisible"
+            app:layout_heightPercent="50%h"
+            app:layout_marginRightPercent="6%w"
+            app:layout_widthPercent="50%h" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <com.zhy.android.percent.support.PercentLinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
-        app:layout_heightPercent="12%w"
-        app:layout_marginTopPercent="0.5%w"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_heightPercent="10%w"
         app:layout_widthPercent="100%w">
 
-        <TextView
-            android:id="@+id/tv_ka_hao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/ka_hao"
-            android:textColor="@color/black"
+        <com.zhy.android.percent.support.PercentRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             app:layout_marginLeftPercent="5%w"
-            app:layout_textSizePercent="5%w" />
+            app:layout_widthPercent="20%w">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="卡号"
+                android:textColor="@color/black"
+                app:layout_textSizePercent="20%w" />
+        </com.zhy.android.percent.support.PercentRelativeLayout>
 
         <EditText
-            android:id="@+id/et_input_number"
+            android:id="@+id/et_a_add_bank_card_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_ka_hao"
+            android:layout_weight="1"
             android:background="@null"
-            android:hint="@string/qing_shu_ru_yin_hang_ka"
-            android:textColor="@color/gray9999999"
-            app:layout_marginLeftPercent="10%w"
-            app:layout_textSizePercent="5%w"
-            app:layout_widthPercent="50%w" />
-    </com.zhy.android.percent.support.PercentRelativeLayout>
+            android:cursorVisible="true"
+            android:hint="请输入银行卡号"
+            android:maxLength="20"
+            android:inputType="number"
+            android:singleLine="true"
+            android:text="6222600730002560217"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@null"
+            app:layout_textSizePercent="4%w" />
 
-    <ImageButton
-        android:id="@+id/ib_next_step"
+
+        <ImageView
+            android:id="@+id/iv_a_add_bank_card_cancelcardnumber"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/quxiao"
+            android:visibility="invisible"
+            app:layout_heightPercent="50%h"
+            app:layout_marginRightPercent="6%w"
+            app:layout_widthPercent="50%h" />
+    </com.zhy.android.percent.support.PercentLinearLayout>
+
+    <TextView
+        android:id="@+id/tv_a_add_bank_next"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:background="@mipmap/next_step"
-        app:layout_heightPercent="12%w"
+        android:background="@drawable/drawable_round_orange"
+        app:layout_heightPercent="10%w"
         app:layout_marginTopPercent="5%w"
-        app:layout_widthPercent="60%w" />
+        android:text="下一步"
+        android:gravity="center"
+        android:textColor="@color/white"
+        app:layout_widthPercent="50%w" />
 
 
 </com.zhy.android.percent.support.PercentLinearLayout>
