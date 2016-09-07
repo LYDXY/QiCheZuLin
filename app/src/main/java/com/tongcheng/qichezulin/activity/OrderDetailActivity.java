@@ -67,7 +67,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
     private WeiXinModel weiXinModel;
     private CarModel3 carModel3;
     private String dingjing;
-    private Integer use_ji_fen = 0;//记录使用了多少积分;
+    private Float use_ji_fen = 0.f;//记录使用了多少积分;
 
     @ViewInject(R.id.tv_chose_pay_ways) //支付方式
             TextView tv_chose_pay_ways;
@@ -102,41 +102,26 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
     @Override
     void initView() {
-
-
-        try {
-            if (UtilsUser.getUser(this) != null) {
-                get_now_my_money(UtilsUser.getUser(this).PID);
-                tv_show_phone_number.setText(UtilsUser.getUser(this).FMobilePhone);
-            }
-            if (getIntent().getExtras().getString("yufukuan") != null) {
-                tv_show_yu_fu_money.setText("¥" + getIntent().getExtras().getString("yufukuan"));
-            }
-            if (getIntent().getExtras().getString("jifen") != null) {
-                Float diyong = Float.parseFloat(UtilsString.strToFloat2(Float.parseFloat(getIntent().getExtras().getString("yufukuan")) * 0.1f, "#"));
-                if (diyong < Float.parseFloat(getIntent().getExtras().getString("jifen"))) {
-                    tv_shou_ji_fen.setText("-¥" + diyong + "");
-                    tv_show_pay_money.setText("还需支付 ¥" + UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong), "0.00"));
-                    dingjing = UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong), "0.00");
-
-                } else {
-                    tv_shou_ji_fen.setText("积分不够抵用预付款的10%");
-                    tv_show_pay_money.setText("还需支付 ¥" + UtilsString.strToFloat2(Float.parseFloat(getIntent().getExtras().getString("yufukuan")), "0.00"));
-                    dingjing = UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan"))), "#.00");
-                }
-                //使用了多少积分
-                use_ji_fen = Integer.parseInt(diyong.toString());
-            }
-
-
-        } catch (Exception E) {
-
+        tv_show_phone_number.setText(UtilsUser.get_user_phoen(this));
+        tv_show_yu_fu_money.setText("¥" + getIntent().getExtras().getString("yufukuan"));
+        Float diyong = Float.parseFloat(UtilsString.strToFloat2(Float.parseFloat(getIntent().getExtras().getString("yufukuan")) * 0.1f, "#"));
+        if (diyong < Float.parseFloat(getIntent().getExtras().getString("jifen"))) {
+            tv_shou_ji_fen.setText("-¥" + diyong + "");
+            tv_show_pay_money.setText("还需支付 ¥" + UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong), "0.00"));
+            dingjing = UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan")) - diyong), "0.00");
+        } else {
+            tv_shou_ji_fen.setText("积分不够抵用预付款的10%");
+            tv_show_pay_money.setText("还需支付 ¥" + UtilsString.strToFloat2(Float.parseFloat(getIntent().getExtras().getString("yufukuan")), "0.00"));
+            dingjing = UtilsString.strToFloat2((Float.parseFloat(getIntent().getExtras().getString("yufukuan"))), "#.00");
         }
+        //使用了多少积分
+        use_ji_fen = Float.parseFloat(diyong.toString());
         carModel3 = (CarModel3) getIntent().getSerializableExtra("car");
         tv_first.setVisibility(View.VISIBLE);
         tv_first.setText("确定订单");
         tv_chose_pay_ways.setOnClickListener(this);
         iv_is_sure.setOnClickListener(this);
+        get_now_my_money(UtilsUser.getUserID(this),UtilsUser.getToken(this));
 
     }
 
@@ -154,7 +139,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                 break;
 
             case R.id.iv_is_sure:
-                if (UtilsUser.getUser(this).PID == null || UtilsUser.getUser(this).PID.equals("")) {
+                if (UtilsUser.getUserID(this) == null || UtilsUser.getUserID(this).equals("")) {
                     JLog.w("用户id不能为空");
                 } else if (carModel3.PID == null || carModel3.PID.equals("")) {
                     JLog.w("车id不能为空");
@@ -181,6 +166,16 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                     JLog.w("可以提交订单");
                     JLog.w(payType);
                     if (payType.equals("3")) {
+                        get_order_que_ding(UtilsUser.getUserID(OrderDetailActivity.this), carModel3.PID, carModel3.KShopID,
+                                getIntent().getExtras().getString("start_time").trim(),
+                                getIntent().getExtras().getString("end_time").trim(),
+                                dingjing,
+                                getIntent().getExtras().getString("all_money").trim(),
+                                getIntent().getExtras().getString("sheng_yu").trim(),
+                                use_ji_fen + "",
+                                getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
+                                "3",UtilsUser.getToken(OrderDetailActivity.this));
+                    } else if (payType.equals("2")) {
                         get_order_que_ding(UtilsUser.getUser(getApplicationContext()).PID, carModel3.PID, carModel3.KShopID,
                                 getIntent().getExtras().getString("start_time").trim(),
                                 getIntent().getExtras().getString("end_time").trim(),
@@ -189,9 +184,8 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                                 getIntent().getExtras().getString("sheng_yu").trim(),
                                 use_ji_fen + "",
                                 getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
-                                "3");
-                    }
-                    else if (payType.equals("2")) {
+                                "2",UtilsUser.getToken(OrderDetailActivity.this));
+                    } else if (view == null) {
                         get_order_que_ding(UtilsUser.getUser(getApplicationContext()).PID, carModel3.PID, carModel3.KShopID,
                                 getIntent().getExtras().getString("start_time").trim(),
                                 getIntent().getExtras().getString("end_time").trim(),
@@ -200,18 +194,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                                 getIntent().getExtras().getString("sheng_yu").trim(),
                                 use_ji_fen + "",
                                 getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
-                                "2");
-                    }
-                    else if (view == null) {
-                        get_order_que_ding(UtilsUser.getUser(getApplicationContext()).PID, carModel3.PID, carModel3.KShopID,
-                                getIntent().getExtras().getString("start_time").trim(),
-                                getIntent().getExtras().getString("end_time").trim(),
-                                dingjing,
-                                getIntent().getExtras().getString("all_money").trim(),
-                                getIntent().getExtras().getString("sheng_yu").trim(),
-                                use_ji_fen + "",
-                                getIntent().getExtras().getString("fu_wu_id_list").trim(), "", "",
-                                "1");
+                                "1",UtilsUser.getToken(OrderDetailActivity.this));
                     }
 
                 }
@@ -275,7 +258,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
 
     //下单按钮的确定操作
-    public void get_order_que_ding(String user_id, String car_id, String shop_id, String start_time, String end_time, String deposit, String money, String lessmoney, String jifen, String expenseid, String invoiceId, String invoiceaddressId,final String paytype) {
+    public void get_order_que_ding(String user_id, String car_id, String shop_id, String start_time, String end_time, String deposit, String money, String lessmoney, String jifen, String expenseid, String invoiceId, String invoiceaddressId, final String paytype,String token) {
         ParamSetOrder paramSetOrder = new ParamSetOrder();
         paramSetOrder.user_id = user_id;
         paramSetOrder.car_id = car_id;
@@ -290,6 +273,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
         paramSetOrder.invoiceId = invoiceId;
         paramSetOrder.invoiceaddressId = invoiceaddressId;
         paramSetOrder.paytype = paytype;
+        paramSetOrder.token=token;
         Callback.Cancelable cancelable
                 = x.http().post(paramSetOrder, new Callback.CommonCallback<String>() {
             @Override
@@ -322,10 +306,10 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
                             JLog.w("插入订单成功");
                             if (paytype.equals("1")) {
 
-                            }else if (paytype.equals("2")){
-                                pay_to_zhi_fu_bao(base.data.get(0).order_code+"-1","再次测试","0.01");
-                            }else if (paytype.equals("3")) {
-                                pay_to_wei_xin1(base.data.get(0).order_code+"-1","测试","再次测试","1","APP");
+                            } else if (paytype.equals("2")) {
+                                pay_to_zhi_fu_bao(base.data.get(0).order_code + "-1", "再次测试", "0.01");
+                            } else if (paytype.equals("3")) {
+                                pay_to_wei_xin1(base.data.get(0).order_code + "-1", "测试", "再次测试", "1", "APP");
                             }
 
                         }
@@ -344,9 +328,10 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
 
     //获取现在的个人钱包金额
-    public void get_now_my_money(String user_id) {
+    public void get_now_my_money(String user_id,String token) {
         ParamGetUserMoney paramGetUserMoney = new ParamGetUserMoney();
         paramGetUserMoney.user_id = user_id;
+        paramGetUserMoney.token=token;
         Callback.Cancelable cancelable
                 = x.http().post(paramGetUserMoney, new Callback.CommonCallback<String>() {
             @Override
@@ -498,18 +483,18 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
 
 
     //调用微信支付
-    public void pay_to_wei_xin2(final String appId,final String partnerId,final String prepayId, final String packageValue, final String nonceStr, final String timeStamp, final String sign) {
+    public void pay_to_wei_xin2(final String appId, final String partnerId, final String prepayId, final String packageValue, final String nonceStr, final String timeStamp, final String sign) {
         final IWXAPI msgApi = WXAPIFactory.createWXAPI(getApplicationContext(), null);
         msgApi.registerApp(AppConfig.WEI_XIN_APP_ID);
-                PayReq request = new PayReq();
-                request.appId = AppConfig.WEI_XIN_APP_ID;
-                request.partnerId = AppConfig.WEI_XIN_MCH_ID;
-                request.prepayId = prepayId;
-                request.packageValue = "Sign=WXPay";
-                request.nonceStr = nonceStr;
-                request.timeStamp = timeStamp;
-                request.sign = sign;
-                msgApi.sendReq(request);
+        PayReq request = new PayReq();
+        request.appId = AppConfig.WEI_XIN_APP_ID;
+        request.partnerId = AppConfig.WEI_XIN_MCH_ID;
+        request.prepayId = prepayId;
+        request.packageValue = "Sign=WXPay";
+        request.nonceStr = nonceStr;
+        request.timeStamp = timeStamp;
+        request.sign = sign;
+        msgApi.sendReq(request);
 
     }
 
@@ -517,7 +502,7 @@ public class OrderDetailActivity extends PuTongActivity2 implements IWXAPIEventH
     //微信支付后的回到
     @Override
     public void onReq(BaseReq baseReq) {
-     switch (baseReq.getType()) {
+        switch (baseReq.getType()) {
             case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
                 break;
             case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:

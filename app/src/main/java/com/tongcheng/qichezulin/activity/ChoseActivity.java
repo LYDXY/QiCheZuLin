@@ -106,23 +106,28 @@ public class ChoseActivity extends PuTongActivity2 {
                 switch (rb.getId()) {
                     case R.id.radio_first:
                         JLog.w("价格不限");
+                        carType="";
                         break;
                     case R.id.radio_second:
                         JLog.w("150");
                         min = "0";
                         max = "150";
+                        carType="";
                         break;
                     case R.id.radio_three:
                         JLog.w("300");
                         min = "150";
                         max = "300";
+                        carType="";
                         break;
                     case R.id.radio_fourth:
                         JLog.w("500");
                         min = "300";
                         max = "500";
+                        carType="";
                         break;
                     case R.id.radio_fifth:
+                        carType="";
                         break;
                 }
 
@@ -136,7 +141,8 @@ public class ChoseActivity extends PuTongActivity2 {
                 JLog.w("选中的位置=" + lv_hao_do_you_chose.getCheckedItemPosition() + "");   // 即获取选中位置);
                 JLog.w(adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).FTypeName);
                 carType = adapter.getItem(lv_hao_do_you_chose.getCheckedItemPosition()).PID;
-
+                min="";
+                max="";
             }
         });
     }

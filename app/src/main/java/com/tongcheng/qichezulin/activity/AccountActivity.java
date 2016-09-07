@@ -63,14 +63,28 @@ public class AccountActivity extends PuTongActivity {
     }
 
     private void init_lqs() {
-        if (UtilsUser.getUser(this) != null) {
-            if (UtilsUser.getUser(this).FMobilePhone != null) {
-                tv_show_phone_number.setText(UtilsString.hidePhoneNumber(UtilsUser.getUser(this).FMobilePhone).trim());
-            }
-            if (UtilsUser.getUser(this).FUserName != null) {
-                tv_user_ccount.setText(UtilsUser.getUser(this).FUserName);
-            }
+        final UtilsUser utilsUser = new UtilsUser(this);
+        String token = utilsUser.getToken_lqs();
+        if (!token.equals("")) {
+            //获取成功
+            JLog.w("获取成功 token:" + token);
+        } else {
+            utilsUser.init_Callback_getToken(new UtilsUser.Callback_getToken() {
+                @Override
+                public void start() {
+                    //tokentime超时，重网络获取
+                    String token = utilsUser.getToken_lqs();
+                    JLog.w("tokentime超时，重网络获取 token:" + token);
+                }
+            });
         }
+        if (UtilsUser.get_user_phoen(this) != null) {
+            tv_show_phone_number.setText(UtilsString.hidePhoneNumber(UtilsUser.get_user_phoen(this)).trim());
+        }
+        if (UtilsUser.get_user_name(this) != null) {
+            tv_user_ccount.setText(UtilsUser.get_user_name(this));
+        }
+
     }
 
     @Override

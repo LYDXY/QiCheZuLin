@@ -33,6 +33,7 @@ import com.tongcheng.qichezulin.model.JsonBase2;
 import com.tongcheng.qichezulin.model.OrderModel;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout;
 import com.tongcheng.qichezulin.pulltorefresh.PullToRefreshLayout2ToMain;
+import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
 import com.tongcheng.qichezulin.utils.UtilsUser;
@@ -58,6 +59,8 @@ import pl.droidsonroids.gif.GifDrawable;
 @ContentView(R.layout.fragment_home)
 public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListener {
 
+
+    private String token;
 
     // 上下拉控件
     @ViewInject(R.id.refresh_view)
@@ -107,9 +110,27 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
             refresh_view.autoRefresh();
             isFirstIn = false;
         }*/
+        final UtilsUser utilsUser = new UtilsUser(getActivity());
+        token = utilsUser.getToken_lqs();
+        if (!token.equals("")) {
+            //获取成功
+            JLog.w("token获取成功");
+            get_order_zu_lin_list(token);
+        } else {
+            utilsUser.init_Callback_getToken(new UtilsUser.Callback_getToken() {
+                @Override
+                public void start() {
+                    //tokentime超时，重网络获取
+                    JLog.w("tokentime超时，重网络获取token,tokentime");
+                    token = utilsUser.getToken_lqs();
+                    JLog.w(token);
+                    get_order_zu_lin_list(token);
+                }
+            });
+        }
         getbanner();
         do_get_hot_cars();
-        get_order_zu_lin_list();
+
     }
 
     @Override
@@ -277,11 +298,11 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
                             protected void convert(BaseAdapterHelper helper, final CarModel item) {
                                 final int position = helper.getPosition();
                                 if (base.data.get(position).FType.equals("1")) {
-                                 //   helper.setText(R.id.tv_re_men_or_you_hui, "热门");
-                                    helper.setImageResource(R.id.iv_re_men_or_you_hui,R.mipmap.hot2x);
+                                    //   helper.setText(R.id.tv_re_men_or_you_hui, "热门");
+                                    helper.setImageResource(R.id.iv_re_men_or_you_hui, R.mipmap.hot2x);
 
                                 } else {
-                                    helper.setImageResource(R.id.iv_re_men_or_you_hui,R.mipmap.youhui2x);
+                                    helper.setImageResource(R.id.iv_re_men_or_you_hui, R.mipmap.youhui2x);
                                 }
                                 helper.setText(R.id.tv_car_name, item.FCarName)
                                         .setText(R.id.tv_car_price, "¥" + item.FDayMoney + "/")
@@ -358,68 +379,65 @@ public class HomeFragment extends HomeBaseFragment2 implements OnItemClickListen
 
 
     //获取租赁中的订单数据
-    public void get_order_zu_lin_list() {
+    public void get_order_zu_lin_list(String token) {
         ParamOrderList paramOrderList = new ParamOrderList();
+        paramOrderList.user_id = UtilsUser.getUserID(getActivity());
+        paramOrderList.token=token;
+        paramOrderList.status = "2";
+        paramOrderList.page = "1";
+        paramOrderList.page_size = "10";
+        Callback.Cancelable cancelable
+                = x.http().post(paramOrderList, new Callback.CommonCallback<String>() {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
 
-        if (UtilsUser.getUser(getContext()) == null) {
-        } else {
-            paramOrderList.user_id = UtilsUser.getUser(getContext()).PID;
-            paramOrderList.status = "2";
-            paramOrderList.page = "1";
-            paramOrderList.page_size = "10";
-            Callback.Cancelable cancelable
-                    = x.http().post(paramOrderList, new Callback.CommonCallback<String>() {
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
+            }
 
-                }
+            @Override
+            public void onCancelled(CancelledException cex) {
 
-                @Override
-                public void onCancelled(CancelledException cex) {
-
-                }
+            }
 
 
-                @Override
-                public void onFinished() {
+            @Override
+            public void onFinished() {
 
-                }
+            }
 
-                @Override
-                public void onSuccess(String result) {
-                    try {
-                        UtilsJson.printJsonData(result);
-                        Gson gson = new Gson();
-                        Type type = new TypeToken<JsonBase2<List<OrderModel>>>() {
-                        }.getType();
-                        JsonBase2<List<OrderModel>> base = gson
-                                .fromJson(result, type);
-                        if (!base.status.toString().trim().equals("0")) {
-                            if (base.data != null) {
-                                JLog.w("获取租赁中的订单成功");
-                                if (base.data.size() > 0) {
-                                    convenientBanner2.startTurning(10000);
-                                    //convenientBanner2.setScrollDuration(10000);
-                                    convenientBanner2.setPages(new CBViewHolderCreator<XingChengHolderView>() {
-                                        @Override
-                                        public XingChengHolderView createHolder() {
-                                            return new XingChengHolderView();
-                                        }
-                                    }, base.data).setClickable(false);
-                                    orderModels = base.data;
-                                }
-
+            @Override
+            public void onSuccess(String result) {
+                try {
+                    UtilsJson.printJsonData(result);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<JsonBase2<List<OrderModel>>>() {
+                    }.getType();
+                    JsonBase2<List<OrderModel>> base = gson
+                            .fromJson(result, type);
+                    if (!base.status.toString().trim().equals("0")) {
+                        if (base.data != null) {
+                            JLog.w("获取租赁中的订单成功");
+                            if (base.data.size() > 0) {
+                                convenientBanner2.startTurning(10000);
+                                //convenientBanner2.setScrollDuration(10000);
+                                convenientBanner2.setPages(new CBViewHolderCreator<XingChengHolderView>() {
+                                    @Override
+                                    public XingChengHolderView createHolder() {
+                                        return new XingChengHolderView();
+                                    }
+                                }, base.data).setClickable(false);
+                                orderModels = base.data;
                             }
-                        } else {
-                            JLog.w("获取租赁中的订单失败");
-                        }
-                    } catch (Exception E) {
-                        E.printStackTrace();
-                    }
 
+                        }
+                    } else {
+                        JLog.w("获取租赁中的订单失败");
+                    }
+                } catch (Exception E) {
+                    E.printStackTrace();
                 }
-            });
-        }
+
+            }
+        });
 
 
     }

@@ -51,7 +51,7 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
             RadioButton rb_a_update_username_women;
 
     //修改个人信息
-    public void update_name(String user_id, String name, int sex) {
+    public void update_name(String user_id, final String name, final int sex) {
         ParamUpdateUser paramUpdateUser = new ParamUpdateUser();
         paramUpdateUser.user_id = user_id;
         paramUpdateUser.name = name;
@@ -70,6 +70,8 @@ public class UpdateAccountUserNameActivity extends PuTongActivity {
                     JLog.w(base.data.size() + "");
                     if (Integer.valueOf(base.status.trim()) == 1) {
                         Toast.makeText(UpdateAccountUserNameActivity.this, "修改个人信息成功", Toast.LENGTH_LONG).show();
+                        UtilsUser.setSP(UpdateAccountUserNameActivity.this, UtilsUser.USER_NAME, name);
+                        UtilsUser.setSP(UpdateAccountUserNameActivity.this, UtilsUser.USER_SEX, sex);
                         Intent intent = new Intent();
                         intent.putExtra("name", et_a_update_username_name.getText().toString());
                         UpdateAccountUserNameActivity.this.setResult(1, intent);

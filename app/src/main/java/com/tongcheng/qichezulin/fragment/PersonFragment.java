@@ -201,6 +201,7 @@ public class PersonFragment extends PuTongFragment {
                         UtilsUser.setSP(getContext(), UtilsUser.USER_NAME,base.data.FUserName); //缓存头像地址
                         UtilsUser.setSP(getContext(), UtilsUser.USER_PHOEN,base.data.FMobilePhone); //缓存头像地址
                         UtilsUser.setSP(getContext(), UtilsUser.FBONDMOENY,base.data.FBondMoeny); //缓存用户保证金
+                        UtilsUser.setSP(getContext(), UtilsUser.USER_SEX,base.data.FSex); //缓存用户性别
 
                     }
                 } else {

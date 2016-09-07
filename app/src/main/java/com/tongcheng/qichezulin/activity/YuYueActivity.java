@@ -29,6 +29,7 @@ import com.tongcheng.qichezulin.model.CarModel3;
 import com.tongcheng.qichezulin.model.FuWuModel;
 import com.tongcheng.qichezulin.model.JiFenModel;
 import com.tongcheng.qichezulin.model.JsonBase2;
+import com.tongcheng.qichezulin.utils.Utils;
 import com.tongcheng.qichezulin.utils.UtilsJson;
 import com.tongcheng.qichezulin.utils.UtilsString;
 import com.tongcheng.qichezulin.utils.UtilsTiaoZhuang;
@@ -144,7 +145,7 @@ public class YuYueActivity extends PuTongActivity2 {
         initView();
         setListenerOnView();
         get_bi_li_value();
-        get_jifen((String) UtilsUser.getSp(getApplication(), UtilsUser.KEY_USER_ID, ""));
+        get_jifen(UtilsUser.getUserID(YuYueActivity.this),UtilsUser.getToken(YuYueActivity.this));
     }
 
 
@@ -286,9 +287,10 @@ public class YuYueActivity extends PuTongActivity2 {
 
 
     //获取用户的积分
-    public void get_jifen(String user_id) {
+    public void get_jifen(String user_id,String token) {
         ParamUserJf paramUserJf = new ParamUserJf();
         paramUserJf.user_id = user_id;
+        paramUserJf.token = token;
         Callback.Cancelable cancelable
                 = x.http().post(paramUserJf, new Callback.CommonCallback<String>() {
             @Override

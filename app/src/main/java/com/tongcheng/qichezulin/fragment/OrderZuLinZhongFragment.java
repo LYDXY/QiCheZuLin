@@ -68,9 +68,25 @@ public class OrderZuLinZhongFragment extends Fragment {
             x.view().inject(this, this.getView());
         }
         setOnPullListenerOnprl_prl();
-        token = UtilsUser.getToken(getActivity());
         user_id = UtilsUser.getUserID(getActivity());
-        get_order_yu_yue_list(user_id, status, page, page_size,token);
+        final UtilsUser utilsUser = new UtilsUser(getActivity());
+        token = utilsUser.getToken_lqs();
+        if (!token.equals("")) {
+            //获取成功
+            JLog.w("token获取成功");
+            get_order_yu_yue_list(user_id, status, page, page_size,token);
+        } else {
+            utilsUser.init_Callback_getToken(new UtilsUser.Callback_getToken() {
+                @Override
+                public void start() {
+                    //tokentime超时，重网络获取
+                    JLog.w("tokentime超时，重网络获取token,tokentime");
+                    token = utilsUser.getToken_lqs();
+                    JLog.w(token);
+                    get_order_yu_yue_list(user_id, status, page, page_size,token);
+                }
+            });
+        }
     }
 
     public void setOnPullListenerOnprl_prl() {

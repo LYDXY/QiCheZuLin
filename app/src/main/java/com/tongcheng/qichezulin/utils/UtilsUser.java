@@ -2,13 +2,24 @@ package com.tongcheng.qichezulin.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.widget.EditText;
 
 import com.code19.library.DateUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jiongbull.jlog.JLog;
+import com.tongcheng.qichezulin.Param.ParamGetToKen;
+import com.tongcheng.qichezulin.activity.MainActivity2;
+import com.tongcheng.qichezulin.model.JsonBase;
+import com.tongcheng.qichezulin.model.TokenModel;
 import com.tongcheng.qichezulin.model.UserModel;
 
+import org.xutils.common.Callback;
+import org.xutils.x;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -29,6 +40,110 @@ public class UtilsUser {
     public static final String USER_NAME = "user_name";
     public static final String USER_PHOEN = "user_phone";
     public static final String FBONDMOENY = "FBondMoeny";
+    public static final String USER_SEX = "user_sex";
+
+    private Context context;
+
+    public UtilsUser(Context context) {
+        this.context = context;
+    }
+
+    //获取网络TOKEN回调
+    public interface Callback_getToken {
+        public void start();
+    }
+
+    private Callback_getToken callback_getToken;
+
+    public void init_Callback_getToken(Callback_getToken callback_getToken) {
+        this.callback_getToken = callback_getToken;
+    }
+
+    //获取网络TOKEN
+    private void gethttpToken() {
+        ParamGetToKen paramGetToKen = new ParamGetToKen();
+        paramGetToKen.phone = UtilsUser.get_user_phoen(context);
+        paramGetToKen.pwd = UtilsUser.get_pwd(context);
+        x.http().post(paramGetToKen, new Callback.CommonCallback<String>() {
+
+            @Override
+            public void onSuccess(String result) {
+                UtilsJson.printJsonData(result);
+                Gson gson = new Gson();
+                Type type = new TypeToken<JsonBase<ArrayList<TokenModel>>>() {
+                }.getType();
+                JsonBase<ArrayList<TokenModel>> base = gson
+                        .fromJson(result, type);
+                if (!base.status.toString().trim().equals("0")) {
+                    if (base.data != null) {
+                        JLog.w(base.data.size() + "获取token成功");
+                        if (base.data.size() > 0) {
+                            //缓存token , 和过期时间
+                            UtilsUser.setSP(context, UtilsUser.TOKEN, base.data.get(0).token); //缓存TOKEN
+                            UtilsUser.setSP(context, UtilsUser.TOKEN_TIME, base.data.get(0).time); //缓存过期时间
+                            callback_getToken.start();
+                        }
+                    }
+                } else {
+                    JLog.w("获取token失败");
+                }
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                JLog.w(isOnCallback + "");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                JLog.w(cex + "");
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+    }
+
+    public static String getToken(Context context) {
+        return "";
+    }
+
+    //获取token
+    public String getToken_lqs() {
+        if (UtilsUser.getTOKEN_TIME(context) != null & UtilsUser.getTOKEN_TIME(context).equals("")) {
+            JLog.w("缓存没有TokenTime");
+            gethttpToken();
+            return "";
+        } else {
+            JLog.w("缓存有TokenTime:" + UtilsUser.getTOKEN_TIME(context));
+            try {
+                long overtime = DateUtils.subtractDate(new Date(System.currentTimeMillis()), DateUtils.string2Date(UtilsUser.getTOKEN_TIME(context), "yyyy/MM/dd HH:mm:ss")) / 1000;//除以1000是为了转换成秒;
+                JLog.w("overtime:" + overtime);
+
+                if (overtime > 0) {
+                    JLog.w("token没有过期");
+                    if (UtilsUser.getSp(context, UtilsUser.TOKEN, "") != null) {
+                        JLog.w("token从缓存中获取成功");
+                        return UtilsUser.getSp(context, UtilsUser.TOKEN, "").toString();
+                    } else {
+                        JLog.w("token从缓存中拿不到");
+                        gethttpToken();
+                        return "";
+                    }
+                } else {
+                    JLog.w("token过期");
+                    //token过期
+                    gethttpToken();
+                    return "";
+                }
+            } catch (Exception E) {
+                JLog.w("转换异常");
+                return "";
+            }
+        }
+    }
 
     //保存整个用户的信息 ---------采用json 字符串的形式
     public static void saveUser(Context context, UserModel info) {
@@ -86,39 +201,6 @@ public class UtilsUser {
         String json = (String) getSp(context, KEY_ACCOUNT_OBJECT, "");
         return gson.fromJson(json, UserModel.class);
     }
-
-    //获取token
-    public static String getToken(Context context) {
-        if (UtilsUser.getSp(context, UtilsUser.TOKEN, "") != null) {
-            return UtilsUser.getSp(context, UtilsUser.TOKEN, "").toString();
-        } else {
-            Utils.ShowText(context, "token从缓存中拿不到");
-            return "";
-        }
-
-    }
-
-    // 判断token是否过期
-    public static String get_is_chao_shi(Context context) {
-        if (UtilsUser.getTOKEN_TIME(context).equals("")) {
-            return "";
-        } else {
-            try{
-                long jiange = DateUtils.subtractDate(DateUtils.string2Date(UtilsUser.getTOKEN_TIME(context), "yyyy-MM-dd HH:mm:ss"), new Date()) / 1000;//除以1000是为了转换成秒;
-                if (jiange > 7200) {
-                    Utils.ShowText(context,"token过期");
-                    return "token过期";
-                } else {
-                    return UtilsUser.getToken(context);
-                }
-            }catch (Exception E){
-                return "转换异常";
-            }
-
-        }
-
-    }
-
 
     //获取用户id
     public static String getUserID(Context context) {
@@ -186,6 +268,7 @@ public class UtilsUser {
         }
 
     }
+
     //获取保证金
     public static String get_fbondmoeny(Context context) {
         if (UtilsUser.getSp(context, UtilsUser.FBONDMOENY, "") != null) {
@@ -197,4 +280,25 @@ public class UtilsUser {
 
     }
 
+    //获取密码
+    public static String get_pwd(Context context) {
+        if (UtilsUser.getSp(context, UtilsUser.PWD, "") != null) {
+            return UtilsUser.getSp(context, UtilsUser.PWD, "").toString();
+        } else {
+            Utils.ShowText(context, "密码 从缓存中拿不到");
+            return "";
+        }
+
+    }
+
+    //获取用户性别
+    public static String get_user_sex(Context context) {
+        if (UtilsUser.getSp(context, UtilsUser.USER_SEX, "") != null) {
+            return UtilsUser.getSp(context, UtilsUser.USER_SEX, "").toString();
+        } else {
+            Utils.ShowText(context, "性别从缓存中拿不到");
+            return "";
+        }
+
+    }
 }

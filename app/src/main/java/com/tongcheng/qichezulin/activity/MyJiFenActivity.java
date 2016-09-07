@@ -74,9 +74,26 @@ public class MyJiFenActivity extends PuTongActivity2 {
         initData();
         initView();
         setListenerOnView();
+        final UtilsUser utilsUser = new UtilsUser(MyJiFenActivity.this);
         userid=UtilsUser.getUserID(MyJiFenActivity.this);
-        token=UtilsUser.getToken(MyJiFenActivity.this);
-        get_now_ji_fen(userid,token);
+        token = utilsUser.getToken_lqs();
+        if (!token.equals("")) {
+            //获取成功
+            JLog.w("token获取成功");
+            get_now_ji_fen(userid,token);
+        } else {
+            utilsUser.init_Callback_getToken(new UtilsUser.Callback_getToken() {
+                @Override
+                public void start() {
+                    //tokentime超时，重网络获取
+                    JLog.w("tokentime超时，重网络获取token,tokentime");
+                    token = utilsUser.getToken_lqs();
+                    JLog.w(token);
+                    get_now_ji_fen(userid,token);
+                }
+            });
+        }
+
         get_use_case_list(userid,token);
 
 

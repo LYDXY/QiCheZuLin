@@ -26,4 +26,5 @@ public class ParamSetOrder extends RequestParams {
     public String invoiceId;//发票抬头ID
     public String invoiceaddressId;//发票地址ID
     public String paytype;//定金支付类型（1.钱包2.支付宝3.微信）
+    public String token;//
 }

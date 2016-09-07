@@ -33,6 +33,8 @@ import java.util.List;
 public class MyWallectActivity extends PuTongActivity {
 
 
+    private String token;
+
     @ViewInject(R.id.tv_show_my_money)
     TextView tv_show_my_money;
     @ViewInject(R.id.rl_a_balanceinstruction)
@@ -93,16 +95,35 @@ public class MyWallectActivity extends PuTongActivity {
         initData();
         initView();
         setListenerOnView();
-//        if (UtilsUser.getUser(this).PID != null && !UtilsUser.getUser(this).PID.equals("")) {
-//            get_now_my_money(UtilsUser.getUser(this).PID);
-//        }
+
+        final UtilsUser utilsUser = new UtilsUser(MyWallectActivity.this);
+        token = utilsUser.getToken_lqs();
+        if (!token.equals("")) {
+            //获取成功
+            JLog.w("token获取成功");
+            get_now_my_money(UtilsUser.getUserID(MyWallectActivity.this),token);
+        } else {
+            utilsUser.init_Callback_getToken(new UtilsUser.Callback_getToken() {
+                @Override
+                public void start() {
+                    //tokentime超时，重网络获取
+                    JLog.w("tokentime超时，重网络获取token,tokentime");
+                    token = utilsUser.getToken_lqs();
+                    JLog.w(token);
+                    get_now_my_money(UtilsUser.getUserID(MyWallectActivity.this),token);
+                }
+            });
+        }
+
+
 
     }
 
     //获取现在的个人钱包金额
-    public void get_now_my_money(String user_id) {
+    public void get_now_my_money(String user_id,String token) {
         ParamGetUserMoney paramGetUserMoney = new ParamGetUserMoney();
         paramGetUserMoney.user_id = user_id;
+        paramGetUserMoney.token = token;
         Callback.Cancelable cancelable
                 = x.http().post(paramGetUserMoney, new Callback.CommonCallback<String>() {
             @Override

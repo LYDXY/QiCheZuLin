@@ -84,7 +84,7 @@ public class FindCarTypeActivity extends PuTongActivity2 {
         setListenerOnView();
         ib_shai_xuan.setOnClickListener(this);
         setOnPullListenerOnprl_prl();
-        do_get_data();
+        do_get_data("","","1","","","");
     }
 
     @Override
@@ -113,14 +113,14 @@ public class FindCarTypeActivity extends PuTongActivity2 {
 
 
     // 获取列表数据
-    private void do_get_data() {
+    private void do_get_data(String max_price,String min_price,String page,String page_size,String cartype,String paytype) {
         ParamGetAllCar paramGetAllCar = new ParamGetAllCar();
-        paramGetAllCar.max_price = "";
-        paramGetAllCar.min_price = "";
-        paramGetAllCar.page = "1";
-        paramGetAllCar.page_size = "";
-        paramGetAllCar.cartype = "";
-        paramGetAllCar.paytype = "";
+        paramGetAllCar.max_price = max_price;
+        paramGetAllCar.min_price = min_price;
+        paramGetAllCar.page = page;
+        paramGetAllCar.page_size =page_size;
+        paramGetAllCar.cartype = cartype;
+        paramGetAllCar.paytype = paytype;
         Callback.Cancelable cancelable
                 = x.http().post(paramGetAllCar, new Callback.CommonCallback<String>() {
             @Override
@@ -206,6 +206,10 @@ public class FindCarTypeActivity extends PuTongActivity2 {
                 JLog.w(min);
                 JLog.w(max);
                 JLog.w(carType);
+                catModel2Adapter.clear();
+                prl_prl.autoRefresh();
+                do_get_data(max,min,"1","",carType,"");
+
         }
     }
 }

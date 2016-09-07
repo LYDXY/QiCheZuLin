@@ -172,7 +172,7 @@ public class BindPhoneNumberActivity extends PuTongActivity {
     }
 
     //绑定手机号
-    public void bind_pn(String user_id, String phone) {
+    public void bind_pn(String user_id, final String phone) {
         ParamUpdateUser paramUpdateUser = new ParamUpdateUser();
         //修改
         paramUpdateUser.user_id = user_id;
@@ -191,6 +191,7 @@ public class BindPhoneNumberActivity extends PuTongActivity {
                     JLog.w(base.data.size() + "");
                     if (Integer.valueOf(base.status.trim()) == 1) {
                         Toast.makeText(BindPhoneNumberActivity.this, "绑定手机号成功", Toast.LENGTH_LONG).show();
+                        UtilsUser.setSP(BindPhoneNumberActivity.this, UtilsUser.USER_PHOEN, phone);
                     } else {
                         Toast.makeText(BindPhoneNumberActivity.this, "绑定手机号失败", Toast.LENGTH_LONG).show();
                     }
